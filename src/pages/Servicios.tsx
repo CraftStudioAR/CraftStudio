@@ -26,18 +26,25 @@ export default function Servicios() {
           {services.map((s) => {
             const isOpen = open === s.n;
             return (
-              <div key={s.n} className="border-b border-ink/10">
+              <div
+                key={s.n}
+                className={`border-b transition-colors duration-500 ${isOpen ? "border-red/30" : "border-ink/10"}`}
+              >
                 <button
                   onClick={() => setOpen(isOpen ? null : s.n)}
                   data-cursor={isOpen ? "Cerrar" : "Abrir"}
                   className="flex w-full items-center gap-6 py-8 text-left md:gap-10"
                 >
-                  <span className="font-serif text-lg opacity-40 md:w-16">{s.n}</span>
+                  <span
+                    className={`font-serif text-lg transition-colors duration-500 md:w-16 ${isOpen ? "text-red opacity-100" : "opacity-40"}`}
+                  >
+                    {s.n}
+                  </span>
                   <span className="font-serif flex-1 text-2xl italic md:text-4xl">{s.title}</span>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.4 }}
-                    className="text-2xl opacity-50"
+                    className={`text-2xl transition-colors duration-500 ${isOpen ? "text-red opacity-100" : "opacity-50"}`}
                   >
                     +
                   </motion.span>

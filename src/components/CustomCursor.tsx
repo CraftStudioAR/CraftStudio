@@ -59,12 +59,12 @@ export default function CustomCursor() {
         className="relative flex items-center justify-center"
         style={{ width: 34, height: 34 }}
       >
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-          <path d="M1 9V3a2 2 0 0 1 2-2h6" stroke="#F2EBE9" strokeWidth="1.4" />
-          <path d="M33 9V3a2 2 0 0 0-2-2h-6" stroke="#F2EBE9" strokeWidth="1.4" />
-          <path d="M1 25v6a2 2 0 0 0 2 2h6" stroke="#F2EBE9" strokeWidth="1.4" />
-          <path d="M33 25v6a2 2 0 0 1-2 2h-6" stroke="#F2EBE9" strokeWidth="1.4" />
-          <circle cx="17" cy="17" r="1.6" fill="#F2EBE9" />
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" className="stroke-cream">
+          <path d="M1 9V3a2 2 0 0 1 2-2h6" strokeWidth="1.4" />
+          <path d="M33 9V3a2 2 0 0 0-2-2h-6" strokeWidth="1.4" />
+          <path d="M1 25v6a2 2 0 0 0 2 2h6" strokeWidth="1.4" />
+          <path d="M33 25v6a2 2 0 0 1-2 2h-6" strokeWidth="1.4" />
+          <circle cx="17" cy="17" r="1.6" className="fill-cream" />
         </svg>
       </motion.div>
 
@@ -72,7 +72,7 @@ export default function CustomCursor() {
         initial={false}
         animate={{ opacity: active ? 1 : 0, y: active ? 0 : 6 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="absolute top-full left-1/2 mt-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#F2EBE9] px-3 py-1 text-[11px] tracking-wide text-[#12100e] uppercase"
+        className="bg-cream text-ink absolute top-full left-1/2 mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-[11px] tracking-wide uppercase"
       >
         {label}
       </motion.div>

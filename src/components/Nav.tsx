@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { motion } from "motion/react";
+import Magnetic from "./Magnetic";
+import { LogoWordmark } from "./Logo";
 import { nav } from "../content/brand";
 
 export default function Nav() {
@@ -19,14 +22,11 @@ export default function Nav() {
         solid ? "bg-cream/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <Link
-        to="/"
-        data-cursor="Inicio"
-        onClick={() => setOpen(false)}
-        className="font-serif-italic text-xl leading-none"
-      >
-        Craft Studio
-      </Link>
+      <Magnetic strength={0.25}>
+        <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
+          <LogoWordmark className="h-5 md:h-6" />
+        </Link>
+      </Magnetic>
 
       <button
         onClick={() => setOpen((v) => !v)}

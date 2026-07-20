@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import Reveal from "../components/Reveal";
+import Magnetic from "../components/Magnetic";
+import CursorSpotlight from "../components/CursorSpotlight";
 import { contactInfo } from "../content/brand";
 
 export default function Contacto() {
@@ -14,8 +16,8 @@ export default function Contacto() {
   }
 
   return (
-    <section className="min-h-screen bg-cream px-6 pt-40 pb-32 md:px-10">
-      <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2">
+    <CursorSpotlight className="min-h-screen bg-cream px-6 pt-40 pb-32 md:px-10">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 md:grid-cols-2">
         <Reveal>
           <p className="mb-6 text-sm tracking-widest text-red uppercase">Contacto</p>
           <h1 className="font-serif text-5xl italic md:text-6xl">
@@ -65,21 +67,23 @@ export default function Contacto() {
                 />
               </div>
 
-              <button
-                type="submit"
-                data-cursor="Enviar"
-                className="group mt-4 flex w-fit items-center gap-3 text-sm tracking-widest uppercase"
-              >
-                Enviar mensaje
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  ↗
-                </span>
-              </button>
+              <Magnetic strength={0.3} className="mt-4">
+                <button
+                  type="submit"
+                  data-cursor="Enviar"
+                  className="group flex w-fit items-center gap-3 text-sm tracking-widest uppercase"
+                >
+                  Enviar mensaje
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    ↗
+                  </span>
+                </button>
+              </Magnetic>
             </form>
           )}
         </Reveal>
       </div>
-    </section>
+    </CursorSpotlight>
   );
 }
 

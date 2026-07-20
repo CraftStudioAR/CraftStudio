@@ -1,4 +1,5 @@
 import Reveal from "../components/Reveal";
+import GlyphMark from "../components/GlyphMark";
 import { values, process } from "../content/brand";
 
 export default function Estudio() {
@@ -15,8 +16,12 @@ export default function Estudio() {
         </div>
       </section>
 
-      <section className="bg-navy px-6 py-28 text-cream md:px-10">
-        <div className="mx-auto grid max-w-6xl gap-14 md:grid-cols-3">
+      <section className="relative overflow-hidden bg-navy px-6 py-28 text-cream md:px-10">
+        <GlyphMark
+          variant={1}
+          className="pointer-events-none absolute -top-20 -right-16 z-0 h-[36vw] w-[36vw] max-w-[420px] text-cream/[0.05]"
+        />
+        <div className="mx-auto grid max-w-6xl gap-14 md:grid-cols-3 relative z-10">
           {[
             { k: "Propósito", v: "Existimos para darle forma al mensaje de las marcas que tienen algo real para decir." },
             { k: "Misión", v: "Pensamos el problema, diseñamos la solución." },
@@ -47,8 +52,12 @@ export default function Estudio() {
         </div>
       </section>
 
-      <section className="bg-ink px-6 py-32 text-cream md:px-10">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden bg-ink px-6 py-32 text-cream md:px-10">
+        <GlyphMark
+          variant={3}
+          className="pointer-events-none absolute -bottom-24 -left-16 z-0 h-[38vw] w-[38vw] max-w-[440px] text-cream/[0.05]"
+        />
+        <div className="relative z-10 mx-auto max-w-6xl">
           <Reveal>
             <p className="mb-4 text-sm tracking-widest text-red uppercase">Posicionamiento</p>
             <p className="font-serif max-w-3xl text-3xl italic leading-snug md:text-4xl">
