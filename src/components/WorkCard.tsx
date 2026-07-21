@@ -44,7 +44,7 @@ export default function WorkCard({
 
   return (
     <Link to={to} data-cursor={cursorLabel} className="group block">
-      <ScrollGrow from={0.82} to={1} style={{ perspective: 900 }}>
+      <ScrollGrow from={0.82} to={1} shrinkBack={false} style={{ perspective: 900 }}>
         <motion.div
           ref={ref}
           onMouseMove={onMouseMove}
@@ -77,7 +77,7 @@ export default function WorkCard({
         <span className="opacity-70">{work.category}</span>
         <span className="opacity-50">{work.year}</span>
       </div>
-      {work.summary && <p className="mt-2 max-w-md text-sm opacity-60">{work.summary}</p>}
+      {work.summary && <p className="mt-2 max-w-md text-sm opacity-60 line-clamp-2">{work.summary}</p>}
       {work.tags?.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
           {work.tags.map((tag) => (

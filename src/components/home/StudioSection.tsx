@@ -1,46 +1,97 @@
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "../Reveal";
 import Magnetic from "../Magnetic";
 import { LogoMark } from "../Logo";
 import { values } from "../../content/brand";
+import Beams from "../Beams";
 
 export default function StudioSection() {
-  return (
-    <section className="bg-cream px-6 py-32 md:px-10 border-t border-ink/10">
-      <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2 items-center">
-        <Reveal>
-          <h2 className="font-serif text-6xl italic md:text-8xl">Estudio</h2>
-          <p className="mt-8 max-w-md text-xl opacity-75 leading-relaxed">
-            Un estudio que piensa como estratega y construye como artesano. Criterio, oficio e
-            intención antes que tendencia.
-          </p>
-          <div className="mt-12 flex gap-4">
-            <Magnetic>
-              <Link
-                to="/estudio"
-                data-cursor="Conocer"
-                className="glass-panel group relative inline-flex items-center gap-3 rounded-lg px-8 py-4 bg-ink text-cream hover:bg-navy transition-colors duration-300"
-              >
-                <LogoMark className="h-5 w-5 transition-transform duration-500 group-hover:scale-110" />
-                <span className="text-xs tracking-widest uppercase">Conocer el estudio</span>
-              </Link>
-            </Magnetic>
-          </div>
-        </Reveal>
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-          {values.slice(0, 4).map((v, i) => (
-            <Reveal key={v.title} delay={i * 0.1}>
-              <div className="relative">
-                <span className="absolute -left-4 -top-6 text-7xl font-serif italic text-ink/[0.04] pointer-events-none">
-                  0{i + 1}
-                </span>
-                <p className="font-serif text-2xl italic relative z-10">{v.title}</p>
-              </div>
-            </Reveal>
-          ))}
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "center center"]
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="px-4 md:px-10 pb-10 md:pb-20 perspective-1000">
+      {/* Floating Rectangle */}
+      <motion.section 
+        style={{ scale }}
+        className="bg-navy relative overflow-hidden text-cream rounded-[2rem] md:rounded-[4rem] flex flex-col items-center justify-center"
+      >
+        
+        {/* Background Beams - Vertical exactly like Hero */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+          <Beams
+            beamWidth={2}
+            beamHeight={20}
+            beamNumber={40}
+            lightColor="#F2EBE9"
+            speed={2}
+            noiseIntensity={1.75}
+            scale={0.2}
+            rotation={isMobile ? 90 : 0}
+          />
         </div>
-      </div>
-    </section>
+
+        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* Left: Manifesto */}
+          <div>
+            <Reveal>
+              <h2 className="font-sans font-bold text-6xl md:text-[8vw] leading-none tracking-tighter opacity-15 mb-8">
+                ESTUDIO
+              </h2>
+
+              <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.3] mb-12 text-balance">
+                Un estudio que piensa como estratega y construye como artesano.
+              </h3>
+              
+              <Magnetic>
+                <Link
+                  to="/estudio"
+                  data-cursor="Conocer"
+                  className="group relative inline-flex items-center gap-4 rounded-full px-8 py-4 bg-cream text-navy hover:bg-white transition-colors duration-300"
+                >
+                  <LogoMark className="h-5 w-5 transition-transform duration-500 group-hover:rotate-180" />
+                  <span className="text-sm tracking-widest uppercase font-medium">Conocer el estudio</span>
+                </Link>
+              </Magnetic>
+            </Reveal>
+          </div>
+
+          {/* Right: Values cleanly aligned */}
+          <div className="flex flex-col mt-10 lg:mt-0">
+            {values.slice(0, 4).map((v, i) => (
+              <Reveal key={v.title} delay={i * 0.1}>
+                <div className="flex items-start gap-6 border-b border-white/10 py-5 md:py-6 first:pt-0">
+                  <span className="font-serif italic text-2xl md:text-3xl opacity-30 mt-1">
+                    0{i + 1}
+                  </span>
+                  <div>
+                     <h4 className="font-serif italic text-2xl md:text-4xl mb-2 text-cream">{v.title}</h4>
+                     <p className="opacity-60 text-sm md:text-base leading-relaxed max-w-sm">{v.summary}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+        </div>
+      </motion.section>
+    </div>
   );
 }

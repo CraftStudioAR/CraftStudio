@@ -12,10 +12,9 @@ export default function Marquee({
           <div key={rep} aria-hidden={rep === 1} className="flex shrink-0 items-center">
             {items.map((item, i) => (
               <span key={i} className="flex items-center">
-                <span className="font-serif px-8 text-3xl italic whitespace-nowrap opacity-80 md:text-4xl">
+                <span className="font-serif px-12 text-2xl italic whitespace-nowrap opacity-60 md:text-3xl">
                   {item}
                 </span>
-                <span className="text-red text-xl opacity-60">✦</span>
               </span>
             ))}
           </div>

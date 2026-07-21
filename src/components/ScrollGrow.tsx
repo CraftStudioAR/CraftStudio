@@ -10,12 +10,14 @@ export default function ScrollGrow({
   children,
   from = 0.85,
   to = 1,
+  shrinkBack = true,
   className = "",
   style,
 }: {
   children: ReactNode;
   from?: number;
   to?: number;
+  shrinkBack?: boolean;
   className?: string;
   style?: CSSProperties;
 }) {
@@ -24,7 +26,7 @@ export default function ScrollGrow({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [from, to, from]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [from, to, shrinkBack ? from : to]);
 
   return (
     <motion.div ref={ref} style={{ ...style, scale }} className={className}>
