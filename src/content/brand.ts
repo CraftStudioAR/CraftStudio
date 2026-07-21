@@ -43,6 +43,7 @@ export const services = [
       "Antes de diseñar, entendemos. Auditoría de identidad, negocio y contexto competitivo.",
     detail:
       "Ninguna solución tiene valor real si antes no existe comprensión profunda del problema. Este programa mapea dónde está parada la marca hoy, qué la frena y qué necesita realmente — no lo que parece que necesita.",
+    fit: "Ideal si todavía no tenés claro qué es lo que hay que resolver.",
   },
   {
     n: "02",
@@ -51,6 +52,7 @@ export const services = [
       "Un sistema de identidad completo, pensado para crecer con la marca, no en contra de ella.",
     detail:
       "Logotipo, paleta, tipografía, aplicaciones. Pero sobre todo: reglas claras para que el sistema se sostenga en manos de terceros, sin depender de nosotros para cada pieza nueva.",
+    fit: "Ideal si estás creando una marca desde cero.",
   },
   {
     n: "03",
@@ -59,6 +61,7 @@ export const services = [
       "Tono de voz, mensajes clave y arquitectura de contenido para hablar con una sola voz.",
     detail:
       "Definimos cómo suena la marca en cada canal — qué dice, qué no dice y por qué. Un marco de mensajes que el equipo interno puede aplicar sin perder consistencia.",
+    fit: "Ideal si ya tenés identidad visual pero el mensaje suena distinto en cada canal.",
   },
   {
     n: "04",
@@ -67,6 +70,7 @@ export const services = [
       "Para marcas que crecieron más rápido que su comunicación y necesitan ponerse a la altura.",
     detail:
       "Trabajo por programas, no por piezas sueltas. Rediseñamos la percepción de la marca sin descartar la trayectoria construida hasta acá.",
+    fit: "Ideal si tu marca ya tiene trayectoria pero quedó chica frente a lo que sos hoy.",
   },
 ];
 
@@ -83,6 +87,7 @@ export type WorkCase = {
   category: string;
   year: string;
   summary: string;
+  tags: string[];
 };
 
 export const work: WorkCase[] = [
@@ -92,6 +97,7 @@ export const work: WorkCase[] = [
     category: "Reposicionamiento",
     year: "2025",
     summary: "Un sistema de identidad que actualiza la presencia digital sin perder trayectoria.",
+    tags: ["Diagnóstico", "Identidad visual", "Sitio web"],
   },
   {
     slug: "caso-02",
@@ -99,6 +105,7 @@ export const work: WorkCase[] = [
     category: "Identidad & sistema visual",
     year: "2025",
     summary: "Expansión internacional con un lenguaje visual escalable a nuevos mercados.",
+    tags: ["Sistema visual", "Packaging", "Comunicación"],
   },
   {
     slug: "caso-03",
@@ -106,6 +113,7 @@ export const work: WorkCase[] = [
     category: "Sistema de franquicia",
     year: "2024",
     summary: "Un sistema visual pensado para replicarse con consistencia en cada local nuevo.",
+    tags: ["Sistema de franquicia", "Señalética", "Manual de marca"],
   },
   {
     slug: "caso-04",
@@ -113,6 +121,7 @@ export const work: WorkCase[] = [
     category: "Reposicionamiento",
     year: "2024",
     summary: "Reposicionamiento de marca sin perder el peso de una trayectoria consolidada.",
+    tags: ["Reposicionamiento", "Identidad visual", "Comunicación estratégica"],
   },
 ];
 
@@ -120,4 +129,15 @@ export const contactInfo = {
   email: "hola@craftstudio.com.ar",
   city: "La Plata, Argentina",
   tagline: "We craft communication",
+};
+
+export const contactForm = {
+  needs: [
+    "Estoy creando una marca nueva",
+    "Tengo una marca y quiero impulsarla",
+    "Quiero relanzar/reposicionar mi marca",
+    "Otro",
+  ],
+  budgets: ["Menos de USD 3.000", "USD 3.000 – 8.000", "USD 8.000 – 15.000", "Más de USD 15.000"],
+  howFound: ["Instagram", "LinkedIn", "Recomendación", "Google", "Otro"],
 };

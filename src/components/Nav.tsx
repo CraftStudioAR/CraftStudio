@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion } from "motion/react";
 import Magnetic from "./Magnetic";
-import { LogoWordmark } from "./Logo";
+import { LogoLockupHorizontal } from "./Logo";
 import { nav } from "../content/brand";
 
 export default function Nav() {
@@ -19,12 +19,12 @@ export default function Nav() {
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-40 flex items-center justify-between px-6 py-5 transition-colors duration-500 md:px-10 ${
-        solid ? "bg-cream/85 backdrop-blur-md" : "bg-transparent"
+        solid ? "bg-cream/85 backdrop-blur-md text-ink" : "bg-transparent text-cream"
       }`}
     >
       <Magnetic strength={0.25}>
         <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
-          <LogoWordmark className="h-5 md:h-6" />
+          <LogoLockupHorizontal className="h-5 md:h-7" />
         </Link>
       </Magnetic>
 
@@ -36,15 +36,15 @@ export default function Nav() {
       >
         <span
           style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
-          className="block h-[1.5px] w-6 bg-ink transition-transform duration-300"
+          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
         />
         <span
           style={{ opacity: open ? 0 : 1 }}
-          className="block h-[1.5px] w-6 bg-ink transition-opacity duration-300"
+          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
         />
         <span
           style={{ transform: open ? "translateY(-7px) rotate(-45deg)" : "none" }}
-          className="block h-[1.5px] w-6 bg-ink transition-transform duration-300"
+          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
         />
       </button>
 

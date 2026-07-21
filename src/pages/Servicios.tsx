@@ -55,8 +55,9 @@ export default function Servicios() {
                   className="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                 >
-                  <div className="overflow-hidden">
-                    <p className="max-w-xl pb-10 pl-0 text-base opacity-70 md:pl-26">{s.detail}</p>
+                  <div className="max-w-xl overflow-hidden pb-10 pl-0 md:pl-26">
+                    <p className="text-base opacity-70">{s.detail}</p>
+                    <p className="mt-4 text-sm text-red">{s.fit}</p>
                   </div>
                 </div>
               </div>

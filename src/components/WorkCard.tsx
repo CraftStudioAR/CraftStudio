@@ -2,6 +2,7 @@ import { useRef, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import GlyphMark from "./GlyphMark";
+import ScrollGrow from "./ScrollGrow";
 import type { WorkCase } from "../content/brand";
 
 // Solo combina los 4 hex oficiales de marca — sin tonos inventados.
@@ -43,7 +44,7 @@ export default function WorkCard({
 
   return (
     <Link to={to} data-cursor={cursorLabel} className="group block">
-      <div style={{ perspective: 900 }}>
+      <ScrollGrow from={0.82} to={1} style={{ perspective: 900 }}>
         <motion.div
           ref={ref}
           onMouseMove={onMouseMove}
@@ -70,13 +71,25 @@ export default function WorkCard({
             {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
         </motion.div>
-      </div>
+      </ScrollGrow>
 
       <div className="mt-4 flex items-center justify-between text-sm">
         <span className="opacity-70">{work.category}</span>
         <span className="opacity-50">{work.year}</span>
       </div>
       {work.summary && <p className="mt-2 max-w-md text-sm opacity-60">{work.summary}</p>}
+      {work.tags?.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {work.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-current/20 px-2.5 py-1 text-[11px] tracking-wide uppercase opacity-60"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </Link>
   );
 }
