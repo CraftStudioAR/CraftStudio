@@ -83,7 +83,7 @@ export default function StudioSection() {
                   </span>
                   <div>
                      <h4 className="font-serif italic text-2xl md:text-4xl mb-2 text-cream">{v.title}</h4>
-                     <p className="opacity-60 text-sm md:text-base leading-relaxed max-w-sm">{v.summary}</p>
+                     <p className="opacity-60 text-sm md:text-base leading-relaxed max-w-sm">{v.text}</p>
                   </div>
                 </div>
               </Reveal>
