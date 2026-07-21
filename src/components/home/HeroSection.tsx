@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Beams from "../Beams";
@@ -9,8 +9,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
     const ctx = gsap.context(() => {
       // 1. Hero Reveal Animation
       gsap.fromTo(
@@ -47,8 +52,10 @@ export default function HeroSection() {
         scrub: true,
       });
     }, heroRef);
-    
-    return () => ctx.revert();
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -65,7 +72,7 @@ export default function HeroSection() {
           speed={2}
           noiseIntensity={1.75}
           scale={0.2}
-          rotation={90}
+          rotation={isMobile ? 90 : 0}
         />
       </div>
       
