@@ -54,7 +54,7 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-navy text-cream"
+      className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-navy text-cream"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Beams
@@ -65,7 +65,7 @@ export default function HeroSection() {
           speed={2}
           noiseIntensity={1.75}
           scale={0.2}
-          rotation={0}
+          rotation={90}
         />
       </div>
       
@@ -74,7 +74,7 @@ export default function HeroSection() {
           <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
         </div>
         
-        <div data-hero-tagline className="-mt-10 opacity-0 z-20">
+        <div data-hero-tagline className="-mt-4 md:-mt-10 opacity-0 z-20">
           <p className="font-script text-2xl md:text-4xl text-cream tracking-wide">
             {contactInfo.tagline}
           </p>
