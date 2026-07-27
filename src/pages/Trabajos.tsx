@@ -85,7 +85,7 @@ export default function Trabajos() {
       <section className="px-6 pb-32 md:px-10">
         <div className="mx-auto grid max-w-[1400px] gap-x-8 gap-y-12 md:gap-y-20 md:grid-cols-2">
           {work.map((w, i) => (
-            <Reveal key={w.slug} delay={(i % 2) * 0.08}>
+            <Reveal key={w.slug} delay={(i % 2) * 0.08} className="min-w-0 w-full">
               <WorkCard work={w} index={i} total={work.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </Reveal>
           ))}

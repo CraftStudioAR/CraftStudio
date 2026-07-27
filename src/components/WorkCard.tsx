@@ -43,14 +43,14 @@ export default function WorkCard({
   }
 
   return (
-    <Link to={to} data-cursor={cursorLabel} className="group block">
+    <Link to={to} data-cursor={cursorLabel} className="group block w-full min-w-0">
       <ScrollGrow from={0.82} to={1} shrinkBack={false} style={{ perspective: 900 }}>
         <motion.div
           ref={ref}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
           style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-          className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${bgs[index % bgs.length]}`}
+          className={`relative flex w-full min-w-0 aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${bgs[index % bgs.length]}`}
         >
           <GlyphMark
             variant={index}
@@ -79,7 +79,7 @@ export default function WorkCard({
       </div>
       {work.summary && <p className="mt-2 max-w-md text-sm opacity-60 line-clamp-2">{work.summary}</p>}
       {work.tags?.length > 0 && (
-        <div className="mt-3 flex flex-nowrap gap-2 overflow-hidden">
+        <div className="mt-3 flex flex-wrap sm:flex-nowrap gap-2 overflow-hidden min-w-0">
           {work.tags.map((tag) => (
             <span
               key={tag}
