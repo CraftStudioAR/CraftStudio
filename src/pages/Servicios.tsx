@@ -4,7 +4,8 @@ import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
 
 export default function Servicios() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [desktopActiveIndex, setDesktopActiveIndex] = useState(0);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(null);
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -66,12 +67,12 @@ export default function Servicios() {
           {/* DESKTOP LAYOUT (Horizontal Flex) */}
           <div className="hidden lg:flex flex-row min-h-[600px] gap-4 w-full">
             {services.map((s, i) => {
-              const isActive = activeIndex === i;
+              const isActive = desktopActiveIndex === i;
               
               return (
                 <motion.div 
                   key={`desktop-${s.n}`}
-                  onClick={() => setActiveIndex(i)}
+                  onClick={() => setDesktopActiveIndex(i)}
                   animate={{ flex: isActive ? 3 : 0.5 }}
                   transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
                   className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
@@ -86,13 +87,13 @@ export default function Servicios() {
           {/* MOBILE LAYOUT (Vertical Stack) */}
           <div className="flex lg:hidden flex-col gap-4 w-full">
             {services.map((s, i) => {
-              const isActive = activeIndex === i;
+              const isActive = mobileActiveIndex === i;
               
               return (
                 <motion.div 
                   layout
                   key={`mobile-${s.n}`}
-                  onClick={() => setActiveIndex(i)}
+                  onClick={() => setMobileActiveIndex(isActive ? null : i)}
                   animate={{ height: isActive ? "auto" : "100px" }}
                   transition={{ duration: 0.8, ease: [0.25, 1, 0.3, 1] }}
                   className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
