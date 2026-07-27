@@ -56,6 +56,9 @@ export default function HeroSection() {
       
       // El scroll desaparece suavemente
       heroTl.to("[data-hero-scroll]", { opacity: 0, ease: "none" }, 0);
+      
+      // Todo el contenido sube para mantenerse centrado en la porción visible
+      heroTl.to("[data-hero-content]", { y: "-50vh", ease: "none" }, 0);
 
       ScrollTrigger.create({
         trigger: heroRef.current,
@@ -110,12 +113,12 @@ export default function HeroSection() {
         />
       </div>
       
-      <div data-hero-content className="relative z-10 flex flex-col items-center text-center">
-        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0">
+      <div data-hero-content className="relative z-10 flex flex-col items-center text-center w-full">
+        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center">
           <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
         </div>
         
-        <div data-hero-tagline className="-mt-4 md:-mt-10 opacity-0 z-20 flex flex-col items-center w-full px-6">
+        <div data-hero-tagline className="absolute top-full mt-4 md:mt-0 opacity-0 z-20 flex flex-col items-center w-full px-6">
           <div className="h-12 md:h-16 flex items-center justify-center">
             <p className="font-script text-2xl md:text-4xl text-cream tracking-wide text-center">
               We {displayText} communication
