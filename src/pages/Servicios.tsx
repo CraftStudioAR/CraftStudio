@@ -78,15 +78,15 @@ export default function Servicios() {
               return (
                 <div 
                   key={service.n}
-                  className="sticky"
-                  style={{ top: topOffset, zIndex: 10 + idx, paddingBottom: isLast ? '0' : '15vh' }}
+                  className={`lg:sticky ${isLast ? 'pb-0' : 'pb-12 lg:pb-[15vh]'}`}
+                  style={{ top: topOffset, zIndex: 10 + idx }}
                 >
                   <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-y-auto no-scrollbar relative max-h-[calc(100vh-5rem)] lg:min-h-[600px] ${cardColors[idx]}`}
+                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 lg:overflow-y-auto no-scrollbar relative lg:max-h-[calc(100vh-5rem)] lg:min-h-[600px] ${cardColors[idx]}`}
                   >
                     {/* Decorative Background Blur */}
                     {idx === 1 && <div className="absolute top-0 right-0 w-64 h-64 bg-red rounded-full blur-[100px] opacity-20 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>}
