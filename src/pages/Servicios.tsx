@@ -90,30 +90,70 @@ export default function Servicios() {
             })}
           </div>
 
-          {/* MOBILE LAYOUT (Vertical Stack) */}
           <div className="flex lg:hidden flex-col gap-4 w-full">
-            {services.map((s, i) => {
-              const isActive = mobileActiveIndex === i;
-              
-              return (
-                <motion.div 
-                  layout
-                  key={`mobile-${s.n}`}
-                  onClick={() => { if (!isActive) setMobileActiveIndex(i); }}
-                  transition={{ duration: 0.8, ease: [0.25, 1, 0.3, 1] }}
-                  className={`relative overflow-hidden rounded-[2rem] flex-shrink-0 cursor-pointer ${cardColors[i]}`}
-                >
-                  <CardContent 
-                    s={s} 
-                    i={i} 
-                    isActive={isActive} 
-                    isMobile={true} 
-                    onClose={() => setMobileActiveIndex(null)}
-                  />
-                </motion.div>
-              );
-            })}
+            {services.map((s, i) => (
+              <div 
+                key={`mobile-btn-${s.n}`}
+                onClick={() => setMobileActiveIndex(i)}
+                className={`relative overflow-hidden rounded-[2rem] flex-shrink-0 cursor-pointer h-[120px] px-6 md:px-8 flex items-center justify-between shadow-sm hover:opacity-90 transition-opacity ${cardColors[i]}`}
+              >
+                <div className="flex items-center gap-6">
+                  <span className="font-serif text-3xl opacity-60">{s.n}</span>
+                  <h3 className="font-serif text-xl md:text-2xl opacity-90 text-balance max-w-[200px]">{s.title}</h3>
+                </div>
+                <div className="w-10 h-10 shrink-0 rounded-full bg-black/10 flex items-center justify-center">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M7 1V13M1 7H13"/>
+                  </svg>
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* MOBILE MODAL */}
+          <AnimatePresence>
+            {mobileActiveIndex !== null && (
+              <motion.div 
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:hidden"
+              >
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setMobileActiveIndex(null)}
+                  className="absolute inset-0 bg-black/60 backdrop-blur-md"
+                />
+                
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className={`relative w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-[2rem] shadow-2xl flex flex-col ${cardColors[mobileActiveIndex]}`}
+                >
+                  <div className="sticky top-0 right-0 w-full flex justify-end p-4 z-20 pointer-events-none">
+                    <button 
+                      onClick={() => setMobileActiveIndex(null)}
+                      className="w-12 h-12 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center hover:bg-black/20 transition-colors pointer-events-auto"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                        <path d="M1 1L13 13M1 13L13 1"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className="-mt-14">
+                    <CardContent 
+                      s={services[mobileActiveIndex]} 
+                      i={mobileActiveIndex} 
+                      isActive={true} 
+                      isMobile={true} 
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
         </div>
       </section>
@@ -192,33 +232,14 @@ function CardContent({ s, i, isActive, isMobile, onClose }: { s: any, i: number,
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className={isMobile 
-            ? "relative flex items-center justify-between w-full h-[100px] px-8 cursor-pointer"
-            : "absolute inset-0 flex items-center justify-center w-full h-full p-6 flex-col lg:p-0"
-          }
+          className="absolute inset-0 flex items-center justify-center w-full h-full p-6 flex-col lg:p-0"
         >
-          {isMobile ? (
-            <>
-              <div className="flex items-center gap-6">
-                <span className="font-serif text-3xl opacity-60">{s.n}</span>
-                <h3 className="font-serif text-2xl opacity-90">{s.title}</h3>
-              </div>
-              <div className="w-8 h-8 rounded-full border border-current/30 flex items-center justify-center opacity-60">
-                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                   <path d="M6 1V11M1 6H11"/>
-                 </svg>
-              </div>
-            </>
-          ) : (
-            <>
-              <span className="font-serif text-2xl opacity-60 lg:absolute lg:top-10">
-                {s.n}
-              </span>
-              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl whitespace-nowrap lg:-rotate-90 opacity-80 lg:overflow-visible tracking-wide origin-center truncate">
-                {s.title}
-              </h3>
-            </>
-          )}
+          <span className="font-serif text-2xl opacity-60 lg:absolute lg:top-10">
+            {s.n}
+          </span>
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl whitespace-nowrap lg:-rotate-90 opacity-80 lg:overflow-visible tracking-wide origin-center truncate">
+            {s.title}
+          </h3>
         </motion.div>
       ) : (
         /* ACTIVE VIEW */
@@ -235,24 +256,10 @@ function CardContent({ s, i, isActive, isMobile, onClose }: { s: any, i: number,
             <div className="p-6 py-10 flex flex-col gap-10 cursor-default">
               
               {/* Header */}
-              <div className="flex flex-col gap-6 cursor-pointer" onClick={onClose}>
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start gap-4">
-                    <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
-                    <h2 className="font-serif italic text-4xl leading-[1.1]">{s.title}</h2>
-                  </div>
-                  {/* CLOSE BUTTON */}
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onClose?.();
-                    }}
-                    className="w-10 h-10 shrink-0 rounded-full bg-current/10 flex items-center justify-center hover:bg-current/20 transition-colors"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                      <path d="M1 1L13 13M1 13L13 1"/>
-                    </svg>
-                  </button>
+              <div className="flex flex-col gap-6">
+                <div className="flex items-start gap-4">
+                  <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
+                  <h2 className="font-serif italic text-4xl leading-[1.1] pr-8 text-balance">{s.title}</h2>
                 </div>
                 <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
               </div>
