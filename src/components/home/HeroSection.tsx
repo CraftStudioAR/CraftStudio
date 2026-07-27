@@ -58,7 +58,8 @@ export default function HeroSection() {
       heroTl.to("[data-hero-scroll]", { opacity: 0, ease: "none" }, 0);
       
       // Todo el contenido (logo + tagline) sube para mantenerse centrado en la porción visible
-      heroTl.to("[data-hero-content]", { y: "-50vh", ease: "none" }, 0);
+      const mobile = window.innerWidth < 768;
+      heroTl.to("[data-hero-content]", { y: mobile ? "-20vh" : "-50vh", ease: "none" }, 0);
 
       ScrollTrigger.create({
         trigger: heroRef.current,
