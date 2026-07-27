@@ -86,6 +86,10 @@ export default function Servicios() {
                   }}
                   transition={{ duration: 0.8, ease: [0.25, 1, 0.3, 1] }}
                   className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
+                  style={{
+                    minWidth: "0px",
+                    minHeight: "0px"
+                  }}
                 >
                   <AnimatePresence mode="wait">
                     {!isActive ? (
