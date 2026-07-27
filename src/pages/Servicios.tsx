@@ -162,7 +162,7 @@ export default function Servicios() {
 // Extracted Card Content component to avoid duplication between Desktop and Mobile layouts
 function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive: boolean, isMobile: boolean }) {
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       {!isActive ? (
         /* INACTIVE VIEW */
         <motion.div 
