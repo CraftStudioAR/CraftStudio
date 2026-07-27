@@ -25,7 +25,7 @@ export default function Trabajos() {
     <div className="bg-cream min-h-screen text-ink">
       
       {/* 1. HERO REDISEÑADO */}
-      <section className="relative px-6 pt-40 pb-20 md:pt-48 md:pb-32 md:px-10 overflow-hidden">
+      <section className="relative px-6 pt-32 pb-20 md:pt-48 md:pb-32 md:px-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red rounded-full blur-[100px] opacity-10 pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
         
         <div className="mx-auto max-w-[1400px] relative z-10">
@@ -40,7 +40,7 @@ export default function Trabajos() {
               initial="hidden"
               animate="visible"
               variants={titleVariants}
-              className="font-serif text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.95] tracking-tight max-w-5xl"
+              className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.95] tracking-tight max-w-5xl"
             >
               <div className="overflow-hidden pb-4 -mb-4">
                 {titleLine1.split("").map((char, index) => (
@@ -75,7 +75,7 @@ export default function Trabajos() {
 
       {/* 2. GRILLA DE TRABAJOS (Sin cambios estructurales) */}
       <section className="px-6 pb-32 md:px-10">
-        <div className="mx-auto grid max-w-[1400px] gap-x-8 gap-y-20 md:grid-cols-2">
+        <div className="mx-auto grid max-w-[1400px] gap-x-8 gap-y-12 md:gap-y-20 md:grid-cols-2">
           {work.map((w, i) => (
             <Reveal key={w.slug} delay={(i % 2) * 0.08}>
               <WorkCard work={w} index={i} total={work.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />

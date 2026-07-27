@@ -75,7 +75,7 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-cream text-ink relative overflow-hidden">
-      <div className="px-6 pt-32 pb-32 md:pt-40 md:px-10 mx-auto max-w-[1400px] grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 relative z-10">
+      <div className="px-6 pt-24 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-[1400px] grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
         
         {/* LADO IZQUIERDO: Título gigante */}
         <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[50vh]">
@@ -84,7 +84,7 @@ export default function Contacto() {
               <p className="mb-8 text-xs tracking-widest text-red uppercase flex items-center gap-4 font-bold">
                 <span className="w-12 h-[1px] bg-red" /> Un Nuevo Proyecto
               </p>
-              <h1 className="font-serif text-6xl md:text-8xl italic leading-[0.9] tracking-tight text-navy">
+              <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos<br />de tu marca.
               </h1>
               <p className="mt-8 max-w-sm text-xl opacity-70 font-medium text-balance">
@@ -93,19 +93,6 @@ export default function Contacto() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.2}>
-            <div className="mt-20 lg:mt-32 flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
-                <span className="text-[10px] tracking-widest uppercase opacity-40 font-bold">Escríbenos Directamente</span>
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="font-serif italic text-3xl hover:text-red transition-colors inline-block w-max"
-                >
-                  {contactInfo.email}
-                </a>
-              </div>
-            </div>
-          </Reveal>
         </div>
 
         {/* LADO DERECHO: El Archivero Interactivo */}
@@ -138,7 +125,7 @@ export default function Contacto() {
               </p>
             </motion.div>
           ) : (
-            <div className="w-full flex flex-col relative h-[650px]">
+            <div className="w-full flex flex-col relative h-[500px] sm:h-[550px] md:h-[650px]">
               
               {/* PESTAÑAS DEL ARCHIVERO */}
               <div className="flex gap-1 md:gap-2 mb-[-1px] relative z-20 px-2 md:px-8">
@@ -150,7 +137,7 @@ export default function Contacto() {
                       key={tab.id}
                       onClick={() => navigateToStep(tab.id)}
                       disabled={!isPast && !isActive}
-                      className={`relative px-4 md:px-8 py-3 md:py-5 rounded-t-[1.5rem] font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
+                      className={`relative px-3 md:px-8 py-3 md:py-5 rounded-t-[1.5rem] font-bold text-[9px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
                         ${isActive 
                           ? "bg-white border-ink/10 text-navy h-[110%] pb-6 z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
                           : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
@@ -184,7 +171,7 @@ export default function Contacto() {
                         transition={{ duration: 0.5 }}
                         className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
                       >
-                        <h2 className="font-serif italic text-3xl md:text-4xl mb-8 text-navy">¿Qué necesita tu marca?</h2>
+                        <h2 className="font-serif italic text-2xl md:text-4xl mb-6 md:mb-8 text-navy">¿Qué necesita tu marca?</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start">
                           {contactForm.needs.map((opt, i) => {
                             const isActive = need === opt;
@@ -196,14 +183,14 @@ export default function Contacto() {
                                   setNeed(opt);
                                   setTimeout(nextStep, 400);
                                 }}
-                                className={`relative overflow-hidden text-left p-6 rounded-2xl border transition-all duration-300 group ${
+                                className={`relative overflow-hidden text-left p-4 md:p-6 rounded-2xl border transition-all duration-300 group ${
                                   isActive 
                                     ? "bg-navy border-navy text-cream shadow-xl scale-[1.02]" 
                                     : "bg-[#faf8f6] border-ink/10 text-ink hover:border-ink/30 hover:bg-white"
                                 }`}
                               >
                                 <span className={`text-[10px] font-bold tracking-widest uppercase mb-3 block transition-colors ${isActive ? 'text-red' : 'text-ink/30'}`}>Opción 0{i+1}</span>
-                                <span className="font-sans font-medium text-lg md:text-xl leading-tight relative z-10">{opt}</span>
+                                <span className="font-sans font-medium text-base sm:text-lg md:text-xl leading-tight relative z-10">{opt}</span>
                               </button>
                             )
                           })}
@@ -235,7 +222,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setBudget(opt)}
-                                  className={`px-6 py-4 rounded-xl border text-left transition-all duration-300 ${
+                                  className={`px-4 py-3 md:px-6 md:py-4 rounded-xl border text-left transition-all duration-300 ${
                                     budget === opt
                                       ? "bg-ink text-cream border-ink shadow-lg scale-[1.02]"
                                       : "bg-[#faf8f6] border-ink/10 hover:border-ink/30 text-ink"
@@ -255,7 +242,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setHowFound(opt)}
-                                  className={`rounded-full border px-6 py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                  className={`rounded-full border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                     howFound === opt
                                       ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                       : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
@@ -292,7 +279,7 @@ export default function Contacto() {
                       >
                         <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos</h2>
                         <div className="flex flex-col gap-6 flex-1">
-                          <div className="grid gap-6 sm:grid-cols-2">
+                          <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
                             <Field label="Nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} />
                             <Field label="Empresa" name="empresa" value={formData.empresa} onChange={handleInputChange} />
                           </div>
@@ -310,7 +297,7 @@ export default function Contacto() {
                               value={formData.mensaje}
                               onChange={handleInputChange}
                               rows={3}
-                              className="w-full resize-none border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-3 font-sans text-lg md:text-xl outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
+                              className="w-full resize-none border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-2 md:py-3 font-sans text-base md:text-xl outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
                               placeholder="Desarrolla brevemente tu situación..."
                             />
                           </div>
@@ -341,6 +328,21 @@ export default function Contacto() {
             </div>
           )}
         </div>
+      </div>
+      
+      {/* O ESCRÍBENOS DIRECTAMENTE (Moved here, below the whole grid layout) */}
+      <div className="px-6 pb-20 md:pb-32 mx-auto max-w-[1400px] flex justify-center lg:justify-end">
+        <Reveal delay={0.2}>
+          <div className="flex flex-col items-center lg:items-end text-center lg:text-right gap-2">
+            <span className="text-[10px] tracking-widest uppercase opacity-40 font-bold">O Escríbenos Directamente</span>
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="font-serif italic text-3xl md:text-4xl hover:text-red transition-colors inline-block"
+            >
+              {contactInfo.email}
+            </a>
+          </div>
+        </Reveal>
       </div>
     </div>
   );
@@ -384,7 +386,7 @@ function Field({
         required
         value={value}
         onChange={onChange}
-        className="w-full border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-3 font-sans text-lg md:text-xl outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
+        className="w-full border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-2 md:py-3 font-sans text-base md:text-xl outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
       />
     </div>
   );
