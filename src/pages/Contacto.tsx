@@ -78,7 +78,7 @@ export default function Contacto() {
       <div className="px-6 pt-24 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-[1400px] grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
         
         {/* LADO IZQUIERDO: Título gigante */}
-        <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[50vh]">
+        <div className="lg:col-span-5 flex flex-col justify-between h-full lg:min-h-[50vh]">
           <div>
             <Reveal>
               <p className="mb-8 text-xs tracking-widest text-red uppercase flex items-center gap-4 font-bold">
@@ -128,7 +128,7 @@ export default function Contacto() {
             <div className="w-full flex flex-col relative h-[500px] sm:h-[550px] md:h-[650px]">
               
               {/* PESTAÑAS DEL ARCHIVERO */}
-              <div className="flex gap-1 md:gap-2 mb-[-1px] relative z-20 px-2 md:px-8">
+              <div className="flex gap-1 md:gap-2 mb-[-1px] relative z-20 px-4 md:px-8">
                 {TABS.map((tab) => {
                   const isActive = activeStep === tab.id;
                   const isPast = activeStep > tab.id;
@@ -137,7 +137,7 @@ export default function Contacto() {
                       key={tab.id}
                       onClick={() => navigateToStep(tab.id)}
                       disabled={!isPast && !isActive}
-                      className={`relative px-3 md:px-8 py-3 md:py-5 rounded-t-[1.5rem] font-bold text-[9px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
+                      className={`relative flex-1 md:flex-none flex justify-center items-center px-1 md:px-8 py-3 md:py-5 rounded-t-[1rem] md:rounded-t-[1.5rem] font-bold text-[9px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
                         ${isActive 
                           ? "bg-white border-ink/10 text-navy h-[110%] pb-6 z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
                           : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
@@ -145,9 +145,9 @@ export default function Contacto() {
                         ${!isPast && !isActive ? "cursor-not-allowed opacity-50" : ""}
                       `}
                     >
-                      <span className="flex items-center gap-1 md:gap-2">
+                      <span className="flex items-center gap-1 md:gap-2 truncate text-center">
                         <span className={isActive ? 'text-red' : ''}>0{tab.id}</span>
-                        <span className="hidden sm:inline">{tab.label}</span>
+                        <span className="truncate">{tab.label}</span>
                       </span>
                     </button>
                   );
