@@ -188,85 +188,156 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"
+          className={isMobile ? "w-full h-full" : "p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"}
         >
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 w-full h-full">
-            
-            {/* Left: Title & Summaries */}
-            <div className="lg:w-1/2 flex flex-col gap-6 md:gap-8 flex-shrink-0">
-              <div className="flex items-baseline gap-4 md:gap-6">
-                <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
-                  {s.n}
-                </span>
-                <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.2em]">
-                  {s.title.split(" ").map((word: string, wIdx: number) => (
-                    <span key={wIdx} className="inline-block whitespace-nowrap">
-                      {word}
-                    </span>
-                  ))}
-                </h2>
+          {isMobile ? (
+            /* MOBILE CUSTOM ACTIVE VIEW */
+            <div className="p-6 py-10 flex flex-col gap-10">
+              
+              {/* Header */}
+              <div className="flex flex-col gap-6">
+                <div className="flex items-start gap-4">
+                  <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
+                  <h2 className="font-serif italic text-4xl leading-[1.1]">{s.title}</h2>
+                </div>
+                <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
               </div>
-              
-              <div className={`w-16 h-[1px] ${i === 0 ? 'bg-ink/20' : 'bg-current opacity-30'}`}></div>
-              
-              <p className="text-xl md:text-2xl font-medium leading-[1.3] text-balance">
-                {s.summary}
-              </p>
-              
-              <p className="text-base md:text-lg opacity-80 leading-relaxed font-medium">
-                {s.detail}
-              </p>
-            </div>
 
-            {/* Right: Lists & Result */}
-            <div className="lg:w-1/2 flex flex-col gap-8 md:gap-10">
-              
-              {/* Fit Ideal */}
-              <div className="flex flex-col gap-4">
-                <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                  <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {s.fit.map((f: string, j: number) => (
-                    <span 
-                      key={j} 
-                      className={`px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border ${
-                        i === 0 ? 'bg-ink/5 border-ink/10' : 'bg-white/10 border-white/20'
-                      }`}
-                    >
-                      {f}
-                    </span>
-                  ))}
+              {/* Intro Text */}
+              <div className="flex flex-col gap-6">
+                <p className="text-xl font-medium leading-[1.4]">{s.summary}</p>
+                <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
+              </div>
+
+              {/* Attributes Container (Specs Box) */}
+              <div className={`p-6 rounded-[1.5rem] flex flex-col gap-10 ${i === 0 ? 'bg-ink/5' : 'bg-white/5'}`}>
+                
+                {/* Fit Ideal */}
+                <div className="flex flex-col gap-5">
+                  <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                    <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
+                  </h4>
+                  <div className="flex flex-col gap-3">
+                    {s.fit.map((f: string, j: number) => (
+                      <span 
+                        key={j} 
+                        className={`px-4 py-3 rounded-xl text-xs tracking-wide font-medium border leading-tight ${
+                          i === 0 ? 'bg-white border-ink/10 shadow-sm' : 'bg-black/20 border-white/10'
+                        }`}
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Incluye */}
+                <div className="flex flex-col gap-5">
+                  <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                    <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
+                  </h4>
+                  <ul className="flex flex-col gap-4">
+                    {s.includes.split(', ').map((item: string, j: number) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <span className={i === 0 ? "text-red font-serif italic text-sm" : "text-current opacity-50 font-serif italic text-sm"}>✦</span>
+                        <span className="text-sm font-medium capitalize leading-tight opacity-90 pt-0.5">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              {/* Includes */}
-              <div className="flex flex-col gap-4">
-                <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                  <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
-                </h4>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
-                  {s.includes.split(', ').map((item: string, j: number) => (
-                    <li key={j} className="flex items-start gap-2 border-b border-current/10 pb-1.5">
-                      <span className={i === 0 ? "text-red font-serif italic text-sm" : "text-current opacity-50 font-serif italic text-sm"}>✦</span>
-                      <span className="text-xs md:text-sm font-medium capitalize leading-tight opacity-90">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               {/* Result Block */}
-              <div className={`mt-auto p-6 md:p-8 rounded-[1rem] relative overflow-hidden flex flex-col justify-center items-center text-center ${
+              <div className={`p-8 rounded-[1.5rem] flex flex-col justify-center items-center text-center mt-2 ${
                 i === 0 ? 'bg-ink text-cream' : 'bg-cream text-ink'
               }`}>
-                <h4 className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase opacity-60 mb-2">El Resultado</h4>
-                <p className="font-serif italic text-xl md:text-2xl leading-[1.2] text-balance">
+                <h4 className="text-[10px] font-bold tracking-widest uppercase opacity-60 mb-4">El Resultado</h4>
+                <p className="font-serif italic text-2xl leading-[1.2] text-balance">
                   "{s.result}"
                 </p>
               </div>
 
             </div>
-          </div>
+          ) : (
+            /* DESKTOP ACTIVE VIEW (Untouched) */
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 w-full h-full">
+              
+              {/* Left: Title & Summaries */}
+              <div className="lg:w-1/2 flex flex-col gap-6 md:gap-8 flex-shrink-0">
+                <div className="flex items-baseline gap-4 md:gap-6">
+                  <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
+                    {s.n}
+                  </span>
+                  <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.2em]">
+                    {s.title.split(" ").map((word: string, wIdx: number) => (
+                      <span key={wIdx} className="inline-block whitespace-nowrap">
+                        {word}
+                      </span>
+                    ))}
+                  </h2>
+                </div>
+                
+                <div className={`w-16 h-[1px] ${i === 0 ? 'bg-ink/20' : 'bg-current opacity-30'}`}></div>
+                
+                <p className="text-xl md:text-2xl font-medium leading-[1.3] text-balance">
+                  {s.summary}
+                </p>
+                
+                <p className="text-base md:text-lg opacity-80 leading-relaxed font-medium">
+                  {s.detail}
+                </p>
+              </div>
+
+              {/* Right: Lists & Result */}
+              <div className="lg:w-1/2 flex flex-col gap-8 md:gap-10">
+                
+                {/* Fit Ideal */}
+                <div className="flex flex-col gap-4">
+                  <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                    <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {s.fit.map((f: string, j: number) => (
+                      <span 
+                        key={j} 
+                        className={`px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border ${
+                          i === 0 ? 'bg-ink/5 border-ink/10' : 'bg-white/10 border-white/20'
+                        }`}
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Includes */}
+                <div className="flex flex-col gap-4">
+                  <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                    <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
+                  </h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
+                    {s.includes.split(', ').map((item: string, j: number) => (
+                      <li key={j} className="flex items-start gap-2 border-b border-current/10 pb-1.5">
+                        <span className={i === 0 ? "text-red font-serif italic text-sm" : "text-current opacity-50 font-serif italic text-sm"}>✦</span>
+                        <span className="text-xs md:text-sm font-medium capitalize leading-tight opacity-90">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Result Block */}
+                <div className={`mt-auto p-6 md:p-8 rounded-[1rem] relative overflow-hidden flex flex-col justify-center items-center text-center ${
+                  i === 0 ? 'bg-ink text-cream' : 'bg-cream text-ink'
+                }`}>
+                  <h4 className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase opacity-60 mb-2">El Resultado</h4>
+                  <p className="font-serif italic text-xl md:text-2xl leading-[1.2] text-balance">
+                    "{s.result}"
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
