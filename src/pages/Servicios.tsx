@@ -221,7 +221,7 @@ export default function Servicios() {
 }
 
 // Extracted Card Content component to avoid duplication between Desktop and Mobile layouts
-function CardContent({ s, i, isActive, isMobile, onClose }: { s: any, i: number, isActive: boolean, isMobile: boolean, onClose?: () => void }) {
+function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive: boolean, isMobile: boolean }) {
   return (
     <AnimatePresence mode="popLayout">
       {!isActive ? (
