@@ -56,7 +56,7 @@ export default function FoundersSection() {
             </p>
             <p
               ref={textRef}
-              className="font-serif text-3xl leading-[1.2] italic md:text-5xl lg:text-6xl text-ink/90 text-balance mb-8"
+              className="font-serif text-3xl leading-[1.2] italic md:text-5xl lg:text-6xl text-ink/90 text-balance mb-12 md:mb-16"
             >
               {manifesto.split(" ").map((w, i) => (
                 <span key={i} className="inline-block mr-[0.25em]">
@@ -64,7 +64,7 @@ export default function FoundersSection() {
                 </span>
               ))}
             </p>
-            <div className="text-lg md:text-xl text-ink/70 leading-relaxed max-w-2xl mx-auto flex flex-col gap-4 text-balance">
+            <div className="text-lg md:text-xl text-ink/70 leading-relaxed max-w-2xl mx-auto flex flex-col gap-8 text-balance">
               <p>Diagnosticamos, definimos y construimos. En ese orden.</p>
               <p>El resultado no es solo visual: es un sistema que funciona, escala y representa con claridad aquello que hace único a cada proyecto.</p>
             </div>

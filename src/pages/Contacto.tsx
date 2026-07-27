@@ -125,7 +125,7 @@ export default function Contacto() {
               </p>
             </motion.div>
           ) : (
-            <div className="w-full flex flex-col relative h-[500px] sm:h-[550px] md:h-[650px]">
+            <div className="w-full flex flex-col relative min-h-[500px] h-auto md:h-[650px]">
               
               {/* PESTAÑAS DEL ARCHIVERO */}
               <div className="flex gap-1 md:gap-2 mb-[-1px] relative z-20 px-4 md:px-8">
@@ -169,7 +169,7 @@ export default function Contacto() {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
+                        className="w-full h-full flex flex-col p-6 md:p-12 bg-white flex-1"
                       >
                         <h2 className="font-serif italic text-2xl md:text-4xl mb-6 md:mb-8 text-navy">¿Qué necesita tu marca?</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start">
