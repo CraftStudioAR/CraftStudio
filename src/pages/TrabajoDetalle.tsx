@@ -10,10 +10,7 @@ export default function TrabajoDetalle() {
   const { slug } = useParams();
   const project = work.find((w) => w.slug === slug);
 
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
 
   if (!project) {
     return <Navigate to="/trabajos" replace />;

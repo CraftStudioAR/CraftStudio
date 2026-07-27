@@ -2,13 +2,14 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigationType } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const location = useLocation();
+  const navigationType = useNavigationType();
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -32,9 +33,12 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    lenisRef.current?.scrollTo(0, { immediate: true });
+    if (navigationType !== "POP") {
+      lenisRef.current?.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+    }
     ScrollTrigger.refresh();
-  }, [location.pathname]);
+  }, [location.pathname, navigationType]);
 
   return <>{children}</>;
 }
