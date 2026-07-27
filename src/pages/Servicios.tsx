@@ -78,7 +78,7 @@ export default function Servicios() {
               return (
                 <div 
                   key={service.n}
-                  className={`lg:sticky ${isLast ? 'pb-0' : 'pb-12 lg:pb-[15vh]'}`}
+                  className={`sticky ${isLast ? 'pb-0' : 'pb-12 md:pb-[15vh]'}`}
                   style={{ top: topOffset, zIndex: 10 + idx }}
                 >
                   <motion.div 
@@ -86,7 +86,7 @@ export default function Servicios() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 lg:overflow-y-auto no-scrollbar relative lg:max-h-[calc(100vh-5rem)] lg:min-h-[600px] ${cardColors[idx]}`}
+                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-hidden relative lg:min-h-[600px] ${cardColors[idx]}`}
                   >
                     {/* Decorative Background Blur */}
                     {idx === 1 && <div className="absolute top-0 right-0 w-64 h-64 bg-red rounded-full blur-[100px] opacity-20 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>}
@@ -95,8 +95,8 @@ export default function Servicios() {
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
                       
                       {/* Left: Title & Summaries */}
-                      <div className="lg:col-span-6 flex flex-col gap-6 md:gap-8">
-                        <div className="flex items-end gap-6">
+                      <div className="lg:col-span-6 flex flex-col gap-4 md:gap-8">
+                        <div className="flex items-end gap-4 md:gap-6">
                           <span className="font-serif text-5xl md:text-7xl opacity-50 italic">
                             {service.n}
                           </span>
@@ -125,13 +125,13 @@ export default function Servicios() {
                           {service.summary}
                         </p>
                         
-                        <p className="text-base lg:text-lg opacity-70 leading-relaxed font-medium max-w-xl">
+                        <p className="hidden md:block text-base lg:text-lg opacity-70 leading-relaxed font-medium max-w-xl">
                           {service.detail}
                         </p>
                       </div>
 
                       {/* Right: Lists & Result */}
-                      <div className="lg:col-span-6 flex flex-col gap-8 lg:pt-2 h-full">
+                      <div className="lg:col-span-6 flex flex-col gap-6 md:gap-8 lg:pt-2 h-full">
                         
                         {/* Fit Ideal */}
                         <div className="flex flex-col gap-4">
