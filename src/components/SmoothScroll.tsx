@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -32,12 +32,19 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (navigationType !== "POP") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
       lenisRef.current?.scrollTo(0, { immediate: true });
-      window.scrollTo(0, 0);
     }
-    ScrollTrigger.refresh();
+    
+    const t = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    
+    return () => clearTimeout(t);
   }, [location.pathname, navigationType]);
 
   return <>{children}</>;
