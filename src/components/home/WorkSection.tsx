@@ -60,7 +60,7 @@ export default function WorkSection() {
                 className="group relative flex md:inline-flex justify-center items-center gap-3 rounded-full px-8 py-3.5 bg-cream text-ink hover:bg-white transition-all hover:scale-105 w-full md:w-auto"
               >
                 <span className="font-bold uppercase tracking-widest text-xs">Ver todos los proyectos</span>
-                <span className="text-lg leading-none transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">↗</span>
+                <span className="text-lg leading-none transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">{"\u2197\uFE0E"}</span>
               </Link>
             </Magnetic>
           </div>

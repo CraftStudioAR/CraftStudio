@@ -69,7 +69,7 @@ export default function StudioSection() {
                 className="group relative flex md:inline-flex items-center justify-center gap-2 md:gap-4 rounded-full px-6 md:px-10 py-5 bg-cream text-navy hover:bg-white transition-all hover:scale-105 shadow-xl shadow-black/10 w-full md:w-auto"
               >
                 <span className="text-[10px] md:text-base tracking-widest uppercase font-bold text-center">Empezar un proyecto con Craft</span>
-                <span className="text-xl leading-none transition-transform duration-500 group-hover:translate-x-2">→</span>
+                <span className="text-xl leading-none transition-transform duration-500 group-hover:translate-x-2">{"\u2192\uFE0E"}</span>
               </Link>
             </Magnetic>
           </Reveal>

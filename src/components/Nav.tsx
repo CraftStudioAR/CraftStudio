@@ -169,7 +169,7 @@ export default function Nav() {
                   </a>
                 </div>
                 <a href="#" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors">
-                  Instagram ↗
+                  Instagram {"\u2197\uFE0E"}
                 </a>
               </div>
             </motion.div>

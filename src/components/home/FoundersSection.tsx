@@ -90,10 +90,10 @@ export default function FoundersSection() {
             
             <div className="flex flex-col md:flex-row flex-wrap gap-4 mt-10 md:mt-12">
               <button className="w-full md:w-auto justify-center bg-cream text-ink px-6 py-4 rounded-full text-xs tracking-widest uppercase font-bold hover:bg-[#e0dad5] transition-colors flex items-center gap-2">
-                Conocer Más ↗
+                Conocer Más {"\u2197\uFE0E"}
               </button>
               <button className="w-full md:w-auto justify-center bg-white/10 text-cream border border-white/10 px-6 py-4 rounded-full text-xs tracking-widest uppercase font-bold hover:bg-white/20 transition-colors flex items-center gap-2">
-                Ver Servicios ↗
+                Ver Servicios {"\u2197\uFE0E"}
               </button>
             </div>
           </div>

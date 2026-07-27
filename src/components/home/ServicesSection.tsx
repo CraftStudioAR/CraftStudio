@@ -63,7 +63,7 @@ export default function ServicesSection() {
                 to="/servicios"
                 className="border-b border-ink/30 pb-1 text-sm tracking-wide uppercase hover:border-ink transition-colors self-start md:self-auto"
               >
-                Ver todos ↗
+                Ver todos {"\u2197\uFE0E"}
               </Link>
             </Magnetic>
           </div>
@@ -154,7 +154,7 @@ export default function ServicesSection() {
                             className="inline-flex items-center gap-4 text-xs lg:text-sm font-bold uppercase tracking-widest hover:opacity-70 transition-opacity"
                           >
                             <span className="border-b border-current/30 pb-1">Conocer en detalle</span>
-                            <span>→</span>
+                            <span>{"\u2192\uFE0E"}</span>
                           </Link>
                         </div>
                       </div>
