@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { motion } from "motion/react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 import Magnetic from "./Magnetic";
 import { LogoLockupHorizontal } from "./Logo";
 import { nav } from "../content/brand";
@@ -8,102 +8,174 @@ import { nav } from "../content/brand";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const location = useLocation();
+
+  const isDarkBg = location.pathname === "/";
+
+  // Close menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Solid bg logic
+      setSolid(currentScrollY > 40);
+
+      // Hide/Show logic
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setHidden(true);
+      } else if (currentScrollY < lastScrollY) {
+        setHidden(false);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [open]);
+
+  // Determine colors based on state and route
+  const isNavDarkText = (solid && !open) || (!solid && !open && !isDarkBg);
+  const hamburgerColor = isNavDarkText ? "bg-ink" : "bg-cream";
+
   return (
-    <header
-      className={`fixed top-0 right-0 left-0 z-40 flex items-center justify-between px-6 py-5 transition-colors duration-500 md:px-10 ${
-        solid ? "bg-cream/85 backdrop-blur-md text-ink" : "bg-transparent text-cream"
-      }`}
-    >
-      <Magnetic strength={0.25}>
-        <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
-          <LogoLockupHorizontal className="h-5 md:h-7" />
-        </Link>
-      </Magnetic>
-
-      <button
-        onClick={() => setOpen((v) => !v)}
-        data-cursor={open ? "Cerrar" : "Menú"}
-        className="relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-[6px] md:hidden"
-        aria-label="Menú"
-      >
-        <span
-          style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
-          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
-        />
-        <span
-          style={{ opacity: open ? 0 : 1 }}
-          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
-        />
-        <span
-          style={{ transform: open ? "translateY(-7px) rotate(-45deg)" : "none" }}
-          className={`block h-[1.5px] w-6 transition-all duration-300 ${solid ? "bg-ink" : "bg-cream"}`}
-        />
-      </button>
-
-      <nav className="hidden items-center gap-9 text-sm tracking-wide uppercase md:flex">
-        {nav.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            data-cursor="Ver"
-            className={({ isActive }) =>
-              `relative py-1 transition-opacity hover:opacity-60 ${isActive ? "opacity-100" : "opacity-70"}`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                {item.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-dot"
-                    className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red"
-                  />
-                )}
-              </>
-            )}
-          </NavLink>
-        ))}
-      </nav>
-
-      {/* Panel siempre montado, animado con transición CSS nativa sobre
-          clip-path (en vez de un motor JS) para que abrir/cerrar sea 100%
-          confiable sin depender de un ciclo de exit-unmount. */}
-      <div
+    <>
+      <header
         style={{
-          clipPath: open ? "circle(150% at 100% 0%)" : "circle(0% at 100% 0%)",
-          pointerEvents: open ? "auto" : "none",
-          transition: "clip-path 0.6s cubic-bezier(0.16,1,0.3,1)",
+          transform: hidden && !open ? "translateY(-100%)" : "translateY(0)",
         }}
-        className="fixed inset-0 z-40 flex flex-col justify-center gap-6 bg-ink px-10 md:hidden"
+        className={`fixed top-0 right-0 left-0 z-50 flex items-center justify-between px-6 py-5 transition-all duration-500 md:px-10 ${
+          solid && !open ? "bg-cream/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        } ${isNavDarkText ? "text-ink" : "text-cream"}`}
       >
-        {nav.map((item, i) => (
-          <div
-            key={item.to}
-            style={{
-              opacity: open ? 1 : 0,
-              transform: open ? "translateY(0)" : "translateY(16px)",
-              transition: `opacity 0.4s ease ${open ? 0.15 + i * 0.06 : 0}s, transform 0.4s ease ${open ? 0.15 + i * 0.06 : 0}s`,
-            }}
-          >
+        <Magnetic strength={0.25}>
+          <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
+            <LogoLockupHorizontal className="h-7 md:h-10 transition-all duration-300" />
+          </Link>
+        </Magnetic>
+
+        <button
+          onClick={() => setOpen((v) => !v)}
+          data-cursor={open ? "Cerrar" : "Menú"}
+          className="relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-[6px] md:hidden"
+          aria-label="Menú"
+        >
+          <span
+            style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
+            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+          />
+          <span
+            style={{ opacity: open ? 0 : 1 }}
+            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+          />
+          <span
+            style={{ transform: open ? "translateY(-7px) rotate(-45deg)" : "none" }}
+            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+          />
+        </button>
+
+        <nav className="hidden items-center gap-9 text-sm tracking-wide uppercase md:flex">
+          {nav.map((item) => (
             <NavLink
+              key={item.to}
               to={item.to}
-              onClick={() => setOpen(false)}
-              tabIndex={open ? 0 : -1}
-              className="font-serif-italic text-4xl text-cream"
+              data-cursor="Ver"
+              className={({ isActive }) =>
+                `relative py-1 transition-opacity hover:opacity-60 ${isActive ? "opacity-100" : "opacity-70"}`
+              }
             >
-              {item.label}
+              {({ isActive }) => (
+                <>
+                  {item.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-dot"
+                      className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red"
+                    />
+                  )}
+                </>
+              )}
             </NavLink>
-          </div>
-        ))}
-      </div>
-    </header>
+          ))}
+        </nav>
+      </header>
+
+      {/* Premium Mobile Menu Overlay */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 flex flex-col justify-center bg-navy px-8 pt-20 pb-10 md:hidden overflow-y-auto"
+          >
+            <div className="flex flex-col gap-6">
+              {nav.map((item, i) => (
+                <div key={item.to} className="overflow-hidden py-1">
+                  <motion.div
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "100%" }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <NavLink
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) => 
+                        `font-serif text-5xl block transition-colors ${isActive ? "text-cream italic" : "text-cream/60"}`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Contact Info at bottom of menu */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="mt-16 flex flex-col gap-6"
+            >
+              <div className="w-full h-[1px] bg-cream/10" />
+              
+              <div className="flex justify-between items-end">
+                <div className="flex flex-col gap-2">
+                  <p className="text-[10px] tracking-widest uppercase text-cream/40">Say Hello</p>
+                  <a href="mailto:hola@craftstudio.com.ar" className="text-cream text-sm font-medium hover:text-red transition-colors">
+                    hola@craftstudio.com.ar
+                  </a>
+                </div>
+                <a href="#" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors">
+                  Instagram ↗
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

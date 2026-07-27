@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../Reveal";
@@ -7,25 +7,61 @@ import { services } from "../../content/brand";
 
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeService = services[activeIndex];
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-play accordion logic (Desktop only)
+  useEffect(() => {
+    if (isHovered || window.innerWidth < 1024) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % services.length);
+    }, 6000); // 6 seconds for a relaxed, harmonious pace
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  const colors = [
+    "bg-white text-ink border border-ink/5 shadow-[0_8px_30px_rgb(0,0,0,0.08)]", // Creación de marca
+    "bg-navy text-cream",                     // Reposicionamiento
+    "bg-red text-cream"                       // Refresh
+  ];
+
+  // Typewriter animation variants
+  const titleVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05, delayChildren: 0.7 }
+    }
+  };
+
+  const charVariants = {
+    hidden: { opacity: 0, y: 5 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+  };
 
   return (
     <section className="bg-cream text-ink py-24 md:py-32 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
         
         {/* Header */}
         <Reveal>
-          <div className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div>
+          <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-2xl">
               <p className="text-sm tracking-widest text-red uppercase mb-4 flex items-center gap-4">
-                <span className="w-8 h-[1px] bg-red" /> Qué Hacemos
+                <span className="w-8 h-[1px] bg-red" /> Servicios
               </p>
-              <h2 className="font-sans font-medium tracking-tight text-5xl md:text-7xl lg:text-8xl">Servicios</h2>
+              <h2 className="font-sans font-medium tracking-tight text-5xl md:text-7xl lg:text-8xl mb-6 break-words lg:whitespace-nowrap">
+                Cómo trabaja <span className="font-serif italic font-normal">Craft</span>
+              </h2>
+              <p className="text-lg md:text-xl text-ink/70 text-balance">
+                Craft no ofrece paquetes estándar. Trabaja con programas pensados para el momento real en el que está cada empresa.
+              </p>
             </div>
             <Magnetic>
               <Link
                 to="/servicios"
-                className="border-b border-ink/30 pb-1 text-sm tracking-wide uppercase hover:border-ink transition-colors"
+                className="border-b border-ink/30 pb-1 text-sm tracking-wide uppercase hover:border-ink transition-colors self-start md:self-auto"
               >
                 Ver todos ↗
               </Link>
@@ -33,66 +69,101 @@ export default function ServicesSection() {
           </div>
         </Reveal>
 
-        {/* Split Screen Container */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          
-          {/* Left Column: Interactive Menu */}
-          <div className="lg:w-1/2 w-full flex flex-col justify-center gap-6 md:gap-10">
-            {services.map((s, i) => {
-              const isActive = activeIndex === i;
-              return (
-                <div
-                  key={s.n}
-                  onMouseEnter={() => setActiveIndex(i)}
-                  onClick={() => setActiveIndex(i)}
-                  className="cursor-pointer group flex items-start gap-4 md:gap-6"
-                >
-                  <span className={`font-serif text-lg md:text-xl transition-colors duration-500 mt-2 md:mt-3 ${isActive ? 'text-red' : 'text-ink/30 group-hover:text-ink/50'}`}>
-                    {s.n}
-                  </span>
-                  <h3 className={`font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.2] transition-all duration-500 origin-left ${isActive ? 'translate-x-2 md:translate-x-4 opacity-100' : 'opacity-40 group-hover:opacity-60'}`}>
-                    {s.title}
-                  </h3>
-                </div>
-              );
-            })}
-          </div>
+        {/* Horizontal Accordion powered entirely by Framer Motion Layout */}
+        <div 
+          className="flex flex-col lg:flex-row h-[380px] lg:h-[600px] gap-4 w-full"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {services.map((s, i) => {
+            const isActive = activeIndex === i;
+            
+            return (
+              <motion.div 
+                layout
+                key={s.n}
+                onClick={() => setActiveIndex(i)}
+                onMouseEnter={() => window.innerWidth >= 1024 && setActiveIndex(i)}
+                initial={false}
+                animate={{
+                  flex: isActive ? 3 : 0.5
+                }}
+                transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+                className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${colors[i]}`}
+                style={{
+                  minWidth: "0px",
+                  minHeight: "0px"
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  {!isActive ? (
+                    /* INACTIVE VIEW */
+                    <motion.div 
+                      key={`inactive-${s.n}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="absolute inset-0 flex flex-row lg:flex-col items-center justify-center lg:justify-center w-full h-full p-6 lg:p-0"
+                    >
+                      <span className="font-serif text-2xl opacity-60 mr-3 lg:mr-0 lg:absolute lg:top-10">
+                        {s.n}
+                      </span>
+                      <h3 className="font-serif text-2xl md:text-4xl whitespace-nowrap lg:-rotate-90 opacity-70 tracking-wide origin-center truncate lg:overflow-visible">
+                        {s.title}
+                      </h3>
+                    </motion.div>
+                  ) : (
+                    /* ACTIVE VIEW */
+                    <motion.div 
+                      key={`active-${s.n}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="absolute inset-0 p-6 lg:p-10 flex flex-col justify-center lg:justify-between w-full h-full overflow-hidden"
+                    >
+                      <div className="lg:w-[600px] flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-0">
+                        <span className="font-serif text-3xl md:text-4xl opacity-60 mb-0 lg:mb-6 block flex-shrink-0">
+                          {s.n}
+                        </span>
+                        
+                        {/* Typewriter Title */}
+                        <motion.h3 
+                          variants={titleVariants}
+                          initial="hidden"
+                          animate="visible"
+                          className="font-serif text-3xl md:text-5xl lg:text-7xl leading-[1.1] text-balance"
+                        >
+                          {s.title.split("").map((char, index) => (
+                            <motion.span key={index} variants={charVariants}>
+                              {char}
+                            </motion.span>
+                          ))}
+                        </motion.h3>
+                      </div>
 
-          {/* Right Column: Dynamic Visor */}
-          <div className="lg:w-1/2 w-full">
-            <div className="w-full bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_20px_60px_rgb(0,0,0,0.03)] border border-ink/[0.03] relative min-h-[420px] md:min-h-[380px] flex flex-col justify-center">
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeService.n}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="flex flex-col"
-                >
-                  <p className="text-xl md:text-2xl opacity-90 leading-relaxed font-medium text-balance mb-6">
-                    {activeService.summary}
-                  </p>
-                  
-                  <div className="h-[1px] w-full bg-ink/10 mb-6" />
-                  
-                  <p className="text-base md:text-lg opacity-60 leading-relaxed text-balance mb-8">
-                    {activeService.detail}
-                  </p>
-                  
-                  <div className="inline-flex flex-col md:flex-row md:items-center gap-2 md:gap-4 bg-cream/50 rounded-xl p-4 border border-ink/5 self-start">
-                    <span className="text-[10px] font-bold tracking-widest text-red uppercase shrink-0">
-                      ✦ Fit ideal
-                    </span>
-                    <span className="text-sm opacity-80">{activeService.fit}</span>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-              
-            </div>
-          </div>
+                      <div className="mt-4 lg:mt-auto flex flex-col lg:max-w-lg lg:w-[500px]">
+                        <p className="text-lg md:text-xl lg:text-3xl font-medium mb-6 lg:mb-12 leading-snug line-clamp-3 lg:line-clamp-none">
+                          {s.summary}
+                        </p>
 
+                        <div>
+                          <Link
+                            to="/servicios"
+                            className="inline-flex items-center gap-4 text-xs lg:text-sm font-bold uppercase tracking-widest hover:opacity-70 transition-opacity"
+                          >
+                            <span className="border-b border-current/30 pb-1">Conocer en detalle</span>
+                            <span>→</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

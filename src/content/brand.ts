@@ -4,7 +4,6 @@
 export const nav = [
   { label: "Servicios", to: "/servicios" },
   { label: "Trabajos", to: "/trabajos" },
-  { label: "Estudio", to: "/estudio" },
   { label: "Contacto", to: "/contacto" },
 ];
 
@@ -38,40 +37,43 @@ export const values = [
 export const services = [
   {
     n: "01",
-    title: "Diagnóstico de marca",
-    summary:
-      "Antes de diseñar, entendemos. Auditoría de identidad, negocio y contexto competitivo.",
-    detail:
-      "Ninguna solución tiene valor real si antes no existe comprensión profunda del problema. Este programa mapea dónde está parada la marca hoy, qué la frena y qué necesita realmente — no lo que parece que necesita.",
-    fit: "Ideal si todavía no tenés claro qué es lo que hay que resolver.",
+    title: "Creación de marca",
+    summary: "Para marcas que necesitan nacer bien.",
+    detail: "Cuando una empresa está en sus inicios, Craft no empieza por el logo. Empieza por las preguntas: ¿quién sos?, ¿a quién le hablás?, ¿qué te hace diferente? Las respuestas son las que dan forma a todo lo que viene después — concepto, posicionamiento, identidad visual, tono de voz y criterios de comunicación. Craft construye la marca como sistema desde el principio. Para que cuando salga al mercado, salga con claridad.",
+    fit: [
+      "Estás lanzando un negocio o producto nuevo",
+      "Nunca tuviste una estrategia de marca definida",
+      "Querés salir al mercado sabiendo exactamente qué lugar ocupás"
+    ],
+    includes: "diagnóstico inicial, concepto de marca, naming, posicionamiento, propuesta de valor, narrativa, tono de voz, identidad visual, sistema gráfico, aplicaciones y guidelines.",
+    result: "Una marca preparada para salir al mercado con coherencia y dirección."
   },
   {
     n: "02",
-    title: "Identidad & sistema visual",
-    summary:
-      "Un sistema de identidad completo, pensado para crecer con la marca, no en contra de ella.",
-    detail:
-      "Logotipo, paleta, tipografía, aplicaciones. Pero sobre todo: reglas claras para que el sistema se sostenga en manos de terceros, sin depender de nosotros para cada pieza nueva.",
-    fit: "Ideal si estás creando una marca desde cero.",
+    title: "Reposicionamiento",
+    summary: "Para marcas que crecieron pero su comunicación no las acompañó.",
+    detail: "Hay un momento en el que una empresa mira su comunicación y siente que ya no la representa. Cambió el público, creció la oferta, evolucionó el negocio — pero afuera sigue pareciendo lo que era antes. Craft trabaja ese momento. Ordena la estrategia de marca para que cada decisión posterior tenga sentido. No es un cambio estético: es una redefinición del lugar que ocupa la marca y de cómo lo comunica.",
+    fit: [
+      "Tu comunicación no refleja lo que hace tu empresa hoy",
+      "Querés diferenciarte con más claridad de la competencia",
+      "Estás en un momento de crecimiento y necesitás ordenar el relato"
+    ],
+    includes: "auditoría de marca, diagnóstico de comunicación, análisis de competencia, posicionamiento, propuesta de valor, narrativa, tono de voz y lineamientos para canales.",
+    result: "Una marca con dirección clara sobre qué lugar ocupa y cómo diferenciarse."
   },
   {
     n: "03",
-    title: "Comunicación estratégica",
-    summary:
-      "Tono de voz, mensajes clave y arquitectura de contenido para hablar con una sola voz.",
-    detail:
-      "Definimos cómo suena la marca en cada canal — qué dice, qué no dice y por qué. Un marco de mensajes que el equipo interno puede aplicar sin perder consistencia.",
-    fit: "Ideal si ya tenés identidad visual pero el mensaje suena distinto en cada canal.",
-  },
-  {
-    n: "04",
-    title: "Reposicionamiento",
-    summary:
-      "Para marcas que crecieron más rápido que su comunicación y necesitan ponerse a la altura.",
-    detail:
-      "Trabajo por programas, no por piezas sueltas. Rediseñamos la percepción de la marca sin descartar la trayectoria construida hasta acá.",
-    fit: "Ideal si tu marca ya tiene trayectoria pero quedó chica frente a lo que sos hoy.",
-  },
+    title: "Refresh",
+    summary: "Para marcas que necesitan una nueva identidad para una nueva etapa.",
+    detail: "Algunas marcas tienen recorrido pero llegaron a un punto de quiebre. El negocio cambió, la identidad no. Craft trabaja ese pasaje — construye una nueva identidad que represente la evolución real de la empresa, sin borrar lo que ya se construyó. No es un cambio por moda. Es un cambio con argumento.",
+    fit: [
+      "Tu identidad visual quedó desactualizada",
+      "Estás atravesando un cambio importante en el negocio",
+      "Querés presentarte desde un nuevo lugar sin perder lo que construiste"
+    ],
+    includes: "diagnóstico de marca, ajuste de posicionamiento, nueva identidad visual, sistema gráfico, identidad verbal, aplicaciones principales, sistema visual para redes y estrategia de lanzamiento.",
+    result: "Una marca con nueva identidad, comunicación coherente y una forma clara de presentar el cambio."
+  }
 ];
 
 export const process = [

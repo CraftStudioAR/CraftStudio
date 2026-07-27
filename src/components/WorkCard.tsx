@@ -79,11 +79,11 @@ export default function WorkCard({
       </div>
       {work.summary && <p className="mt-2 max-w-md text-sm opacity-60 line-clamp-2">{work.summary}</p>}
       {work.tags?.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-nowrap gap-2 overflow-hidden">
           {work.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-current/20 px-2.5 py-1 text-[11px] tracking-wide uppercase opacity-60"
+              className="rounded-full border border-current/20 px-2.5 py-1 text-[11px] tracking-wide uppercase opacity-60 truncate max-w-full"
             >
               {tag}
             </span>

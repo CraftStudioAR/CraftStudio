@@ -47,48 +47,33 @@ export default function StudioSection() {
           />
         </div>
 
-        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-24 md:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">
           
-          {/* Left: Manifesto */}
-          <div>
-            <Reveal>
-              <h2 className="font-sans font-bold text-6xl md:text-[8vw] leading-none tracking-tighter opacity-15 mb-8">
-                ESTUDIO
-              </h2>
+          <Reveal>
+            <h2 className="font-sans font-medium tracking-tight text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-10 text-balance">
+              Craft trabaja con vos, <span className="font-serif italic font-normal text-cream/70">no para vos.</span>
+            </h2>
 
-              <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.3] mb-12 text-balance">
-                Un estudio que piensa como estratega y construye como artesano.
-              </h3>
-              
-              <Magnetic>
-                <Link
-                  to="/estudio"
-                  data-cursor="Conocer"
-                  className="group relative inline-flex items-center gap-4 rounded-full px-8 py-4 bg-cream text-navy hover:bg-white transition-colors duration-300"
-                >
-                  <LogoMark className="h-5 w-5 transition-transform duration-500 group-hover:rotate-180" />
-                  <span className="text-sm tracking-widest uppercase font-medium">Conocer el estudio</span>
-                </Link>
-              </Magnetic>
-            </Reveal>
-          </div>
-
-          {/* Right: Values cleanly aligned */}
-          <div className="flex flex-col mt-10 lg:mt-0">
-            {values.slice(0, 4).map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.1}>
-                <div className="flex items-start gap-6 border-b border-white/10 py-5 md:py-6 first:pt-0">
-                  <span className="font-serif italic text-2xl md:text-3xl opacity-30 mt-1">
-                    0{i + 1}
-                  </span>
-                  <div>
-                     <h4 className="font-serif italic text-2xl md:text-4xl mb-2 text-cream">{v.title}</h4>
-                     <p className="opacity-60 text-sm md:text-base leading-relaxed max-w-sm">{v.text}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+            <div className="flex flex-col gap-6 text-lg md:text-xl lg:text-2xl opacity-80 leading-relaxed mb-16 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-balance md:text-wrap">
+              <p>
+                Craft mantiene un número de clientes que le permite estar presente de verdad en cada proyecto. Tiempo, experiencia y honestidad al servicio de cada marca — así es como el estudio entiende el trabajo y quiere crecer.
+              </p>
+              <p>
+                Si llegaste hasta acá, probablemente tenés algo que comunicar que todavía no encontró la forma correcta de decirse. Eso es exactamente lo que Craft hace.
+              </p>
+            </div>
+            
+            <Magnetic>
+              <Link
+                to="/contacto"
+                data-cursor="Contacto"
+                className="group relative flex md:inline-flex items-center justify-center gap-2 md:gap-4 rounded-full px-6 md:px-10 py-5 bg-cream text-navy hover:bg-white transition-all hover:scale-105 shadow-xl shadow-black/10 w-full md:w-auto"
+              >
+                <span className="text-[10px] md:text-base tracking-widest uppercase font-bold text-center">Empezar un proyecto con Craft</span>
+                <span className="text-xl leading-none transition-transform duration-500 group-hover:translate-x-2">→</span>
+              </Link>
+            </Magnetic>
+          </Reveal>
 
         </div>
       </motion.section>

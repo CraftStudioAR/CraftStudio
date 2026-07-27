@@ -3,8 +3,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Servicios from "./pages/Servicios";
 import Trabajos from "./pages/Trabajos";
-import Estudio from "./pages/Estudio";
 import Contacto from "./pages/Contacto";
+import TrabajoDetalle from "./pages/TrabajoDetalle";
 
 export default function App() {
   return (
@@ -13,8 +13,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/trabajos" element={<Trabajos />} />
-        <Route path="/estudio" element={<Estudio />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/trabajos/:slug" element={<TrabajoDetalle />} />
       </Route>
     </Routes>
   );
