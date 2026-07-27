@@ -186,7 +186,7 @@ export default function Servicios() {
 
                             {/* Result Block */}
                             <div className={`mt-auto p-6 md:p-8 rounded-[1rem] relative overflow-hidden flex flex-col justify-center items-center text-center ${
-                              i === 0 ? 'bg-ink text-cream' : 'bg-black/20'
+                              i === 0 ? 'bg-ink text-cream' : 'bg-cream text-ink'
                             }`}>
                               <h4 className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase opacity-60 mb-2">El Resultado</h4>
                               <p className="font-serif italic text-xl md:text-2xl leading-[1.2] text-balance">
