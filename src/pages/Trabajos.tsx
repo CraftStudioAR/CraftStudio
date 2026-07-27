@@ -42,18 +42,26 @@ export default function Trabajos() {
               variants={titleVariants}
               className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.95] tracking-tight max-w-5xl"
             >
-              <div className="overflow-hidden pb-4 -mb-4">
-                {titleLine1.split("").map((char, index) => (
-                  <motion.span key={`l1-${index}`} variants={charVariants} className="inline-block italic">
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+              <div className="overflow-hidden pb-4 -mb-4 flex flex-wrap gap-x-[0.3em] gap-y-2">
+                {titleLine1.split(" ").map((word, wIdx) => (
+                  <span key={`w1-${wIdx}`} className="inline-block whitespace-nowrap">
+                    {word.split("").map((char, index) => (
+                      <motion.span key={`l1-${wIdx}-${index}`} variants={charVariants} className="inline-block italic">
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
                 ))}
               </div>
-              <div className="overflow-hidden pb-4 -mb-4 text-navy">
-                {titleLine2.split("").map((char, index) => (
-                  <motion.span key={`l2-${index}`} variants={charVariants} className="inline-block">
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+              <div className="overflow-hidden pb-4 -mb-4 text-navy flex flex-wrap gap-x-[0.3em] gap-y-2">
+                {titleLine2.split(" ").map((word, wIdx) => (
+                  <span key={`w2-${wIdx}`} className="inline-block whitespace-nowrap">
+                    {word.split("").map((char, index) => (
+                      <motion.span key={`l2-${wIdx}-${index}`} variants={charVariants} className="inline-block">
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
                 ))}
               </div>
             </motion.h1>

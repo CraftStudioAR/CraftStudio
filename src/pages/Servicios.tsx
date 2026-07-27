@@ -105,12 +105,16 @@ export default function Servicios() {
                             whileInView="visible"
                             viewport={{ margin: "-100px" }}
                             variants={titleVariants}
-                            className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none"
+                            className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.3em] gap-y-2"
                           >
-                            {service.title.split("").map((char, index) => (
-                              <motion.span key={index} variants={charVariants} className="inline-block">
-                                {char === " " ? "\u00A0" : char}
-                              </motion.span>
+                            {service.title.split(" ").map((word, wIdx) => (
+                              <span key={`w-${wIdx}`} className="inline-block whitespace-nowrap">
+                                {word.split("").map((char, index) => (
+                                  <motion.span key={`c-${wIdx}-${index}`} variants={charVariants} className="inline-block">
+                                    {char}
+                                  </motion.span>
+                                ))}
+                              </span>
                             ))}
                           </motion.h2>
                         </div>
