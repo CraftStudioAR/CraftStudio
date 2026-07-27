@@ -71,7 +71,7 @@ export default function Servicios() {
       <section className="px-6 pb-24 md:pb-40 md:px-10 relative">
         <div className="mx-auto max-w-[1400px]">
           
-          <div className="flex flex-col lg:flex-row lg:h-[750px] gap-4 w-full">
+          <div className="flex flex-col lg:flex-row min-h-[600px] gap-4 w-full">
             {services.map((s, i) => {
               const isActive = activeIndex === i;
               
@@ -113,17 +113,17 @@ export default function Servicios() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
-                        className="p-8 md:p-12 lg:p-16 flex flex-col w-full h-full lg:overflow-y-auto no-scrollbar"
+                        className="p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"
                       >
-                        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 w-full h-full">
+                        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 w-full h-full">
                           
                           {/* Left: Title & Summaries */}
-                          <div className="lg:w-1/2 flex flex-col gap-8 md:gap-12 flex-shrink-0">
+                          <div className="lg:w-1/2 flex flex-col gap-6 md:gap-8 flex-shrink-0">
                             <div className="flex items-baseline gap-4 md:gap-6">
                               <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
                                 {s.n}
                               </span>
-                              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-7xl leading-none flex flex-wrap gap-x-[0.2em]">
+                              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.2em]">
                                 {s.title.split(" ").map((word, wIdx) => (
                                   <span key={wIdx} className="inline-block whitespace-nowrap">
                                     {word}
@@ -132,30 +132,30 @@ export default function Servicios() {
                               </h2>
                             </div>
                             
-                            <div className={`w-24 h-[1px] ${i === 0 ? 'bg-ink/20' : 'bg-current opacity-30'}`}></div>
+                            <div className={`w-16 h-[1px] ${i === 0 ? 'bg-ink/20' : 'bg-current opacity-30'}`}></div>
                             
-                            <p className="text-2xl md:text-3xl font-medium leading-[1.4] text-balance">
+                            <p className="text-xl md:text-2xl font-medium leading-[1.3] text-balance">
                               {s.summary}
                             </p>
                             
-                            <p className="text-base md:text-lg opacity-80 leading-loose font-medium max-w-xl">
+                            <p className="text-base md:text-lg opacity-80 leading-relaxed font-medium">
                               {s.detail}
                             </p>
                           </div>
 
                           {/* Right: Lists & Result */}
-                          <div className="lg:w-1/2 flex flex-col gap-10 md:gap-12">
+                          <div className="lg:w-1/2 flex flex-col gap-8 md:gap-10">
                             
                             {/* Fit Ideal */}
-                            <div className="flex flex-col gap-5">
-                              <h4 className={`text-xs md:text-sm font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                                <span className={`w-8 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
+                            <div className="flex flex-col gap-4">
+                              <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                                <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
                               </h4>
-                              <div className="flex flex-wrap gap-3">
+                              <div className="flex flex-wrap gap-2">
                                 {s.fit.map((f, j) => (
                                   <span 
                                     key={j} 
-                                    className={`px-4 py-2 rounded-full text-xs md:text-sm tracking-wide font-medium border ${
+                                    className={`px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border ${
                                       i === 0 ? 'bg-ink/5 border-ink/10' : 'bg-white/10 border-white/20'
                                     }`}
                                   >
@@ -166,26 +166,26 @@ export default function Servicios() {
                             </div>
 
                             {/* Includes */}
-                            <div className="flex flex-col gap-5">
-                              <h4 className={`text-xs md:text-sm font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                                <span className={`w-8 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
+                            <div className="flex flex-col gap-4">
+                              <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                                <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
                               </h4>
-                              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
                                 {s.includes.split(', ').map((item, j) => (
-                                  <li key={j} className="flex items-start gap-3 border-b border-current/10 pb-2">
-                                    <span className={i === 0 ? "text-red font-serif italic text-base" : "text-current opacity-50 font-serif italic text-base"}>✦</span>
-                                    <span className="text-sm md:text-base font-medium capitalize leading-tight opacity-90">{item}</span>
+                                  <li key={j} className="flex items-start gap-2 border-b border-current/10 pb-1.5">
+                                    <span className={i === 0 ? "text-red font-serif italic text-sm" : "text-current opacity-50 font-serif italic text-sm"}>✦</span>
+                                    <span className="text-xs md:text-sm font-medium capitalize leading-tight opacity-90">{item}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
 
                             {/* Result Block */}
-                            <div className={`mt-auto p-8 md:p-10 rounded-[1.5rem] relative overflow-hidden flex flex-col justify-center items-center text-center ${
+                            <div className={`mt-auto p-6 md:p-8 rounded-[1rem] relative overflow-hidden flex flex-col justify-center items-center text-center ${
                               i === 0 ? 'bg-ink text-cream' : 'bg-black/20'
                             }`}>
-                              <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-60 mb-4">El Resultado</h4>
-                              <p className="font-serif italic text-2xl md:text-3xl leading-[1.2] text-balance">
+                              <h4 className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase opacity-60 mb-2">El Resultado</h4>
+                              <p className="font-serif italic text-xl md:text-2xl leading-[1.2] text-balance">
                                 "{s.result}"
                               </p>
                             </div>
