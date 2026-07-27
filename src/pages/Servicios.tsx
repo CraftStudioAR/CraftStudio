@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useScroll } from "motion/react";
+import { useRef, useState } from "react";
+import { motion, useScroll, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
 
@@ -10,11 +10,7 @@ export default function Servicios() {
     offset: ["start center", "end center"],
   });
 
-  const cardColors = [
-    "bg-cream text-ink border border-ink/10 shadow-xl", 
-    "bg-navy text-cream shadow-2xl",                     
-    "bg-red text-cream shadow-2xl"                       
-  ];
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
 
   // Typewriter animation variants for the Hero
   const titleVariants = {
@@ -63,128 +59,111 @@ export default function Servicios() {
           </Reveal>
         </div>
       </section>
-
-      {/* 2. STICKY STACKED CARDS SECTION */}
+      {/* 2. ACCORDION SERVICES SECTION */}
       <section className="px-6 py-24 md:py-40 md:px-10 relative">
-        <div className="mx-auto max-w-[1400px]">
-          
-          <div className="flex flex-col gap-12 md:gap-24">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="flex flex-col border-t border-cream/20">
             {services.map((service, idx) => {
-              // Sticky stacking for all breakpoints.
-              // topOffset guarantees they stack neatly, leaving a sliver of the previous card visible.
-              const topOffset = `calc(5rem + ${idx * 2}rem)`; 
-              const isLast = idx === services.length - 1;
-
+              const isOpen = activeAccordion === idx;
               return (
-                <div 
-                  key={service.n}
-                  className={`sticky ${isLast ? 'pb-0' : 'pb-12 md:pb-[15vh]'}`}
-                  style={{ top: topOffset, zIndex: 10 + idx }}
-                >
-                  <motion.div 
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.7 }}
-                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-hidden relative lg:min-h-[600px] ${cardColors[idx]}`}
+                <div key={service.n} className="border-b border-cream/20 flex flex-col">
+                  {/* Header */}
+                  <button 
+                    onClick={() => setActiveAccordion(isOpen ? null : idx)}
+                    className="flex items-center justify-between py-8 md:py-12 group text-left w-full focus:outline-none"
                   >
-                    {/* Decorative Background Blur */}
-                    {idx === 1 && <div className="absolute top-0 right-0 w-64 h-64 bg-red rounded-full blur-[100px] opacity-20 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>}
-                    {idx === 2 && <div className="absolute bottom-0 left-0 w-96 h-96 bg-navy rounded-full blur-[120px] opacity-30 -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>}
-                    
-                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-                      
-                      {/* Left: Title & Summaries */}
-                      <div className="lg:col-span-6 flex flex-col gap-4 md:gap-8">
-                        <div className="flex items-end gap-4 md:gap-6">
-                          <span className="font-serif text-5xl md:text-7xl opacity-50 italic">
-                            {service.n}
+                    <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-12">
+                      <span className="font-serif italic text-2xl md:text-3xl text-red opacity-80 transition-opacity group-hover:opacity-100">
+                        {service.n}
+                      </span>
+                      <h2 className="font-serif italic text-4xl md:text-6xl lg:text-7xl leading-none transition-colors group-hover:text-cream text-cream/90 flex flex-wrap gap-x-[0.3em]">
+                        {service.title.split(" ").map((word, wIdx) => (
+                          <span key={wIdx} className="inline-block whitespace-nowrap">
+                            {word}
                           </span>
-                          <motion.h2 
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ margin: "-100px" }}
-                            variants={titleVariants}
-                            className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.3em] gap-y-2"
-                          >
-                            {service.title.split(" ").map((word, wIdx) => (
-                              <span key={`w-${wIdx}`} className="inline-block whitespace-nowrap">
-                                {word.split("").map((char, index) => (
-                                  <motion.span key={`c-${wIdx}-${index}`} variants={charVariants} className="inline-block">
-                                    {char}
-                                  </motion.span>
-                                ))}
-                              </span>
-                            ))}
-                          </motion.h2>
-                        </div>
-                        
-                        <div className={`w-24 h-[1px] ${idx === 0 ? 'bg-red' : 'bg-current opacity-30'}`}></div>
-                        
-                        <p className="text-xl md:text-2xl font-medium leading-[1.3] text-balance">
-                          {service.summary}
-                        </p>
-                        
-                        <p className="hidden md:block text-base lg:text-lg opacity-70 leading-relaxed font-medium max-w-xl">
-                          {service.detail}
-                        </p>
-                      </div>
+                        ))}
+                      </h2>
+                    </div>
+                    <div className="relative w-8 h-8 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center rounded-full border border-cream/30 group-hover:border-red group-hover:bg-red/10 transition-colors ml-4">
+                      <span className="absolute w-4 md:w-6 h-[1.5px] bg-cream group-hover:bg-red transition-colors"></span>
+                      <motion.span 
+                        animate={{ rotate: isOpen ? 0 : 90 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute w-4 md:w-6 h-[1.5px] bg-cream group-hover:bg-red transition-colors"
+                      ></motion.span>
+                    </div>
+                  </button>
+                  
+                  {/* Expanded Content */}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-12 md:pb-20 pt-4 md:pl-[5.5rem]">
+                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                            
+                            {/* Left Text */}
+                            <div className="lg:col-span-6 flex flex-col gap-6 md:gap-8">
+                              <p className="text-xl md:text-3xl font-medium leading-[1.3] text-balance text-cream">
+                                {service.summary}
+                              </p>
+                              <p className="text-base md:text-lg opacity-70 leading-relaxed font-medium">
+                                {service.detail}
+                              </p>
+                            </div>
 
-                      {/* Right: Lists & Result */}
-                      <div className="lg:col-span-6 flex flex-col gap-6 md:gap-8 lg:pt-2 h-full">
-                        
-                        {/* Fit Ideal */}
-                        <div className="flex flex-col gap-4">
-                          <h4 className={`text-xs md:text-sm font-bold tracking-widest uppercase flex items-center gap-4 ${idx === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                            <span className={`w-6 h-[1px] ${idx === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {service.fit.map((f, i) => (
-                              <span 
-                                key={i} 
-                                className={`px-3 py-1.5 rounded-[2rem] text-xs md:text-sm tracking-wide font-medium border ${
-                                  idx === 0 ? 'bg-ink text-cream' : 'bg-white/10 border-white/20'
-                                }`}
-                              >
-                                {f}
-                              </span>
-                            ))}
+                            {/* Right Info */}
+                            <div className="lg:col-span-6 flex flex-col gap-8 md:gap-10">
+                              
+                              <div className="flex flex-col gap-4">
+                                <h4 className="text-xs font-bold tracking-widest uppercase text-red flex items-center gap-4">
+                                  <span className="w-6 h-[1px] bg-red"></span> Fit Ideal
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {service.fit.map((f, i) => (
+                                    <span key={i} className="px-4 py-2 rounded-full text-xs md:text-sm tracking-wide font-medium bg-cream/5 border border-cream/10 text-cream/90">
+                                      {f}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="flex flex-col gap-4">
+                                <h4 className="text-xs font-bold tracking-widest uppercase text-red flex items-center gap-4">
+                                  <span className="w-6 h-[1px] bg-red"></span> Incluye
+                                </h4>
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                                  {service.includes.split(', ').map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3">
+                                      <span className="text-red font-serif italic text-lg leading-none">✦</span>
+                                      <span className="text-sm md:text-base font-medium capitalize leading-tight opacity-80">{item}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              <div className="p-6 md:p-8 rounded-[1.5rem] bg-cream text-ink mt-2">
+                                <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 mb-3 md:mb-4">El Resultado</h4>
+                                <p className="font-serif italic text-xl md:text-2xl leading-tight">
+                                  "{service.result}"
+                                </p>
+                              </div>
+
+                            </div>
                           </div>
                         </div>
-
-                        {/* Includes */}
-                        <div className="flex flex-col gap-4">
-                          <h4 className={`text-xs md:text-sm font-bold tracking-widest uppercase flex items-center gap-4 ${idx === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                            <span className={`w-6 h-[1px] ${idx === 0 ? 'bg-red' : 'bg-current'}`}></span> Incluye
-                          </h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6">
-                            {service.includes.split(', ').map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 border-b border-current/10 pb-1.5">
-                                <span className={idx === 0 ? "text-red font-serif italic" : "text-current opacity-50 font-serif italic"}>✦</span>
-                                <span className="text-sm md:text-base font-medium capitalize leading-tight">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Result Block */}
-                        <div className={`mt-auto p-6 md:p-8 rounded-[1.5rem] relative overflow-hidden flex-grow flex flex-col justify-center ${
-                          idx === 0 ? 'bg-ink text-cream' : 'bg-black/20'
-                        }`}>
-                          <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-60 mb-3">El Resultado</h4>
-                          <p className="font-serif italic text-xl md:text-2xl lg:text-3xl leading-tight">
-                            "{service.result}"
-                          </p>
-                        </div>
-
-                      </div>
-                    </div>
-                  </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
           </div>
-
         </div>
       </section>
 
