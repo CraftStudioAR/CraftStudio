@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll } from "motion/react";
 import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
@@ -12,6 +12,18 @@ export default function Servicios() {
     target: processRef,
     offset: ["start center", "end center"]
   });
+
+  // Lock body scroll when mobile modal is open
+  useEffect(() => {
+    if (mobileActiveIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileActiveIndex]);
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -129,7 +141,7 @@ export default function Servicios() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: 20 }}
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className={`relative w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-[2rem] shadow-2xl flex flex-col ${cardColors[mobileActiveIndex]}`}
+                  className={`relative w-full max-h-[90vh] overflow-y-auto overflow-x-hidden no-scrollbar rounded-[2rem] shadow-2xl flex flex-col ${cardColors[mobileActiveIndex]}`}
                 >
                   <div className="sticky top-0 right-0 w-full flex justify-end p-4 z-20 pointer-events-none">
                     <button 
