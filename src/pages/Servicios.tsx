@@ -5,14 +5,6 @@ import { services, process } from "../content/brand";
 
 export default function Servicios() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
-    checkSize();
-    window.addEventListener("resize", checkSize);
-    return () => window.removeEventListener("resize", checkSize);
-  }, []);
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -80,16 +72,14 @@ export default function Servicios() {
                   layout
                   key={s.n}
                   onClick={() => setActiveIndex(i)}
-                  animate={{
-                    flex: isDesktop ? (isActive ? 3 : 0.5) : "none",
-                    height: isDesktop ? "100%" : (isActive ? "auto" : "100px")
-                  }}
-                  transition={{ duration: 0.8, ease: [0.25, 1, 0.3, 1] }}
-                  className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
-                  style={{
-                    minWidth: "0px",
-                    minHeight: "0px"
-                  }}
+                  className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]} 
+                    ${isActive 
+                      ? 'lg:flex-[3_3_0%] h-auto' 
+                      : 'lg:flex-[0.5_0.5_0%] h-[100px] lg:h-auto'
+                    }
+                  `}
+                  transition={{ layout: { duration: 0.8, ease: [0.25, 1, 0.3, 1] } }}
+                  style={{ minWidth: "0px" }}
                 >
                   <AnimatePresence mode="wait">
                     {!isActive ? (
@@ -122,7 +112,7 @@ export default function Servicios() {
                         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 w-full h-full">
                           
                           {/* Left: Title & Summaries */}
-                          <div className="lg:w-1/2 flex flex-col gap-6 md:gap-8 flex-shrink-0">
+                          <div className="lg:w-1/2 flex flex-col gap-6 md:gap-8">
                             <div className="flex items-baseline gap-4 md:gap-6">
                               <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
                                 {s.n}
