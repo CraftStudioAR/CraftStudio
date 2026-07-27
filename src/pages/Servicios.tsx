@@ -70,15 +70,15 @@ export default function Servicios() {
           
           <div className="flex flex-col gap-12 md:gap-24">
             {services.map((service, idx) => {
-              // On mobile we just use normal flow (relative), on desktop we use sticky stacking.
+              // Sticky stacking for all breakpoints.
               // topOffset guarantees they stack neatly, leaving a sliver of the previous card visible.
-              const topOffset = `calc(5rem + ${idx * 2.5}rem)`; 
+              const topOffset = `calc(5rem + ${idx * 2}rem)`; 
               const isLast = idx === services.length - 1;
 
               return (
                 <div 
                   key={service.n}
-                  className="relative lg:sticky"
+                  className="sticky"
                   style={{ top: topOffset, zIndex: 10 + idx, paddingBottom: isLast ? '0' : '15vh' }}
                 >
                   <motion.div 
@@ -86,7 +86,7 @@ export default function Servicios() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-y-auto no-scrollbar relative lg:max-h-[calc(100vh-6rem)] lg:min-h-[600px] ${cardColors[idx]}`}
+                    className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-y-auto no-scrollbar relative max-h-[calc(100vh-5rem)] lg:min-h-[600px] ${cardColors[idx]}`}
                   >
                     {/* Decorative Background Blur */}
                     {idx === 1 && <div className="absolute top-0 right-0 w-64 h-64 bg-red rounded-full blur-[100px] opacity-20 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>}
