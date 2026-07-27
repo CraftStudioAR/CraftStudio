@@ -99,12 +99,17 @@ export default function Servicios() {
                 <motion.div 
                   layout
                   key={`mobile-${s.n}`}
-                  onClick={() => setMobileActiveIndex(isActive ? null : i)}
-                  animate={{ height: isActive ? "auto" : "100px" }}
+                  onClick={() => { if (!isActive) setMobileActiveIndex(i); }}
                   transition={{ duration: 0.8, ease: [0.25, 1, 0.3, 1] }}
-                  className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
+                  className={`relative overflow-hidden rounded-[2rem] flex-shrink-0 cursor-pointer ${cardColors[i]}`}
                 >
-                  <CardContent s={s} i={i} isActive={isActive} isMobile={true} />
+                  <CardContent 
+                    s={s} 
+                    i={i} 
+                    isActive={isActive} 
+                    isMobile={true} 
+                    onClose={() => setMobileActiveIndex(null)}
+                  />
                 </motion.div>
               );
             })}
@@ -176,7 +181,7 @@ export default function Servicios() {
 }
 
 // Extracted Card Content component to avoid duplication between Desktop and Mobile layouts
-function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive: boolean, isMobile: boolean }) {
+function CardContent({ s, i, isActive, isMobile, onClose }: { s: any, i: number, isActive: boolean, isMobile: boolean, onClose?: () => void }) {
   return (
     <AnimatePresence mode="popLayout">
       {!isActive ? (
@@ -187,14 +192,33 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className={`absolute inset-0 flex items-center justify-center w-full h-full p-6 ${isMobile ? "flex-row" : "flex-col lg:p-0"}`}
+          className={isMobile 
+            ? "relative flex items-center justify-between w-full h-[100px] px-8 cursor-pointer"
+            : "absolute inset-0 flex items-center justify-center w-full h-full p-6 flex-col lg:p-0"
+          }
         >
-          <span className={`font-serif text-2xl opacity-60 ${isMobile ? "mr-4" : "lg:absolute lg:top-10"}`}>
-            {s.n}
-          </span>
-          <h3 className={`font-serif tracking-wide origin-center truncate ${isMobile ? "text-2xl md:text-3xl whitespace-nowrap opacity-80" : "text-2xl md:text-3xl lg:text-4xl whitespace-nowrap lg:-rotate-90 opacity-80 lg:overflow-visible"}`}>
-            {s.title}
-          </h3>
+          {isMobile ? (
+            <>
+              <div className="flex items-center gap-6">
+                <span className="font-serif text-3xl opacity-60">{s.n}</span>
+                <h3 className="font-serif text-2xl opacity-90">{s.title}</h3>
+              </div>
+              <div className="w-8 h-8 rounded-full border border-current/30 flex items-center justify-center opacity-60">
+                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                   <path d="M6 1V11M1 6H11"/>
+                 </svg>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="font-serif text-2xl opacity-60 lg:absolute lg:top-10">
+                {s.n}
+              </span>
+              <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl whitespace-nowrap lg:-rotate-90 opacity-80 lg:overflow-visible tracking-wide origin-center truncate">
+                {s.title}
+              </h3>
+            </>
+          )}
         </motion.div>
       ) : (
         /* ACTIVE VIEW */
@@ -204,17 +228,31 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className={isMobile ? "w-full h-full" : "p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"}
+          className={isMobile ? "w-full" : "p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"}
         >
           {isMobile ? (
             /* MOBILE CUSTOM ACTIVE VIEW */
-            <div className="p-6 py-10 flex flex-col gap-10">
+            <div className="p-6 py-10 flex flex-col gap-10 cursor-default">
               
               {/* Header */}
-              <div className="flex flex-col gap-6">
-                <div className="flex items-start gap-4">
-                  <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
-                  <h2 className="font-serif italic text-4xl leading-[1.1]">{s.title}</h2>
+              <div className="flex flex-col gap-6 cursor-pointer" onClick={onClose}>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-4">
+                    <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
+                    <h2 className="font-serif italic text-4xl leading-[1.1]">{s.title}</h2>
+                  </div>
+                  {/* CLOSE BUTTON */}
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClose?.();
+                    }}
+                    className="w-10 h-10 shrink-0 rounded-full bg-current/10 flex items-center justify-center hover:bg-current/20 transition-colors"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M1 1L13 13M1 13L13 1"/>
+                    </svg>
+                  </button>
                 </div>
                 <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
               </div>
