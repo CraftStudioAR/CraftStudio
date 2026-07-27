@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
 
 export default function Servicios() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const checkSize = () => setIsDesktop(mediaQuery.matches);
+    checkSize();
+    
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -72,14 +83,13 @@ export default function Servicios() {
                   layout
                   key={s.n}
                   onClick={() => setActiveIndex(i)}
-                  className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]} 
-                    ${isActive 
-                      ? 'lg:flex-[3_3_0%] h-auto' 
-                      : 'lg:flex-[0.5_0.5_0%] h-[100px] lg:h-auto'
-                    }
-                  `}
-                  transition={{ layout: { duration: 0.8, ease: [0.25, 1, 0.3, 1] } }}
-                  style={{ minWidth: "0px" }}
+                  animate={{
+                    flex: isDesktop ? (isActive ? 3 : 0.5) : "none",
+                    height: isDesktop ? "100%" : (isActive ? "auto" : "100px")
+                  }}
+                  transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+                  className={`relative overflow-hidden rounded-[2rem] cursor-pointer flex-shrink-0 ${cardColors[i]}`}
+                  style={{ minWidth: "0px", minHeight: "0px" }}
                 >
                   <AnimatePresence mode="wait">
                     {!isActive ? (
