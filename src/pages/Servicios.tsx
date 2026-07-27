@@ -1,11 +1,17 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll } from "motion/react";
 import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
 
 export default function Servicios() {
   const [desktopActiveIndex, setDesktopActiveIndex] = useState(0);
   const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(null);
+
+  const processRef = useRef(null);
+  const { scrollYProgress: processScroll } = useScroll({
+    target: processRef,
+    offset: ["start center", "end center"]
+  });
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -108,7 +114,7 @@ export default function Servicios() {
       </section>
 
       {/* 3. ANIMATED PROCESS TIMELINE */}
-      <section className="px-6 py-32 md:py-48 md:px-10 bg-ink text-cream rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden">
+      <section ref={processRef} className="px-6 py-32 md:py-48 md:px-10 bg-cream text-ink rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden">
         <div className="mx-auto max-w-[1400px]">
           
           <div className="text-center mb-24 md:mb-40">
@@ -116,7 +122,7 @@ export default function Servicios() {
               <p className="text-sm tracking-widest uppercase mb-4 flex items-center justify-center gap-4 text-red font-bold">
                 <span className="w-8 h-[1px] bg-red" /> Método <span className="w-8 h-[1px] bg-red" />
               </p>
-              <h2 className="font-serif italic text-5xl md:text-7xl lg:text-[8rem] leading-none tracking-tight">
+              <h2 className="font-serif italic text-5xl md:text-7xl lg:text-[8rem] leading-none tracking-tight text-navy">
                 Cómo trabajamos
               </h2>
               <p className="text-xl md:text-2xl opacity-60 mt-6 max-w-2xl mx-auto">
@@ -126,6 +132,15 @@ export default function Servicios() {
           </div>
 
           <div className="max-w-4xl mx-auto relative">
+            {/* The vertical timeline line */}
+            <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-[2px] bg-ink/10 -translate-x-1/2"></div>
+            
+            {/* The animated fill line */}
+            <motion.div 
+              className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-[4px] bg-red -translate-x-1/2 origin-top"
+              style={{ scaleY: processScroll }}
+            ></motion.div>
+
             <div className="flex flex-col gap-16 md:gap-32">
               {process.map((p, i) => {
                 const isEven = i % 2 === 0;
@@ -133,12 +148,12 @@ export default function Servicios() {
                   <div key={p.n} className="relative flex flex-col md:flex-row items-start md:items-center w-full">
                     
                     {/* Number / Node indicator */}
-                    <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 bg-red rounded-full flex items-center justify-center z-10 mb-6 md:mb-0 md:absolute md:left-1/2 md:-translate-x-1/2">
-                      <span className="font-serif italic text-2xl md:text-3xl text-cream">{p.n}</span>
+                    <div className="absolute left-[39px] md:left-1/2 w-20 h-20 bg-cream rounded-full border-4 border-cream flex items-center justify-center -translate-x-1/2 z-10">
+                      <span className="font-serif italic text-3xl text-ink/40">{p.n}</span>
                     </div>
 
-                    {/* Content */}
-                    <div className={`w-full md:w-1/2 ${isEven ? 'md:pr-24 md:text-right' : 'md:pl-24 md:ml-auto'}`}>
+                    {/* Content Left (if even) or Right (if odd) on Desktop, always right on Mobile */}
+                    <div className={`w-full md:w-1/2 pl-24 md:pl-0 ${isEven ? 'md:pr-24 md:text-right' : 'md:pl-24 md:ml-auto'}`}>
                       <Reveal delay={0.2}>
                         <h3 className="font-serif text-3xl md:text-5xl italic mb-4 leading-tight group-hover:text-red transition-colors duration-500">
                           {p.title}
