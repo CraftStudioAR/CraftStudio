@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll } from "motion/react";
 import Reveal from "../components/Reveal";
 import { services, process } from "../content/brand";
 
@@ -27,7 +27,7 @@ export default function Servicios() {
 
   const charVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
   return (
@@ -85,7 +85,7 @@ export default function Servicios() {
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.7 }}
                     className={`rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12 overflow-y-auto no-scrollbar relative lg:max-h-[calc(100vh-6rem)] lg:min-h-[600px] ${cardColors[idx]}`}
                   >
                     {/* Decorative Background Blur */}

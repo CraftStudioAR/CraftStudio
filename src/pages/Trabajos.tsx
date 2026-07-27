@@ -14,7 +14,7 @@ export default function Trabajos() {
 
   const charVariants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
   // Split title manually to handle the line break beautifully on large screens

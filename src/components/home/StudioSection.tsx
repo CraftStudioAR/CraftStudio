@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "../Reveal";
 import Magnetic from "../Magnetic";
-import { LogoMark } from "../Logo";
-import { values } from "../../content/brand";
+
 import Beams from "../Beams";
 
 export default function StudioSection() {

@@ -114,7 +114,7 @@ export default function Contacto() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8 }}
               className="bg-navy text-cream rounded-[2rem] md:rounded-[4rem] p-12 md:p-20 h-[600px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
             >
               {/* Background Beams - exactamente como en Hero / Studio */}
@@ -181,7 +181,7 @@ export default function Contacto() {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.5 }}
                         className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
                       >
                         <h2 className="font-serif italic text-3xl md:text-4xl mb-8 text-navy">¿Qué necesita tu marca?</h2>
@@ -223,7 +223,7 @@ export default function Contacto() {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.5 }}
                         className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
                       >
                         <div className="flex flex-col gap-10 flex-1 content-start">
@@ -287,7 +287,7 @@ export default function Contacto() {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.5 }}
                         className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
                       >
                         <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos</h2>

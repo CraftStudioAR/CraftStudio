@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Beams from "../Beams";
 import { LogoWordmark } from "../Logo";
-import { contactInfo } from "../../content/brand";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
