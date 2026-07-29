@@ -385,49 +385,50 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
         >
           {isMobile ? (
             /* MOBILE CUSTOM ACTIVE VIEW */
-            <div className="p-6 pt-20 flex flex-col gap-10 cursor-default">
-              
-              {/* Header */}
-              <div className="flex flex-col gap-6">
-                <div className="flex items-start gap-4">
-                  <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
-                  <h2 className="font-serif italic text-4xl leading-[1.1] pr-4 text-balance break-words">{s.title}</h2>
-                </div>
-                <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
-              </div>
-
-              {/* Intro Text */}
-              <div className="flex flex-col gap-6">
-                <p className="text-xl font-medium leading-[1.4]">{s.summary}</p>
-                <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
-              </div>
-
-              {/* Attributes Container (Specs Box) */}
-              <div className={`p-6 rounded-[1.5rem] flex flex-col gap-10 ${i === 0 ? 'bg-ink/5' : 'bg-white/5'}`}>
+            <div className="cursor-default w-full">
+              <div className="p-6 pt-20 flex flex-col gap-10">
                 
-                {/* Fit Ideal */}
-                <div className="flex flex-col gap-5">
-                  <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                    <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
-                  </h4>
-                  <div className="flex flex-col gap-3">
-                    {s.fit.map((f: string, j: number) => (
-                      <span 
-                        key={j} 
-                        className={`px-4 py-3 rounded-xl text-xs tracking-wide font-medium border leading-tight ${
-                          i === 0 ? 'bg-white border-ink/10 shadow-sm' : 'bg-black/20 border-white/10'
-                        }`}
-                      >
-                        {f}
-                      </span>
-                    ))}
+                {/* Header */}
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-start gap-4">
+                    <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
+                    <h2 className="font-serif italic text-4xl leading-[1.1] pr-4 text-balance break-words">{s.title}</h2>
+                  </div>
+                  <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
+                </div>
+
+                {/* Intro Text */}
+                <div className="flex flex-col gap-6">
+                  <p className="text-xl font-medium leading-[1.4]">{s.summary}</p>
+                  <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
+                </div>
+
+                {/* Attributes Container (Specs Box) */}
+                <div className={`p-6 rounded-[1.5rem] flex flex-col gap-10 ${i === 0 ? 'bg-ink/5' : 'bg-white/5'}`}>
+                  
+                  {/* Fit Ideal */}
+                  <div className="flex flex-col gap-5">
+                    <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                      <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
+                    </h4>
+                    <div className="flex flex-col gap-3">
+                      {s.fit.map((f: string, j: number) => (
+                        <span 
+                          key={j} 
+                          className={`px-4 py-3 rounded-xl text-xs tracking-wide font-medium border leading-tight ${
+                            i === 0 ? 'bg-white border-ink/10 shadow-sm' : 'bg-black/20 border-white/10'
+                          }`}
+                        >
+                          {f}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Spacer sólido para garantizar margen inferior en el scroll */}
-              <div className="h-16 w-full flex-shrink-0" aria-hidden="true"></div>
-
+              {/* Pequeño spacer físico para evitar el colapso del padding en iOS, sin sumar gap */}
+              <div className="h-6 w-full shrink-0" aria-hidden="true"></div>
             </div>
           ) : (
             /* DESKTOP ACTIVE VIEW (Untouched) */
