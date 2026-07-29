@@ -1,6 +1,5 @@
 
 import Reveal from "../components/Reveal";
-import Footer from "../components/Footer";
 
 // Generar una lista falsa para demostrar las tarjetas ricas
 const articles = [
@@ -91,8 +90,6 @@ export default function CraftLab() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

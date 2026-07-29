@@ -1,5 +1,4 @@
 import Reveal from "../components/Reveal";
-import Footer from "../components/Footer";
 
 export default function Nosotras() {
   return (
@@ -147,8 +146,6 @@ export default function Nosotras() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }
