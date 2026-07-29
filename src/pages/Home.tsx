@@ -9,7 +9,7 @@ import StudioSection from "../components/home/StudioSection";
 
 export default function Home() {
   return (
-    <div data-theme="light" className="flex min-h-screen flex-col bg-cream font-sans text-ink selection:bg-red selection:text-cream overflow-hidden">
+    <div data-theme="light" className="bg-cream">
       {/* 1. Hero Section (Pinned, shrinks as rectangle) */}
       <HeroSection />
 
