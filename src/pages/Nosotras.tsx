@@ -4,20 +4,18 @@ export default function Nosotras() {
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       
-      {/* 1. HERO - MANIFIESTO */}
-      <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden z-10">
-        <div className="mx-auto max-w-[1400px] w-full pt-20">
+      {/* 1. HERO SECTION */}
+      <section className="relative px-6 pt-40 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">
+        <div className="mx-auto max-w-[1400px] w-full relative z-10">
           <Reveal>
-            <p className="text-xs md:text-sm tracking-widest uppercase mb-8 flex items-center gap-4 text-red font-bold">
-              <span className="w-8 h-[1px] bg-red" /> Nuestro Manifiesto
+            <p className="text-xs md:text-sm tracking-widest uppercase mb-6 flex items-center gap-4 text-red font-bold">
+              <span className="w-8 h-[1px] bg-red" /> El Equipo
             </p>
           </Reveal>
           
           <Reveal delay={0.1}>
-            <h1 className="font-serif italic text-[3.5rem] leading-[1] md:text-8xl lg:text-[9rem] lg:leading-[0.85] tracking-tight text-navy">
-              Construimos <br/> 
-              <span className="text-red">identidades</span> <br/>
-              con propósito.
+            <h1 className="font-serif italic text-6xl md:text-8xl lg:text-[10rem] leading-[0.85] tracking-tight text-navy">
+              Nosotras<span className="text-red">.</span>
             </h1>
           </Reveal>
         </div>
