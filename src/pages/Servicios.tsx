@@ -170,7 +170,7 @@ export default function Servicios() {
       </section>
 
       {/* 3. BRAND PARTNERSHIPS CARDS SECTION */}
-      <section className="px-6 pb-24 md:pb-40 md:px-10 relative">
+      <section className="px-6 pb-12 md:pb-20 md:px-10 relative">
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="mb-10 max-w-3xl">
