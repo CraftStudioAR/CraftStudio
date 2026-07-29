@@ -21,8 +21,8 @@ export default function Nosotras() {
         </div>
       </section>
 
-      {/* 2. FILOSOFÍA - SPLIT SCREEN EDITORIAL */}
-      <section className="px-6 py-24 md:py-40 md:px-10 bg-white relative z-20 rounded-t-[3rem] shadow-sm">
+      {/* 2. FILOSOFÍA - SPLIT SCREEN EDITORIAL (Todo crema, sin cortes) */}
+      <section className="px-6 pb-24 md:pb-40 md:px-10 relative z-20">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           
           {/* Título Pegajoso (Sticky) */}
@@ -53,91 +53,66 @@ export default function Nosotras() {
                 </p>
               </div>
             </Reveal>
-
-            <Reveal>
-              <div className="bg-ink/5 p-8 md:p-12 rounded-3xl">
-                <p className="text-xl md:text-3xl font-serif italic text-navy leading-relaxed text-center">
-                  "Craft representa una forma de mirar y de hacer: diagnosticar, definir y construir con criterio, intención y dirección."
-                </p>
-              </div>
-            </Reveal>
           </div>
           
         </div>
       </section>
 
-      {/* 3. LAS FUNDADORAS - ASYMMETRIC GALLERY */}
-      <section className="px-6 py-24 md:py-40 md:px-10 bg-ink text-cream relative z-10">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+      {/* 3. LAS FUNDADORAS - CLEAN GRID */}
+      <section className="px-6 pb-24 md:pb-40 md:px-10 relative z-10 border-t border-ink/10 pt-24 md:pt-40">
+        <div className="max-w-[1400px] mx-auto">
           
-          {/* Left Sticky Title */}
-          <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
-            <Reveal>
-              <p className="text-xs md:text-sm tracking-widest uppercase mb-4 text-red font-bold flex items-center gap-4">
-                <span className="w-8 h-[1px] bg-red" /> El Equipo
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-serif italic text-6xl md:text-7xl lg:text-8xl leading-none text-balance">
-                Quienes lo<br/>hacen<br/>posible.
-              </h2>
-            </Reveal>
-          </div>
+          <Reveal>
+            <h2 className="font-serif italic text-5xl md:text-6xl text-navy mb-20">Quienes lo hacen posible.</h2>
+          </Reveal>
 
-          {/* Right Scrolling Profiles */}
-          <div className="lg:col-span-8 flex flex-col gap-32 md:gap-48 mt-12 lg:mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
             
-            {/* Tiziana (Derecha) */}
-            <div className="flex flex-col group w-full max-w-2xl ml-auto">
+            {/* Tiziana */}
+            <div className="flex flex-col group">
               <Reveal>
-                <div className="relative overflow-hidden aspect-[4/3] mb-8 md:mb-12 rounded-2xl w-full">
+                <div className="relative overflow-hidden aspect-[4/5] mb-8 rounded-2xl bg-ink/5">
                   <img 
                     src="/images/tiziana.jpg" 
                     alt="María Tiziana Negro" 
                     className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-ink/20 group-hover:bg-transparent transition-colors duration-700" />
                 </div>
               </Reveal>
               <Reveal>
-                <div className="w-full">
-                  <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl mb-3 text-white">
-                    María Tiziana Negro
-                  </h3>
-                  <p className="text-red font-bold tracking-widest uppercase text-xs md:text-sm mb-6">
-                    Co-Fundadora · Diseño & Dirección Creativa
-                  </p>
-                  <p className="text-cream/70 text-lg md:text-xl leading-relaxed text-balance">
-                    Diseñadora gráfica y digital recibida en Fundación Gutenberg. Busca entender las marcas, sus objetivos y las personas con las que necesitan conectar. Construye identidades visuales estratégicas que ordenan y potencian su mensaje, permitiéndoles crecer y llegar más lejos sin perder lo que las hace únicas.
-                  </p>
-                </div>
+                <h3 className="font-serif italic text-3xl md:text-4xl mb-2 text-navy">
+                  María Tiziana Negro
+                </h3>
+                <p className="text-red font-bold tracking-widest uppercase text-[10px] md:text-xs mb-6">
+                  Co-Fundadora · Diseño & Dirección Creativa
+                </p>
+                <p className="text-ink/70 text-base md:text-lg leading-relaxed text-balance">
+                  Diseñadora gráfica y digital recibida en Fundación Gutenberg. Busca entender las marcas, sus objetivos y las personas con las que necesitan conectar. Construye identidades visuales estratégicas que ordenan y potencian su mensaje, permitiéndoles crecer y llegar más lejos sin perder lo que las hace únicas.
+                </p>
               </Reveal>
             </div>
 
-            {/* Martina (Izquierda, aspecto cuadrado) */}
-            <div className="flex flex-col group w-full max-w-2xl mr-auto">
+            {/* Martina */}
+            <div className="flex flex-col group md:mt-24">
               <Reveal>
-                <div className="relative overflow-hidden aspect-square md:aspect-[5/4] mb-8 md:mb-12 rounded-2xl w-full">
+                <div className="relative overflow-hidden aspect-[4/5] mb-8 rounded-2xl bg-ink/5">
                   <img 
                     src="/images/martina.jpg" 
                     alt="Martina Mincarelli" 
                     className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-ink/20 group-hover:bg-transparent transition-colors duration-700" />
                 </div>
               </Reveal>
               <Reveal>
-                <div className="w-full">
-                  <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl mb-3 text-white">
-                    Martina Mincarelli
-                  </h3>
-                  <p className="text-red font-bold tracking-widest uppercase text-xs md:text-sm mb-6">
-                    Co-Fundadora · Growth Marketing & Performance
-                  </p>
-                  <p className="text-cream/70 text-lg md:text-xl leading-relaxed text-balance">
-                    Estratega de Growth Marketing y Comunicadora Digital recibida en la UNLP. Trabaja sobre la relación entre comunicación y crecimiento del negocio: cómo una marca se posiciona, construye presencia y convierte sus objetivos comerciales en decisiones concretas. Su mirada une creatividad, análisis y criterio.
-                  </p>
-                </div>
+                <h3 className="font-serif italic text-3xl md:text-4xl mb-2 text-navy">
+                  Martina Mincarelli
+                </h3>
+                <p className="text-red font-bold tracking-widest uppercase text-[10px] md:text-xs mb-6">
+                  Co-Fundadora · Growth Marketing & Performance
+                </p>
+                <p className="text-ink/70 text-base md:text-lg leading-relaxed text-balance">
+                  Estratega de Growth Marketing y Comunicadora Digital recibida en la UNLP. Trabaja sobre la relación entre comunicación y crecimiento del negocio: cómo una marca se posiciona, construye presencia y convierte sus objetivos comerciales en decisiones concretas. Su mirada une creatividad, análisis y criterio.
+                </p>
               </Reveal>
             </div>
 
