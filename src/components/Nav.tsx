@@ -81,7 +81,7 @@ export default function Nav() {
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
           <Magnetic strength={0.25}>
             <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
-              <LogoMark className="h-6 md:h-8 transition-all duration-300" />
+              <LogoMark className="h-10 md:h-14 transition-all duration-300" />
             </Link>
           </Magnetic>
         </div>
