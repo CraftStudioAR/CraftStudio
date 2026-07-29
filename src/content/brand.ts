@@ -172,7 +172,7 @@ export const work: WorkCase[] = [
 
 export const contactInfo = {
   email: "hola@craftstudio.com.ar",
-  city: "La Plata, Argentina",
+  city: "Buenos Aires, Argentina",
   tagline: "We craft communication",
 };
 
