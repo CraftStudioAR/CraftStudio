@@ -7,7 +7,6 @@ import { nav } from "../content/brand";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [solid, setSolid] = useState(false);
   const [hidden] = useState(false);
   const [forceHidden, setForceHidden] = useState(false);
   const location = useLocation();
