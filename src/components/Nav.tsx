@@ -12,32 +12,65 @@ export default function Nav() {
   const [forceHidden, setForceHidden] = useState(false);
   const location = useLocation();
 
-  const isDarkBg = location.pathname === "/";
-  
+  const [isOverDark, setIsOverDark] = useState(location.pathname === "/");
   const displayNav = nav;
 
   // Close menu on route change
   useEffect(() => {
     setOpen(false);
+    setIsOverDark(location.pathname === "/");
   }, [location.pathname]);
 
   useEffect(() => {
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
+    let ticking = false;
+    
+    const checkTheme = () => {
+      const navY = 45; 
       
-      // Solid bg logic: Wait until past the hero section (approx 90% of screen height) on home, else 50px
-      const isHome = window.location.pathname === "/";
-      setSolid(currentScrollY > (isHome ? window.innerHeight * 0.9 : 50));
+      // Chequeamos 3 puntos a lo largo del ancho de la pantalla
+      // 15% (Izquierda), 50% (Centro/Logo), 85% (Derecha/Menú)
+      const points = [
+        window.innerWidth * 0.15,
+        window.innerWidth * 0.5,
+        window.innerWidth * 0.85
+      ];
+      
+      let isDark = false;
 
-      // The auto-hide logic on scroll down has been removed as requested, 
-      // so the nav remains permanently visible on screen (except when forceHidden by specific sections).
-      
+      for (const x of points) {
+        const elements = document.elementsFromPoint(x, navY);
+        const themeElement = elements.find(el => el.hasAttribute('data-theme'));
+        
+        if (themeElement && themeElement.getAttribute('data-theme') === 'dark') {
+          isDark = true;
+          break; // Si toca algo oscuro en cualquier punto, lo volvemos claro por seguridad
+        }
+      }
+
+      if (isDark) {
+        setIsOverDark(true);
+      } else {
+        const isHome = window.location.pathname === "/";
+        setIsOverDark(isHome && window.scrollY < window.innerHeight * 0.9);
+      }
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          checkTheme();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Ejecutar chequeo inicialmente y repetirlo por si la página carga dinámicamente
+    checkTheme();
+    const intervalId = setInterval(checkTheme, 500);
+
     window.addEventListener("scroll", onScroll, { passive: true });
     
-    // Listen for custom events to force hide the nav in specific sections (e.g. WorkSection)
     const handleForceHide = () => setForceHidden(true);
     const handleForceShow = () => setForceHidden(false);
     window.addEventListener("nav-force-hide", handleForceHide);
@@ -47,6 +80,7 @@ export default function Nav() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("nav-force-hide", handleForceHide);
       window.removeEventListener("nav-force-show", handleForceShow);
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -60,8 +94,9 @@ export default function Nav() {
     return () => { document.body.style.overflow = "unset"; };
   }, [open]);
 
-  // Determine colors based on state and route
-  const isNavDarkText = (solid && !open) || (!solid && !open && !isDarkBg);
+  // Si estamos sobre fondo oscuro, el texto NO debe ser oscuro (debe ser crema).
+  // Y si abrimos el menú, el fondo del menú es navy, así que el texto debe ser crema.
+  const isNavDarkText = !isOverDark && !open;
   const hamburgerColor = isNavDarkText ? "bg-ink" : "bg-cream";
 
   return (
@@ -69,51 +104,60 @@ export default function Nav() {
       <header
         style={{
           transform: (hidden || forceHidden) && !open ? "translateY(-100%)" : "translateY(0)",
+          pointerEvents: "none" // Para que los clics pasen a través del espacio vacío
         }}
-        className={`fixed top-0 right-0 left-0 z-[100] flex items-center justify-between px-6 py-5 transition-all duration-500 md:px-10 ${
-          solid && !open ? "bg-cream/95 backdrop-blur-md shadow-sm" : "bg-transparent"
-        } ${isNavDarkText ? "text-ink" : "text-cream"}`}
+        className="fixed top-0 right-0 left-0 z-[100] flex items-center justify-between px-6 py-5 transition-transform duration-500 md:px-10"
       >
-        {/* Placeholder izquierdo para balancear el flex justify-between */}
-        <div className="w-10 md:w-20"></div>
+        {/* Placeholder izquierdo para mantener balance en desktop */}
+        <div className="w-12 hidden md:block"></div>
 
-        {/* Logo centrado de forma absoluta */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+        {/* Logo central flotante (Círculo glassmorphism) */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
           <Magnetic strength={0.25}>
-            <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
-              <LogoMark className="h-10 md:h-14 transition-all duration-300" />
+            <Link 
+              to="/" 
+              data-cursor="Inicio" 
+              onClick={() => setOpen(false)} 
+              className={`block glass-panel group overflow-hidden rounded-full flex items-center justify-center w-12 h-12 md:w-14 md:h-14 transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}
+            >
+              <LogoMark className="h-8 md:h-10 w-auto transition-all duration-300 relative z-10" />
+              <div className="glass-sheen"></div>
             </Link>
           </Magnetic>
         </div>
 
+        {/* Mobile Hamburger (Círculo glassmorphism derecha - Más chico) */}
         <button
           onClick={() => setOpen((v) => !v)}
           data-cursor={open ? "Cerrar" : "Menú"}
-          className="relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-[6px] md:hidden"
+          className={`relative z-50 flex h-12 w-12 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-full glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
           aria-label="Menú"
         >
+          <div className="glass-sheen"></div>
           <span
-            style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
-            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+            style={{ transform: open ? "translateY(5.5px) rotate(45deg)" : "none" }}
+            className={`block h-[1.5px] w-4 transition-colors duration-300 relative z-10 ${hamburgerColor}`}
           />
           <span
             style={{ opacity: open ? 0 : 1 }}
-            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+            className={`block h-[1.5px] w-4 transition-colors duration-300 relative z-10 ${hamburgerColor}`}
           />
           <span
-            style={{ transform: open ? "translateY(-7px) rotate(-45deg)" : "none" }}
-            className={`block h-[1.5px] w-7 transition-colors duration-300 ${hamburgerColor}`}
+            style={{ transform: open ? "translateY(-5.5px) rotate(-45deg)" : "none" }}
+            className={`block h-[1.5px] w-4 transition-colors duration-300 relative z-10 ${hamburgerColor}`}
           />
         </button>
 
-        <nav className="hidden items-center gap-9 text-sm tracking-wide uppercase md:flex">
+        {/* Desktop Nav Links (Pastilla glassmorphism derecha) */}
+        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-full pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
+          <div className="glass-sheen"></div>
           {displayNav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               data-cursor="Ver"
               className={({ isActive }) =>
-                `relative py-1 transition-opacity hover:opacity-60 ${isActive ? "opacity-100" : "opacity-70"}`
+                `relative py-1 transition-opacity hover:opacity-60 z-10 ${isActive ? "opacity-100" : "opacity-70"}`
               }
             >
               {({ isActive }) => (

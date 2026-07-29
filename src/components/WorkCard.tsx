@@ -47,6 +47,7 @@ export default function WorkCard({
       <ScrollGrow from={0.82} to={1} shrinkBack={false} style={{ perspective: 900 }}>
         <motion.div
           ref={ref}
+          data-theme="dark"
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
           style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}

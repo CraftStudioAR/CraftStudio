@@ -4,7 +4,7 @@ import { nav, contactInfo } from "../content/brand";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-ink text-cream pt-10 pb-6 px-6 md:px-10 border-t border-white/5">
+    <footer data-theme="dark" className="relative bg-ink text-cream pt-10 pb-6 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8">
         
         {/* Top: Call to Action & Info */}

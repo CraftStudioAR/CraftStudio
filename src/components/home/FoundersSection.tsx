@@ -52,7 +52,7 @@ export default function FoundersSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative z-10 bg-cream text-ink px-6 pt-32 pb-12 md:pb-16 md:px-10 min-h-screen">
+    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 pt-32 pb-12 md:pb-16 md:px-10 min-h-screen">
       <GlyphMark
         variant={1}
         className="pointer-events-none absolute -left-20 top-10 z-0 h-[40vw] w-[40vw] max-w-[400px] text-ink/[0.03] md:-left-10 rotate-12"

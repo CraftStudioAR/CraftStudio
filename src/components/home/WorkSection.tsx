@@ -42,7 +42,7 @@ export default function WorkSection() {
   }, []);
 
   return (
-    <section ref={workContainerRef} className="bg-ink text-cream h-screen overflow-hidden flex flex-col relative">
+    <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-screen overflow-hidden flex flex-col relative">
       <div className="px-6 md:px-10 pt-10 md:pt-14 pb-8 md:pb-10 flex-shrink-0 flex flex-col lg:flex-row lg:items-start justify-between gap-6 md:gap-10">
         <Reveal>
           <div className="flex flex-col items-start gap-6 max-w-4xl">

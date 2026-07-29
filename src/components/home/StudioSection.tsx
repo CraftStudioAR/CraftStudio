@@ -29,6 +29,7 @@ export default function StudioSection() {
       {/* Floating Rectangle */}
       <motion.section 
         style={{ scale }}
+        data-theme="dark"
         className="bg-navy relative overflow-hidden text-cream rounded-2xl md:rounded-2xl flex flex-col items-center justify-center"
       >
         

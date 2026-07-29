@@ -2,7 +2,7 @@ import Reveal from "../components/Reveal";
 
 export default function Nosotras() {
   return (
-    <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
+    <div data-theme="light" className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       
       {/* 1. HERO Y MANIFIESTO CORTO */}
       <section className="relative px-6 pt-40 pb-20 md:pt-48 md:pb-32 md:px-10 overflow-hidden z-10 flex flex-col items-center text-center">
@@ -47,7 +47,7 @@ export default function Nosotras() {
             {/* Tiziana */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 group">
               <Reveal>
-                <div className="relative w-48 h-60 md:w-56 md:h-72 shrink-0 overflow-hidden rounded-xl bg-ink/5 mx-auto lg:mx-0">
+                <div data-theme="dark" className="relative w-48 h-60 md:w-56 md:h-72 shrink-0 overflow-hidden rounded-xl bg-ink/5 mx-auto lg:mx-0">
                   <img 
                     src="/images/tiziana.jpg" 
                     alt="María Tiziana Negro" 
@@ -74,7 +74,7 @@ export default function Nosotras() {
             {/* Martina */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 group">
               <Reveal>
-                <div className="relative w-48 h-60 md:w-56 md:h-72 shrink-0 overflow-hidden rounded-xl bg-ink/5 mx-auto lg:mx-0">
+                <div data-theme="dark" className="relative w-48 h-60 md:w-56 md:h-72 shrink-0 overflow-hidden rounded-xl bg-ink/5 mx-auto lg:mx-0">
                   <img 
                     src="/images/martina.jpg" 
                     alt="Martina Mincarelli" 

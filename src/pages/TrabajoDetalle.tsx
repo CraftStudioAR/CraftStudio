@@ -110,7 +110,7 @@ export default function TrabajoDetalle() {
           
           {/* Main Hero Image Placeholder */}
           <Reveal>
-            <div className="w-full aspect-video md:aspect-[21/9] rounded-2xl md:rounded-2xl bg-navy relative overflow-hidden flex items-center justify-center">
+            <div data-theme="dark" className="w-full aspect-video md:aspect-[21/9] rounded-2xl md:rounded-2xl bg-navy relative overflow-hidden flex items-center justify-center">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-navy to-ink"></div>
               <GlyphMark variant={0} className="w-[80vw] md:w-[40vw] text-cream/5 absolute opacity-50 mix-blend-overlay" />
               <div className="grain-overlay !absolute !opacity-20" />
@@ -132,7 +132,7 @@ export default function TrabajoDetalle() {
               </div>
             </Reveal>
             <Reveal delay={0.2}>
-              <div className="w-full aspect-square md:aspect-[4/3] rounded-2xl bg-ink relative overflow-hidden flex items-center justify-center">
+              <div data-theme="dark" className="w-full aspect-square md:aspect-[4/3] rounded-2xl bg-ink relative overflow-hidden flex items-center justify-center">
                 <div className="glass-sheen" />
                 <GlyphMark variant={1} className="w-[60vw] md:w-[30vw] text-cream/10 absolute opacity-30" />
                 <p className="text-cream/30 font-serif italic text-xl relative z-10">
@@ -177,6 +177,7 @@ function ProjectCTA() {
     <div ref={containerRef} className="px-4 md:px-10 pb-10 md:pb-20 perspective-1000">
       <motion.section 
         style={{ scale }}
+        data-theme="dark"
         className="bg-navy relative overflow-hidden text-cream rounded-2xl md:rounded-2xl flex flex-col items-center justify-center"
       >
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">

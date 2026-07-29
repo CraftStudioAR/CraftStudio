@@ -98,6 +98,7 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
+      data-theme="dark"
       className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-navy text-cream"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">

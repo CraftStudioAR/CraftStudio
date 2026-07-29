@@ -117,7 +117,7 @@ function AccordionGroup({ items, colors, activeIndex, setActiveIndex, setIsHover
 
   return (
     <div 
-      className="flex flex-col lg:flex-row h-[320px] lg:h-[480px] gap-4 w-full"
+      className="flex flex-col lg:flex-row h-[450px] lg:h-[500px] gap-4 w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -133,8 +133,8 @@ function AccordionGroup({ items, colors, activeIndex, setActiveIndex, setIsHover
             initial={false}
             animate={{ flex: isActive ? 3 : 0.5 }}
             transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-            className={`relative overflow-hidden rounded-2xl cursor-none flex-shrink-0 ${colors[i]}`}
-            style={{ minWidth: "0px", minHeight: "0px" }}
+            className={`relative overflow-hidden rounded-2xl cursor-none flex-shrink-0 ${colors[i]} max-lg:min-h-[80px]`}
+            style={{ minWidth: "0px" }}
           >
             <AnimatePresence mode="wait">
               {!isActive ? (
@@ -144,7 +144,7 @@ function AccordionGroup({ items, colors, activeIndex, setActiveIndex, setIsHover
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex flex-row lg:flex-col items-center justify-center lg:justify-center w-full h-full p-6 lg:p-0"
+                  className="absolute inset-0 flex flex-row lg:flex-col items-center justify-start lg:justify-center w-full h-full px-8 py-0 lg:p-0"
                 >
                   <span className="font-serif text-2xl opacity-60 mr-3 lg:mr-0 lg:absolute lg:top-10">{s.n}</span>
                   <h3 className="font-serif text-2xl md:text-4xl whitespace-nowrap lg:-rotate-90 opacity-70 tracking-wide origin-center truncate lg:overflow-visible">
