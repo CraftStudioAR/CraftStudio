@@ -433,20 +433,6 @@ export default function Contacto() {
 
 // COMPONENTES AUXILIARES
 
-function NextButton({ onClick, disabled }: { onClick: () => void; disabled: boolean }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className="group flex items-center gap-3 text-[10px] md:text-xs font-bold tracking-widest uppercase px-5 md:px-6 py-3 rounded-full transition-all disabled:opacity-30 hover:-translate-y-1 shadow-lg bg-ink text-cream hover:bg-navy"
-    >
-      Continuar
-      <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-    </button>
-  );
-}
-
 function Field({ 
   label, 
   name, 

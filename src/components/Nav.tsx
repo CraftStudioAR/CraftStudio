@@ -8,7 +8,7 @@ import { nav } from "../content/brand";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [hidden] = useState(false);
   const [forceHidden, setForceHidden] = useState(false);
   const location = useLocation();
 
@@ -22,8 +22,6 @@ export default function Nav() {
   }, [location.pathname]);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const onScroll = () => {
       const currentScrollY = window.scrollY;
       
@@ -34,7 +32,6 @@ export default function Nav() {
       // The auto-hide logic on scroll down has been removed as requested, 
       // so the nav remains permanently visible on screen (except when forceHidden by specific sections).
       
-      lastScrollY = currentScrollY;
     };
 
     onScroll();

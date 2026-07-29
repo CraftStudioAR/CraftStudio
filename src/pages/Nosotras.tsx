@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
-import Magnetic from "../components/Magnetic";
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export default function Nosotras() {

@@ -53,7 +53,7 @@ export default function CraftLab() {
         <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-cream">
           
           <motion.div style={{ x }} className="flex gap-8 md:gap-16 px-6 md:px-10">
-            {articles.map((article, index) => {
+            {articles.map((article) => {
               return (
                 <div 
                   key={article.id} 
