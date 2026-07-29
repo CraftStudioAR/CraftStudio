@@ -113,19 +113,19 @@ export default function HeroSection() {
         />
       </div>
       
-      <div data-hero-content className="relative z-10 flex flex-col items-center text-center w-full">
-        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center">
+      <div data-hero-content className="relative z-10 flex flex-col items-center justify-center text-center w-full">
+        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center relative">
           <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
         </div>
         
-        <div data-hero-tagline className="absolute top-full mt-4 md:mt-0 opacity-0 z-20 flex flex-col items-center w-full px-6">
+        <div data-hero-tagline className="-mt-4 md:-mt-8 opacity-0 z-20 flex flex-col items-center w-full px-6 relative">
           <div className="h-12 md:h-16 flex items-center justify-center">
             <p className="font-script text-2xl md:text-4xl text-cream tracking-wide text-center">
               We {displayText} communication
             </p>
           </div>
           
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-xs sm:max-w-none">
+          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-xs sm:max-w-none">
             <a
               href="/contacto"
               className="w-full sm:w-auto text-center bg-cream hover:bg-white text-red px-8 py-3.5 rounded-full font-medium transition-all hover:scale-105 shadow-[0_0_20px_rgba(242,235,233,0.1)]"

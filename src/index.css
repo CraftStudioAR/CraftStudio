@@ -40,6 +40,10 @@
     color: var(--color-cream);
   }
 
+  a, button, [role="button"] {
+    cursor: none !important;
+  }
+
   a {
     color: inherit;
   }

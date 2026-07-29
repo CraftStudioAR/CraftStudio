@@ -29,7 +29,7 @@ export default function StudioSection() {
       {/* Floating Rectangle */}
       <motion.section 
         style={{ scale }}
-        className="bg-navy relative overflow-hidden text-cream rounded-[2rem] md:rounded-[4rem] flex flex-col items-center justify-center"
+        className="bg-navy relative overflow-hidden text-cream rounded-2xl md:rounded-2xl flex flex-col items-center justify-center"
       >
         
         {/* Background Beams - Vertical exactly like Hero */}
@@ -50,7 +50,7 @@ export default function StudioSection() {
           
           <Reveal>
             <h2 className="font-sans font-medium tracking-tight text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-10 text-balance">
-              Craft trabaja con vos, <span className="font-serif italic font-normal text-cream/70">no para vos.</span>
+              ¿Listo para <span className="font-serif italic font-normal text-cream/70">construir?</span>
             </h2>
 
             <div className="flex flex-col gap-6 text-lg md:text-xl lg:text-2xl opacity-80 leading-relaxed mb-16 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-balance md:text-wrap">

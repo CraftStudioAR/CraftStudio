@@ -9,9 +9,12 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [forceHidden, setForceHidden] = useState(false);
   const location = useLocation();
 
   const isDarkBg = location.pathname === "/";
+  
+  const displayNav = nav;
 
   // Close menu on route change
   useEffect(() => {
@@ -24,22 +27,30 @@ export default function Nav() {
     const onScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Solid bg logic
-      setSolid(currentScrollY > 40);
+      // Solid bg logic: Wait until past the hero section (approx 90% of screen height) on home, else 50px
+      const isHome = window.location.pathname === "/";
+      setSolid(currentScrollY > (isHome ? window.innerHeight * 0.9 : 50));
 
-      // Hide/Show logic
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setHidden(true);
-      } else if (currentScrollY < lastScrollY) {
-        setHidden(false);
-      }
-
+      // The auto-hide logic on scroll down has been removed as requested, 
+      // so the nav remains permanently visible on screen (except when forceHidden by specific sections).
+      
       lastScrollY = currentScrollY;
     };
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    
+    // Listen for custom events to force hide the nav in specific sections (e.g. WorkSection)
+    const handleForceHide = () => setForceHidden(true);
+    const handleForceShow = () => setForceHidden(false);
+    window.addEventListener("nav-force-hide", handleForceHide);
+    window.addEventListener("nav-force-show", handleForceShow);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("nav-force-hide", handleForceHide);
+      window.removeEventListener("nav-force-show", handleForceShow);
+    };
   }, []);
 
   // Prevent scroll when menu is open
@@ -60,9 +71,9 @@ export default function Nav() {
     <>
       <header
         style={{
-          transform: hidden && !open ? "translateY(-100%)" : "translateY(0)",
+          transform: (hidden || forceHidden) && !open ? "translateY(-100%)" : "translateY(0)",
         }}
-        className={`fixed top-0 right-0 left-0 z-50 flex items-center justify-between px-6 py-5 transition-all duration-500 md:px-10 ${
+        className={`fixed top-0 right-0 left-0 z-[100] flex items-center justify-between px-6 py-5 transition-all duration-500 md:px-10 ${
           solid && !open ? "bg-cream/95 backdrop-blur-md shadow-sm" : "bg-transparent"
         } ${isNavDarkText ? "text-ink" : "text-cream"}`}
       >
@@ -93,7 +104,7 @@ export default function Nav() {
         </button>
 
         <nav className="hidden items-center gap-9 text-sm tracking-wide uppercase md:flex">
-          {nav.map((item) => (
+          {displayNav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
@@ -129,7 +140,7 @@ export default function Nav() {
             className="fixed inset-0 z-40 flex flex-col justify-center bg-navy px-8 pt-20 pb-10 md:hidden overflow-y-auto"
           >
             <div className="flex flex-col gap-6">
-              {nav.map((item, i) => (
+              {displayNav.map((item, i) => (
                 <div key={item.to} className="overflow-hidden py-1">
                   <motion.div
                     initial={{ y: "100%" }}

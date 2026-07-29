@@ -4,6 +4,8 @@
 export const nav = [
   { label: "Servicios", to: "/servicios" },
   { label: "Trabajos", to: "/trabajos" },
+  { label: "Nosotras", to: "/nosotras" },
+  { label: "Craft Lab", to: "/craft-lab" },
   { label: "Contacto", to: "/contacto" },
 ];
 
@@ -34,45 +36,86 @@ export const values = [
   },
 ];
 
-export const services = [
+export const programasInfo = {
+  title: "PROGRAMAS",
+  description: "Para marcas que necesitan construir, ordenar o redefinir su identidad, posicionamiento y comunicación.",
+  ideal: "Ideal si: tu marca está en un momento de cambio, crecimiento o definición y necesita un proceso estructural que vaya más allá de una acción puntual."
+};
+
+export const programas = [
   {
     n: "01",
-    title: "Creación de marca",
-    summary: "Para marcas que necesitan nacer bien.",
-    detail: "Cuando una empresa está en sus inicios, Craft no empieza por el logo. Empieza por las preguntas: ¿quién sos?, ¿a quién le hablás?, ¿qué te hace diferente? Las respuestas son las que dan forma a todo lo que viene después — concepto, posicionamiento, identidad visual, tono de voz y criterios de comunicación. Craft construye la marca como sistema desde el principio. Para que cuando salga al mercado, salga con claridad.",
+    title: "Creación de Marca",
+    summary: "Para marcas nuevas que necesitan nacer con una base clara.",
+    detail: "Trabajamos sobre el branding, el posicionamiento y los criterios de comunicación para que la marca pueda salir al mercado con dirección.",
     fit: [
-      "Estás lanzando un negocio o producto nuevo",
-      "Nunca tuviste una estrategia de marca definida",
-      "Querés salir al mercado sabiendo exactamente qué lugar ocupás"
+      "Lanzar una marca",
+      "Crear una nueva unidad de negocio",
+      "Presentar un proyecto desde cero"
     ],
-    includes: "diagnóstico inicial, concepto de marca, naming, posicionamiento, propuesta de valor, narrativa, tono de voz, identidad visual, sistema gráfico, aplicaciones y guidelines.",
-    result: "Una marca preparada para salir al mercado con coherencia y dirección."
+    includes: "",
+    result: ""
   },
   {
     n: "02",
     title: "Reposicionamiento",
-    summary: "Para marcas que crecieron pero su comunicación no las acompañó.",
-    detail: "Hay un momento en el que una empresa mira su comunicación y siente que ya no la representa. Cambió el público, creció la oferta, evolucionó el negocio — pero afuera sigue pareciendo lo que era antes. Craft trabaja ese momento. Ordena la estrategia de marca para que cada decisión posterior tenga sentido. No es un cambio estético: es una redefinición del lugar que ocupa la marca y de cómo lo comunica.",
+    summary: "Para marcas que ya existen, pero necesitan redefinir cómo son percibidas.",
+    detail: "Ordenamos la estrategia, el mensaje, la propuesta de valor y la forma en que la marca se comunica para que ocupe un lugar más claro.",
     fit: [
-      "Tu comunicación no refleja lo que hace tu empresa hoy",
-      "Querés diferenciarte con más claridad de la competencia",
-      "Estás en un momento de crecimiento y necesitás ordenar el relato"
+      "Tu marca creció",
+      "Cambió de público",
+      "Amplió su oferta o ya no comunica lo que realmente es"
     ],
-    includes: "auditoría de marca, diagnóstico de comunicación, análisis de competencia, posicionamiento, propuesta de valor, narrativa, tono de voz y lineamientos para canales.",
-    result: "Una marca con dirección clara sobre qué lugar ocupa y cómo diferenciarse."
+    includes: "",
+    result: ""
   },
   {
     n: "03",
     title: "Refresh",
-    summary: "Para marcas que necesitan una nueva identidad para una nueva etapa.",
-    detail: "Algunas marcas tienen recorrido pero llegaron a un punto de quiebre. El negocio cambió, la identidad no. Craft trabaja ese pasaje — construye una nueva identidad que represente la evolución real de la empresa, sin borrar lo que ya se construyó. No es un cambio por moda. Es un cambio con argumento.",
+    summary: "Para marcas que necesitan actualizar su identidad.",
+    detail: "Trabajamos sobre una nueva etapa visual y comunicacional, alineada al momento actual de la marca y a lo que necesita proyectar.",
     fit: [
-      "Tu identidad visual quedó desactualizada",
-      "Estás atravesando un cambio importante en el negocio",
-      "Querés presentarte desde un nuevo lugar sin perder lo que construiste"
+      "Renovar la identidad",
+      "Modernizar la imagen",
+      "Relanzar la marca con mayor coherencia"
     ],
-    includes: "diagnóstico de marca, ajuste de posicionamiento, nueva identidad visual, sistema gráfico, identidad verbal, aplicaciones principales, sistema visual para redes y estrategia de lanzamiento.",
-    result: "Una marca con nueva identidad, comunicación coherente y una forma clara de presentar el cambio."
+    includes: "",
+    result: ""
+  }
+];
+
+export const brandPartnershipsInfo = {
+  title: "BRAND PARTNERSHIPS",
+  description: "Acompañamientos estratégicos y creativos para marcas que necesitan activar una acción puntual o sostener una dirección ya construida.",
+  ideal: "Ideal si: ya tenés una identidad definida y lo que necesitás es poner en movimiento una acción concreta o mantener la coherencia de lo que ya construiste."
+};
+
+export const brandPartnerships = [
+  {
+    n: "01",
+    title: "Activación",
+    summary: "Para marcas que necesitan comunicar una campaña, lanzamiento o acción puntual con una idea clara.",
+    detail: "Acompañamos el concepto, los mensajes, la dirección creativa y la bajada por canales para que la acción tenga coherencia con la marca.",
+    fit: [
+      "Necesitás lanzar un nuevo producto",
+      "Querés comunicar una campaña o fecha clave",
+      "Buscás acompañar una acción comercial puntual"
+    ],
+    includes: "concepto de campaña, mensajes clave, dirección creativa, diseño de piezas para canales, bajada estratégica y acompañamiento en ejecución.",
+    result: "Una acción o campaña lanzada con coherencia visual, verbal y estratégica."
+  },
+  {
+    n: "02",
+    title: "Continuidad",
+    summary: "Para marcas que ya trabajaron un programa con Craft y necesitan sostener la dirección.",
+    detail: "Acompañamos la implementación desde una mirada estratégica y creativa, ayudando a que cada decisión siga respondiendo al sistema definido.",
+    fit: [
+      "Necesitás ordenar tus próximos pasos",
+      "Buscás revisar y mejorar campañas activas",
+      "Querés sostener una estrategia ya desarrollada"
+    ],
+    includes: "revisión estratégica continua, consultoría creativa, curaduría de contenidos, acompañamiento en producción y ajuste de piezas de comunicación.",
+    result: "Una marca que se mantiene coherente, relevante y fiel a su sistema de identidad a lo largo del tiempo."
   }
 ];
 
@@ -135,11 +178,23 @@ export const contactInfo = {
 
 export const contactForm = {
   needs: [
-    "Estoy creando una marca nueva",
-    "Tengo una marca y quiero impulsarla",
-    "Quiero relanzar/reposicionar mi marca",
-    "Otro",
+    "Estoy empezando un proyecto desde cero.",
+    "Quiero hacer crecer una marca que ya existe.",
+    "Necesito relanzar o reposicionar mi marca.",
+    "Me interesa lanzar una campaña específica para mi proyecto.",
+    "No estoy seguro, me gustaría recibir orientación.",
   ],
-  budgets: ["Menos de USD 3.000", "USD 3.000 – 8.000", "USD 8.000 – 15.000", "Más de USD 15.000"],
-  howFound: ["Instagram", "LinkedIn", "Recomendación", "Google", "Otro"],
+  budgets: [
+    "Entre $500.000 y $1.000.000",
+    "Entre $1.000.000 y $2.000.000",
+    "Entre $2.000.000 y $5.000.000",
+    "Más de $5.000.000",
+  ],
+  howFound: ["Instagram", "TikTok", "Google", "Recomendación", "Otro"],
+  timelines: [
+    "Lo antes posible.",
+    "Dentro del próximo mes.",
+    "En los próximos 2 o 3 meses.",
+    "Solo estoy explorando opciones.",
+  ]
 };

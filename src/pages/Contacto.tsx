@@ -9,8 +9,9 @@ import Beams from "../components/Beams";
 // Tabs data
 const TABS = [
   { id: 1, label: "El Desafío" },
-  { id: 2, label: "El Contexto" },
-  { id: 3, label: "Tus Datos" },
+  { id: 2, label: "El Proyecto" },
+  { id: 3, label: "El Contexto" },
+  { id: 4, label: "Tus Datos" },
 ];
 
 export default function Contacto() {
@@ -22,11 +23,14 @@ export default function Contacto() {
   const [need, setNeed] = useState<string | null>(null);
   const [budget, setBudget] = useState<string | null>(null);
   const [howFound, setHowFound] = useState<string | null>(null);
+  const [timeline, setTimeline] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     nombre: "",
-    empresa: "",
     email: "",
-    mensaje: "",
+    telefono: "",
+    marca: "",
+    redes: "",
+    proyectoInfo: "",
   });
 
   // Check mobile on mount for the Beams rotation
@@ -73,36 +77,47 @@ export default function Contacto() {
     }),
   };
 
+  const NextButton = ({ onClick, disabled }: { onClick: () => void, disabled?: boolean }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`group flex items-center justify-center gap-2 px-8 py-4 bg-navy text-cream rounded-full font-bold tracking-widest text-xs uppercase transition-all duration-300 ${disabled ? "opacity-30 cursor-not-allowed" : "hover:bg-red hover:scale-105"}`}
+    >
+      Siguiente
+      <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-cream text-ink relative overflow-hidden">
-      <div className="px-6 pt-24 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-[1400px] grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+      <div className="px-6 pt-32 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
         
-        {/* LADO IZQUIERDO: Título gigante */}
-        <div className="lg:col-span-5 flex flex-col justify-between h-full lg:min-h-[50vh]">
+        {/* ENCABEZADO CENTRADO */}
+        <div className="w-full text-center flex flex-col items-center mb-16 relative z-10">
           <div>
             <Reveal>
-              <p className="mb-8 text-xs tracking-widest text-red uppercase flex items-center gap-4 font-bold">
-                <span className="w-12 h-[1px] bg-red" /> Un Nuevo Proyecto
+              <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
+                <span className="w-8 md:w-12 h-[1px] bg-red" /> SECCIÓN / CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
               </p>
-              <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl italic leading-[0.9] tracking-tight text-navy">
-                Hablemos<br />de tu marca.
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
+                Hablemos de tu proyecto
               </h1>
-              <p className="mt-8 max-w-sm text-xl opacity-70 font-medium text-balance">
-                Completá este expediente interactivo para que podamos entender tu situación antes de nuestra primera reunión.
+              <p className="mt-8 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
+                Antes de conocernos, nos gustaría saber un poco más sobre vos, tu marca y lo que estás buscando. Completá este breve formulario y nos pondremos en contacto con vos lo antes posible!
               </p>
             </Reveal>
           </div>
-
         </div>
 
-        {/* LADO DERECHO: El Archivero Interactivo */}
-        <div className="lg:col-span-7 flex flex-col pt-4">
+        {/* EL ARCHIVERO INTERACTIVO */}
+        <div className="w-full flex flex-col">
           {sent ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="bg-navy text-cream rounded-[2rem] md:rounded-[4rem] p-12 md:p-20 h-[600px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
+              className="bg-navy text-cream rounded-2xl md:rounded-2xl p-12 md:p-20 h-[600px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
             >
               {/* Background Beams - exactamente como en Hero / Studio */}
               <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
@@ -125,29 +140,28 @@ export default function Contacto() {
               </p>
             </motion.div>
           ) : (
-            <div className="w-full flex flex-col relative min-h-[500px] h-auto md:h-[650px]">
+            <div className="w-full flex flex-col relative min-h-[300px] h-auto">
               
-              {/* PESTAÑAS DEL ARCHIVERO */}
-              <div className="flex gap-1 md:gap-2 mb-[-1px] relative z-20 px-4 md:px-8">
+              <div className="flex items-end gap-1 md:gap-2 mb-[-1px] relative z-20 px-8 md:px-12">
                 {TABS.map((tab) => {
                   const isActive = activeStep === tab.id;
                   const isPast = activeStep > tab.id;
                   return (
-                    <button
-                      key={tab.id}
-                      onClick={() => navigateToStep(tab.id)}
-                      disabled={!isPast && !isActive}
-                      className={`relative flex-1 md:flex-none flex justify-center items-center px-1 md:px-8 py-3 md:py-5 rounded-t-[1rem] md:rounded-t-[1.5rem] font-bold text-[9px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
-                        ${isActive 
-                          ? "bg-white border-ink/10 text-navy h-[110%] pb-6 z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
-                          : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
-                        }
-                        ${!isPast && !isActive ? "cursor-not-allowed opacity-50" : ""}
-                      `}
-                    >
+                      <button
+                        key={tab.id}
+                        onClick={() => navigateToStep(tab.id)}
+                        disabled={!isPast && !isActive}
+                        className={`relative flex-1 flex justify-center items-center px-1 md:px-2 lg:px-4 py-3 md:py-5 rounded-t-xl md:rounded-t-xl font-bold text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
+                          ${isActive 
+                            ? "bg-white border-ink/10 text-navy z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
+                            : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
+                          }
+                          ${!isPast && !isActive ? "cursor-not-allowed opacity-50" : ""}
+                        `}
+                      >
                       <span className="flex items-center gap-1 md:gap-2 truncate text-center">
                         <span className={isActive ? 'text-red' : ''}>0{tab.id}</span>
-                        <span className="truncate">{tab.label}</span>
+                        <span className="truncate hidden md:inline">{tab.label}</span>
                       </span>
                     </button>
                   );
@@ -155,7 +169,7 @@ export default function Contacto() {
               </div>
 
               {/* CUERPO DEL ARCHIVERO */}
-              <div className="bg-white rounded-[2rem] md:rounded-tl-[2rem] border border-ink/10 shadow-[0_15px_40px_rgb(0,0,0,0.06)] flex-1 relative overflow-hidden z-10 flex flex-col">
+              <div className="bg-white rounded-2xl md:rounded-2xl border border-ink/10 shadow-[0_15px_40px_rgb(0,0,0,0.06)] flex-1 relative overflow-hidden z-10 flex flex-col">
                 <form onSubmit={handleSubmit} className="w-full h-full relative flex flex-col">
                   <AnimatePresence mode="wait" custom={direction}>
                     
@@ -169,10 +183,11 @@ export default function Contacto() {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-full h-full flex flex-col p-6 md:p-12 bg-white flex-1"
+                        className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
                       >
+                        <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">01 / El Desafío</span>
                         <h2 className="font-serif italic text-2xl md:text-4xl mb-6 md:mb-8 text-navy">¿Qué necesita tu marca?</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start mb-8 md:mb-12">
                           {contactForm.needs.map((opt, i) => {
                             const isActive = need === opt;
                             return (
@@ -195,7 +210,8 @@ export default function Contacto() {
                             )
                           })}
                         </div>
-                        <div className="flex justify-end pt-6 mt-auto border-t border-ink/5">
+
+                        <div className="flex justify-end pt-6 mt-auto">
                            <NextButton onClick={nextStep} disabled={!need} />
                         </div>
                       </motion.div>
@@ -211,9 +227,23 @@ export default function Contacto() {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
+                        className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
                       >
                         <div className="flex flex-col gap-10 flex-1 content-start">
+                          <div>
+                            <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">02 / El Proyecto</span>
+                            <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                              ¿Qué hace tu marca y qué te gustaría lograr trabajando juntos?
+                            </label>
+                            <textarea
+                              name="proyectoInfo"
+                              value={formData.proyectoInfo}
+                              onChange={handleInputChange}
+                              rows={3}
+                              className="w-full resize-none border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-3 font-sans text-base outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
+                              placeholder="Contanos un poco más sobre tu proyecto..."
+                            />
+                          </div>
                           <div>
                             <h2 className="font-serif italic text-2xl md:text-3xl mb-6 text-navy">Presupuesto estimado</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -233,34 +263,13 @@ export default function Contacto() {
                               ))}
                             </div>
                           </div>
-
-                          <div className="border-t border-ink/5 pt-8">
-                            <h2 className="font-serif italic text-2xl md:text-3xl mb-6 text-navy">¿Cómo nos conociste?</h2>
-                            <div className="flex flex-wrap gap-3">
-                              {contactForm.howFound.map((opt) => (
-                                <button
-                                  key={opt}
-                                  type="button"
-                                  onClick={() => setHowFound(opt)}
-                                  className={`rounded-full border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
-                                    howFound === opt
-                                      ? "border-red text-cream bg-red shadow-md scale-[1.05]"
-                                      : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
-                                  }`}
-                                >
-                                  {opt}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
                         </div>
-
-                        <div className="flex justify-between items-center mt-auto pt-6 border-t border-ink/5">
+                        <div className="flex justify-between items-center mt-auto pt-8">
                           <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
                           </button>
-                          <NextButton onClick={nextStep} disabled={!budget || !howFound} />
+                          <NextButton onClick={nextStep} disabled={!formData.proyectoInfo || !budget} />
                         </div>
                       </motion.div>
                     )}
@@ -275,35 +284,89 @@ export default function Contacto() {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="w-full h-full flex flex-col absolute inset-0 p-6 md:p-12 overflow-y-auto no-scrollbar bg-white"
+                        className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
                       >
-                        <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos</h2>
-                        <div className="flex flex-col gap-6 flex-1">
-                          <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
-                            <Field label="Nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} />
-                            <Field label="Empresa" name="empresa" value={formData.empresa} onChange={handleInputChange} />
-                          </div>
-                          <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
-                          
-                          <div className="mt-4">
-                            <div className="flex justify-between items-end mb-2">
-                              <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold">
-                                Mensaje
-                              </label>
-                              <span className="text-[10px] tracking-widest opacity-30 uppercase font-bold">Opcional</span>
+                        <div className="flex flex-col gap-10 flex-1 content-start">
+
+                          <div>
+                            <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">03 / El Contexto</span>
+                            <h2 className="font-serif italic text-2xl md:text-3xl mb-4 text-navy">¿Cuándo te gustaría empezar?</h2>
+                            <div className="flex flex-wrap gap-2 md:gap-3">
+                              {contactForm.timelines.map((opt) => (
+                                <button
+                                  key={opt}
+                                  type="button"
+                                  onClick={() => setTimeline(opt)}
+                                  className={`rounded-full border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                    timeline === opt
+                                      ? "border-red text-cream bg-red shadow-md scale-[1.05]"
+                                      : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
+                                  }`}
+                                >
+                                  {opt}
+                                </button>
+                              ))}
                             </div>
-                            <textarea
-                              name="mensaje"
-                              value={formData.mensaje}
-                              onChange={handleInputChange}
-                              rows={3}
-                              className="w-full resize-none border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-2 md:py-3 font-sans text-base md:text-xl outline-none placeholder:opacity-30 focus:border-red focus:bg-white transition-colors"
-                              placeholder="Desarrolla brevemente tu situación..."
-                            />
+                          </div>
+
+                          <div className="border-t border-ink/5 pt-10">
+                            <h2 className="font-serif italic text-2xl md:text-3xl mb-4 text-navy">¿Cómo llegaste a Craft?</h2>
+                            <div className="flex flex-wrap gap-2 md:gap-3">
+                              {contactForm.howFound.map((opt) => (
+                                <button
+                                  key={opt}
+                                  type="button"
+                                  onClick={() => setHowFound(opt)}
+                                  className={`rounded-full border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                    howFound === opt
+                                      ? "border-red text-cream bg-red shadow-md scale-[1.05]"
+                                      : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
+                                  }`}
+                                >
+                                  {opt}
+                                </button>
+                              ))}
+                            </div>
                           </div>
                         </div>
 
-                        <div className="flex justify-between items-center mt-auto pt-6 border-t border-ink/5">
+                        <div className="flex justify-between items-center mt-auto pt-6">
+                          <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                            <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                            Atrás
+                          </button>
+                          <NextButton onClick={nextStep} disabled={!timeline || !howFound} />
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* PASO 4 */}
+                    {activeStep === 4 && (
+                      <motion.div
+                        key="step4"
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.5 }}
+                        className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
+                      >
+                        <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">04 / Tus Datos</span>
+                        <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos</h2>
+                        <div className="flex flex-col gap-6 flex-1">
+                          <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
+                            <Field label="Nombre Completo" name="nombre" value={formData.nombre} onChange={handleInputChange} />
+                            <Field label="Email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
+                          </div>
+                          <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
+                            <Field label="Teléfono" name="telefono" type="tel" value={formData.telefono} onChange={handleInputChange} />
+                            <Field label="Nombre de la marca o proyecto" name="marca" value={formData.marca} onChange={handleInputChange} />
+                          </div>
+                          <Field label="Redes Sociales y/o sitio web" name="redes" value={formData.redes} onChange={handleInputChange} />
+                        </div>
+
+                        <div className="flex justify-between items-center mt-auto pt-6">
                           <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
@@ -330,10 +393,10 @@ export default function Contacto() {
         </div>
       </div>
       
-      {/* O ESCRÍBENOS DIRECTAMENTE (Moved here, below the whole grid layout) */}
-      <div className="px-6 pb-20 md:pb-32 mx-auto max-w-[1400px] flex justify-center lg:justify-end">
+      {/* O ESCRÍBENOS DIRECTAMENTE */}
+      <div className="px-6 pb-20 mx-auto max-w-5xl flex justify-center mt-12">
         <Reveal delay={0.2}>
-          <div className="flex flex-col items-center lg:items-end text-center lg:text-right gap-2">
+          <div className="flex flex-col items-center text-center gap-2 border-b border-ink/10 pb-20 w-full md:w-[600px]">
             <span className="text-[10px] tracking-widest uppercase opacity-40 font-bold">O Escríbenos Directamente</span>
             <a
               href={`mailto:${contactInfo.email}`}
@@ -342,6 +405,26 @@ export default function Contacto() {
               {contactInfo.email}
             </a>
           </div>
+        </Reveal>
+      </div>
+
+      {/* SUMATE AL EQUIPO BANNER */}
+      <div className="px-6 pb-32 mx-auto max-w-[1000px] flex flex-col items-center text-center">
+        <Reveal>
+          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-6">4. SUMATE AL EQUIPO</span>
+          <h2 className="font-serif italic text-4xl md:text-6xl text-navy mb-6">Craft crece con las<br className="hidden md:block"/> personas correctas.</h2>
+          <p className="text-xl opacity-70 mb-10 max-w-2xl mx-auto text-balance">
+            Si compartís la manera en que Craft entiende el trabajo: con criterio, con proceso y con compromiso real, nos gustaría conocerte.
+          </p>
+          <a 
+            href="/sumate" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="group inline-flex items-center justify-center gap-3 bg-red text-cream px-8 py-4 rounded-full text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] hover:bg-[#8a2613]"
+          >
+            Postularse
+            <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </Reveal>
       </div>
     </div>
