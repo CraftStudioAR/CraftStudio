@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import Magnetic from "./Magnetic";
-import { LogoLockupHorizontal } from "./Logo";
+import { LogoMark } from "./Logo";
 import { nav } from "../content/brand";
 
 export default function Nav() {
@@ -74,11 +74,17 @@ export default function Nav() {
           solid && !open ? "bg-cream/95 backdrop-blur-md shadow-sm" : "bg-transparent"
         } ${isNavDarkText ? "text-ink" : "text-cream"}`}
       >
-        <Magnetic strength={0.25}>
-          <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
-            <LogoLockupHorizontal className="h-7 md:h-10 transition-all duration-300" />
-          </Link>
-        </Magnetic>
+        {/* Placeholder izquierdo para balancear el flex justify-between */}
+        <div className="w-10 md:w-20"></div>
+
+        {/* Logo centrado de forma absoluta */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+          <Magnetic strength={0.25}>
+            <Link to="/" data-cursor="Inicio" onClick={() => setOpen(false)} className="block">
+              <LogoMark className="h-6 md:h-8 transition-all duration-300" />
+            </Link>
+          </Magnetic>
+        </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
