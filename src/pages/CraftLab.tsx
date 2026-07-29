@@ -1,17 +1,6 @@
-
+import { Link } from "react-router-dom";
 import Reveal from "../components/Reveal";
-
-// Generar una lista falsa para demostrar las tarjetas ricas
-const articles = [
-  { id: "01", date: "24 OCT", title: "La construcción de valor", category: "Estrategia", image: "/images/lab1.jpg", desc: "Cómo las marcas modernas trasladan su propuesta de valor a un ecosistema digital saturado.", aspect: "aspect-[4/5]" },
-  { id: "02", date: "18 OCT", title: "Tipografía como identidad", category: "Diseño", image: "/images/lab2.jpg", desc: "El rol de las variables tipográficas en la construcción de una voz de marca reconocible.", aspect: "aspect-[1/1]" },
-  { id: "03", date: "05 OCT", title: "Comunicación digital", category: "Cultura", image: "/images/lab3.jpg", desc: "Análisis del nuevo paradigma de comunicación asíncrona y su impacto en las comunidades.", aspect: "aspect-[3/4]" },
-  { id: "04", date: "22 SEP", title: "El fin del branding tradicional", category: "Estrategia", image: "/images/lab1.jpg", desc: "Por qué los manuales de marca rígidos están siendo reemplazados por sistemas fluidos.", aspect: "aspect-[4/3]" },
-  { id: "05", date: "14 SEP", title: "Micro-interacciones en UX", category: "Diseño", image: "/images/lab2.jpg", desc: "Pequeños detalles en la interfaz que generan grandes impactos emocionales en el usuario.", aspect: "aspect-[4/5]" },
-  { id: "06", date: "01 SEP", title: "El nuevo lujo", category: "Estrategia", image: "/images/lab3.jpg", desc: "El lujo silencioso y la experiencia sobre la ostentación en el diseño contemporáneo.", aspect: "aspect-[1/1]" },
-  { id: "07", date: "28 AGO", title: "Narrativas visuales", category: "Arte", image: "/images/lab1.jpg", desc: "El uso del arte 3D y el surrealismo para construir mundos inmersivos de marca.", aspect: "aspect-[3/4]" },
-  { id: "08", date: "15 AGO", title: "Minimalismo cálido", category: "Diseño", image: "/images/lab2.jpg", desc: "La evolución estética del minimalismo frío hacia paletas y texturas orgánicas.", aspect: "aspect-[4/5]" },
-];
+import { articles } from "../content/lab";
 
 export default function CraftLab() {
   return (
@@ -45,7 +34,7 @@ export default function CraftLab() {
             
             {articles.map((article, index) => (
               <Reveal key={article.id} delay={0.1 * (index % 3)}>
-                <div className="break-inside-avoid mb-16 flex flex-col group cursor-pointer">
+                <Link to={`/craft-lab/${article.slug}`} className="break-inside-avoid mb-16 flex flex-col group cursor-pointer block">
                   
                   {/* Tarjeta Visual */}
                   <div className={`relative w-full ${article.aspect} overflow-hidden rounded-2xl bg-ink/5 mb-6`}>
@@ -83,7 +72,7 @@ export default function CraftLab() {
                     </p>
                   </div>
 
-                </div>
+                </Link>
               </Reveal>
             ))}
 

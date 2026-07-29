@@ -7,6 +7,7 @@ import Contacto from "./pages/Contacto";
 import TrabajoDetalle from "./pages/TrabajoDetalle";
 import Nosotras from "./pages/Nosotras";
 import CraftLab from "./pages/CraftLab";
+import LabDetalle from "./pages/LabDetalle";
 import Sumate from "./pages/Sumate";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/trabajos" element={<Trabajos />} />
         <Route path="/nosotras" element={<Nosotras />} />
         <Route path="/craft-lab" element={<CraftLab />} />
+        <Route path="/craft-lab/:slug" element={<LabDetalle />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/sumate" element={<Sumate />} />
         <Route path="/trabajos/:slug" element={<TrabajoDetalle />} />
