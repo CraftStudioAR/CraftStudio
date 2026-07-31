@@ -88,7 +88,7 @@ export default function Nosotras() {
                     Martina Mincarelli
                   </h3>
                   <p className="text-red font-bold tracking-widest uppercase text-[10px] md:text-xs mb-6">
-                    Growth Marketing & Performance
+                    DIRECCIÓN COMERCIAL & MARKETING
                   </p>
                   <div className="text-ink/70 text-sm md:text-base leading-relaxed text-balance space-y-4">
                     <p>Estratega de Growth Marketing y Comunicadora Digital recibida en la UNLP. Trabaja sobre la relación entre comunicación y crecimiento del negocio: cómo una marca se posiciona, construye presencia y convierte sus objetivos comerciales en decisiones concretas.</p>
