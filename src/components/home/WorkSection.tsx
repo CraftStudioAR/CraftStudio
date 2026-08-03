@@ -17,18 +17,24 @@ export default function WorkSection() {
     const ctx = gsap.context(() => {
       // Horizontal Scroll for Work Section
       if (workContainerRef.current && workScrollRef.current) {
-        // Calculate the exact distance to scroll horizontally
-        const totalWidth = workScrollRef.current.scrollWidth - window.innerWidth;
-        
+        const getScrollDistance = () => {
+          if (!workScrollRef.current) return 0;
+          const isMobile = window.innerWidth < 768;
+          // In mobile, provide extra margin so the last card passes fully into view before unpinning
+          const extraMobile = isMobile ? 100 : 0;
+          return workScrollRef.current.scrollWidth - window.innerWidth + extraMobile;
+        };
+
         gsap.to(workScrollRef.current, {
-          x: -totalWidth,
+          x: () => -getScrollDistance(),
           ease: "none",
           scrollTrigger: {
             trigger: workContainerRef.current,
             start: "top top",
-            end: `+=${totalWidth}`,
+            end: () => `+=${getScrollDistance()}`,
             pin: true,
             scrub: 1,
+            invalidateOnRefresh: true,
             onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
             onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
             onEnterBack: () => window.dispatchEvent(new Event("nav-force-hide")),
@@ -42,46 +48,57 @@ export default function WorkSection() {
   }, []);
 
   return (
-    <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-screen overflow-hidden flex flex-col relative">
-      <div className="px-6 md:px-10 pt-10 md:pt-14 pb-8 md:pb-10 flex-shrink-0 flex flex-col lg:flex-row lg:items-start justify-between gap-6 md:gap-10">
+    <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-start relative">
+      {/* Header */}
+      <div className="px-6 md:px-10 pt-20 sm:pt-24 md:pt-14 pb-5 md:pb-8 flex-shrink-0">
         <Reveal>
-          <div className="flex flex-col items-start gap-6 max-w-4xl">
-            <div>
-              <p className="text-cream/50 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-3">
-                ✦ Portafolio
-              </p>
-              <h2 className="font-sans font-medium tracking-tight text-5xl md:text-7xl lg:text-8xl break-words md:whitespace-nowrap">
-                Casos Destacados
-              </h2>
-            </div>
-            <p className="text-base md:text-xl text-cream/70 text-balance max-w-2xl">
-              Te compartimos una selección de marcas que ya confiaron en nuestra mirada.
+          <div className="flex flex-col items-start max-w-7xl">
+            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-3 md:mb-4 flex items-center gap-3">
+              <span className="w-8 h-[1.5px] bg-red" /> Portafolio
+            </p>
+            <h2 className="font-sans font-medium tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream leading-[1.05]">
+              Proyectos
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-cream/80 max-w-xl leading-relaxed mt-2 md:mt-3">
+              Algunas marcas que ya confiaron en nuestra mirada
             </p>
           </div>
-        </Reveal>
-        
-        <Reveal delay={0.2} className="lg:mt-10">
-          <Magnetic>
-            <Link
-              to="/trabajos"
-              className="group relative flex justify-center items-center gap-4 rounded-full px-8 py-3.5 bg-ink text-cream border border-cream/50 hover:border-cream hover:bg-white/5 transition-all hover:scale-105 shadow-xl w-full md:w-auto"
-            >
-              <span className="font-bold uppercase tracking-widest text-xs md:text-sm">Ver todos los proyectos</span>
-              <span className="text-xl leading-none transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">{"\u2197\uFE0E"}</span>
-            </Link>
-          </Magnetic>
         </Reveal>
       </div>
       
       {/* Horizontal scroll track */}
-      <div className="flex-1 flex items-center pl-6 md:pl-10 pb-24 md:pb-36">
-        <div ref={workScrollRef} className="flex gap-10 md:gap-20 pr-12 md:pr-32 items-start">
+      <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-36">
+        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-20 pr-16 md:pr-32 items-start">
           {work.map((w, i) => (
-            <div key={w.slug} className="w-[85vw] max-w-md shrink-0">
+            <div key={w.slug} className="w-[84vw] sm:w-[85vw] md:w-[85vw] max-w-md shrink-0">
               <WorkCard work={w} index={i} total={work.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Mobile Bottom Navigation Bar (No "Desliza" text) */}
+      <div className="px-6 pb-6 pt-2 flex justify-end md:hidden z-40 flex-shrink-0">
+        <Link
+          to="/trabajos"
+          className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white text-ink font-semibold text-xs shadow-xl active:scale-95 transition-transform"
+        >
+          <span>Ver todos los proyectos</span>
+          <span className="text-sm font-bold">↗</span>
+        </Link>
+      </div>
+
+      {/* Desktop Bottom Right Button (100% original) */}
+      <div className="hidden md:block absolute bottom-10 right-10 z-50">
+        <Magnetic>
+          <Link
+            to="/trabajos"
+            className="group flex justify-center items-center gap-3 rounded-xl px-8 py-3.5 bg-white text-ink hover:scale-105 transition-transform duration-300 shadow-xl"
+          >
+            <span className="font-bold tracking-tight text-base">Ver todos los proyectos</span>
+            <span className="text-2xl leading-none transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">{"\u2197\uFE0E"}</span>
+          </Link>
+        </Magnetic>
       </div>
       
     </section>

@@ -1,39 +1,26 @@
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Beams from "../Beams";
+import { motion, AnimatePresence } from "motion/react";
 import { LogoWordmark } from "../Logo";
-
 
 gsap.registerPlugin(ScrollTrigger);
 
 const WORDS = [
   "craft",
-  "position",
   "embrace",
   "shape",
   "design",
   "develop",
-  "structure",
-  "scale",
-  "plan",
-  "strengthen",
-  "curate",
-  "love"
+  "curate"
 ];
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    
     const ctx = gsap.context(() => {
       // 1. Hero Reveal Animation
       gsap.fromTo(
@@ -71,75 +58,94 @@ export default function HeroSection() {
       });
     }, heroRef);
     return () => {
-      window.removeEventListener("resize", checkMobile);
       ctx.revert();
     };
   }, []);
 
-  // Typewriter effect
+  // Word slider effect
   useEffect(() => {
-    const currentWord = WORDS[currentWordIndex];
-    const typeSpeed = isDeleting ? 40 : 80;
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting && displayText === currentWord) {
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && displayText === "") {
-        setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % WORDS.length);
-      } else {
-        setDisplayText(currentWord.substring(0, displayText.length + (isDeleting ? -1 : 1)));
-      }
-    }, typeSpeed);
-    
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentWordIndex]);
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % WORDS.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
       ref={heroRef}
       data-theme="dark"
-      className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-navy text-cream"
+      className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden text-cream"
     >
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <Beams
-          beamWidth={2}
-          beamHeight={20}
-          beamNumber={40}
-          lightColor="#F2EBE9" // Sweet White to match brand
-          speed={2}
-          noiseIntensity={1.75}
-          scale={0.2}
-          rotation={isMobile ? 90 : 0}
-        />
-      </div>
+      {/* Background Hero Image */}
+      <img
+        src="/images/hero_backup.webp"
+        alt="Craft Studio"
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        style={{
+          objectPosition: "55% center",
+        }}
+      />
       
       <div data-hero-content className="relative z-10 flex flex-col items-center justify-center text-center w-full">
         <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center relative">
           <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
         </div>
         
-        <div data-hero-tagline className="-mt-4 md:-mt-8 opacity-0 z-20 flex flex-col items-center w-full px-6 relative">
-          <div className="h-12 md:h-16 flex items-center justify-center">
-            <p className="font-script text-2xl md:text-4xl text-cream tracking-wide text-center">
-              We {displayText} communication
-            </p>
+        <div data-hero-tagline className="-mt-6 sm:-mt-8 md:-mt-14 opacity-0 z-20 flex flex-col items-center w-full px-4 sm:px-6 relative">
+          <div className="h-10 sm:h-14 md:h-20 flex items-center justify-center">
+            <h2 className="flex items-center text-[18px] xs:text-[21px] sm:text-[30px] md:text-[40px] text-cream tracking-wide text-center m-0 whitespace-nowrap">
+              <span className="font-sans">we</span>
+              <span className="relative inline-flex items-center justify-center min-w-[75px] xs:min-w-[90px] sm:min-w-[150px] md:min-w-[210px] h-[1.8em] mx-1 sm:mx-2 md:mx-4 [perspective:600px]">
+                <AnimatePresence mode="popLayout">
+                  <motion.span
+                    key={currentWordIndex}
+                    initial={{
+                      rotateX: -60,
+                      y: "-75%",
+                      opacity: 0,
+                    }}
+                    animate={{
+                      rotateX: 0,
+                      y: "0%",
+                      opacity: 1,
+                    }}
+                    exit={{
+                      rotateX: 60,
+                      y: "75%",
+                      opacity: 0,
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      backfaceVisibility: "hidden",
+                    }}
+                    className="absolute font-script text-[26px] xs:text-[30px] sm:text-5xl md:text-6xl text-cream pt-0.5 sm:pt-1 md:pt-2 whitespace-nowrap drop-shadow-md"
+                  >
+                    {WORDS[currentWordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+              <span className="font-sans">communication</span>
+            </h2>
           </div>
           
-          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-xs sm:max-w-none">
-            <a
-              href="/contacto"
-              className="w-full sm:w-auto text-center bg-cream hover:bg-white text-red px-8 py-3.5 rounded-full font-medium transition-all hover:scale-105 shadow-[0_0_20px_rgba(242,235,233,0.1)]"
+          <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-center justify-center w-full">
+            <Link
+              to="/contacto"
+              className="w-[205px] sm:w-auto text-center bg-cream hover:bg-white text-red px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-xl text-xs sm:text-sm md:text-base font-semibold tracking-wide transition-all hover:scale-105 shadow-[0_0_20px_rgba(242,235,233,0.1)]"
             >
               Contanos tu proyecto
-            </a>
-            <a
-              href="/trabajos"
-              className="w-full sm:w-auto text-center glass-panel group overflow-hidden text-cream px-8 py-3.5 rounded-full font-medium transition-all hover:scale-105"
+            </Link>
+            <Link
+              to="/trabajos"
+              className="w-[205px] sm:w-auto text-center glass-panel group overflow-hidden text-cream px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-xl text-xs sm:text-sm md:text-base font-medium tracking-wide transition-all hover:scale-105"
             >
               <span className="relative z-10">Ver proyectos</span>
               <div className="glass-sheen"></div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

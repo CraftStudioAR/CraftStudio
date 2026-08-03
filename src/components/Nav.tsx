@@ -107,29 +107,30 @@ export default function Nav() {
         }}
         className="fixed top-0 right-0 left-0 z-[100] flex items-center justify-between px-6 py-5 transition-transform duration-500 md:px-10"
       >
-        {/* Placeholder izquierdo para mantener balance en desktop */}
-        <div className="w-12 hidden md:block"></div>
-
-        {/* Logo central flotante (Círculo glassmorphism) */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
+        {/* Logo a la izquierda (glassmorphism) */}
+        <div className="flex items-center justify-start pointer-events-auto">
           <Magnetic strength={0.25}>
             <Link 
               to="/" 
               data-cursor="Inicio" 
               onClick={() => setOpen(false)} 
-              className={`block glass-panel group overflow-hidden rounded-full flex items-center justify-center w-12 h-12 md:w-14 md:h-14 transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}
+              className={`block glass-panel group overflow-hidden rounded-full flex items-center justify-center w-14 h-14 md:w-16 md:h-16 transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}
             >
-              <LogoMark className="h-8 md:h-10 w-auto transition-all duration-300 relative z-10" />
+              <LogoMark className="h-12 md:h-14 w-auto transition-all duration-300 relative z-10" />
               <div className="glass-sheen"></div>
             </Link>
           </Magnetic>
+        </div>
+
+        {/* Espaciador central vacio */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
         </div>
 
         {/* Mobile Hamburger (Círculo glassmorphism derecha - Más chico) */}
         <button
           onClick={() => setOpen((v) => !v)}
           data-cursor={open ? "Cerrar" : "Menú"}
-          className={`relative z-50 flex h-12 w-12 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-full glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
+          className={`relative z-50 flex h-14 w-14 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-xl glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
           aria-label="Menú"
         >
           <div className="glass-sheen"></div>
@@ -148,7 +149,7 @@ export default function Nav() {
         </button>
 
         {/* Desktop Nav Links (Pastilla glassmorphism derecha) */}
-        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-full pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
+        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-xl pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
           <div className="glass-sheen"></div>
           {displayNav.map((item) => (
             <NavLink

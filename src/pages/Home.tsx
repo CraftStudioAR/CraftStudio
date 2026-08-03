@@ -3,7 +3,7 @@ import HeroSection from "../components/home/HeroSection";
 import FoundersSection from "../components/home/FoundersSection";
 import WorkSection from "../components/home/WorkSection";
 import ServicesSection from "../components/home/ServicesSection";
-import ProcessSection from "../components/home/ProcessSection";
+
 import LabSection from "../components/home/LabSection";
 import StudioSection from "../components/home/StudioSection";
 
@@ -29,8 +29,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 6. Process Section (Cómo Trabajamos) */}
-      <ProcessSection />
 
       {/* 7. Craft Lab (Editorial) */}
       <LabSection />

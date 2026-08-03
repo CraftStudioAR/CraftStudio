@@ -311,7 +311,7 @@ export default function Servicios() {
                 </p>
                 <a 
                   href="/contacto" 
-                  className="group/btn relative inline-flex items-center gap-6 bg-cream text-navy px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden"
+                  className="group/btn relative inline-flex items-center gap-6 bg-cream text-navy px-10 py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden"
                 >
                   <span className="relative z-10 text-xs md:text-sm">Agendar Diagnóstico</span>
                   <span className="relative z-10 text-xl group-hover/btn:translate-x-2 transition-transform duration-500">{"\u2192\uFE0E"}</span>

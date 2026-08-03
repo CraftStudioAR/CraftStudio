@@ -51,13 +51,13 @@ export default function WorkCard({
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
           style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-          className={`relative flex w-full min-w-0 aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${bgs[index % bgs.length]}`}
+          className={`relative flex w-full min-w-0 aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3] max-h-[44vh] md:max-h-none items-center justify-center overflow-hidden bg-gradient-to-br ${bgs[index % bgs.length]}`}
         >
           <GlyphMark
             variant={index}
             className="absolute h-[75%] w-[75%] text-cream/25 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-cream/35"
           />
-          <span className="font-serif relative px-6 text-center text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
+          <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
             {work.client}
           </span>
           <div className="grain-overlay !absolute !opacity-15" />
@@ -74,17 +74,16 @@ export default function WorkCard({
         </motion.div>
       </ScrollGrow>
 
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <span className="opacity-70">{work.category}</span>
-        <span className="opacity-50">{work.year}</span>
+      <div className="mt-3 flex items-center justify-between text-xs sm:text-sm">
+        <span className="font-medium text-cream/80">{work.category}</span>
+        <span className="font-mono text-cream/50">{work.year}</span>
       </div>
-      {work.summary && <p className="mt-2 max-w-md text-sm opacity-60 line-clamp-2">{work.summary}</p>}
       {work.tags?.length > 0 && (
-        <div className="mt-3 flex flex-wrap sm:flex-nowrap gap-2 overflow-hidden min-w-0">
+        <div className="mt-2 flex flex-wrap sm:flex-nowrap gap-1.5 overflow-hidden min-w-0">
           {work.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-current/20 px-2.5 py-1 text-[11px] tracking-wide uppercase opacity-60 truncate max-w-full"
+              className="rounded-full border border-cream/15 px-2 py-0.5 text-[10px] tracking-wide uppercase text-cream/60 truncate max-w-full"
             >
               {tag}
             </span>

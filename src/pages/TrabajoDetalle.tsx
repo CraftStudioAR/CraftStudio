@@ -204,7 +204,7 @@ function ProjectCTA() {
             
             <Link 
               to="/contacto"
-              className="inline-block bg-cream hover:bg-white text-navy px-10 py-5 rounded-full text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105 shadow-xl shadow-black/10"
+              className="inline-block bg-cream hover:bg-white text-navy px-10 py-5 rounded-xl text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105 shadow-xl shadow-black/10"
             >
               Iniciar un proyecto
             </Link>
