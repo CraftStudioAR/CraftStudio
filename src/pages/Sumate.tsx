@@ -2,8 +2,6 @@ import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
-import { LogoWordmark } from "../components/Logo";
-import Beams from "../components/Beams";
 import { contactInfo } from "../content/brand";
 
 const areas = [
@@ -58,8 +56,6 @@ export default function Sumate() {
     telefono: "",
     email: "",
   });
-
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
