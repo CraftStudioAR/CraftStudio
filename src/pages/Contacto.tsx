@@ -400,7 +400,7 @@ export default function Contacto() {
         </div>
 
         {/* Mail alineado a la derecha con presencia y estilo */}
-        <div className="w-full flex justify-end mt-4 mb-10 md:mb-14">
+        <div className="w-full flex justify-end mt-4 mb-6 md:mb-8">
           <a
             href={`mailto:${contactInfo.email}`}
             className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm md:text-base font-medium tracking-wide shadow-sm"
@@ -413,7 +413,7 @@ export default function Contacto() {
       </div>
       
       {/* SUMATE AL EQUIPO BANNER */}
-      <div className="px-6 pb-24 md:pb-32 mx-auto max-w-[900px] flex flex-col items-center text-center">
+      <div className="px-6 pt-12 md:pt-16 pb-28 md:pb-36 mx-auto max-w-[900px] flex flex-col items-center text-center">
         <Reveal>
           <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">SUMATE AL EQUIPO</span>
           <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
