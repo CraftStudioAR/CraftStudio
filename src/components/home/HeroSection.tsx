@@ -78,12 +78,9 @@ export default function HeroSection() {
     >
       {/* Background Hero Image */}
       <img
-        src="/images/hero_backup.webp"
+        src="/images/hero.webp"
         alt="Craft Studio"
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-        style={{
-          objectPosition: "55% center",
-        }}
+        className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
       />
       
       <div data-hero-content className="relative z-10 flex flex-col items-center justify-center text-center w-full">
