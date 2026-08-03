@@ -399,13 +399,15 @@ export default function Contacto() {
           )}
         </div>
 
-        {/* Mail alineado discretamente a la derecha */}
-        <div className="w-full flex justify-end mt-4 mb-8">
+        {/* Mail alineado a la derecha con presencia y estilo */}
+        <div className="w-full flex justify-end mt-6 mb-12">
           <a
             href={`mailto:${contactInfo.email}`}
-            className="text-xs font-medium tracking-wide opacity-50 hover:opacity-100 hover:text-red transition-all duration-200"
+            className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm md:text-base font-medium tracking-wide shadow-sm"
           >
-            {contactInfo.email}
+            <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>{contactInfo.email}</span>
+            <svg className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
       </div>
