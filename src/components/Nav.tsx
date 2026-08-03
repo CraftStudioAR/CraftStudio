@@ -130,7 +130,7 @@ export default function Nav() {
         <button
           onClick={() => setOpen((v) => !v)}
           data-cursor={open ? "Cerrar" : "Menú"}
-          className={`relative z-50 flex h-14 w-14 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-xl glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
+          className={`relative z-50 flex h-14 w-14 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-full glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
           aria-label="Menú"
         >
           <div className="glass-sheen"></div>
@@ -149,7 +149,7 @@ export default function Nav() {
         </button>
 
         {/* Desktop Nav Links (Pastilla glassmorphism derecha) */}
-        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-xl pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
+        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-full pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
           <div className="glass-sheen"></div>
           {displayNav.map((item) => (
             <NavLink

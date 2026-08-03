@@ -103,8 +103,8 @@ export default function Contacto() {
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
               </h1>
-              <p className="mt-8 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
-                Antes de conocernos, nos gustaría saber un poco más sobre vos, tu marca y lo que estás buscando. Completá este breve formulario y nos pondremos en contacto con vos lo antes posible!
+              <p className="mt-6 mx-auto max-w-4xl text-base sm:text-lg opacity-75 font-normal leading-relaxed text-balance">
+                Nos gustaría saber un poco más sobre vos, tu marca y lo que estás buscando. Completá este breve formulario y nos pondremos en contacto con vos lo antes posible!
               </p>
             </Reveal>
           </div>
@@ -117,9 +117,9 @@ export default function Contacto() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="bg-navy text-cream rounded-2xl md:rounded-2xl p-12 md:p-20 h-[600px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
+              className="bg-navy text-cream rounded-2xl md:rounded-2xl p-12 md:p-20 min-h-[500px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
             >
-              {/* Background Beams - exactamente como en Hero / Studio */}
+              {/* Background Beams */}
               <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
                 <Beams
                   beamWidth={2}
@@ -133,11 +133,18 @@ export default function Contacto() {
                 />
               </div>
 
-              <LogoWordmark className="h-12 text-cream/30 mb-12 relative z-10" />
-              <h3 className="font-serif italic text-5xl md:text-6xl mb-6 relative z-10">Expediente Creado</h3>
-              <p className="text-xl opacity-70 max-w-md text-balance relative z-10">
-                Hemos recibido tu información. Nuestro equipo la analizará y te contactaremos a la brevedad.
-              </p>
+              <LogoWordmark className="h-10 md:h-12 text-cream/30 mb-8 relative z-10" />
+              <h3 className="font-serif italic text-4xl sm:text-5xl md:text-6xl mb-6 relative z-10 text-cream">
+                Craft recibió tu consulta.
+              </h3>
+              <div className="flex flex-col gap-4 max-w-lg text-cream/80 text-base md:text-lg font-normal leading-relaxed relative z-10">
+                <p>
+                  Gracias por tomarte el tiempo de contarnos sobre tu proyecto. Lo leemos con atención y te contactamos.
+                </p>
+                <p className="text-sm md:text-base opacity-75">
+                  Mientras tanto, si querés conocer un poco más sobre cómo piensa Craft, pasate por <a href="/lab" className="text-cream underline hover:text-red transition-colors font-medium">Craft Lab</a>.
+                </p>
+              </div>
             </motion.div>
           ) : (
             <div className="w-full flex flex-col relative min-h-[300px] h-auto">
@@ -374,7 +381,7 @@ export default function Contacto() {
                           <Magnetic strength={0.2}>
                             <button
                               type="submit"
-                              className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-full text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613]"
+                              className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613]"
                               disabled={!formData.nombre || !formData.email}
                             >
                               Enviar Expediente
@@ -391,38 +398,35 @@ export default function Contacto() {
             </div>
           )}
         </div>
+
+        {/* Mail alineado discretamente a la derecha */}
+        <div className="w-full flex justify-end mt-4 mb-8">
+          <a
+            href={`mailto:${contactInfo.email}`}
+            className="text-xs font-medium tracking-wide opacity-50 hover:opacity-100 hover:text-red transition-all duration-200"
+          >
+            {contactInfo.email}
+          </a>
+        </div>
       </div>
       
-      {/* O ESCRÍBENOS DIRECTAMENTE */}
-      <div className="px-6 pb-20 mx-auto max-w-5xl flex justify-center mt-12">
-        <Reveal delay={0.2}>
-          <div className="flex flex-col items-center text-center gap-2 border-b border-ink/10 pb-20 w-full md:w-[600px]">
-            <span className="text-[10px] tracking-widest uppercase opacity-40 font-bold">O Escríbenos Directamente</span>
-            <a
-              href={`mailto:${contactInfo.email}`}
-              className="font-serif italic text-3xl md:text-4xl hover:text-red transition-colors inline-block"
-            >
-              {contactInfo.email}
-            </a>
-          </div>
-        </Reveal>
-      </div>
-
       {/* SUMATE AL EQUIPO BANNER */}
-      <div className="px-6 pb-32 mx-auto max-w-[1000px] flex flex-col items-center text-center">
+      <div className="px-6 pb-28 mx-auto max-w-[900px] flex flex-col items-center text-center">
         <Reveal>
-          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-6">4. SUMATE AL EQUIPO</span>
-          <h2 className="font-serif italic text-4xl md:text-6xl text-navy mb-6">Craft crece con las<br className="hidden md:block"/> personas correctas.</h2>
-          <p className="text-xl opacity-70 mb-10 max-w-2xl mx-auto text-balance">
+          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">SUMATE AL EQUIPO</span>
+          <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
+            Sumate a nuestro equipo.
+          </h2>
+          <p className="text-base sm:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
             Si compartís la manera en que Craft entiende el trabajo: con criterio, con proceso y con compromiso real, nos gustaría conocerte.
           </p>
           <a 
             href="/sumate" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="group inline-flex items-center justify-center gap-3 bg-red text-cream px-8 py-4 rounded-full text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] hover:bg-[#8a2613]"
+            className="group inline-flex items-center justify-center gap-3 bg-red text-cream px-8 py-3.5 rounded-xl text-xs tracking-widest uppercase font-bold transition-all duration-300 hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.25)] hover:bg-[#8a2613]"
           >
-            Postularse
+            contanos sobre vos
             <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </Reveal>
