@@ -4,6 +4,7 @@ import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
 import { LogoWordmark } from "../components/Logo";
 import Beams from "../components/Beams";
+import { contactInfo } from "../content/brand";
 
 const areas = [
   "Diseño gráfico",
@@ -104,7 +105,7 @@ export default function Sumate() {
                   <span className="w-8 md:w-12 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
                 </p>
                 <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
-                  Contale a Craft quién sos
+                  Contanos quién sos
                 </h1>
                 <p className="mt-8 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
                   No buscamos perfiles para ejecutar tareas. Buscamos personas que piensen, que hagan preguntas y que se involucren de verdad con cada proyecto.
@@ -120,26 +121,19 @@ export default function Sumate() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
-                className="bg-navy text-cream rounded-2xl md:rounded-tl-2xl p-12 md:p-20 flex-1 w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden min-h-[500px]"
+                className="relative bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] text-cream rounded-2xl p-12 md:p-20 flex-1 w-full flex flex-col justify-center items-center text-center shadow-2xl overflow-hidden min-h-[500px] border border-white/20 backdrop-blur-xl"
               >
-                {/* Background Beams para el éxito */}
-                <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-                  <Beams
-                    beamWidth={2}
-                    beamHeight={20}
-                    beamNumber={40}
-                    lightColor="#F2EBE9"
-                    speed={2}
-                    noiseIntensity={1.75}
-                    scale={0.2}
-                    rotation={isMobile ? 90 : 0}
-                  />
-                </div>
+                {/* Textura y efectos de luz glassmorphism */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
+                <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
+                <div className="glass-sheen" />
 
-                <LogoWordmark className="h-12 text-cream/30 mb-12 relative z-10" />
-                <h3 className="font-serif italic text-4xl md:text-5xl mb-6 relative z-10">Craft recibió tu perfil.</h3>
-                <p className="text-xl opacity-70 max-w-md text-balance relative z-10">
-                  Lo revisamos con atención y te contactamos si hay una oportunidad que tenga sentido para los dos.
+                <h3 className="font-serif italic text-4xl sm:text-5xl md:text-6xl mb-6 relative z-10 text-cream drop-shadow-md">
+                  Craft recibió tu perfil.
+                </h3>
+                <p className="text-base sm:text-lg md:text-xl text-cream/90 max-w-xl text-balance leading-relaxed relative z-10 font-normal">
+                  Lo revisamos con atención y te contactamos si hay una oportunidad de construir juntos.
                 </p>
               </motion.div>
             ) : (
@@ -336,6 +330,16 @@ export default function Sumate() {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Mail alineado discretamente a la derecha */}
+          <div className="w-full flex justify-end mt-4 mb-8">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="text-xs font-medium tracking-wide opacity-50 hover:opacity-100 hover:text-red transition-all duration-200"
+            >
+              {contactInfo.email}
+            </a>
           </div>
       </div>
     </div>
