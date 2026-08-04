@@ -21,31 +21,33 @@ export default function HeroSection() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   useEffect(() => {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     const ctx = gsap.context(() => {
       // 1. Hero Reveal Animation
       gsap.fromTo(
         "[data-hero-logo]",
         { opacity: 0, scale: 0.9, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power4.out", delay: 0.2 }
+        { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power4.out", delay: 0.2, force3D: true }
       );
       
       gsap.fromTo(
         "[data-hero-tagline]",
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 1 }
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 1, force3D: true }
       );
 
-      // 2. Pin Hero and Parallax Content on Scroll
+      // 2. Pin Hero and Parallax Content on Scroll with smoothed interpolation
       const heroTl = gsap.timeline();
       
       // El hero entero se achica como un rectángulo
-      heroTl.to(heroRef.current, { scale: 0.95, ease: "none" }, 0);
+      heroTl.to(heroRef.current, { scale: 0.95, ease: "none", force3D: true }, 0);
       
       // El scroll desaparece suavemente
       heroTl.to("[data-hero-scroll]", { opacity: 0, ease: "none" }, 0);
       
-      // Todo el contenido sube para mantenerse centrado en la porción visible
-      heroTl.to("[data-hero-content]", { y: "-50vh", ease: "none" }, 0);
+      // Todo el contenido sube para mantenerse centrado en la porción visible de forma fluida
+      heroTl.to("[data-hero-content]", { y: "-50vh", ease: "none", force3D: true }, 0);
 
       ScrollTrigger.create({
         trigger: heroRef.current,
@@ -54,7 +56,10 @@ export default function HeroSection() {
         pin: true,
         pinSpacing: false, // Allows next section to overlap!
         animation: heroTl,
-        scrub: true,
+        scrub: 0.6, // Smooths out mobile touch jitters and avoids micro-rebounds
+        anticipatePin: 1,
+        fastScrollEnd: true,
+        preventOverlaps: true,
       });
     }, heroRef);
     return () => {
@@ -83,8 +88,8 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
       />
       
-      <div data-hero-content className="relative z-10 flex flex-col items-center justify-center text-center w-full">
-        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center relative">
+      <div data-hero-content style={{ willChange: "transform" }} className="relative z-10 flex flex-col items-center justify-center text-center w-full transform-gpu">
+        <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center relative transform-gpu">
           <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
         </div>
         
