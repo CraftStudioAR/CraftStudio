@@ -137,15 +137,17 @@ export default function Nosotras() {
       </section>
 
       {/* 4. NUESTRA FORMA DE TRABAJO (Dark Editorial Section with Full Background Image) */}
-      <section data-theme="dark" className="relative bg-ink text-cream py-20 md:py-28 px-6 md:px-12 lg:px-20 mt-8 overflow-hidden">
+      <section data-theme="dark" className="relative bg-ink text-cream py-24 md:py-32 px-6 md:px-12 lg:px-20 mt-8 overflow-hidden min-h-[560px] md:min-h-[680px] flex items-center">
         {/* Background Image covering the entire section */}
         <img 
           src="/images/nosotras.webp" 
           alt="Nuestra forma de trabajo" 
-          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+          className="absolute inset-0 w-full h-full object-cover object-[center_20%] md:object-[85%_center] z-0"
         />
-        {/* Gradient Overlay: Softened so background image shows clearly */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/45 to-transparent z-0 pointer-events-none" />
+        {/* Gradient Overlay: Difuminado oscuro y cinematográfico sobre el texto */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 md:via-ink/85 via-50% to-transparent z-0 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-transparent to-transparent md:hidden z-0 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/20 z-0 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Text on the side */}
