@@ -138,7 +138,7 @@ export default function HeroSection() {
             </Link>
             <Link
               to="/trabajos"
-              className="w-[205px] sm:w-auto text-center glass-panel group overflow-hidden text-cream px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-xl text-xs sm:text-sm md:text-base font-medium tracking-wide transition-all hover:scale-105"
+              className="w-[205px] sm:w-auto text-center glass-panel glass-panel-dark group overflow-hidden text-cream px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-xl text-xs sm:text-sm md:text-base font-medium tracking-wide transition-all hover:scale-105 border border-white/20 hover:border-white/40 shadow-lg"
             >
               <span className="relative z-10">Ver proyectos</span>
               <div className="glass-sheen"></div>

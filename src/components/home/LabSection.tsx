@@ -18,7 +18,7 @@ export default function LabSection() {
 
       <div className="w-full relative z-10 px-6 md:px-10 max-w-7xl mx-auto">
         <Reveal className="w-full">
-          <div className="glass-panel relative overflow-hidden rounded-2xl p-8 md:p-16 lg:p-20 border border-white/10 shadow-2xl">
+          <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
             <div className="glass-sheen" />
             <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 relative z-10 w-full lg:translate-x-4">
               
