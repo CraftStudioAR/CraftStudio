@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
 import { contactInfo, contactForm } from "../content/brand";
-import { LogoWordmark } from "../components/Logo";
-import Beams from "../components/Beams";
 
 // Tabs data
 const TABS = [
@@ -18,7 +16,6 @@ export default function Contacto() {
   const [sent, setSent] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
 
   const [need, setNeed] = useState<string | null>(null);
   const [budget, setBudget] = useState<string | null>(null);
@@ -31,13 +28,6 @@ export default function Contacto() {
     marca: "",
     redes: "",
     proyectoInfo: "",
-  });
-
-  // Check mobile on mount for the Beams rotation
-  useState(() => {
-    if (typeof window !== "undefined") {
-      setIsMobile(window.innerWidth < 768);
-    }
   });
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -117,32 +107,23 @@ export default function Contacto() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="bg-navy text-cream rounded-2xl md:rounded-2xl p-12 md:p-20 min-h-[500px] w-full flex flex-col justify-center items-center text-center shadow-2xl relative overflow-hidden"
+              className="relative bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] text-cream rounded-2xl p-12 md:p-20 min-h-[500px] w-full flex flex-col justify-center items-center text-center shadow-2xl overflow-hidden border border-white/20 backdrop-blur-xl"
             >
-              {/* Background Beams */}
-              <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-                <Beams
-                  beamWidth={2}
-                  beamHeight={20}
-                  beamNumber={40}
-                  lightColor="#F2EBE9"
-                  speed={2}
-                  noiseIntensity={1.75}
-                  scale={0.2}
-                  rotation={isMobile ? 90 : 0}
-                />
-              </div>
+              {/* Textura y efectos de luz glassmorphism */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
+              <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
+              <div className="glass-sheen" />
 
-              <LogoWordmark className="h-10 md:h-12 text-cream/30 mb-8 relative z-10" />
-              <h3 className="font-serif italic text-4xl sm:text-5xl md:text-6xl mb-6 relative z-10 text-cream">
+              <h3 className="font-serif italic text-4xl sm:text-5xl md:text-6xl mb-6 relative z-10 text-cream drop-shadow-md">
                 Craft recibió tu consulta.
               </h3>
-              <div className="flex flex-col gap-4 max-w-lg text-cream/80 text-base md:text-lg font-normal leading-relaxed relative z-10">
+              <div className="flex flex-col gap-4 max-w-lg text-cream/90 text-base md:text-lg font-normal leading-relaxed relative z-10">
                 <p>
                   Gracias por tomarte el tiempo de contarnos sobre tu proyecto. Lo leemos con atención y te contactamos.
                 </p>
-                <p className="text-sm md:text-base opacity-75">
-                  Mientras tanto, si querés conocer un poco más sobre cómo piensa Craft, pasate por <a href="/lab" className="text-cream underline hover:text-red transition-colors font-medium">Craft Lab</a>.
+                <p className="text-sm md:text-base opacity-80">
+                  Mientras tanto, si querés conocer un poco más sobre cómo piensa Craft, pasate por <a href="/lab" className="text-cream underline hover:text-white transition-colors font-semibold">Craft Lab</a>.
                 </p>
               </div>
             </motion.div>
