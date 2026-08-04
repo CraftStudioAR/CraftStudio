@@ -140,7 +140,7 @@ export default function Nosotras() {
       <section data-theme="dark" className="relative bg-ink text-cream py-20 md:py-28 px-6 md:px-12 lg:px-20 mt-8 overflow-hidden">
         {/* Background Image covering the entire section */}
         <img 
-          src="/images/fondo craft lab home.webp" 
+          src="/images/nosotras.webp" 
           alt="Nuestra forma de trabajo" 
           className="absolute inset-0 w-full h-full object-cover object-center z-0"
         />
