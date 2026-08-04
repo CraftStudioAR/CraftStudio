@@ -114,7 +114,7 @@ export default function Nav() {
               to="/" 
               data-cursor="Inicio" 
               onClick={() => setOpen(false)} 
-              className={`block glass-panel group overflow-hidden rounded-full flex items-center justify-center w-14 h-14 md:w-16 md:h-16 transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}
+              className={`block glass-panel ${isNavDarkText ? "glass-panel-light text-ink" : "glass-panel-dark text-cream"} group overflow-hidden rounded-full flex items-center justify-center w-14 h-14 md:w-16 md:h-16 transition-all hover:scale-105`}
             >
               <LogoMark className="h-12 md:h-14 w-auto transition-all duration-300 relative z-10" />
               <div className="glass-sheen"></div>
@@ -130,7 +130,7 @@ export default function Nav() {
         <button
           onClick={() => setOpen((v) => !v)}
           data-cursor={open ? "Cerrar" : "Menú"}
-          className={`relative z-50 flex h-14 w-14 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-full glass-panel group overflow-hidden transition-all hover:scale-105 shadow-sm ${isNavDarkText ? "border-ink/10" : "border-white/10"}`}
+          className={`relative z-50 flex h-14 w-14 flex-col items-center justify-center gap-1 md:hidden pointer-events-auto rounded-full glass-panel ${isNavDarkText ? "glass-panel-light" : "glass-panel-dark"} group overflow-hidden transition-all hover:scale-105`}
           aria-label="Menú"
         >
           <div className="glass-sheen"></div>
@@ -149,7 +149,7 @@ export default function Nav() {
         </button>
 
         {/* Desktop Nav Links (Pastilla glassmorphism derecha) */}
-        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-full pointer-events-auto glass-panel group overflow-hidden transition-all shadow-sm ${isNavDarkText ? "text-ink border-ink/10" : "text-cream border-white/10"}`}>
+        <nav className={`hidden md:flex items-center gap-8 text-sm tracking-wide uppercase px-8 py-3.5 rounded-full pointer-events-auto glass-panel ${isNavDarkText ? "glass-panel-light text-ink" : "glass-panel-dark text-cream"} group overflow-hidden transition-all`}>
           <div className="glass-sheen"></div>
           {displayNav.map((item) => (
             <NavLink
