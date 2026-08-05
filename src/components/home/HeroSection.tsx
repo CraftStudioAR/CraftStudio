@@ -81,10 +81,14 @@ export default function HeroSection() {
       data-theme="dark"
       className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden text-cream"
     >
-      {/* Background Hero Image */}
+      {/* Background Hero Image — el navegador elige el ancho segun pantalla y densidad,
+          asi un celular no descarga la version de 3777px (ver scripts/convert_hero.mjs). */}
       <img
         src="/images/hero.webp"
+        srcSet="/images/hero-1280.webp 1280w, /images/hero.webp 1920w, /images/hero-2560.webp 2560w, /images/hero-3777.webp 3777w"
+        sizes="100vw"
         alt="Craft Studio"
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
       />
       
