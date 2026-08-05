@@ -104,7 +104,7 @@ export default function Nosotras() {
                 Martina Mincarelli
               </h2>
               <p className="text-xs sm:text-sm font-semibold tracking-wider text-ink/60 uppercase mb-6 md:mb-8">
-                Growth Marketing & Performance
+                Dirección Comercial & Marketing
               </p>
               <div className="space-y-4 text-ink/80 text-sm sm:text-base leading-relaxed">
                 <p>
@@ -124,7 +124,7 @@ export default function Nosotras() {
                 <img 
                   src="/images/martina.webp" 
                   alt="Martina Mincarelli" 
-                  className="w-full aspect-[4/3] object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-full aspect-[4/3] object-cover object-[center_15%] grayscale hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute bottom-4 right-5 z-10 pointer-events-none">
                   <span className="font-script text-3xl md:text-4xl text-white/90 drop-shadow-md">Marti</span>
