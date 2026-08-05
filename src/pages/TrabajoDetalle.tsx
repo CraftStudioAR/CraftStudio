@@ -204,30 +204,26 @@ function ProjectCTA() {
 
   return (
     <div ref={containerRef} className="px-4 md:px-10 pb-10 md:pb-20 perspective-1000">
+      {/* Mismo efecto vidrio que el menu (glass-panel + sheen) y caja mas baja,
+          para que se lea como cierre de pagina y no como otra pieza del proyecto. */}
       <motion.section
         style={{ scale }}
-        data-theme="dark"
-        className="relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] text-cream shadow-2xl backdrop-blur-xl md:rounded-2xl flex flex-col items-center justify-center"
+        className="group relative overflow-hidden rounded-2xl glass-panel glass-panel-light text-ink flex flex-col items-center justify-center"
       >
-        {/* Textura y efectos de luz glassmorphism — mismo tratamiento que la tarjeta
-            de consulta enviada en Contacto y Sumate. */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
         <div className="glass-sheen" />
 
-        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-24 md:py-32 flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
+        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-12 md:py-16 flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-xs font-bold tracking-widest uppercase text-cream/70 mb-6">
+            <p className="text-xs font-bold tracking-widest uppercase text-red mb-4">
               ¿Listo para el tuyo?
             </p>
-            <h2 className="font-serif italic font-medium tracking-tight text-5xl md:text-7xl lg:text-8xl leading-none mb-12">
+            <h2 className="font-serif italic font-medium tracking-tight text-4xl md:text-5xl lg:text-6xl leading-none mb-8 text-navy">
               Hablemos de tu marca.
             </h2>
-            
-            <Link 
+
+            <Link
               to="/contacto"
-              className="inline-block bg-cream hover:bg-white text-navy px-10 py-5 rounded-xl text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105 shadow-xl shadow-black/10"
+              className="inline-block bg-navy hover:bg-ink text-cream px-8 py-4 rounded-xl text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105 shadow-lg shadow-black/10"
             >
               Iniciar un proyecto
             </Link>
