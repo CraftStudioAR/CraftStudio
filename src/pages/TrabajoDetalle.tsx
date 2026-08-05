@@ -67,7 +67,7 @@ export default function TrabajoDetalle() {
             
             <motion.div variants={itemVariants} className="w-24 h-[1px] bg-red"></motion.div>
             
-            <motion.p variants={itemVariants} className="text-2xl md:text-4xl font-medium leading-[1.3] text-balance max-w-2xl">
+            <motion.p variants={itemVariants} className="text-lg md:text-xl lg:text-2xl font-medium leading-[1.4] text-balance max-w-2xl">
               {project.summary}
             </motion.p>
           </motion.div>
@@ -217,7 +217,7 @@ function ProjectCTA() {
             <p className="text-xs font-bold tracking-widest uppercase text-red mb-4">
               ¿Listo para el tuyo?
             </p>
-            <h2 className="font-serif italic font-medium tracking-tight text-4xl md:text-5xl lg:text-6xl leading-none mb-8 text-navy">
+            <h2 className="font-sans font-semibold tracking-tight text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-navy">
               Hablemos de tu marca.
             </h2>
 

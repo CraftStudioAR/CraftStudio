@@ -54,7 +54,7 @@ function Img({
 
 function TextBox({ text }: { text: string }) {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
+    <div className="flex flex-col justify-center gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
       {text.split("\n\n").map((paragraph, i) => (
         <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
           {paragraph}
@@ -160,27 +160,38 @@ function Block({
       );
     }
 
-    case "imageText":
+    case "imageText": {
+      // heightFrom "image": la imagen va en su alto natural y el texto se estira
+      // hasta igualarla (el grid ya estira por defecto). "text" (default): al reves,
+      // la imagen no aporta alto propio y se estira hasta el alto del texto.
+      const heightFromImage = block.heightFrom === "image";
       return (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
-          {/* En desktop la imagen no aporta altura propia a la fila: se estira para igualar
-              la altura natural del texto (la caja de texto es lo que manda). */}
-          <button
-            type="button"
-            onClick={() => onOpen(startIndex)}
-            aria-label={`Ampliar imagen: ${block.image.alt}`}
-            className="group/img relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-auto"
-          >
-            <img
-              src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
-              alt={block.image.alt}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
+        <div className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-2 md:gap-6">
+          {heightFromImage ? (
+            <Img
+              image={block.image}
+              transforms="f_auto,q_auto,w_1200"
+              onOpen={() => onOpen(startIndex)}
             />
-          </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => onOpen(startIndex)}
+              aria-label={`Ampliar imagen: ${block.image.alt}`}
+              className="group/img relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-auto"
+            >
+              <img
+                src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
+                alt={block.image.alt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
+              />
+            </button>
+          )}
           <TextBox text={block.text} />
         </div>
       );
+    }
 
     case "keywords":
       return (

@@ -138,7 +138,15 @@ export type ProjectBlock =
       /** Aspect ratio CSS (ej. "9 / 10") que ambas imágenes comparten, para igualar su altura cuando sus proporciones naturales no coinciden. Si se omite, cada imagen usa su altura natural. */
       aspect?: string;
     }
-  | { type: "imageText"; image: ProjectImage; text: string }
+  | {
+      type: "imageText";
+      image: ProjectImage;
+      text: string;
+      /** Quien define el alto de la fila en desktop. "text" (default): la imagen se
+       *  estira hasta el alto del texto. "image": la imagen queda en su alto natural
+       *  y la caja de texto crece hasta igualarla. */
+      heightFrom?: "text" | "image";
+    }
   | { type: "keywords"; items: string[] }
   | { type: "quote"; image: ProjectImage; quote: string };
 
@@ -193,6 +201,8 @@ export const work: WorkCase[] = [
       },
       {
         type: "imageText",
+        // Queda en su alto natural para igualar a los dos libros del bloque siguiente.
+        heightFrom: "image",
         image: { publicId: "Etiqueta_Vino_7_ihwg8r", alt: "Libro de diseño abierto mostrando la etiqueta" },
         text: "Partimos del poema Hope is the thing with feathers para desarrollar una narrativa visual. La composición, las ilustraciones y los recursos gráficos fueron pensados para reflejar la esperanza, la escritura y el legado de Emily Dickinson, convirtiendo la etiqueta en una pieza que invita a descubrir la historia detrás del vino.",
       },
