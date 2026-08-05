@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import GlyphMark from "./GlyphMark";
 import ScrollGrow from "./ScrollGrow";
+import { cld } from "../lib/cloudinary";
 import type { WorkCase } from "../content/brand";
 
 // Solo combina los 4 hex oficiales de marca — sin tonos inventados.
@@ -51,15 +52,36 @@ export default function WorkCard({
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
           style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-          className={`relative flex w-full min-w-0 aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3] max-h-[44vh] md:max-h-none items-center justify-center overflow-hidden bg-gradient-to-br ${bgs[index % bgs.length]}`}
+          className={`relative flex w-full min-w-0 aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3] max-h-[44vh] md:max-h-none items-center justify-center overflow-hidden ${
+            work.cover ? "bg-ink" : `bg-gradient-to-br ${bgs[index % bgs.length]}`
+          }`}
         >
-          <GlyphMark
-            variant={index}
-            className="absolute h-[75%] w-[75%] text-cream/25 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-cream/35"
-          />
-          <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
-            {work.client}
-          </span>
+          {work.cover ? (
+            <img
+              src={cld(work.cover.publicId, "f_auto,q_auto,w_800")}
+              alt={work.cover.alt}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          ) : (
+            <>
+              <GlyphMark
+                variant={index}
+                className="absolute h-[75%] w-[75%] text-cream/25 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-cream/35"
+              />
+              <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
+                {work.client}
+              </span>
+            </>
+          )}
+          {work.cover && (
+            <>
+              <div className="absolute inset-0 bg-ink/35" />
+              <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
+                {work.client}
+              </span>
+            </>
+          )}
           <div className="grain-overlay !absolute !opacity-15" />
           <div className="glass-sheen" />
 

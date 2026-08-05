@@ -126,6 +126,22 @@ export const process = [
   { n: "04", title: "Sistema", text: "Entregamos reglas claras para que la marca lo use sola, sin depender de nosotros." },
 ];
 
+export type ProjectImage = { publicId: string; alt: string };
+
+export type ProjectBlock =
+  | { type: "image"; image: ProjectImage }
+  | { type: "imageFeature"; main: ProjectImage; stacked: [ProjectImage, ProjectImage] }
+  | {
+      type: "imagePair";
+      images: [ProjectImage, ProjectImage];
+      mobileLayout?: "pair" | "stack";
+      /** Aspect ratio CSS (ej. "9 / 10") que ambas imágenes comparten, para igualar su altura cuando sus proporciones naturales no coinciden. Si se omite, cada imagen usa su altura natural. */
+      aspect?: string;
+    }
+  | { type: "imageText"; image: ProjectImage; text: string }
+  | { type: "keywords"; items: string[] }
+  | { type: "quote"; image: ProjectImage; quote: string };
+
 export type WorkCase = {
   slug: string;
   client: string;
@@ -133,9 +149,85 @@ export type WorkCase = {
   year: string;
   summary: string;
   tags: string[];
+  cover?: ProjectImage;
+  scope?: string[];
+  description?: string;
+  blocks?: ProjectBlock[];
 };
 
 export const work: WorkCase[] = [
+  {
+    slug: "etiqueta-emily-dickinson",
+    client: "Diseño de etiqueta inspirada en Emily Dickinson",
+    category: "Activación",
+    year: "2025",
+    summary:
+      "Desarrollo de una etiqueta de vino basada en un concepto literario, combinando narrativa, ilustración y diseño editorial.",
+    tags: [],
+    scope: ["Diseño de packaging", "Dirección de arte", "Conceptualización", "Ilustración"],
+    description:
+      "Este proyecto nace como un homenaje a Emily Dickinson y a uno de sus poemas más emblemáticos: Hope is the thing with feathers. Más que diseñar una etiqueta, el objetivo fue transformar una obra literaria en una experiencia visual capaz de transmitir la sensibilidad de la autora y convertir la botella en un objeto narrativo.",
+    cover: { publicId: "Etiqueta_Vino_13_jyhh3q", alt: "Pila de corchos de vino" },
+    blocks: [
+      {
+        type: "image",
+        image: { publicId: "Etiqueta_Vino_1_jwbjnl", alt: "Barriles de roble en la bodega, cartel HORNOS" },
+      },
+      {
+        type: "imageFeature",
+        main: { publicId: "Etiqueta_Vino_2_obsspl", alt: "Botella Emily en balde de hielo junto a limones y quesos" },
+        stacked: [
+          { publicId: "Etiqueta_Vino_3_sc5fyy", alt: "Uvas verdes con el logo Emily superpuesto" },
+          { publicId: "Etiqueta_Vino_4_ys4utr", alt: "Puerta de la bodega de maduración" },
+        ],
+      },
+      { type: "keywords", items: ["LIBERTAD", "MUNDO INTERIOR", "ESPERANZA"] },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        aspect: "9 / 10",
+        images: [
+          { publicId: "Etiqueta_Vino_5_ue990f", alt: "Viñedo entre montañas" },
+          { publicId: "Etiqueta_Vino_6_xwcawc", alt: "Botella Emily sobre baldosas verdes" },
+        ],
+      },
+      {
+        type: "imageText",
+        image: { publicId: "Etiqueta_Vino_7_ihwg8r", alt: "Libro de diseño abierto mostrando la etiqueta" },
+        text: "Partimos del poema Hope is the thing with feathers para desarrollar una narrativa visual. La composición, las ilustraciones y los recursos gráficos fueron pensados para reflejar la esperanza, la escritura y el legado de Emily Dickinson, convirtiendo la etiqueta en una pieza que invita a descubrir la historia detrás del vino.",
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "stack",
+        images: [
+          { publicId: "Etiqueta_Vino_8_nra45o", alt: "Bocetos a mano del diseño de la etiqueta" },
+          { publicId: "Etiqueta_Vino_9_tjhx8b", alt: "Planos con las medidas de la etiqueta" },
+        ],
+      },
+      {
+        type: "image",
+        image: { publicId: "Etiqueta_Vino_10_rddwol", alt: "Picnic con burrata, copa de vino y botella Emily en bolsa de red" },
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "Etiqueta_Vino_11_o61a69", alt: "Estantería de una bodega con botellas" },
+          { publicId: "Etiqueta_Vino_12_lxacxh", alt: "Botella Emily sobre un banco de madera" },
+        ],
+      },
+      {
+        type: "imageText",
+        image: { publicId: "Etiqueta_Vino_13_jyhh3q", alt: "Pila de corchos de vino" },
+        text: "El diseño representa la vida de Emily Dickinson y cómo, desde la intimidad de su habitación, fue capaz de crear mundos a través de la escritura. Aunque vivió gran parte de su vida en aislamiento, encontró en las palabras una forma de libertad.\n\nEl pájaro representa la esperanza; la pluma que cae, la transformación; y la pluma de escritura simboliza la libertad que Emily encontró en su poesía. La tipografía manuscrita evocan sus manuscritos originales, reforzando el carácter íntimo y personal de sus poemas.",
+      },
+      {
+        type: "quote",
+        image: { publicId: "Etiqueta_Vino_14_nt9zbd", alt: "Viñedo al atardecer" },
+        quote: "Hope is the thing with feathers",
+      },
+    ],
+  },
   {
     slug: "caso-01",
     client: "Estudio de Arquitectura",
