@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
-import GlyphMark from "../components/GlyphMark";
 import ProjectBlocks from "../components/work/ProjectBlocks";
 import { work } from "../content/brand";
 
@@ -54,6 +53,15 @@ export default function TrabajoDetalle() {
             animate="visible"
             className="lg:col-span-7 flex flex-col gap-6 md:gap-8"
           >
+            {project.title && (
+              <motion.p
+                variants={itemVariants}
+                className="text-xs font-bold tracking-widest uppercase text-red"
+              >
+                {project.title}
+              </motion.p>
+            )}
+
             <motion.h1
               variants={itemVariants}
               className={`font-serif italic leading-[0.95] tracking-tight text-navy text-balance ${
@@ -88,22 +96,6 @@ export default function TrabajoDetalle() {
               <p className="text-xl md:text-2xl font-medium">{project.year}</p>
             </motion.div>
 
-            {project.tags && project.tags.length > 0 && (
-              <motion.div variants={itemVariants} className="flex flex-col gap-4">
-                <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Entregables</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-4 py-2 rounded-2xl text-sm tracking-wide font-medium bg-ink/5 border border-ink/10"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
             {project.scope && project.scope.length > 0 && (
               <motion.div variants={itemVariants} className="flex flex-col gap-4">
                 <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Alcance del proyecto</h4>
@@ -129,8 +121,12 @@ export default function TrabajoDetalle() {
         <section className="px-6 pb-16 md:px-10 md:pb-20">
           <div className="max-w-[1400px] mx-auto">
             <Reveal>
-              <div className="rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
-                <p className="text-lg leading-relaxed text-ink/80 md:text-xl">{project.description}</p>
+              <div className="flex flex-col gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
+                {project.description.split("\n\n").map((paragraph, i) => (
+                  <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -140,44 +136,8 @@ export default function TrabajoDetalle() {
       {/* 4. GALERÍA DEL PROYECTO */}
       <section className="px-6 pb-32 md:px-10">
         <div className="max-w-[1400px] mx-auto">
-          {project.blocks && project.blocks.length > 0 ? (
+          {project.blocks && project.blocks.length > 0 && (
             <ProjectBlocks blocks={project.blocks} />
-          ) : (
-            <div className="flex flex-col gap-6 md:gap-10">
-              {/* Main Hero Image Placeholder */}
-              <Reveal>
-                <div data-theme="dark" className="w-full aspect-video md:aspect-[21/9] rounded-2xl md:rounded-2xl bg-navy relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-navy to-ink"></div>
-                  <GlyphMark variant={0} className="w-[80vw] md:w-[40vw] text-cream/5 absolute opacity-50 mix-blend-overlay" />
-                  <div className="grain-overlay !absolute !opacity-20" />
-                  <p className="text-cream/40 font-serif italic text-2xl md:text-4xl relative z-10">
-                    [ Fotografía del Proyecto ]
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* Secondary Images Grid Placeholder */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-                <Reveal delay={0.1}>
-                  <div className="w-full aspect-square md:aspect-[4/3] rounded-2xl bg-cream border border-ink/10 relative overflow-hidden flex items-center justify-center">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-red rounded-full blur-[100px] opacity-10"></div>
-                    <div className="grain-overlay !absolute !opacity-10" />
-                    <p className="text-ink/30 font-serif italic text-xl relative z-10">
-                      [ Detalle 01 ]
-                    </p>
-                  </div>
-                </Reveal>
-                <Reveal delay={0.2}>
-                  <div data-theme="dark" className="w-full aspect-square md:aspect-[4/3] rounded-2xl bg-ink relative overflow-hidden flex items-center justify-center">
-                    <div className="glass-sheen" />
-                    <GlyphMark variant={1} className="w-[60vw] md:w-[30vw] text-cream/10 absolute opacity-30" />
-                    <p className="text-cream/30 font-serif italic text-xl relative z-10">
-                      [ Detalle 02 ]
-                    </p>
-                  </div>
-                </Reveal>
-              </div>
-            </div>
           )}
         </div>
       </section>

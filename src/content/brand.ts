@@ -9,33 +9,6 @@ export const nav = [
   { label: "Contacto", to: "/contacto" },
 ];
 
-export const values = [
-  {
-    title: "Criterio",
-    text: "Decidimos con fundamento, no por tendencia. Cada elección se sostiene sola frente a una pregunta.",
-  },
-  {
-    title: "Oficio",
-    text: "La suma del conocimiento técnico que no se delega. Se nota en el detalle que nadie pidió pero todos notan.",
-  },
-  {
-    title: "Intención",
-    text: "Nada es decorativo. Si un elemento está, es porque cumple una función dentro del sistema.",
-  },
-  {
-    title: "Honestidad",
-    text: "Decimos lo que pensamos aunque no sea lo que el cliente quiere escuchar primero.",
-  },
-  {
-    title: "Profundidad",
-    text: "El diagnóstico viene antes que la propuesta. Entendemos el negocio antes de tocar una tipografía.",
-  },
-  {
-    title: "Construcción",
-    text: "No entregamos piezas. Construimos sistemas que la marca puede seguir usando sola.",
-  },
-];
-
 export const programasInfo = {
   title: "PROGRAMAS",
   description: "Para marcas que necesitan construir, ordenar o redefinir su identidad, posicionamiento y comunicación.",
@@ -119,14 +92,24 @@ export const brandPartnerships = [
   }
 ];
 
-export const process = [
-  { n: "01", title: "Diagnóstico", text: "Escuchamos, auditamos, entendemos el negocio real detrás del pedido." },
-  { n: "02", title: "Estrategia", text: "Definimos el problema antes de proponer una sola solución visual." },
-  { n: "03", title: "Diseño", text: "Construimos el sistema con oficio artesanal y precisión técnica." },
-  { n: "04", title: "Sistema", text: "Entregamos reglas claras para que la marca lo use sola, sin depender de nosotros." },
-];
+export type ProjectImage = {
+  publicId: string;
+  alt: string;
+  /** Proporción natural ancho/alto (ej. 2160/3261). Solo hace falta en pares con matchHeight. */
+  ratio?: number;
+};
 
-export type ProjectImage = { publicId: string; alt: string };
+/** Métrica de resultado. El número va aparte del formato para poder animar el conteo. */
+export type Stat = {
+  value: number;
+  /** Decimales al mostrarlo (ej. 1 → "2,1"). */
+  decimals?: number;
+  /** Se pega delante del número (ej. "+"). */
+  prefix?: string;
+  /** Se pega detrás del número (ej. " M", " mil", "%"). */
+  suffix?: string;
+  label: string;
+};
 
 export type ProjectBlock =
   | { type: "image"; image: ProjectImage }
@@ -137,6 +120,10 @@ export type ProjectBlock =
       mobileLayout?: "pair" | "stack";
       /** Aspect ratio CSS (ej. "9 / 10") que ambas imágenes comparten, para igualar su altura cuando sus proporciones naturales no coinciden. Si se omite, cada imagen usa su altura natural. */
       aspect?: string;
+      /** Iguala el alto escalando en vez de recortar: la más alta se achica y las dos
+       *  conservan su proporción natural. Requiere `ratio` en ambas imágenes y siempre
+       *  va en fila, también en mobile (ignora mobileLayout). */
+      matchHeight?: boolean;
     }
   | {
       type: "imageText";
@@ -148,15 +135,25 @@ export type ProjectBlock =
       heightFrom?: "text" | "image";
     }
   | { type: "keywords"; items: string[] }
-  | { type: "quote"; image: ProjectImage; quote: string };
+  | { type: "quote"; image: ProjectImage; quote: string }
+  | {
+      type: "stats";
+      /** Encabezado del panel (ej. "Resultados Instagram 2024"). */
+      title?: string;
+      items: Stat[];
+      /** Métrica destacada, en una fila propia al pie del panel. */
+      highlight?: Stat;
+    }
+  | { type: "testimonial"; quote: string; author: string; role: string };
 
 export type WorkCase = {
   slug: string;
   client: string;
+  /** Título del proyecto, cuando el nombre del cliente no alcanza para nombrarlo. */
+  title?: string;
   category: string;
   year: string;
   summary: string;
-  tags: string[];
   cover?: ProjectImage;
   scope?: string[];
   description?: string;
@@ -165,13 +162,268 @@ export type WorkCase = {
 
 export const work: WorkCase[] = [
   {
+    slug: "yokoo-studio",
+    client: "Yokoo Studio",
+    title: "Reposicionamiento de Comunicación",
+    category: "Shift Program",
+    year: "2022-2025",
+    summary:
+      "Acompañamos la evolución de Yokoo Studio durante más de dos años a través de un proceso de reposicionamiento de su comunicación, desarrollando una estrategia de Growth Marketing que integró contenido, campañas y experiencias para impulsar una nueva etapa de crecimiento.",
+    scope: [
+      "Estrategia de comunicación",
+      "Growth Marketing",
+      "Lanzamiento de producto",
+      "Activaciones",
+      "Influencer Marketing",
+      "Ecommerce",
+    ],
+    description:
+      "Yokoo Studio atravesaba una etapa de crecimiento y necesitaba que su comunicación evolucionara al mismo ritmo que el negocio. Entre 2023 y septiembre de 2025 trabajamos de forma cercana con los fundadores y en articulación con las distintas áreas de la marca, desarrollando una estrategia de comunicación con enfoque en Growth Marketing.",
+    cover: { publicId: "1_ad1dsz", alt: "Campaña Yokoo Studio The Making: buzo navy con el logo dorado en el set de producción" },
+    blocks: [
+      {
+        type: "image",
+        image: { publicId: "2_nzdgkt", alt: "Perfil con gorro tejido Yokoo Studio y campera verde lima sobre un fondo de montañas nevadas" },
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "3_dbmzui", alt: "Remera gris con la estampa are we living a dream? vista de espaldas" },
+          { publicId: "6_m9updu", alt: "Dos modelos con remeras Yokoo en la rampa rosa de un skatepark" },
+        ],
+      },
+      {
+        type: "imageText",
+        // La foto manda el alto de la fila: entra completa y el texto se estira hasta igualarla.
+        heightFrom: "image",
+        image: { publicId: "4_bdbaii", alt: "Tres polaroids de la campaña sobre el cemento de una cancha de tenis" },
+        text: "A través de campañas, contenido, e-commerce, lanzamientos y experiencias, construimos un sistema de comunicación consistente que acompañó el crecimiento del negocio, fortaleció el posicionamiento de la marca y dio coherencia a cada punto de contacto.",
+      },
+      {
+        type: "imagePair",
+        // Stack en mobile: la pieza de social media tiene tipografía fina y a media columna no se lee.
+        mobileLayout: "stack",
+        images: [
+          { publicId: "1_ad1dsz", alt: "Campaña Yokoo Studio The Making: buzo navy con el logo dorado en el set de producción" },
+          { publicId: "7_u1ra22", alt: "Sistema de Instagram Stories de la colección Yokoo Basics" },
+        ],
+      },
+      {
+        type: "stats",
+        title: "Resultados Instagram 2024",
+        items: [
+          { value: 2.1, decimals: 1, suffix: " M", label: "visualizaciones" },
+          { value: 613, suffix: " mil", label: "cuentas alcanzadas" },
+          { value: 109, suffix: " mil", label: "visitas al perfil" },
+          { value: 27.6, decimals: 1, suffix: " mil", label: "clics al sitio web" },
+        ],
+        highlight: { value: 70, prefix: "+", suffix: "%", label: "de crecimiento respecto al año anterior" },
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        // La foto es más alta que el afiche: se achica hasta igualarlo, sin recortar ninguna.
+        matchHeight: true,
+        images: [
+          {
+            publicId: "_DSC0060_oxxois",
+            alt: "Modelo sentado en el piso con remera negra Yokoo y jean claro",
+            ratio: 2160 / 3261,
+          },
+          {
+            publicId: "5_be6hok",
+            alt: "Afiche de la activación con Loli Café por el día de la primavera",
+            ratio: 3024 / 4032,
+          },
+        ],
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "8_am0iqp", alt: "Modelo con buzo blanco Yokoo y raqueta al hombro en una cancha de tenis" },
+          { publicId: "9_j7ton6", alt: "Retrato en blanco y negro con remera Yokoo entre tambores metálicos" },
+        ],
+      },
+      {
+        type: "testimonial",
+        quote:
+          "Craft es un equipo de creativas increíbles. Responsables de hacer crecer nuestra marca de indumentaria con su gran dedicación y su conocimiento del mercado argentino. Son un equipo que está constantemente capacitándose y conoce las últimas tendencias dentro de las plataformas más importantes.",
+        author: "Valentina",
+        role: "Co Founder en Yokoo Studio",
+      },
+    ],
+  },
+  {
+    slug: "nomade-cafe",
+    client: "Nómade Café",
+    title: "Implementación de marca",
+    category: "Brand Partnership",
+    year: "2025",
+    summary:
+      "Acompañamos el lanzamiento de una nueva etapa para Nómade Café, desarrollando una estrategia de comunicación y contenido que trasladó su rebranding a una experiencia de marca consistente.",
+    scope: ["Estrategia de comunicación", "Dirección creativa", "Producción de contenido"],
+    description:
+      "Luego de su rebranding, Nómade necesitaba transformar su nueva identidad en una comunicación que conectara con las personas. Trabajamos junto al equipo de la marca para desarrollar una estrategia de contenido que diera continuidad al nuevo posicionamiento, llevando esa identidad al día a día a través de fotografía, video y una línea editorial coherente.",
+    cover: { publicId: "1_m9fjpj", alt: "Vaso de café con leche sobre una mesa azul con el logo de Nómade" },
+    blocks: [
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "1_m9fjpj", alt: "Vaso de café con leche sobre una mesa azul con el logo de Nómade" },
+          { publicId: "4_g9ac1n", alt: "Cartel de neón Los nómades también descansan sobre el sillón del salón" },
+        ],
+      },
+      {
+        type: "imageText",
+        // La foto manda el alto de la fila: entra completa y el texto se estira hasta igualarla.
+        heightFrom: "image",
+        image: { publicId: "2_j95hnl", alt: "Fachada del local en blanco y negro con el vinilo Take (me) Away en la ventana" },
+        text: "Más que generar publicaciones, el desafío fue convertir una nueva identidad en una experiencia de marca reconocible en cada punto de contacto digital.",
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "3_wlvhhq", alt: "Sándwich de focaccia sostenido a contraluz" },
+          { publicId: "5_iplaat", alt: "Vista cenital de dos sándwiches y un capuchino con latte art" },
+        ],
+      },
+      {
+        type: "stats",
+        title: "Resultados primeros 3 meses",
+        items: [
+          { value: 474, prefix: "+", suffix: " mil", label: "visualizaciones orgánicas" },
+          { value: 119, prefix: "+", suffix: " mil", label: "cuentas alcanzadas" },
+          { value: 426, prefix: "+", suffix: "%", label: "visitas al perfil" },
+          { value: 677, prefix: "+", suffix: "%", label: "clics en el enlace de la bio" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "usa-magazine",
+    client: "USA Magazine",
+    title: "Producción editorial de moda",
+    category: "Brand Partnership",
+    year: "2021",
+    summary:
+      "Desarrollamos una producción editorial publicada en USA Magazine (EE.UU) construyendo una narrativa visual donde la dirección de arte, la fotografía y el estilismo dialogan para crear una identidad estética propia.",
+    scope: ["Dirección de arte", "Producción fotográfica", "Dirección creativa", "Color grading"],
+    cover: { publicId: "1_fpqfnp", alt: "Retrato en blanco y negro de cuerpo entero frente a un edificio industrial" },
+    blocks: [
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "1_fpqfnp", alt: "Retrato en blanco y negro de cuerpo entero frente a un edificio industrial" },
+          { publicId: "2_y8s0iw", alt: "Primer plano de la campera de cuero amarilla contra el cielo" },
+        ],
+      },
+      {
+        // Díptico armado como doble página de revista: va a ancho completo.
+        type: "image",
+        image: { publicId: "3_anxmbl", alt: "Doble página con el look completo y un retrato sonriendo en blanco y negro" },
+      },
+      {
+        type: "imageText",
+        // La foto manda el alto de la fila: entra completa y el texto se estira hasta igualarla.
+        heightFrom: "image",
+        image: { publicId: "4_kj5mtb", alt: "Vista cenital recostado en una silla de playa con camisa floral" },
+        text: "Desarrollada para una publicación internacional, esta producción explora la moda desde una mirada editorial, donde cada imagen responde a una narrativa visual. La dirección de arte, la composición y la estética de la serie fueron trabajadas para construir un relato con identidad propia, pensado para el lenguaje de una revista de moda.",
+      },
+    ],
+  },
+  {
+    slug: "dart-haus",
+    client: "Dart Haus",
+    title: "Dirección de arte y producción",
+    category: "Brand Partnership",
+    year: "2023",
+    summary:
+      "Desarrollamos una producción editorial para comunicar el universo de Dart Haus, un concept store donde la curaduría y la experiencia del espacio son parte central de la marca.",
+    scope: ["Dirección de arte", "Producción fotográfica", "Styling", "Curaduría visual"],
+    cover: { publicId: "1_sotz3p", alt: "Retrato de perfil en blanco y negro con anillos de vidrio apoyados en el hombro" },
+    blocks: [
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "1_sotz3p", alt: "Retrato de perfil en blanco y negro con anillos de vidrio apoyados en el hombro" },
+          { publicId: "2_oth8vi", alt: "Bodegón cenital de bases y potes de maquillaje sobre una bandeja negra" },
+        ],
+      },
+      {
+        type: "imageText",
+        // La foto manda el alto de la fila: entra completa y el texto se estira hasta igualarla.
+        heightFrom: "image",
+        image: { publicId: "3_ojtukr", alt: "Vidriera del local en blanco y negro con una persona pasando desenfocada" },
+        text: "Sus creadoras necesitaban que su comunicación transmitiera el valor de la curaduría y no solo de los productos que comercializan. El proyecto consistió en desarrollar una producción editorial capaz de reflejar la identidad del espacio, construir una narrativa visual coherente y comunicar la experiencia de la concept store en cada imagen.",
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "4_pdb9qy", alt: "Piezas de cerámica dibujadas a mano sobre un estante blanco" },
+          { publicId: "5_kst9tw", alt: "Perchero con prendas celestes y blancas junto a un espejo de forma orgánica" },
+        ],
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "6_jnlnex", alt: "Detalle de un choker de red con perlas sobre un blazer beige" },
+          { publicId: "7_ives99", alt: "Vitrina de vidrio con aros y anillos de la curaduría de la tienda" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "adon-management",
+    client: "Adon Management",
+    title: "Producción editorial de moda",
+    category: "Brand Partnership",
+    year: "2022",
+    summary:
+      "Producción editorial realizada junto a Adon Management, explorando una narrativa visual donde la moda, la dirección de arte y la fotografía construyen una identidad estética propia.",
+    scope: [
+      "Dirección de arte",
+      "Producción fotográfica",
+      "Styling",
+      "Dirección creativa",
+      "Retoque",
+    ],
+    description:
+      "Realizada en colaboración con Adon, esta producción nace de la búsqueda por desarrollar un lenguaje visual de carácter editorial. Más que retratar modelos, el objetivo fue construir una serie de imágenes con una identidad estética definida, donde cada decisión de arte, estilismo y composición aportara a una narrativa común.",
+    cover: { publicId: "1_ttirsu", alt: "Retrato en blanco y negro con tapado de piel y encaje en la calle" },
+    blocks: [
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "1_ttirsu", alt: "Retrato en blanco y negro con tapado de piel y encaje en la calle" },
+          { publicId: "2_wijnpb", alt: "Detalle de las hojas de un agave a contraluz" },
+        ],
+      },
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "3_ust9rh", alt: "Retrato de cuerpo entero sentada en un banco de plaza con campera de cuero" },
+          { publicId: "4_o5zgzh", alt: "Primer plano apoyada en la mano, con collar de perlas y campera de cuero negra" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "etiqueta-emily-dickinson",
     client: "Diseño de etiqueta inspirada en Emily Dickinson",
     category: "Activación",
     year: "2025",
     summary:
       "Desarrollo de una etiqueta de vino basada en un concepto literario, combinando narrativa, ilustración y diseño editorial.",
-    tags: [],
     scope: ["Diseño de packaging", "Dirección de arte", "Conceptualización", "Ilustración"],
     description:
       "Este proyecto nace como un homenaje a Emily Dickinson y a uno de sus poemas más emblemáticos: Hope is the thing with feathers. Más que diseñar una etiqueta, el objetivo fue transformar una obra literaria en una experiencia visual capaz de transmitir la sensibilidad de la autora y convertir la botella en un objeto narrativo.",
@@ -237,38 +489,6 @@ export const work: WorkCase[] = [
         quote: "Hope is the thing with feathers",
       },
     ],
-  },
-  {
-    slug: "caso-01",
-    client: "Estudio de Arquitectura",
-    category: "Reposicionamiento",
-    year: "2025",
-    summary: "Un sistema de identidad que actualiza la presencia digital sin perder trayectoria.",
-    tags: ["Diagnóstico", "Identidad visual", "Sitio web"],
-  },
-  {
-    slug: "caso-02",
-    client: "Marca de Moda",
-    category: "Identidad & sistema visual",
-    year: "2025",
-    summary: "Expansión internacional con un lenguaje visual escalable a nuevos mercados.",
-    tags: ["Sistema visual", "Packaging", "Comunicación"],
-  },
-  {
-    slug: "caso-03",
-    client: "Cadena de Restaurantes",
-    category: "Sistema de franquicia",
-    year: "2024",
-    summary: "Un sistema visual pensado para replicarse con consistencia en cada local nuevo.",
-    tags: ["Sistema de franquicia", "Señalética", "Manual de marca"],
-  },
-  {
-    slug: "caso-04",
-    client: "Diseño Industrial",
-    category: "Reposicionamiento",
-    year: "2024",
-    summary: "Reposicionamiento de marca sin perder el peso de una trayectoria consolidada.",
-    tags: ["Reposicionamiento", "Identidad visual", "Comunicación estratégica"],
   },
 ];
 

@@ -100,18 +100,6 @@ export default function WorkCard({
         <span className="font-medium text-cream/80">{work.category}</span>
         <span className="font-mono text-cream/50">{work.year}</span>
       </div>
-      {work.tags?.length > 0 && (
-        <div className="mt-2 flex flex-wrap sm:flex-nowrap gap-1.5 overflow-hidden min-w-0">
-          {work.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-cream/15 px-2 py-0.5 text-[10px] tracking-wide uppercase text-cream/60 truncate max-w-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
     </Link>
   );
 }
