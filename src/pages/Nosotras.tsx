@@ -40,7 +40,7 @@ export default function Nosotras() {
 
       {/* 2. FOUNDER 1: MARÍA TIZIANA NEGRO (Photo Left, Details Right) */}
       <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
           {/* Photo */}
           <div className="lg:col-span-6">
@@ -49,7 +49,7 @@ export default function Nosotras() {
                 <img 
                   src="/images/tiziana.webp" 
                   alt="María Tiziana Negro" 
-                  className="w-full aspect-[4/3] object-cover object-[72%_35%] grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute bottom-4 left-5 z-10 pointer-events-none">
                   <span className="font-script text-3xl md:text-4xl text-white/90 drop-shadow-md">Tizi</span>
@@ -59,7 +59,7 @@ export default function Nosotras() {
           </div>
 
           {/* Details */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
+          <div className="lg:col-span-6 flex flex-col">
             <Reveal delay={0.1}>
               <div className="flex items-center gap-2 text-xs tracking-widest uppercase text-red font-medium mb-3">
                 <span className="w-4 h-[1.5px] bg-red" />
@@ -91,10 +91,10 @@ export default function Nosotras() {
 
       {/* 3. FOUNDER 2: MARTINA MINCARELLI (Details Left, Photo Right) */}
       <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
           {/* Details */}
-          <div className="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1">
+          <div className="lg:col-span-6 flex flex-col order-2 lg:order-1">
             <Reveal delay={0.1}>
               <div className="flex items-center gap-2 text-xs tracking-widest uppercase text-red font-medium mb-3">
                 <span className="w-4 h-[1.5px] bg-red" />
@@ -124,7 +124,7 @@ export default function Nosotras() {
                 <img 
                   src="/images/martina.webp" 
                   alt="Martina Mincarelli" 
-                  className="w-full aspect-[4/3] object-cover object-[center_15%] grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute bottom-4 right-5 z-10 pointer-events-none">
                   <span className="font-script text-3xl md:text-4xl text-white/90 drop-shadow-md">Marti</span>

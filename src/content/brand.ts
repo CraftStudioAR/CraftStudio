@@ -9,88 +9,67 @@ export const nav = [
   { label: "Contacto", to: "/contacto" },
 ];
 
+/** Bajada del hero de Servicios. El "por qué" ya lo cuenta el Home: acá sólo se
+ *  ordena cómo está organizada esa forma de trabajar. */
+export const modalidadesInfo = {
+  description:
+    "Contamos con dos formas de acompañar a tu marca. Cada una reúne programas y proyectos pensados para responder a necesidades diferentes. Deslizá y conocé qué incluye cada una.",
+};
+
 export const programasInfo = {
   title: "PROGRAMAS",
-  description: "Para marcas que necesitan construir, ordenar o redefinir su identidad, posicionamiento y comunicación.",
-  ideal: "Ideal si: tu marca está en un momento de cambio, crecimiento o definición y necesita un proceso estructural que vaya más allá de una acción puntual."
+  description: "Construimos la dirección de una marca a través de procesos estratégicos que responden a distintos momentos: crear, reposicionar o actualizar."
 };
 
 export const programas = [
   {
     n: "01",
-    title: "Creación de Marca",
+    title: "Build Program",
     summary: "Para marcas nuevas que necesitan nacer con una base clara.",
-    detail: "Trabajamos sobre el branding, el posicionamiento y los criterios de comunicación para que la marca pueda salir al mercado con dirección.",
+    detail: "Construimos el branding, el posicionamiento y los criterios de comunicación para salir al mercado con dirección.",
     fit: [
-      "Lanzar una marca",
-      "Crear una nueva unidad de negocio",
-      "Presentar un proyecto desde cero"
-    ],
-    includes: "",
-    result: ""
+      "Nueva Marca o Proyecto"
+    ]
   },
   {
     n: "02",
-    title: "Reposicionamiento",
-    summary: "Para marcas que ya existen, pero necesitan redefinir cómo son percibidas.",
-    detail: "Ordenamos la estrategia, el mensaje, la propuesta de valor y la forma en que la marca se comunica para que ocupe un lugar más claro.",
+    title: "Shift Program",
+    summary: "Para marcas que crecieron, cambiaron o ya no comunican lo que realmente son.",
+    detail: "Revisamos el posicionamiento, la propuesta de valor y la comunicación para que la marca conecte mejor con su negocio, su público y sus objetivos.",
     fit: [
-      "Tu marca creció",
-      "Cambió de público",
-      "Amplió su oferta o ya no comunica lo que realmente es"
-    ],
-    includes: "",
-    result: ""
+      "Negocio en evolución",
+      "Nuevo público",
+      "Mayor diferenciación"
+    ]
   },
   {
     n: "03",
-    title: "Refresh",
-    summary: "Para marcas que necesitan actualizar su identidad.",
-    detail: "Trabajamos sobre una nueva etapa visual y comunicacional, alineada al momento actual de la marca y a lo que necesita proyectar.",
+    title: "Refresh Program",
+    summary: "Para marcas que necesitan actualizar su identidad para representar una nueva etapa.",
+    detail: "Actualizamos la identidad visual y el sistema de comunicación para que la marca refleje con mayor coherencia quién es hoy y hacia dónde quiere crecer.",
     fit: [
-      "Renovar la identidad",
-      "Modernizar la imagen",
-      "Relanzar la marca con mayor coherencia"
-    ],
-    includes: "",
-    result: ""
+      "Relanzamiento",
+      "Cambio de Imagen"
+    ]
   }
 ];
 
+/** Brand Partnerships no se abre en subcategorías: ya es la modalidad. Una
+ *  activación es uno de los proyectos que puede darse dentro de ella, no un
+ *  nivel más abajo. */
 export const brandPartnershipsInfo = {
   title: "BRAND PARTNERSHIPS",
-  description: "Acompañamientos estratégicos y creativos para marcas que necesitan activar una acción puntual o sostener una dirección ya construida.",
-  ideal: "Ideal si: ya tenés una identidad definida y lo que necesitás es poner en movimiento una acción concreta o mantener la coherencia de lo que ya construiste."
+  description: "Diseñamos y dirigimos acciones de comunicación para marcas que ya cuentan con una dirección definida.",
+  detail: "Nos sumamos a proyectos que necesitan una mirada estratégica, creativa y de ejecución. Cada Brand Partnership se construye según los objetivos de la marca y el alcance de la iniciativa.",
+  scope: "Desarrollamos campañas, lanzamientos de producto, producciones, activaciones de marca, dirección creativa, experiencias digitales, desarrollo visual, entre otros.",
+  ideal: [
+    "Lanzar un producto.",
+    "Comunicar una fecha clave.",
+    "Potenciar una acción comercial.",
+    "Desarrollar un proyecto especial.",
+    "Coordinación de activaciones online y offline."
+  ]
 };
-
-export const brandPartnerships = [
-  {
-    n: "01",
-    title: "Activación",
-    summary: "Para marcas que necesitan comunicar una campaña, lanzamiento o acción puntual con una idea clara.",
-    detail: "Acompañamos el concepto, los mensajes, la dirección creativa y la bajada por canales para que la acción tenga coherencia con la marca.",
-    fit: [
-      "Necesitás lanzar un nuevo producto",
-      "Querés comunicar una campaña o fecha clave",
-      "Buscás acompañar una acción comercial puntual"
-    ],
-    includes: "concepto de campaña, mensajes clave, dirección creativa, diseño de piezas para canales, bajada estratégica y acompañamiento en ejecución.",
-    result: "Una acción o campaña lanzada con coherencia visual, verbal y estratégica."
-  },
-  {
-    n: "02",
-    title: "Continuidad",
-    summary: "Para marcas que ya trabajaron un programa con Craft y necesitan sostener la dirección.",
-    detail: "Acompañamos la implementación desde una mirada estratégica y creativa, ayudando a que cada decisión siga respondiendo al sistema definido.",
-    fit: [
-      "Necesitás ordenar tus próximos pasos",
-      "Buscás revisar y mejorar campañas activas",
-      "Querés sostener una estrategia ya desarrollada"
-    ],
-    includes: "revisión estratégica continua, consultoría creativa, curaduría de contenidos, acompañamiento en producción y ajuste de piezas de comunicación.",
-    result: "Una marca que se mantiene coherente, relevante y fiel a su sistema de identidad a lo largo del tiempo."
-  }
-];
 
 export type ProjectImage = {
   publicId: string;
@@ -149,8 +128,10 @@ export type ProjectBlock =
 export type WorkCase = {
   slug: string;
   client: string;
-  /** Título del proyecto, cuando el nombre del cliente no alcanza para nombrarlo. */
+  /** Qué se hizo, en concreto (ej. "Concepto y Diseño de Packaging"). El detalle
+   *  del proceso y las decisiones van en el caso, no acá. */
   title?: string;
+  /** Modalidad bajo la que se trabajó: un programa ("Shift Program") o "Brand Partnership". */
   category: string;
   year: string;
   summary: string;
@@ -420,14 +401,16 @@ export const work: WorkCase[] = [
   {
     slug: "etiqueta-emily-dickinson",
     client: "Diseño de etiqueta inspirada en Emily Dickinson",
-    category: "Activación",
+    title: "Concepto y Diseño de Packaging",
+    category: "Brand Partnership",
     year: "2025",
     summary:
-      "Desarrollo de una etiqueta de vino basada en un concepto literario, combinando narrativa, ilustración y diseño editorial.",
+      "Desarrollamos un sistema visual para una etiqueta de vino que transforma una obra literaria en una experiencia de marca, combinando narrativa, ilustración y diseño de arte.",
     scope: ["Diseño de packaging", "Dirección de arte", "Conceptualización", "Ilustración"],
     description:
       "Este proyecto nace como un homenaje a Emily Dickinson y a uno de sus poemas más emblemáticos: Hope is the thing with feathers. Más que diseñar una etiqueta, el objetivo fue transformar una obra literaria en una experiencia visual capaz de transmitir la sensibilidad de la autora y convertir la botella en un objeto narrativo.",
-    cover: { publicId: "Etiqueta_Vino_13_jyhh3q", alt: "Pila de corchos de vino" },
+    // La portada tiene que mostrar el trabajo de diseño, no el contexto: va la botella.
+    cover: { publicId: "Etiqueta_Vino_2_obsspl", alt: "Botella Emily en balde de hielo junto a limones y quesos" },
     blocks: [
       {
         type: "image",

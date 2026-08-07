@@ -29,6 +29,18 @@ export default function TrabajoDetalle() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
+  const description = project.description ? (
+    <Reveal>
+      <div className="flex flex-col gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
+        {project.description.split("\n\n").map((paragraph, i) => (
+          <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </Reveal>
+  ) : null;
+
   return (
     <div className="bg-cream min-h-screen text-ink selection:bg-red selection:text-cream">
       
@@ -87,7 +99,7 @@ export default function TrabajoDetalle() {
             className="lg:col-span-5 flex flex-col gap-10 lg:pt-6"
           >
             <motion.div variants={itemVariants} className="flex flex-col gap-3">
-              <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Categoría</h4>
+              <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Modalidad</h4>
               <p className="text-xl md:text-2xl font-medium">{project.category}</p>
             </motion.div>
 
@@ -116,28 +128,14 @@ export default function TrabajoDetalle() {
         </div>
       </section>
 
-      {/* 3. DESCRIPCIÓN EXTENDIDA */}
-      {project.description && (
-        <section className="px-6 pb-16 md:px-10 md:pb-20">
-          <div className="max-w-[1400px] mx-auto">
-            <Reveal>
-              <div className="flex flex-col gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
-                {project.description.split("\n\n").map((paragraph, i) => (
-                  <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      )}
-
-      {/* 4. GALERÍA DEL PROYECTO */}
+      {/* 3. GALERÍA DEL PROYECTO — la descripción se intercala después de la
+             primera imagen, para que el caso abra mostrando el trabajo. */}
       <section className="px-6 pb-32 md:px-10">
         <div className="max-w-[1400px] mx-auto">
-          {project.blocks && project.blocks.length > 0 && (
-            <ProjectBlocks blocks={project.blocks} />
+          {project.blocks && project.blocks.length > 0 ? (
+            <ProjectBlocks blocks={project.blocks} afterFirstBlock={description} />
+          ) : (
+            description
           )}
         </div>
       </section>
@@ -168,16 +166,16 @@ function ProjectCTA() {
           para que se lea como cierre de pagina y no como otra pieza del proyecto. */}
       <motion.section
         style={{ scale }}
-        className="group relative overflow-hidden rounded-2xl glass-panel glass-panel-light text-ink flex flex-col items-center justify-center"
+        className="group relative overflow-hidden rounded-2xl glass-panel glass-panel-light text-ink flex flex-col items-center justify-center max-w-xl mx-auto"
       >
         <div className="glass-sheen" />
 
-        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-12 md:py-16 flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
+        <div className="w-full relative z-10 px-6 md:px-10 py-10 md:py-14 flex flex-col items-center justify-center text-center mx-auto">
           <Reveal>
-            <p className="text-xs font-bold tracking-widest uppercase text-red mb-4">
+            <p className="text-xs font-bold tracking-widest uppercase text-red mb-3">
               ¿Listo para el tuyo?
             </p>
-            <h2 className="font-sans font-semibold tracking-tight text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-navy">
+            <h2 className="font-sans font-semibold tracking-tight text-2xl sm:text-3xl md:text-4xl leading-tight mb-6 text-navy">
               Hablemos de tu marca.
             </h2>
 

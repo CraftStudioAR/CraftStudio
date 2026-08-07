@@ -17,9 +17,9 @@ export default function Trabajos() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
-  // Split title manually to handle the line break beautifully on large screens
-  const titleLine1 = "Sistemas construidos,";
-  const titleLine2 = "no piezas entregadas.";
+  // El portfolio no vuelve a vender la metodología: nombra lo que hay para ver.
+  const titleLine1 = "Marcas que acompañamos";
+  const titleLine2 = "en distintos momentos de su crecimiento";
 
   return (
     <div className="bg-cream min-h-screen text-ink">
@@ -31,7 +31,7 @@ export default function Trabajos() {
         <div className="mx-auto max-w-[1400px] relative z-10">
           <Reveal>
             <p className="text-sm tracking-widest uppercase mb-8 flex items-center gap-4 text-red font-bold">
-              <span className="w-12 h-[1px] bg-red" /> Nuestro Archivo
+              <span className="w-12 h-[1px] bg-red" /> Proyectos
             </p>
           </Reveal>
           
@@ -40,7 +40,7 @@ export default function Trabajos() {
               initial="hidden"
               animate="visible"
               variants={titleVariants}
-              className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.95] tracking-tight max-w-5xl"
+              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] leading-[1.02] tracking-tight max-w-4xl"
             >
               <div className="overflow-hidden pb-4 -mb-4 flex flex-wrap gap-x-[0.3em] gap-y-2">
                 {titleLine1.split(" ").map((word, wIdx) => (
@@ -69,9 +69,6 @@ export default function Trabajos() {
             <Reveal delay={0.6}>
               <div className="flex flex-col gap-6 lg:max-w-xs lg:pb-4">
                 <div className="w-16 h-[1px] bg-current opacity-20 hidden lg:block"></div>
-                <p className="text-xl md:text-2xl font-medium leading-[1.4] text-balance opacity-80">
-                  Una selección de programas de identidad y comunicación.
-                </p>
                 <p className="text-xs font-bold tracking-widest uppercase opacity-40">
                   Casos completos a pedido.
                 </p>

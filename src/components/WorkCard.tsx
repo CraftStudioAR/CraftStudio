@@ -57,31 +57,28 @@ export default function WorkCard({
           }`}
         >
           {work.cover ? (
-            <img
-              src={cld(work.cover.publicId, "f_auto,q_auto,w_800")}
-              alt={work.cover.alt}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-          ) : (
             <>
-              <GlyphMark
-                variant={index}
-                className="absolute h-[75%] w-[75%] text-cream/25 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-cream/35"
+              <img
+                src={cld(work.cover.publicId, "f_auto,q_auto,w_800")}
+                alt={work.cover.alt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
-                {work.client}
-              </span>
+              {/* Degradado sólo al pie: la foto tiene que leerse, el nombre se apoya abajo. */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
             </>
+          ) : (
+            <GlyphMark
+              variant={index}
+              className="absolute h-[75%] w-[75%] text-cream/25 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-cream/35"
+            />
           )}
-          {work.cover && (
-            <>
-              <div className="absolute inset-0 bg-ink/35" />
-              <span className="font-serif relative px-6 text-center text-2xl sm:text-3xl text-cream/95 italic transition-transform duration-700 ease-out group-hover:scale-105">
-                {work.client}
-              </span>
-            </>
-          )}
+
+          {/* El nombre de la marca va con nuestra tipografía, nunca con su logo. */}
+          <span className="font-sans font-bold uppercase tracking-[0.28em] absolute bottom-7 left-6 right-16 text-left text-lg sm:text-xl md:text-2xl leading-tight text-cream/95 transition-transform duration-700 ease-out origin-bottom-left group-hover:scale-105">
+            {work.client}
+          </span>
+
           <div className="grain-overlay !absolute !opacity-15" />
           <div className="glass-sheen" />
 
@@ -96,9 +93,27 @@ export default function WorkCard({
         </motion.div>
       </ScrollGrow>
 
-      <div className="mt-3 flex items-center justify-between text-xs sm:text-sm">
-        <span className="font-medium text-cream/80">{work.category}</span>
-        <span className="font-mono text-cream/50">{work.year}</span>
+      {/* En la grilla lo importante es entender rápido qué se desarrolló; el detalle
+          del proceso vive dentro del caso. Los colores heredan del contexto porque
+          la tarjeta se usa sobre fondo oscuro (home) y sobre crema (/trabajos). */}
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="flex items-baseline justify-between gap-4">
+          <h3 className="text-current text-sm sm:text-base font-medium leading-snug opacity-90">
+            {work.title ?? work.client}
+          </h3>
+          <span className="font-mono text-current text-xs opacity-40 shrink-0">{work.year}</span>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {[work.category, work.scope?.[0]].filter(Boolean).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-current/20 px-3 py-1 text-[10px] sm:text-[11px] tracking-wide uppercase opacity-60"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </Link>
   );

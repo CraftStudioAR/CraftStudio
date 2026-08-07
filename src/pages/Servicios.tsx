@@ -2,11 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
 import Beams from "../components/Beams";
-import { programas, programasInfo, brandPartnerships, brandPartnershipsInfo } from "../content/brand";
+import { programas, programasInfo, brandPartnershipsInfo, modalidadesInfo } from "../content/brand";
 
 export default function Servicios() {
   const [activeProgramas, setActiveProgramas] = useState(0);
-  const [activePartnerships, setActivePartnerships] = useState(0);
   const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(null);
 
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -86,29 +85,8 @@ export default function Servicios() {
             
             <Reveal delay={0.6}>
               <p className="text-2xl md:text-4xl max-w-4xl font-medium md:text-balance opacity-90 leading-snug">
-                En Craft contamos con dos modalidades de trabajo: Programas y Brand Partnerships.
+                {modalidadesInfo.description}
               </p>
-            </Reveal>
-          </div>
-
-          {/* Grilla Inferior: Tarjetas de Modalidades lado a lado */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mt-16 lg:mt-24 w-full">
-            <Reveal delay={0.8}>
-              <div className="bg-white p-8 md:p-12 lg:p-16 rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col justify-center">
-                <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-red mb-6 group-hover:text-navy transition-colors">Programas</h3>
-                <p className="text-lg md:text-xl lg:text-2xl font-medium opacity-80 text-balance">
-                  Construyen la dirección. Para marcas que necesitan construir, ordenar o redefinir su identidad, posicionamiento y comunicación.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.9}>
-              <div className="bg-white p-8 md:p-12 lg:p-16 rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col justify-center">
-                <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-red mb-6 group-hover:text-navy transition-colors">Brand Partnerships</h3>
-                <p className="text-lg md:text-xl lg:text-2xl font-medium opacity-80 text-balance">
-                  Activan o sostienen. Acompañamientos estratégicos y creativos para marcas que necesitan activar una acción puntual o sostener una dirección ya construida.
-                </p>
-              </div>
             </Reveal>
           </div>
 
@@ -121,8 +99,7 @@ export default function Servicios() {
           <Reveal>
             <div className="mb-10 max-w-3xl">
               <h2 className="font-serif italic text-5xl md:text-7xl text-navy mb-4">{programasInfo.title}</h2>
-              <p className="text-lg md:text-2xl font-medium mb-4">{programasInfo.description}</p>
-              <p className="text-base md:text-lg opacity-70 italic">{programasInfo.ideal}</p>
+              <p className="text-lg md:text-2xl font-medium">{programasInfo.description}</p>
             </div>
           </Reveal>
           
@@ -166,88 +143,31 @@ export default function Servicios() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* 3. BRAND PARTNERSHIPS CARDS SECTION */}
-      <section className="px-6 pb-12 md:pb-20 md:px-10 relative">
-        <div className="mx-auto max-w-[1400px]">
-          <Reveal>
-            <div className="mb-10 max-w-3xl">
-              <h2 className="font-serif italic text-5xl md:text-7xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
-              <p className="text-lg md:text-2xl font-medium mb-4">{brandPartnershipsInfo.description}</p>
-              <p className="text-base md:text-lg opacity-70 italic">{brandPartnershipsInfo.ideal}</p>
-            </div>
-          </Reveal>
-          
-          {/* DESKTOP LAYOUT */}
-          <div className="hidden lg:flex flex-row min-h-[450px] gap-4 w-full">
-            {brandPartnerships.map((s, i) => {
-              const isActive = activePartnerships === i;
-              
-              return (
-                <motion.div 
-                  key={`desktop-bp-${s.n}`}
-                  onClick={() => setActivePartnerships(i)}
-                  animate={{ flex: isActive ? 3 : 0.5 }}
-                  transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-                  className={`relative overflow-hidden rounded-2xl cursor-pointer flex-shrink-0 ${cardColors[i % cardColors.length]}`}
-                  style={{ minWidth: "0px" }}
-                >
-                  <CardContent s={s} i={i} isActive={isActive} isMobile={false} />
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* MOBILE LAYOUT */}
-          <div className="flex lg:hidden flex-col gap-4 w-full">
-            {brandPartnerships.map((s, i) => {
-              const offsetIndex = i + 10;
-              return (
-                <div 
-                  key={`mobile-btn-bp-${s.n}`}
-                  onClick={() => setMobileActiveIndex(offsetIndex)}
-                  className={`relative overflow-hidden rounded-2xl flex-shrink-0 cursor-pointer h-[120px] px-6 md:px-8 flex items-center justify-between shadow-sm hover:opacity-90 transition-opacity ${cardColors[i % cardColors.length]}`}
-                >
-                  <div className="flex items-center gap-6">
-                    <span className="font-serif text-3xl opacity-60">{s.n}</span>
-                    <h3 className="font-serif text-xl md:text-2xl opacity-90 text-balance max-w-[200px]">{s.title}</h3>
-                  </div>
-                  <div className="w-10 h-10 shrink-0 rounded-full bg-black/10 flex items-center justify-center">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                      <path d="M7 1V13M1 7H13"/>
-                    </svg>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* SHARED MOBILE MODAL */}
+          {/* MOBILE MODAL */}
           <AnimatePresence>
             {mobileActiveIndex !== null && (
               <div className="fixed inset-0 z-[100] lg:hidden flex items-center justify-center p-4 sm:p-6">
                 {/* Backdrop (Fijo, no scrollea) */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setMobileActiveIndex(null)}
                   className="absolute inset-0 bg-black/60 backdrop-blur-md"
                 />
-                
+
                 {/* Contenedor Modal (Se adapta al contenido) */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.95, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: 20 }}
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className={`relative w-full rounded-2xl shadow-2xl overflow-hidden pointer-events-auto ${cardColors[(mobileActiveIndex >= 10 ? mobileActiveIndex - 10 : mobileActiveIndex) % cardColors.length]}`}
+                  className={`relative w-full rounded-2xl shadow-2xl overflow-hidden pointer-events-auto ${cardColors[mobileActiveIndex % cardColors.length]}`}
                 >
                   {/* Botón de cerrar fijo arriba a la derecha (no scrollea porque es absolute al contenedor padre) */}
                   <div className="absolute top-0 right-0 w-full flex justify-end p-4 z-20 pointer-events-none">
-                    <button 
+                    <button
                       onClick={() => setMobileActiveIndex(null)}
                       className="w-12 h-12 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center hover:bg-black/20 transition-colors pointer-events-auto"
                     >
@@ -259,17 +179,59 @@ export default function Servicios() {
 
                   {/* Área scrolleable independiente (Controla la altura máxima) */}
                   <div className="w-full max-h-[85vh] overflow-y-auto overscroll-contain no-scrollbar relative z-10">
-                    <CardContent 
-                      s={mobileActiveIndex >= 10 ? brandPartnerships[mobileActiveIndex - 10] : programas[mobileActiveIndex]} 
-                      i={mobileActiveIndex >= 10 ? mobileActiveIndex - 10 : mobileActiveIndex} 
-                      isActive={true} 
-                      isMobile={true} 
+                    <CardContent
+                      s={programas[mobileActiveIndex]}
+                      i={mobileActiveIndex}
+                      isActive={true}
+                      isMobile={true}
                     />
                   </div>
                 </motion.div>
               </div>
             )}
           </AnimatePresence>
+        </div>
+      </section>
+
+      {/* 3. BRAND PARTNERSHIPS — es la modalidad en sí, sin subcategorías debajo. */}
+      <section className="px-6 pb-12 md:pb-20 md:px-10 relative">
+        <div className="mx-auto max-w-[1400px]">
+          <Reveal>
+            <div className="mb-10 max-w-3xl">
+              <h2 className="font-serif italic text-5xl md:text-7xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
+              <p className="text-lg md:text-2xl font-medium">{brandPartnershipsInfo.description}</p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <Reveal className="lg:col-span-7">
+              <div className="bg-white rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] p-8 md:p-12 h-full flex flex-col gap-6">
+                <p className="text-lg md:text-xl leading-relaxed opacity-80">
+                  {brandPartnershipsInfo.detail}
+                </p>
+                <div className="w-16 h-[1px] bg-ink/20" />
+                <p className="text-lg md:text-xl leading-relaxed opacity-80">
+                  {brandPartnershipsInfo.scope}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2} className="lg:col-span-5">
+              <div className="bg-navy text-cream rounded-2xl p-8 md:p-12 h-full flex flex-col gap-6 shadow-2xl">
+                <h3 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-red">
+                  <span className="w-6 h-[1px] bg-red" /> Ideal para
+                </h3>
+                <ul className="flex flex-col gap-4">
+                  {brandPartnershipsInfo.ideal.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-base md:text-lg leading-snug">
+                      <span className="text-red mt-[0.35em] shrink-0">✦</span>
+                      <span className="opacity-90">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -304,12 +266,9 @@ export default function Servicios() {
               <h2 className="font-serif italic text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight mb-8">
                 ¿Por dónde <br className="hidden lg:block"/>empezar?
               </h2>
-              
+
               <div className="mt-8 lg:mt-12 flex flex-col items-center lg:items-start gap-8">
-                <p className="text-lg text-cream/70 text-balance">
-                  ¿No sabés cuál es tu momento? Contanos dónde estás parada y lo definimos juntas.
-                </p>
-                <a 
+                <a
                   href="/contacto" 
                   className="group/btn relative inline-flex items-center gap-6 bg-cream text-navy px-10 py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden"
                 >
@@ -320,28 +279,19 @@ export default function Servicios() {
             </Reveal>
           </div>
           
-          <div className="lg:w-7/12 flex flex-col gap-6 md:gap-8 relative z-10 justify-center">
+          {/* El Home y las secciones de arriba ya explicaron las modalidades: acá va
+              directo la problemática y el paso siguiente, sin reciclar ese contenido. */}
+          <div className="lg:w-7/12 flex flex-col gap-6 md:gap-8 relative z-10 justify-center text-center lg:text-left">
             <Reveal delay={0.2}>
-              <div className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-[1.5rem] flex flex-col gap-4 backdrop-blur-sm">
-                <div className="flex items-start gap-4">
-                  <span className="text-red font-serif italic text-2xl mt-1">✦</span>
-                  <p className="text-xl md:text-2xl font-medium leading-relaxed opacity-90 text-balance">
-                    Los <span className="text-white">Programas</span> construyen la dirección.<br/>
-                    Los <span className="text-white">Brand Partnerships</span> la activan o sostienen.
-                  </p>
-                </div>
-              </div>
+              <p className="text-2xl md:text-3xl font-medium leading-[1.3] text-balance">
+                El primer paso es entender en qué momento está tu marca.
+              </p>
             </Reveal>
 
             <Reveal delay={0.4}>
-              <div className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-[1.5rem] flex flex-col gap-4 backdrop-blur-sm">
-                <p className="text-lg md:text-xl font-medium leading-relaxed opacity-80 text-balance">
-                  No necesitás saber qué modalidad necesitas hoy: <span className="text-white">el primer paso es entender en qué momento está tu negocio.</span>
-                </p>
-                <p className="text-base md:text-lg opacity-60 leading-relaxed text-balance">
-                  En una reunión de diagnóstico analizamos tu contexto actual, identificamos los principales desafíos y definimos juntas el mejor punto de partida.
-                </p>
-              </div>
+              <p className="text-base md:text-lg text-cream/70 leading-relaxed text-balance max-w-2xl">
+                En una primera reunión analizamos tu contexto, identificamos los principales desafíos y definimos juntas el mejor punto de partida para acompañarte.
+              </p>
             </Reveal>
           </div>
           

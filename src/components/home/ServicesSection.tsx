@@ -16,14 +16,10 @@ export default function ServicesSection() {
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] mb-6 tracking-tight leading-tight">
               Como trabaja <span className="font-serif italic font-medium text-red">Craft</span>
             </h2>
-            <div className="text-base md:text-lg text-ink/80 max-w-2xl text-balance font-sans leading-relaxed flex flex-col gap-1">
-              <p className="font-semibold text-ink">
-                Cada marca atraviesa momentos diferentes.
-              </p>
-              <p className="text-ink/70">
-                Por eso desarrollamos dos modalidades de trabajo, pensadas para responder a las necesidades de cada etapa.
-              </p>
-            </div>
+            <p className="text-base md:text-lg text-ink/80 max-w-2xl text-balance font-sans leading-relaxed">
+              <span className="font-semibold text-ink">Cada marca atraviesa momentos diferentes.</span>{" "}
+              Por eso desarrollamos dos modalidades de trabajo, pensadas para responder a las necesidades de cada etapa.
+            </p>
           </div>
         </Reveal>
 
@@ -35,13 +31,13 @@ export default function ServicesSection() {
               <h3 className="font-sans font-bold text-4xl md:text-5xl tracking-tight mb-4 text-ink">
                 Programas
               </h3>
-              <p className="font-sans text-sm md:text-base text-ink/50 mb-6 font-medium">
+              <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
                 Construimos la dirección de tu marca.
               </p>
-              <p className="font-sans text-base md:text-lg text-ink/80 mb-12 flex-grow text-balance">
-                Creamos, ordenamos o renovamos una marca desde su identidad, posicionamiento y comunicación.
+              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-12 flex-grow text-balance">
+                Ideal para: crear una marca desde cero, reposicionarla o actualizar su identidad y comunicación.
               </p>
-              
+
               <Magnetic>
                 <Link
                   to="/servicios"
@@ -60,13 +56,13 @@ export default function ServicesSection() {
               <h3 className="font-sans font-bold text-4xl md:text-5xl tracking-tight mb-4 text-ink">
                 Brand Partnerships
               </h3>
-              <p className="font-sans text-sm md:text-base text-ink/50 mb-6 font-medium">
-                Para marcas que ya tienen una dirección definida.
+              <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
+                Diseñamos y dirigimos acciones de comunicación para marcas que ya cuentan con una dirección definida.
               </p>
-              <p className="font-sans text-base md:text-lg text-ink/80 mb-12 flex-grow text-balance">
-                Desarrollamos campañas, lanzamientos, producciones y acompañamientos de comunicación, ya sea para una necesidad puntual o para trabajar en conjunto a largo plazo.
+              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-12 flex-grow text-balance">
+                Ideal para: campañas, lanzamientos, producciones y activaciones.
               </p>
-              
+
               <Magnetic>
                 <Link
                   to="/servicios"

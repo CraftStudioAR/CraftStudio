@@ -118,12 +118,9 @@ export default function Contacto() {
               <h3 className="font-serif italic text-4xl sm:text-5xl md:text-6xl mb-6 relative z-10 text-cream drop-shadow-md">
                 Craft recibió tu consulta.
               </h3>
-              <div className="flex flex-col gap-4 max-w-lg text-cream/90 text-base md:text-lg font-normal leading-relaxed relative z-10">
+              <div className="max-w-lg text-cream/90 text-base md:text-lg font-normal leading-relaxed relative z-10">
                 <p>
-                  Gracias por tomarte el tiempo de contarnos sobre tu proyecto. Lo leemos con atención y te contactamos.
-                </p>
-                <p className="text-sm md:text-base opacity-80">
-                  Mientras tanto, si querés conocer un poco más sobre cómo piensa Craft, pasate por <a href="/lab" className="text-cream underline hover:text-white transition-colors font-semibold">Craft Lab</a>.
+                  Gracias por tomarte el tiempo de contarnos sobre tu proyecto. Lo leemos con atención y te contactamos. Mientras tanto, si querés conocer un poco más sobre cómo piensa Craft, pasate por <a href="/craft-lab" className="text-cream underline hover:text-white transition-colors font-semibold">Craft Lab</a>.
                 </p>
               </div>
             </motion.div>

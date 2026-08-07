@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { animate, useInView, useReducedMotion } from "motion/react";
 import Reveal from "../Reveal";
 import GlyphMark from "../GlyphMark";
@@ -180,7 +180,15 @@ function Testimonial({ quote, author, role }: { quote: string; author: string; r
   );
 }
 
-export default function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
+export default function ProjectBlocks({
+  blocks,
+  afterFirstBlock,
+}: {
+  blocks: ProjectBlock[];
+  /** Se intercala justo debajo del primer bloque. El caso abre con una imagen y
+   *  recién después llega el texto, sin partir la galería en dos lightbox. */
+  afterFirstBlock?: ReactNode;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const images = blocks.flatMap(blockImages);
@@ -198,9 +206,12 @@ export default function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
     <>
       <div className="flex flex-col gap-6 md:gap-10">
         {blocks.map((block, i) => (
-          <Reveal key={i} delay={Math.min(i * 0.05, 0.3)}>
-            <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
-          </Reveal>
+          <Fragment key={i}>
+            <Reveal delay={Math.min(i * 0.05, 0.3)}>
+              <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
+            </Reveal>
+            {i === 0 && afterFirstBlock}
+          </Fragment>
         ))}
       </div>
 
