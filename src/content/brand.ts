@@ -400,8 +400,8 @@ export const work: WorkCase[] = [
   },
   {
     slug: "etiqueta-emily-dickinson",
-    client: "Diseño de etiqueta inspirada en Emily Dickinson",
-    title: "Concepto y Diseño de Packaging",
+    client: "Concepto y Diseño de Packaging",
+    title: "Diseño de etiqueta inspirada en Emily Dickinson",
     category: "Brand Partnership",
     year: "2025",
     summary:
