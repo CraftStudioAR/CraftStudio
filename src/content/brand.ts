@@ -326,7 +326,7 @@ export const work: WorkCase[] = [
     summary:
       "Desarrollamos una producción editorial para comunicar el universo de Dart Haus, un concept store donde la curaduría y la experiencia del espacio son parte central de la marca.",
     scope: ["Dirección de arte", "Producción fotográfica", "Styling", "Curaduría visual"],
-    cover: { publicId: "2_oth8vi", alt: "Bodegón cenital de bases y potes de maquillaje sobre una bandeja negra" },
+    cover: { publicId: "1_sotz3p", alt: "Retrato de perfil en blanco y negro con anillos de vidrio apoyados en el hombro" },
     blocks: [
       {
         type: "imagePair",
