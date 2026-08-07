@@ -153,7 +153,7 @@ export default function FoundersSection() {
         {/* Top Left */}
         <div data-speed="1.1" className="parallax-img absolute top-28 left-[5%] z-10">
           <MagneticImage
-            src="/images/lab1.jpg"
+            src="/images/about1.jpg"
             initialRotate={-2}
             className="w-52 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-md"
           />
@@ -161,7 +161,7 @@ export default function FoundersSection() {
         {/* Center Left (Overlaps bottom of Top Left) */}
         <div data-speed="0.8" className="parallax-img absolute top-[40%] left-[8%] z-20">
           <MagneticImage
-            src="/images/lab2.jpg"
+            src="/images/about3.jpg"
             initialRotate={2}
             className="w-72 aspect-square object-cover opacity-90 rounded-sm shadow-lg"
           />
@@ -169,7 +169,7 @@ export default function FoundersSection() {
         {/* Top Right */}
         <div data-speed="1.3" className="parallax-img absolute top-40 right-[12%] z-10">
           <MagneticImage
-            src="/images/martina.webp"
+            src="/images/about2.jpg"
             initialRotate={3}
             className="w-44 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
           />
@@ -177,7 +177,7 @@ export default function FoundersSection() {
         {/* Bottom Right (Overlaps bottom of Top Right) */}
         <div data-speed="0.6" className="parallax-img absolute top-[52%] right-[8%] z-20">
           <MagneticImage
-            src="/images/lab3.jpg"
+            src="/images/about4.jpg"
             initialRotate={-2}
             className="w-56 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
@@ -185,7 +185,7 @@ export default function FoundersSection() {
         {/* Bottom Center */}
         <div data-speed="0.7" className="parallax-img absolute bottom-6 left-[33%] z-15">
           <MagneticImage
-            src="/images/tiziana.webp"
+            src="/images/about5.jpg"
             initialRotate={1}
             className="w-64 aspect-[4/3] object-cover opacity-80 rounded-sm shadow-md"
           />
@@ -197,7 +197,7 @@ export default function FoundersSection() {
         {/* Top Left */}
         <div data-speed="1.2" className="parallax-img absolute top-10 left-2 z-10">
           <MagneticImage
-            src="/images/lab1.jpg"
+            src="/images/about1.jpg"
             initialRotate={-6}
             className="w-22 aspect-[3/4] object-cover opacity-80 shadow-sm rounded-sm"
           />
@@ -205,7 +205,7 @@ export default function FoundersSection() {
         {/* Top Right */}
         <div data-speed="1.4" className="parallax-img absolute top-8 right-2 z-20">
           <MagneticImage
-            src="/images/martina.webp"
+            src="/images/about2.jpg"
             initialRotate={6}
             className="w-22 aspect-[4/5] object-cover opacity-90 shadow-md rounded-sm"
           />
@@ -213,7 +213,7 @@ export default function FoundersSection() {
         {/* Bottom Left */}
         <div data-speed="1.1" className="parallax-img absolute bottom-12 left-2 z-10">
           <MagneticImage
-            src="/images/lab2.jpg"
+            src="/images/about3.jpg"
             initialRotate={3}
             className="w-24 aspect-square object-cover opacity-80 shadow-sm rounded-sm"
           />
@@ -221,7 +221,7 @@ export default function FoundersSection() {
         {/* Bottom Right */}
         <div data-speed="1.3" className="parallax-img absolute bottom-14 right-2 z-20">
           <MagneticImage
-            src="/images/lab3.jpg"
+            src="/images/about4.jpg"
             initialRotate={-6}
             className="w-22 aspect-[4/5] object-cover opacity-85 shadow-md rounded-sm"
           />
@@ -229,7 +229,7 @@ export default function FoundersSection() {
         {/* Bottom Center (Slightly overlaps bottom left and right images) */}
         <div data-speed="0.9" className="parallax-img absolute bottom-2 left-[26%] z-30">
           <MagneticImage
-            src="/images/tiziana.webp"
+            src="/images/about5.jpg"
             initialRotate={1}
             className="w-28 aspect-[4/3] object-cover opacity-85 shadow-lg rounded-sm"
           />
