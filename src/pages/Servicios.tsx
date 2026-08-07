@@ -88,6 +88,10 @@ export default function Servicios() {
                 {modalidadesInfo.description}
               </p>
             </Reveal>
+
+            <Reveal delay={0.7}>
+              <div className="w-full h-[1px] bg-ink/10 mt-16 md:mt-20" />
+            </Reveal>
           </div>
 
         </div>
