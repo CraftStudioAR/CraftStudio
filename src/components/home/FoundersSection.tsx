@@ -153,17 +153,17 @@ export default function FoundersSection() {
         {/* Top Left */}
         <div data-speed="1.1" className="parallax-img absolute top-28 left-[5%] z-10">
           <MagneticImage
-            src="/images/about1.jpg"
+            src="/images/about3.jpg"
             initialRotate={-2}
-            className="w-52 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-md"
+            className="w-60 aspect-square object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
         {/* Center Left (Overlaps bottom of Top Left) */}
         <div data-speed="0.8" className="parallax-img absolute top-[40%] left-[8%] z-20">
           <MagneticImage
-            src="/images/about3.jpg"
+            src="/images/about1.jpg"
             initialRotate={2}
-            className="w-72 aspect-square object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-64 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
           />
         </div>
         {/* Top Right */}
@@ -197,9 +197,9 @@ export default function FoundersSection() {
         {/* Top Left */}
         <div data-speed="1.2" className="parallax-img absolute top-10 left-2 z-10">
           <MagneticImage
-            src="/images/about1.jpg"
+            src="/images/about3.jpg"
             initialRotate={-6}
-            className="w-22 aspect-[3/4] object-cover opacity-80 shadow-sm rounded-sm"
+            className="w-24 aspect-square object-cover opacity-85 shadow-sm rounded-sm"
           />
         </div>
         {/* Top Right */}
@@ -213,9 +213,9 @@ export default function FoundersSection() {
         {/* Bottom Left */}
         <div data-speed="1.1" className="parallax-img absolute bottom-12 left-2 z-10">
           <MagneticImage
-            src="/images/about3.jpg"
+            src="/images/about1.jpg"
             initialRotate={3}
-            className="w-24 aspect-square object-cover opacity-80 shadow-sm rounded-sm"
+            className="w-22 aspect-[3/4] object-cover opacity-80 shadow-sm rounded-sm"
           />
         </div>
         {/* Bottom Right */}
