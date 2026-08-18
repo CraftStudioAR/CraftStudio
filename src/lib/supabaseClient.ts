@@ -29,7 +29,9 @@ export async function getProjects(): Promise<WorkCase[]> {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (error) {
+        console.error('[Supabase Error] getProjects:', error.message, error.details);
+      } else if (data && data.length > 0) {
         return data.map((item) => ({
           ...item,
           scope: typeof item.scope === 'string' ? JSON.parse(item.scope) : item.scope,
@@ -38,7 +40,7 @@ export async function getProjects(): Promise<WorkCase[]> {
         }));
       }
     } catch (e) {
-      console.warn('Supabase getProjects failed, falling back to localWork', e);
+      console.error('[Supabase Exception] getProjects:', e);
     }
   }
   return localWork;
@@ -56,7 +58,9 @@ export async function getProjectBySlug(slug: string): Promise<WorkCase | undefin
         .eq('slug', slug)
         .single();
 
-      if (!error && data) {
+      if (error) {
+        console.error(`[Supabase Error] getProjectBySlug (${slug}):`, error.message, error.details);
+      } else if (data) {
         return {
           ...data,
           scope: typeof data.scope === 'string' ? JSON.parse(data.scope) : data.scope,
@@ -65,7 +69,7 @@ export async function getProjectBySlug(slug: string): Promise<WorkCase | undefin
         };
       }
     } catch (e) {
-      console.warn(`Supabase getProjectBySlug (${slug}) failed, falling back to localWork`, e);
+      console.error(`[Supabase Exception] getProjectBySlug (${slug}):`, e);
     }
   }
   const projects = await getProjects();
@@ -83,11 +87,13 @@ export async function getCraftLabArticles() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (error) {
+        console.error('[Supabase Error] getCraftLabArticles:', error.message, error.details);
+      } else if (data && data.length > 0) {
         return data;
       }
     } catch (e) {
-      console.warn('Supabase getCraftLabArticles failed, falling back to localArticles', e);
+      console.error('[Supabase Exception] getCraftLabArticles:', e);
     }
   }
   return localArticles;
@@ -105,11 +111,13 @@ export async function getCraftLabArticleBySlug(slug: string) {
         .eq('slug', slug)
         .single();
 
-      if (!error && data) {
+      if (error) {
+        console.error(`[Supabase Error] getCraftLabArticleBySlug (${slug}):`, error.message, error.details);
+      } else if (data) {
         return data;
       }
     } catch (e) {
-      console.warn(`Supabase getCraftLabArticleBySlug (${slug}) failed, falling back to localArticles`, e);
+      console.error(`[Supabase Exception] getCraftLabArticleBySlug (${slug}):`, e);
     }
   }
   const articles = await getCraftLabArticles();
