@@ -160,7 +160,7 @@ export const work: WorkCase[] = [
     ],
     description:
       "Yokoo Studio atravesaba una etapa de crecimiento y necesitaba que su comunicación evolucionara al mismo ritmo que el negocio. Entre 2023 y septiembre de 2025 trabajamos de forma cercana con los fundadores y en articulación con las distintas áreas de la marca, desarrollando una estrategia de comunicación con enfoque en Growth Marketing.",
-    cover: { publicId: "1_ad1dsz", alt: "Campaña Yokoo Studio The Making: buzo navy con el logo dorado en el set de producción" },
+    cover: { publicId: "8_am0iqp", alt: "Modelo con buzo blanco Yokoo y raqueta al hombro en una cancha de tenis" },
     blocks: [
       {
         type: "image",
@@ -247,7 +247,7 @@ export const work: WorkCase[] = [
     scope: ["Estrategia de comunicación", "Dirección creativa", "Producción de contenido"],
     description:
       "Luego de su rebranding, Nómade necesitaba transformar su nueva identidad en una comunicación que conectara con las personas. Trabajamos junto al equipo de la marca para desarrollar una estrategia de contenido que diera continuidad al nuevo posicionamiento, llevando esa identidad al día a día a través de fotografía, video y una línea editorial coherente.",
-    cover: { publicId: "1_m9fjpj", alt: "Vaso de café con leche sobre una mesa azul con el logo de Nómade" },
+    cover: { publicId: "2_1_nywhqf", alt: "Vaso de café helado con leche sobre una mesa azul" },
     blocks: [
       {
         type: "imagePair",
@@ -326,7 +326,7 @@ export const work: WorkCase[] = [
     summary:
       "Desarrollamos una producción editorial para comunicar el universo de Dart Haus, un concept store donde la curaduría y la experiencia del espacio son parte central de la marca.",
     scope: ["Dirección de arte", "Producción fotográfica", "Styling", "Curaduría visual"],
-    cover: { publicId: "1_sotz3p", alt: "Retrato de perfil en blanco y negro con anillos de vidrio apoyados en el hombro" },
+    cover: { publicId: "2_oth8vi", alt: "Bodegón cenital de bases y potes de maquillaje sobre una bandeja negra" },
     blocks: [
       {
         type: "imagePair",
@@ -473,7 +473,54 @@ export const work: WorkCase[] = [
       },
     ],
   },
+  {
+    slug: "sunkiss",
+    client: "Sunkiss",
+    title: "Brand Growth en TikTok",
+    category: "Brand Partnership",
+    year: "2026",
+    summary:
+      "Desarrollamos una estrategia integral de TikTok para posicionar a Sunkiss en la plataforma, construir una comunidad y convertir el canal en una herramienta de crecimiento de marca.",
+    scope: [
+      "Brand Growth",
+      "Estrategia de Contenidos",
+      "UGC",
+      "Influencer Marketing",
+    ],
+    cover: { publicId: "1_eyavfy", alt: "Sunkiss Brand Growth en TikTok" },
+    blocks: [
+      {
+        type: "imagePair",
+        mobileLayout: "pair",
+        images: [
+          { publicId: "IMG_8816_qn0cej", alt: "Contenido Sunkiss TikTok" },
+          { publicId: "IMG_8817_uohpae", alt: "Contenido Sunkiss TikTok" },
+        ],
+      },
+      {
+        type: "imageText",
+        heightFrom: "image",
+        image: { publicId: "1_eyavfy", alt: "Sunkiss presencia de marca en TikTok" },
+        text:
+          "Sunkiss ya contaba con una identidad de marca definida, pero su presencia en TikTok todavía no tenía una estrategia ni un lenguaje propio. Partimos de un diagnóstico integral del canal, analizando su performance, audiencia y competencia para detectar oportunidades de crecimiento.\n\nA partir de ese análisis, construimos un plan estratégico de 90 días que incluyó definición de KPIs, posicionamiento dentro de la plataforma, optimización del perfil, pilares de contenido, estrategia creativa, formatos replicables, tendencias y lineamientos para UGC e influencers.\n\nLa estrategia combinó contenido educativo, institucional y aspiracional, buscando no solo aumentar el alcance, sino construir una presencia reconocible para Sunkiss y generar un recorrido desde el descubrimiento hasta la conversión.\n\nAl finalizar los primeros 90 días, la cuenta pasó de 5K a 11,2K seguidores, alcanzó 3,86 millones de visualizaciones y 3,79 millones de cuentas, superando ampliamente el objetivo inicial de crecimiento.",
+      },
+      {
+        type: "stats",
+        items: [
+          { value: 6211, prefix: "+", label: "seguidores" },
+          { value: 3.86, decimals: 2, suffix: " Millones", label: "de visualizaciones" },
+          { value: 15, prefix: "+", suffix: " K", label: "likes" },
+        ],
+      },
+      {
+        type: "image",
+        image: { publicId: "ANTES_Y_DESPUES_rnwysy", alt: "Gráfico de crecimiento Sunkiss" },
+      },
+    ],
+  },
 ];
+
+
 
 export const contactInfo = {
   email: "hola@craftstudio.com.ar",
@@ -481,7 +528,14 @@ export const contactInfo = {
   tagline: "We craft communication",
 };
 
+export const brandLogos = [
+  { publicId: "yokoo_jdzsmb", alt: "Yokoo Studio" },
+  { publicId: "sunkiss_l22ice", alt: "Sunkiss" },
+  { publicId: "nomade_zhi6vi", alt: "Nómade Café" },
+];
+
 export const contactForm = {
+
   needs: [
     "Estoy empezando un proyecto desde cero.",
     "Quiero hacer crecer una marca que ya existe.",

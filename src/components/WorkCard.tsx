@@ -64,8 +64,8 @@ export default function WorkCard({
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              {/* Degradado sólo al pie: la foto tiene que leerse, el nombre se apoya abajo. */}
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
+              {/* Degradado para legibilidad del texto en el centro */}
+              <div className="absolute inset-0 bg-ink/40 transition-opacity duration-500 group-hover:bg-ink/50" />
             </>
           ) : (
             <GlyphMark
@@ -74,10 +74,12 @@ export default function WorkCard({
             />
           )}
 
-          {/* El nombre de la marca va con nuestra tipografía, nunca con su logo. */}
-          <span className="font-sans font-bold uppercase tracking-[0.28em] absolute bottom-7 left-6 right-16 text-left text-lg sm:text-xl md:text-2xl leading-tight text-cream/95 transition-transform duration-700 ease-out origin-bottom-left group-hover:scale-105">
-            {work.client}
-          </span>
+          {/* El nombre de la marca centrado en la card */}
+          <div className="absolute inset-0 flex items-center justify-center text-center p-8 z-10">
+            <span className="font-sans font-bold uppercase tracking-[0.28em] text-center text-xl sm:text-2xl md:text-3xl leading-tight text-cream drop-shadow-md transition-transform duration-700 ease-out group-hover:scale-110">
+              {work.client}
+            </span>
+          </div>
 
           <div className="grain-overlay !absolute !opacity-15" />
           <div className="glass-sheen" />

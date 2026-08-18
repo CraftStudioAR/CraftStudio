@@ -182,12 +182,12 @@ export default function FoundersSection() {
             className="w-56 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
-        {/* Bottom Center */}
-        <div data-speed="0.7" className="parallax-img absolute bottom-6 left-[33%] z-15">
+        {/* Bottom Left */}
+        <div data-speed="0.7" className="parallax-img absolute top-[70%] left-[16%] z-10">
           <MagneticImage
             src="/images/about5.jpg"
-            initialRotate={1}
-            className="w-64 aspect-[4/3] object-cover opacity-80 rounded-sm shadow-md"
+            initialRotate={-3}
+            className="w-64 md:w-72 aspect-[4/3] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
       </div>
@@ -226,12 +226,12 @@ export default function FoundersSection() {
             className="w-22 aspect-[4/5] object-cover opacity-85 shadow-md rounded-sm"
           />
         </div>
-        {/* Bottom Center (Slightly overlaps bottom left and right images) */}
-        <div data-speed="0.9" className="parallax-img absolute bottom-2 left-[26%] z-30">
+        {/* Bottom Left */}
+        <div data-speed="0.9" className="parallax-img absolute bottom-2 left-2 z-20">
           <MagneticImage
             src="/images/about5.jpg"
-            initialRotate={1}
-            className="w-28 aspect-[4/3] object-cover opacity-85 shadow-lg rounded-sm"
+            initialRotate={-2}
+            className="w-28 aspect-[4/3] object-cover opacity-90 shadow-md rounded-sm"
           />
         </div>
       </div>
@@ -239,10 +239,10 @@ export default function FoundersSection() {
       <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
         
         {/* Declaración Principal */}
-        <div className="text-center max-w-3xl mx-auto my-14 md:my-0 mb-14 md:mb-18 px-6 sm:px-4">
+        <div className="text-center max-w-3xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-6 sm:px-4">
           <p
             ref={textRef}
-            className="font-serif text-[30px] sm:text-[38px] md:text-6xl lg:text-7xl leading-[1.18] md:leading-[1.1] text-ink/90 text-balance mb-6 md:mb-8"
+            className="font-serif text-[30px] sm:text-[38px] md:text-6xl lg:text-7xl leading-[1.18] md:leading-[1.1] text-ink/90 text-balance mb-2 md:mb-3"
           >
             {manifesto.map((w, i) => (
               <span key={i} className={`inline-block mr-[0.25em] gsap-word ${w.s}`}>
@@ -250,12 +250,13 @@ export default function FoundersSection() {
               </span>
             ))}
           </p>
-          <div className="max-w-xl mx-auto mt-4 md:mt-6 text-center text-balance">
-            <p className="text-sm sm:text-base md:text-lg text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#f2ebe9,_0_0_20px_#f2ebe9]">
-              Construimos sistemas que escalan y representan aquello que hace único a cada proyecto.
+          <div className="max-w-xl mx-auto mt-1 md:mt-2 text-center text-balance">
+            <p className="text-base sm:text-lg md:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
+              Desarrollamos sistemas que escalan y representan aquello que hace único a cada proyecto.
             </p>
           </div>
         </div>
+
         
       </div>
     </section>

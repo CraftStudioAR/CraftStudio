@@ -6,6 +6,7 @@ import ServicesSection from "../components/home/ServicesSection";
 
 import LabSection from "../components/home/LabSection";
 import StudioSection from "../components/home/StudioSection";
+import { brandLogos } from "../content/brand";
 
 export default function Home() {
   return (
@@ -25,9 +26,10 @@ export default function Home() {
       {/* 5. Brands Marquee (Clean, faded edges) */}
       <div className="relative z-20 w-full bg-cream pt-2 pb-12 md:pt-4 md:pb-20 border-b border-ink/5">
         <div className="mx-auto w-full max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          <Marquee items={["Logo Marca", "Logo Marca", "Logo Marca", "Logo Marca", "Logo Marca", "Logo Marca", "Logo Marca"]} className="text-ink" />
+          <Marquee items={brandLogos} className="text-ink" />
         </div>
       </div>
+
 
 
       {/* 7. Craft Lab (Editorial) */}

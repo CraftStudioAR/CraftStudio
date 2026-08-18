@@ -44,50 +44,54 @@ export default function TrabajoDetalle() {
   return (
     <div className="bg-cream min-h-screen text-ink selection:bg-red selection:text-cream">
       
-      {/* 1. HEADER / VOLVER */}
-      <div className="px-6 pt-32 pb-8 md:px-10 md:pt-40 max-w-[1400px] mx-auto">
-        <Link 
-          to="/trabajos"
-          className="inline-flex items-center gap-3 text-xs tracking-widest uppercase font-bold text-red hover:opacity-70 transition-opacity"
-        >
-          <span>←</span>
-          <span className="border-b border-red/30 pb-0.5">Volver a todos los trabajos</span>
-        </Link>
-      </div>
+      {/* 1. HERO DEL PROYECTO */}
+      <section className="px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-32 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto">
 
-      {/* 2. HERO DEL PROYECTO */}
-      <section className="px-6 pb-20 md:px-10 md:pb-32 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          {/* Volver */}
+          <div className="mb-10">
+            <Link 
+              to="/trabajos"
+              className="inline-flex items-center gap-3 text-xs tracking-widest uppercase font-bold text-red hover:opacity-70 transition-opacity"
+            >
+              <span>←</span>
+              <span className="border-b border-red/30 pb-0.5">Volver a todos los trabajos</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 flex flex-col gap-6 md:gap-8"
+            className="lg:col-span-7 flex flex-col gap-4 md:gap-5"
           >
-            {project.title && (
-              <motion.p
-                variants={itemVariants}
-                className="text-xs font-bold tracking-widest uppercase text-red"
-              >
-                {project.title}
-              </motion.p>
-            )}
-
+            {/* Título principal: tipo de trabajo */}
             <motion.h1
               variants={itemVariants}
               className={`font-serif italic leading-[0.95] tracking-tight text-navy text-balance ${
-                project.client.length > 28
+                (project.title ?? project.client).length > 28
                   ? "text-4xl md:text-6xl lg:text-7xl"
                   : "text-6xl md:text-8xl lg:text-[9rem]"
               }`}
             >
-              {project.client}
+              {project.title ?? project.client}
             </motion.h1>
+
+            {/* Nombre de la marca debajo, más chico */}
+            {project.title && (
+              <motion.p
+                variants={itemVariants}
+                className="font-sans font-bold uppercase tracking-widest text-sm md:text-base text-ink/70"
+              >
+                {project.client}
+              </motion.p>
+            )}
             
-            <motion.div variants={itemVariants} className="w-24 h-[1px] bg-red"></motion.div>
+            <motion.div variants={itemVariants} className="w-16 h-[1px] bg-red mt-1"></motion.div>
             
-            <motion.p variants={itemVariants} className="text-lg md:text-xl lg:text-2xl font-medium leading-[1.4] text-balance max-w-2xl">
+            <motion.p variants={itemVariants} className="text-base md:text-lg font-medium leading-[1.5] text-balance max-w-2xl text-ink/80">
               {project.summary}
             </motion.p>
           </motion.div>
@@ -115,7 +119,7 @@ export default function TrabajoDetalle() {
                   {project.scope.map((item) => (
                     <span
                       key={item}
-                      className="px-4 py-2 rounded-2xl text-sm tracking-wide font-medium bg-ink/5 border border-ink/10"
+                      className="px-3 py-1.5 rounded text-xs tracking-wide font-medium bg-ink/5 border border-ink/10"
                     >
                       {item}
                     </span>
@@ -125,8 +129,10 @@ export default function TrabajoDetalle() {
             )}
           </motion.div>
 
+          </div>
         </div>
       </section>
+
 
       {/* 3. GALERÍA DEL PROYECTO — la descripción se intercala después de la
              primera imagen, para que el caso abra mostrando el trabajo. */}

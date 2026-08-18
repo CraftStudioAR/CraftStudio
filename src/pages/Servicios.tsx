@@ -102,7 +102,7 @@ export default function Servicios() {
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="mb-10 max-w-3xl">
-              <h2 className="font-serif italic text-5xl md:text-7xl text-navy mb-4">{programasInfo.title}</h2>
+              <h2 className="font-sans font-bold uppercase tracking-tight text-4xl md:text-6xl text-navy mb-4">{programasInfo.title}</h2>
               <p className="text-lg md:text-2xl font-medium">{programasInfo.description}</p>
             </div>
           </Reveal>
@@ -116,6 +116,7 @@ export default function Servicios() {
                 <motion.div 
                   key={`desktop-prog-${s.n}`}
                   onClick={() => setActiveProgramas(i)}
+                  onMouseEnter={() => setActiveProgramas(i)}
                   animate={{ flex: isActive ? 3 : 0.5 }}
                   transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
                   className={`relative overflow-hidden rounded-2xl cursor-pointer flex-shrink-0 ${cardColors[i]}`}
@@ -221,7 +222,7 @@ export default function Servicios() {
             </Reveal>
 
             <Reveal delay={0.2} className="lg:col-span-5">
-              <div className="bg-navy text-cream rounded-2xl p-8 md:p-12 h-full flex flex-col gap-6 shadow-2xl">
+              <div className="bg-white text-ink rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] p-8 md:p-12 h-full flex flex-col gap-6">
                 <h3 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-red">
                   <span className="w-6 h-[1px] bg-red" /> Ideal para
                 </h3>
@@ -243,10 +244,10 @@ export default function Servicios() {
       <div ref={ctaRef} className="px-4 md:px-10 pb-10 md:pb-20 pt-10 md:pt-16 perspective-1000 bg-cream">
         <motion.section 
           style={{ scale }}
-          className="bg-navy relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20"
+          className="bg-red relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20"
         >
           {/* Animated Background Gradients inside the card */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3"></div>
           
           <div className="absolute inset-0 z-0 pointer-events-none opacity-40 hidden md:block">
@@ -254,7 +255,7 @@ export default function Servicios() {
               beamWidth={2}
               beamHeight={20}
               beamNumber={40}
-              lightColor="#F2EBE9"
+              lightColor="#FEFAF9"
               speed={2}
               noiseIntensity={1.75}
               scale={0.2}
@@ -264,17 +265,17 @@ export default function Servicios() {
           
           <div className="lg:w-5/12 flex flex-col relative z-10 text-center lg:text-left h-full">
             <Reveal>
-              <p className="text-xs tracking-widest text-red uppercase font-bold mb-6 flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-8 h-[1px] bg-red" /> Siguiente paso
+              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-6 flex items-center justify-center lg:justify-start gap-4">
+                <span className="w-8 h-[1px] bg-cream/50" /> Siguiente paso
               </p>
-              <h2 className="font-serif italic text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight mb-8">
+              <h2 className="font-serif italic text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight mb-8 text-cream">
                 ¿Por dónde <br className="hidden lg:block"/>empezar?
               </h2>
 
               <div className="mt-8 lg:mt-12 flex flex-col items-center lg:items-start gap-8">
                 <a
                   href="/contacto" 
-                  className="group/btn relative inline-flex items-center gap-6 bg-cream text-navy px-10 py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden"
+                  className="group/btn relative inline-flex items-center gap-6 bg-cream text-red px-10 py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden shadow-lg"
                 >
                   <span className="relative z-10 text-xs md:text-sm">Agendar Diagnóstico</span>
                   <span className="relative z-10 text-xl group-hover/btn:translate-x-2 transition-transform duration-500">{"\u2192\uFE0E"}</span>

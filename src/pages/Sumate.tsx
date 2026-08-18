@@ -43,6 +43,8 @@ export default function Sumate() {
   const [activeStep, setActiveStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   
   const [area, setArea] = useState<string | null>(null);
   const [otherArea, setOtherArea] = useState("");
@@ -61,9 +63,52 @@ export default function Sumate() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || '';
+      if (!accessKey) {
+        console.warn('VITE_WEB3FORMS_KEY no está configurada.');
+        setSent(true);
+        return;
+      }
+
+      const selectedArea = area === 'Otro' && otherArea ? `Otro (${otherArea})` : area;
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `Nuevo Perfil Postulante - ${formData.nombre} (${selectedArea})`,
+          from_name: formData.nombre,
+          reply_to: formData.email,
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          ciudad: formData.ciudad,
+          area: selectedArea,
+          portfolio: formData.portfolio,
+          tareas: formData.tareas,
+          interes: formData.interes,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setSubmitError(data.message || 'Error al enviar el perfil.');
+      }
+    } catch (err: any) {
+      console.error('Error submitting form to Web3Forms:', err);
+      setSubmitError('Ocurrió un error al enviar tu postulación. Por favor, intentá nuevamente.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function nextStep() {
@@ -303,21 +348,29 @@ export default function Sumate() {
                           </div>
 
                           <div className="flex justify-between items-center mt-auto pt-6">
-                            <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
-                              <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                              Atrás
-                            </button>
-                            <Magnetic strength={0.2}>
-                              <button
-                                type="submit"
-                                className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-full text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613]"
-                                disabled={!formData.nombre || !formData.ciudad || !formData.telefono || !formData.email}
-                              >
-                                Enviar Perfil
-                                <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                              </button>
-                            </Magnetic>
-                          </div>
+                             <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                               <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                               Atrás
+                             </button>
+                             
+                             <div className="flex flex-col items-end gap-2">
+                               {submitError && (
+                                 <p className="text-red text-[10px] font-bold uppercase tracking-widest mb-1 animate-fadeIn">
+                                   {submitError}
+                                 </p>
+                               )}
+                               <Magnetic strength={0.2}>
+                                 <button
+                                   type="submit"
+                                   className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613] cursor-pointer"
+                                   disabled={!formData.nombre || !formData.ciudad || !formData.telefono || !formData.email || submitting}
+                                 >
+                                   {submitting ? 'Enviando...' : 'Enviar Perfil'}
+                                   <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                 </button>
+                               </Magnetic>
+                             </div>
+                           </div>
                         </motion.div>
                       )}
 

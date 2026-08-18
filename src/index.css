@@ -4,7 +4,7 @@
    Cualquier variación tonal se resuelve con opacidad (/NN), nunca con un
    hex nuevo: Sweet White, Rosso Corsa, Pure Black, Prusian Blue. */
 @theme {
-  --color-cream: #f2ebe9;
+  --color-cream: #FEFAF9;
   --color-red: #a52f18;
   --color-ink: #000000;
   --color-navy: #0a0424;
@@ -40,8 +40,14 @@
     color: var(--color-cream);
   }
 
-  a, button, [role="button"] {
+  a, button, [role="button"], .cursor-pointer, [data-cursor] {
     cursor: none !important;
+  }
+
+  @media (pointer: fine) {
+    *, ::before, ::after {
+      cursor: none !important;
+    }
   }
 
   a {
