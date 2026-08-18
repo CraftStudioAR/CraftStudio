@@ -28,12 +28,14 @@ function Img({
   image,
   transforms,
   className = "",
+  imgClassName = "",
   aspect,
   onOpen,
 }: {
   image: ProjectImage;
   transforms?: string;
   className?: string;
+  imgClassName?: string;
   /** CSS aspect-ratio value (ej. "9 / 10"). Se aplica vía style porque Tailwind no puede generar clases con valores dinámicos. */
   aspect?: string;
   onOpen: () => void;
@@ -43,14 +45,14 @@ function Img({
       type="button"
       onClick={onOpen}
       aria-label={`Ampliar imagen: ${image.alt}`}
-      className="group/img block w-full overflow-hidden rounded-2xl"
+      className={`group/img block w-full overflow-hidden rounded-2xl ${className}`}
     >
       <img
         src={cld(image.publicId, transforms)}
         alt={image.alt}
         loading="lazy"
         style={aspect ? { aspectRatio: aspect } : undefined}
-        className={`w-full transition-transform duration-700 ease-out group-hover/img:scale-[1.03] ${className}`}
+        className={`w-full transition-transform duration-700 ease-out group-hover/img:scale-[1.03] rounded-2xl ${imgClassName}`}
       />
     </button>
   );
@@ -246,10 +248,12 @@ function Block({
 
     case "imageFeature":
       return (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 items-stretch">
           <Img
             image={block.main}
             transforms="f_auto,q_auto,w_1200"
+            className="h-full"
+            imgClassName="h-full object-cover"
             onOpen={() => onOpen(startIndex)}
           />
           <div className="grid grid-cols-2 gap-3 self-start md:grid-cols-1 md:gap-6">
