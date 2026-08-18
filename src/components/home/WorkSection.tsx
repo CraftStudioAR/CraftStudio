@@ -1,19 +1,27 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "../Reveal";
 import Magnetic from "../Magnetic";
 import WorkCard from "../WorkCard";
-import { work } from "../../content/brand";
+import { getProjects } from "../../lib/supabaseClient";
+import type { WorkCase } from "../../content/brand";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkSection() {
+  const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
   const workContainerRef = useRef<HTMLDivElement>(null);
   const workScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    getProjects().then(setProjectsList);
+  }, []);
+
+  useEffect(() => {
+    if (projectsList.length === 0) return;
+
     const ctx = gsap.context(() => {
       // Horizontal Scroll for Work Section
       if (workContainerRef.current && workScrollRef.current) {
@@ -45,7 +53,7 @@ export default function WorkSection() {
     }, workContainerRef);
     
     return () => ctx.revert();
-  }, []);
+  }, [projectsList]);
 
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-start relative">
@@ -69,9 +77,9 @@ export default function WorkSection() {
       {/* Horizontal scroll track */}
       <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-36">
         <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-20 pr-16 md:pr-32 items-start">
-          {work.map((w, i) => (
+          {projectsList.map((w, i) => (
             <div key={w.slug} className="w-[84vw] sm:w-[85vw] md:w-[85vw] max-w-md shrink-0">
-              <WorkCard work={w} index={i} total={work.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
+              <WorkCard work={w} index={i} total={projectsList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>
           ))}
         </div>

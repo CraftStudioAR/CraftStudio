@@ -1,15 +1,33 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
 import ProjectBlocks from "../components/work/ProjectBlocks";
-import { work } from "../content/brand";
+import { getProjectBySlug } from "../lib/supabaseClient";
+import type { WorkCase } from "../content/brand";
 
 export default function TrabajoDetalle() {
   const { slug } = useParams();
-  const project = work.find((w) => w.slug === slug);
+  const [project, setProject] = useState<WorkCase | undefined | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (slug) {
+      setLoading(true);
+      getProjectBySlug(slug).then((proj) => {
+        setProject(proj || undefined);
+        setLoading(false);
+      });
+    }
+  }, [slug]);
 
+  if (loading) {
+    return (
+      <div className="bg-cream min-h-screen flex items-center justify-center text-ink font-mono text-xs">
+        Cargando caso...
+      </div>
+    );
+  }
 
   if (!project) {
     return <Navigate to="/trabajos" replace />;

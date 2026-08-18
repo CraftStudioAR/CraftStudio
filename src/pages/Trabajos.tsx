@@ -1,9 +1,16 @@
+import { useState, useEffect } from "react";
 import Reveal from "../components/Reveal";
 import WorkCard from "../components/WorkCard";
-import { work } from "../content/brand";
+import { getProjects } from "../lib/supabaseClient";
+import type { WorkCase } from "../content/brand";
 import { motion } from "motion/react";
 
 export default function Trabajos() {
+  const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
+
+  useEffect(() => {
+    getProjects().then(setProjectsList);
+  }, []);
   const titleVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,9 +88,9 @@ export default function Trabajos() {
       {/* 2. GRILLA DE TRABAJOS (Sin cambios estructurales) */}
       <section className="px-6 pb-32 md:px-10">
         <div className="mx-auto grid max-w-[1400px] gap-x-8 gap-y-12 md:gap-y-20 md:grid-cols-2">
-          {work.map((w, i) => (
+          {projectsList.map((w, i) => (
             <Reveal key={w.slug} delay={(i % 2) * 0.08} className="min-w-0 w-full">
-              <WorkCard work={w} index={i} total={work.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
+              <WorkCard work={w} index={i} total={projectsList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </Reveal>
           ))}
         </div>

@@ -1,17 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Reveal from "../components/Reveal";
-import { articles } from "../content/lab";
+import { getCraftLabArticleBySlug } from "../lib/supabaseClient";
+import { getImageUrl } from "../lib/cloudinary";
+
+interface Article {
+  id: string;
+  slug: string;
+  date: string;
+  title: string;
+  category: string;
+  image: string;
+  desc: string;
+  aspect?: string;
+  content: string;
+}
 
 export default function LabDetalle() {
   const { slug } = useParams();
-  
-  // Encontrar el artículo correspondiente al slug
-  const article = articles.find((a) => a.slug === slug);
+  const [article, setArticle] = useState<Article | undefined | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (slug) {
+      setLoading(true);
+      getCraftLabArticleBySlug(slug).then((data: any) => {
+        setArticle(data || undefined);
+        setLoading(false);
+      });
+    }
+  }, [slug]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="bg-cream min-h-screen flex items-center justify-center text-ink font-mono text-xs">
+        Cargando artículo...
+      </div>
+    );
+  }
 
   if (!article) {
     return <Navigate to="/craft-lab" replace />;
@@ -63,7 +94,7 @@ export default function LabDetalle() {
         <Reveal delay={0.4}>
           <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-[2rem] overflow-hidden relative bg-ink/5">
             <img 
-              src={article.image} 
+              src={getImageUrl(article.image)} 
               alt={article.title} 
               className="absolute inset-0 w-full h-full object-cover"
             />

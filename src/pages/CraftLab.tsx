@@ -1,8 +1,27 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Reveal from "../components/Reveal";
-import { articles } from "../content/lab";
+import { getCraftLabArticles } from "../lib/supabaseClient";
+import { getImageUrl } from "../lib/cloudinary";
+
+interface Article {
+  id: string;
+  slug: string;
+  date: string;
+  title: string;
+  category: string;
+  image: string;
+  desc: string;
+  aspect?: string;
+  content: string;
+}
 
 export default function CraftLab() {
+  const [articlesList, setArticlesList] = useState<Article[]>([]);
+
+  useEffect(() => {
+    getCraftLabArticles().then((data: any) => setArticlesList(data));
+  }, []);
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       
@@ -32,14 +51,14 @@ export default function CraftLab() {
           {/* CSS Columns para efecto Masonry real */}
           <div className="columns-1 md:columns-2 lg:columns-3 gap-8 md:gap-12 lg:gap-16">
             
-            {articles.map((article, index) => (
+            {articlesList.map((article, index) => (
               <Reveal key={article.id} delay={0.1 * (index % 3)}>
                 <Link to={`/craft-lab/${article.slug}`} className="break-inside-avoid mb-16 flex flex-col group cursor-pointer block">
                   
                   {/* Tarjeta Visual */}
-                  <div className={`relative w-full ${article.aspect} overflow-hidden rounded-2xl bg-ink/5 mb-6`}>
+                  <div className={`relative w-full ${article.aspect || 'aspect-[4/5]'} overflow-hidden rounded-2xl bg-ink/5 mb-6`}>
                     <img 
-                      src={article.image} 
+                      src={getImageUrl(article.image)} 
                       alt={article.title} 
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
