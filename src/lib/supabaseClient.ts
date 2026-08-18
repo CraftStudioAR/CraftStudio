@@ -12,6 +12,8 @@ export const isSupabaseConfigured = Boolean(
   supabaseUrl.includes('supabase.co')
 );
 
+console.log('[DEBUG] Supabase Configured:', isSupabaseConfigured, 'URL:', supabaseUrl);
+
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
