@@ -38,7 +38,12 @@ export default function Nav() {
 
       for (const x of points) {
         const elements = document.elementsFromPoint(x, navY);
-        const themeElement = elements.find(el => el.hasAttribute('data-theme'));
+        const themeElement = elements.find(el => {
+          if (!el.hasAttribute('data-theme')) return false;
+          // Ignorar tarjetas individuales de proyectos (WorkCards) u otros elementos interactivos pequeños
+          const isInteractiveOrCard = el.tagName === 'A' || el.tagName === 'BUTTON' || el.classList.contains('group') || el.closest('.group');
+          return !isInteractiveOrCard;
+        });
         
         if (themeElement && themeElement.getAttribute('data-theme') === 'dark') {
           isDark = true;
