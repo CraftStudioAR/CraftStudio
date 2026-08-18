@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import Reveal from "../components/Reveal";
 import { getCraftLabArticleBySlug } from "../lib/supabaseClient";
 import { getImageUrl } from "../lib/cloudinary";
+import ProjectBlocks from "../components/work/ProjectBlocks";
 
 interface Article {
   id: string;
@@ -14,6 +15,7 @@ interface Article {
   desc: string;
   aspect?: string;
   content: string;
+  blocks?: any[];
 }
 
 export default function LabDetalle() {
@@ -104,14 +106,18 @@ export default function LabDetalle() {
 
       {/* CONTENIDO (READING COLUMN) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
-        <div className="max-w-3xl mx-auto space-y-8 md:space-y-12">
-          {paragraphs.map((paragraph, index) => (
-            <Reveal key={index} delay={0.1}>
-              <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif">
-                {paragraph}
-              </p>
-            </Reveal>
-          ))}
+        <div className={`${article.blocks && article.blocks.length > 0 ? 'max-w-6xl' : 'max-w-3xl'} mx-auto space-y-8 md:space-y-12`}>
+          {article.blocks && article.blocks.length > 0 ? (
+            <ProjectBlocks blocks={article.blocks} />
+          ) : (
+            paragraphs.map((paragraph, index) => (
+              <Reveal key={index} delay={0.1}>
+                <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif">
+                  {paragraph}
+                </p>
+              </Reveal>
+            ))
+          )}
           
           <Reveal>
             <div className="mt-20 pt-10 border-t border-ink/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
