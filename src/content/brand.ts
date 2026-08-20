@@ -17,7 +17,7 @@ export const modalidadesInfo = {
 };
 
 export const programasInfo = {
-  title: "PROGRAMAS",
+  title: "PROGRAMS",
   description: "Construimos la dirección de una marca a través de procesos estratégicos que responden a distintos momentos: crear, reposicionar o actualizar."
 };
 
