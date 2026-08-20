@@ -226,14 +226,16 @@ export default function Servicios() {
                 <h3 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-red">
                   <span className="w-6 h-[1px] bg-red" /> Ideal para
                 </h3>
-                <ul className="flex flex-col gap-4">
+                <div className="flex flex-wrap gap-2">
                   {brandPartnershipsInfo.ideal.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-base md:text-lg leading-snug">
-                      <span className="text-red mt-[0.35em] shrink-0">✦</span>
-                      <span className="opacity-90">{item}</span>
-                    </li>
+                    <span 
+                      key={item} 
+                      className="px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border bg-ink/5 border-ink/10 text-ink/80"
+                    >
+                      {item}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             </Reveal>
           </div>
