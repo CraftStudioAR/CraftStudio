@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
-import Beams from "../components/Beams";
 import { programas, programasInfo, brandPartnershipsInfo, modalidadesInfo } from "../content/brand";
 
 export default function Servicios() {
