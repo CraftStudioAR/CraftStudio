@@ -235,7 +235,7 @@ export default function Servicios() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-10% 0px" }}
-              className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-10 max-w-6xl w-full"
+              className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-10 w-full"
             >
               
               {/* Detail & Scope Columns */}
