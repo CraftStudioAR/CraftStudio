@@ -293,7 +293,7 @@ function Block({
 
       return (
         <div
-          className={`grid items-start gap-3 md:grid-cols-2 md:gap-6 ${
+          className={`grid items-stretch gap-3 md:grid-cols-2 md:gap-6 ${
             stackOnMobile ? "grid-cols-1" : "grid-cols-2"
           }`}
         >
@@ -303,7 +303,8 @@ function Block({
               image={image}
               transforms="f_auto,q_auto,w_1200"
               aspect={block.aspect}
-              className={block.aspect ? "object-cover" : ""}
+              className="h-full w-full"
+              imgClassName="h-full object-cover"
               onOpen={() => onOpen(startIndex + i)}
             />
           ))}
