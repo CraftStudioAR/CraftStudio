@@ -123,7 +123,12 @@ export type ProjectBlock =
       /** Métrica destacada, en una fila propia al pie del panel. */
       highlight?: Stat;
     }
-  | { type: "testimonial"; quote: string; author: string; role: string };
+  | { type: "testimonial"; quote: string; author: string; role: string }
+  | {
+      type: "text";
+      text: string;
+      align?: "left" | "center" | "right";
+    };
 
 export type WorkCase = {
   slug: string;

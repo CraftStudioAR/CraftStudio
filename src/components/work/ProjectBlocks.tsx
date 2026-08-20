@@ -20,6 +20,7 @@ function blockImages(block: ProjectBlock): ProjectImage[] {
     case "keywords":
     case "stats":
     case "testimonial":
+    case "text":
       return [];
   }
 }
@@ -371,5 +372,14 @@ function Block({
 
     case "testimonial":
       return <Testimonial quote={block.quote} author={block.author} role={block.role} />;
+
+    case "text":
+      return (
+        <div className="max-w-3xl mx-auto w-full px-6 md:px-0 my-4">
+          <p className={`text-lg md:text-2xl text-ink/80 leading-relaxed font-serif text-${block.align || "left"} whitespace-pre-line`}>
+            {block.text}
+          </p>
+        </div>
+      );
   }
 }
