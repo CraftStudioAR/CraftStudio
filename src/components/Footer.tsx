@@ -32,7 +32,7 @@ export default function Footer() {
             <h3 className="text-[10px] tracking-widest uppercase text-cream/40 mb-1 font-semibold">
               Navegación
             </h3>
-            <div className="flex flex-col gap-2.5">
+            <div className="grid grid-cols-2 md:flex md:flex-col gap-x-4 gap-y-2.5">
               {nav.map((item) => (
                 <Link 
                   key={item.to} 
@@ -51,7 +51,7 @@ export default function Footer() {
             <h3 className="text-[10px] tracking-widest uppercase text-cream/40 mb-1 font-semibold">
               Contacto
             </h3>
-            <div className="flex flex-col gap-2.5">
+            <div className="grid grid-cols-2 md:flex md:flex-col gap-x-4 gap-y-2.5">
               <a 
                 href={`mailto:${contactInfo.email}`} 
                 className="text-sm transition-colors opacity-70 hover:opacity-100 hover:text-cream w-fit"
