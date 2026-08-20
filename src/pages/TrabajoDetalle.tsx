@@ -101,7 +101,7 @@ export default function TrabajoDetalle() {
             {project.title && (
               <motion.p
                 variants={itemVariants}
-                className="font-sans font-bold uppercase tracking-widest text-lg md:text-xl text-ink/70"
+                className="font-sans font-bold uppercase tracking-widest text-xl md:text-2xl text-ink/70"
               >
                 {project.client}
               </motion.p>
