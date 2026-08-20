@@ -244,24 +244,13 @@ export default function Servicios() {
       <div ref={ctaRef} className="px-4 md:px-10 pb-10 md:pb-20 pt-10 md:pt-16 perspective-1000 bg-cream">
         <motion.section 
           style={{ scale }}
-          className="bg-red relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20"
+          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20 border border-white/10 backdrop-blur-xl"
         >
-          {/* Animated Background Gradients inside the card */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3"></div>
-          
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-40 hidden md:block">
-            <Beams
-              beamWidth={2}
-              beamHeight={20}
-              beamNumber={40}
-              lightColor="#FEFAF9"
-              speed={2}
-              noiseIntensity={1.75}
-              scale={0.2}
-              rotation={0}
-            />
-          </div>
+          {/* Textura y efectos de luz glassmorphism */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
+          <div className="glass-sheen" />
           
           <div className="lg:w-5/12 flex flex-col relative z-10 text-center lg:text-left h-full">
             <Reveal>
