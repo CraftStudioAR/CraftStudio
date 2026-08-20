@@ -209,34 +209,34 @@ export default function Servicios() {
 
           <div className="mt-4">
             <Reveal>
-              <div className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-8 max-w-5xl mx-auto">
+              <div className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-10 max-w-6xl ml-auto w-full">
                 
                 {/* Detail & Scope Columns */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                  <p className="text-lg md:text-xl leading-relaxed opacity-95">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                  <p className="text-xl md:text-2xl font-medium leading-relaxed opacity-95">
                     {brandPartnershipsInfo.detail}
                   </p>
-                  <p className="text-lg md:text-xl leading-relaxed opacity-95">
+                  <p className="text-xl md:text-2xl font-medium leading-relaxed opacity-95">
                     {brandPartnershipsInfo.scope}
                   </p>
                 </div>
                 
                 {/* Divider Line with Text */}
-                <div className="relative flex items-center justify-center my-2">
+                <div className="relative flex items-center justify-center my-4">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-cream/20"></div>
                   </div>
-                  <div className="relative bg-[#a52f18] px-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-cream/70">
+                  <div className="relative bg-[#a52f18] px-6 text-xs md:text-sm font-bold tracking-widest uppercase text-cream/70">
                     Fit Ideal
                   </div>
                 </div>
 
                 {/* Fit Ideal Pills */}
-                <div className="flex flex-wrap justify-center gap-2">
+                <div className="flex flex-wrap justify-center gap-3">
                   {brandPartnershipsInfo.ideal.map((item) => (
                     <span 
                       key={item} 
-                      className="px-3.5 py-2 rounded-full text-xs tracking-wide font-medium border bg-white/10 border-white/20 text-cream leading-tight text-center"
+                      className="px-4.5 py-2.5 rounded-full text-xs md:text-sm tracking-wide font-medium border bg-white/10 border-white/20 text-cream leading-tight text-center"
                     >
                       {item}
                     </span>
