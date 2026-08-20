@@ -202,7 +202,7 @@ export default function Servicios() {
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="mb-10 max-w-3xl">
-              <h2 className="font-serif italic text-5xl md:text-7xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
+              <h2 className="font-sans font-bold uppercase tracking-tight text-4xl md:text-6xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
               <p className="text-lg md:text-2xl font-medium">{brandPartnershipsInfo.description}</p>
             </div>
           </Reveal>
