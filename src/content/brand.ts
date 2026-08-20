@@ -544,7 +544,7 @@ export const contactForm = {
   needs: [
     "Estoy empezando un proyecto desde cero.",
     "Quiero hacer crecer una marca que ya existe.",
-    "Necesito relanzar o reposicionar mi marca.",
+    "Necesito relanzar mi marca o cambiar mi imagen.",
     "Me interesa lanzar una campaña específica para mi proyecto.",
     "No estoy seguro, me gustaría recibir orientación.",
   ],

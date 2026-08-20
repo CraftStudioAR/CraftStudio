@@ -139,7 +139,7 @@ export default function Sumate() {
       <div className="px-6 pt-32 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
           
           {/* ENCABEZADO CENTRADO */}
-          <div className="w-full text-center flex flex-col items-center mb-16 relative z-10">
+          <div className="w-full text-center flex flex-col items-center mb-10 relative z-10">
             <div>
               <Reveal>
                 <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
@@ -148,8 +148,8 @@ export default function Sumate() {
                 <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                   Contanos quién sos
                 </h1>
-                <p className="mt-8 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
-                  No buscamos perfiles para ejecutar tareas. Buscamos personas que piensen, que hagan preguntas y que se involucren de verdad con cada proyecto.
+                <p className="mt-4 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
+                  Buscamos personas que disfruten proponer, preguntar, construir en equipo y meterse de lleno en cada proyecto. Si te sentís identificado/a, nos encantaría conocerte!
                 </p>
               </Reveal>
             </div>
