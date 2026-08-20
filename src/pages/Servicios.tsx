@@ -207,34 +207,42 @@ export default function Servicios() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <Reveal className="lg:col-span-7">
-              <div className="bg-white rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] p-8 md:p-12 h-full flex flex-col gap-6">
-                <p className="text-lg md:text-xl leading-relaxed opacity-80">
-                  {brandPartnershipsInfo.detail}
-                </p>
-                <div className="w-16 h-[1px] bg-ink/20" />
-                <p className="text-lg md:text-xl leading-relaxed opacity-80">
-                  {brandPartnershipsInfo.scope}
-                </p>
-              </div>
-            </Reveal>
+          <div className="mt-4">
+            <Reveal>
+              <div className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-8 max-w-5xl mx-auto">
+                
+                {/* Detail & Scope Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                  <p className="text-lg md:text-xl leading-relaxed opacity-95">
+                    {brandPartnershipsInfo.detail}
+                  </p>
+                  <p className="text-lg md:text-xl leading-relaxed opacity-95">
+                    {brandPartnershipsInfo.scope}
+                  </p>
+                </div>
+                
+                {/* Divider Line with Text */}
+                <div className="relative flex items-center justify-center my-2">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-cream/20"></div>
+                  </div>
+                  <div className="relative bg-[#a52f18] px-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-cream/70">
+                    Fit Ideal
+                  </div>
+                </div>
 
-            <Reveal delay={0.2} className="lg:col-span-5">
-              <div className="bg-white text-ink rounded-2xl border border-ink/5 shadow-[0_15px_40px_rgb(0,0,0,0.03)] p-8 md:p-12 h-full flex flex-col gap-6">
-                <h3 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-red">
-                  <span className="w-6 h-[1px] bg-red" /> Ideal para
-                </h3>
-                <div className="flex flex-wrap gap-2">
+                {/* Fit Ideal Pills */}
+                <div className="flex flex-wrap justify-center gap-2">
                   {brandPartnershipsInfo.ideal.map((item) => (
                     <span 
                       key={item} 
-                      className="px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border bg-ink/5 border-ink/10 text-ink/80"
+                      className="px-3.5 py-2 rounded-full text-xs tracking-wide font-medium border bg-white/10 border-white/20 text-cream leading-tight text-center"
                     >
                       {item}
                     </span>
                   ))}
                 </div>
+                
               </div>
             </Reveal>
           </div>
