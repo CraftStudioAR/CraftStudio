@@ -95,7 +95,7 @@ export type ProjectBlock =
   | { type: "imageFeature"; main: ProjectImage; stacked: [ProjectImage, ProjectImage] }
   | {
       type: "imagePair";
-      images: [ProjectImage, ProjectImage];
+      images: ProjectImage[];
       mobileLayout?: "pair" | "stack";
       /** Aspect ratio CSS (ej. "9 / 10") que ambas imágenes comparten, para igualar su altura cuando sus proporciones naturales no coinciden. Si se omite, cada imagen usa su altura natural. */
       aspect?: string;
