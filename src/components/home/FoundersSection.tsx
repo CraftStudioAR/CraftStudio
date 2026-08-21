@@ -175,11 +175,11 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Right (Overlaps bottom of Top Right) */}
-        <div data-speed="0.6" className="parallax-img absolute top-[52%] right-[8%] z-20">
+        <div data-speed="0.6" className="parallax-img absolute top-[50%] right-[6%] z-20">
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-2}
-            className="w-56 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-80 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
         {/* Bottom Left */}
