@@ -327,7 +327,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setTimeline(opt)}
-                                  className={`rounded-full border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                  className={`rounded-lg border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                     timeline === opt
                                       ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                       : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
@@ -347,7 +347,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setHowFound(opt)}
-                                  className={`rounded-full border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                  className={`rounded-lg border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                     howFound === opt
                                       ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                       : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"

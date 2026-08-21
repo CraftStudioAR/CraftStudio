@@ -274,7 +274,7 @@ export default function Servicios() {
                   {brandPartnershipsInfo.ideal.map((item, j) => (
                     <span 
                       key={j} 
-                      className="px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border bg-white/10 border-white/20"
+                      className="px-3 py-1.5 rounded-lg text-[11px] md:text-xs tracking-wide font-medium border bg-white/10 border-white/20"
                     >
                       {item}
                     </span>
@@ -459,7 +459,7 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
                   {s.fit.map((f: string, j: number) => (
                     <span 
                       key={j} 
-                      className={`px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border ${
+                      className={`px-3 py-1.5 rounded-lg text-[11px] md:text-xs tracking-wide font-medium border ${
                         i === 0 ? 'bg-ink/5 border-ink/10' : 'bg-white/10 border-white/20'
                       }`}
                     >

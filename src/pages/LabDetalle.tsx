@@ -69,7 +69,7 @@ export default function LabDetalle() {
 
         <Reveal delay={0.1}>
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[10px] md:text-xs tracking-widest text-red uppercase font-bold bg-red/10 px-4 py-1.5 rounded-full">
+            <span className="text-[10px] md:text-xs tracking-widest text-red uppercase font-bold bg-red/10 px-4 py-1.5 rounded-lg">
               {article.category}
             </span>
             <span className="text-[10px] md:text-xs tracking-widest text-ink/50 uppercase font-bold py-1">

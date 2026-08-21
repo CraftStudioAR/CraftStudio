@@ -216,7 +216,7 @@ export default function TrabajoDetalle() {
                   {project.scope.map((item) => (
                     <span
                       key={item}
-                      className="px-3 py-1.5 rounded text-xs tracking-wide font-medium bg-ink/5 border border-ink/10"
+                      className="px-3 py-1.5 rounded-lg text-xs tracking-wide font-medium bg-ink/5 border border-ink/10"
                     >
                       {item}
                     </span>

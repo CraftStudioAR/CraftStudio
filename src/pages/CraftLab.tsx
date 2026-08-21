@@ -74,7 +74,7 @@ export default function CraftLab() {
                   {/* Metadatos y Título (Ajustados para grilla) */}
                   <div className="flex flex-col flex-1 px-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[9px] md:text-[10px] tracking-widest text-red uppercase font-bold bg-red/10 px-3 py-1 rounded-full">
+                      <span className="text-[9px] md:text-[10px] tracking-widest text-red uppercase font-bold bg-red/10 px-3.5 py-1.5 rounded-lg">
                         {article.category}
                       </span>
                       <span className="text-[9px] md:text-[10px] tracking-widest text-ink/50 uppercase font-bold py-1">

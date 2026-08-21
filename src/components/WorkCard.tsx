@@ -110,7 +110,7 @@ export default function WorkCard({
           {[work.category, work.scope?.[0]].filter(Boolean).map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-current/20 px-3 py-1 text-[10px] sm:text-[11px] tracking-wide uppercase opacity-60"
+              className="rounded-lg border border-current/20 px-3 py-1 text-[10px] sm:text-[11px] tracking-wide uppercase opacity-60"
             >
               {tag}
             </span>

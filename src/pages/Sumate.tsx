@@ -231,7 +231,7 @@ export default function Sumate() {
                                 key={opt}
                                 type="button"
                                 onClick={() => setArea(opt)}
-                                className={`rounded-full border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                className={`rounded-lg border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                   area === opt
                                     ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                     : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
