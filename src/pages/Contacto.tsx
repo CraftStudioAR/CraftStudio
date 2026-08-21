@@ -450,7 +450,7 @@ export default function Contacto() {
           <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
             Sumate a nuestro equipo.
           </h2>
-          <p className="text-base sm:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
+          <p className="text-sm md:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
             Si compartís la manera en que Craft entiende el trabajo: con criterio, con proceso y con compromiso real, nos gustaría conocerte.
           </p>
           <a 
