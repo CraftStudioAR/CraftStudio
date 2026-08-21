@@ -128,6 +128,16 @@ export type ProjectBlock =
       type: "text";
       text: string;
       align?: "left" | "center" | "right";
+      hasContainer?: boolean;
+      widthMode?: 'standard' | 'full' | 'auto';
+      fontFamily?: 'serif' | 'sans';
+      bold?: boolean;
+      italic?: boolean;
+      sizeMobile?: string;
+      sizeTablet?: string;
+      sizeDesktop?: string;
+      tracking?: string;
+      leading?: string;
     };
 
 export type WorkCase = {
@@ -144,6 +154,15 @@ export type WorkCase = {
   scope?: string[];
   description?: string;
   blocks?: ProjectBlock[];
+  titleStyle?: {
+    bold?: boolean;
+    italic?: boolean;
+    sizeMobile?: string;
+    sizeTablet?: string;
+    sizeDesktop?: string;
+    tracking?: string;
+    leading?: string;
+  };
 };
 
 export const work: WorkCase[] = [

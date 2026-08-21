@@ -185,12 +185,8 @@ function Testimonial({ quote, author, role }: { quote: string; author: string; r
 
 export default function ProjectBlocks({
   blocks,
-  afterFirstBlock,
 }: {
   blocks: ProjectBlock[];
-  /** Se intercala justo debajo del primer bloque. El caso abre con una imagen y
-   *  recién después llega el texto, sin partir la galería en dos lightbox. */
-  afterFirstBlock?: ReactNode;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -209,12 +205,9 @@ export default function ProjectBlocks({
     <>
       <div className="flex flex-col gap-6 md:gap-10">
         {blocks.map((block, i) => (
-          <Fragment key={i}>
-            <Reveal delay={Math.min(i * 0.05, 0.3)}>
-              <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
-            </Reveal>
-            {i === 0 && afterFirstBlock}
-          </Fragment>
+          <Reveal key={i} delay={Math.min(i * 0.05, 0.3)}>
+            <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
+          </Reveal>
         ))}
       </div>
 
@@ -374,13 +367,41 @@ function Block({
     case "testimonial":
       return <Testimonial quote={block.quote} author={block.author} role={block.role} />;
 
-    case "text":
+    case "text": {
+      const containerWidth = 
+        block.widthMode === "full" 
+          ? "w-full" 
+          : block.widthMode === "auto" 
+            ? "w-fit max-w-full" 
+            : "max-w-3xl";
+
+      const containerClass = `mx-auto w-full px-6 md:px-0 my-4 ${containerWidth} ${
+        block.hasContainer 
+          ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 flex flex-col gap-4 shadow-sm" 
+          : ""
+      }`;
+
+      const boldClass = block.bold ? "font-bold" : "font-normal";
+      const italicClass = block.italic ? "italic" : "not-italic";
+      const trackingClass = block.tracking || "tracking-normal";
+      const leadingClass = block.leading || "leading-relaxed";
+      const fontFamily = block.fontFamily === "sans" ? "font-sans" : "font-serif";
+      
+      const sizeMobile = block.sizeMobile || "text-lg";
+      const sizeTablet = block.sizeTablet || "text-xl";
+      const sizeDesktop = block.sizeDesktop || "text-2xl";
+
+      const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${sizeMobile} md:${sizeTablet} lg:${sizeDesktop}`;
+
       return (
-        <div className="max-w-3xl mx-auto w-full px-6 md:px-0 my-4">
-          <p className={`text-lg md:text-2xl text-ink/80 leading-relaxed font-serif text-${block.align || "left"} whitespace-pre-line`}>
-            {block.text}
-          </p>
+        <div className={containerClass}>
+          {block.text.split("\n\n").map((paragraph, idx) => (
+            <p key={idx} className={textClass}>
+              {paragraph}
+            </p>
+          ))}
         </div>
       );
+    }
   }
 }

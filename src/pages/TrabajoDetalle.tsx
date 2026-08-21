@@ -47,17 +47,7 @@ export default function TrabajoDetalle() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
-  const description = project.description ? (
-    <Reveal>
-      <div className="flex flex-col gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
-        {project.description.split("\n\n").map((paragraph, i) => (
-          <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
-            {paragraph}
-          </p>
-        ))}
-      </div>
-    </Reveal>
-  ) : null;
+
 
   return (
     <div className="bg-cream min-h-screen text-ink selection:bg-red selection:text-cream">
@@ -88,10 +78,20 @@ export default function TrabajoDetalle() {
             {/* Título principal: tipo de trabajo */}
             <motion.h1
               variants={itemVariants}
-              className={`font-serif italic leading-[0.95] tracking-tight text-navy text-balance ${
-                (project.title ?? project.client).length > 28
-                  ? "text-4xl md:text-6xl lg:text-7xl"
-                  : "text-6xl md:text-8xl lg:text-[9rem]"
+              className={`font-serif text-[#0a0424] text-balance ${
+                project.titleStyle?.bold ? 'font-bold' : 'font-normal'
+              } ${
+                project.titleStyle?.italic !== false ? 'italic' : 'not-italic'
+              } ${
+                project.titleStyle?.tracking || 'tracking-tight'
+              } ${
+                project.titleStyle?.leading || 'leading-[0.95]'
+              } ${
+                project.titleStyle?.sizeMobile || 'text-4xl'
+              } md:${
+                project.titleStyle?.sizeTablet || 'text-6xl'
+              } lg:${
+                project.titleStyle?.sizeDesktop || 'text-[9rem]'
               }`}
             >
               {project.title ?? project.client}
@@ -152,17 +152,14 @@ export default function TrabajoDetalle() {
       </section>
 
 
-      {/* 3. GALERÍA DEL PROYECTO — la descripción se intercala después de la
-             primera imagen, para que el caso abra mostrando el trabajo. */}
-      <section className="px-6 pb-32 md:px-10">
-        <div className="max-w-[1400px] mx-auto">
-          {project.blocks && project.blocks.length > 0 ? (
-            <ProjectBlocks blocks={project.blocks} afterFirstBlock={description} />
-          ) : (
-            description
-          )}
-        </div>
-      </section>
+      {/* 3. GALERÍA DEL PROYECTO */}
+      {project.blocks && project.blocks.length > 0 && (
+        <section className="px-6 pb-32 md:px-10">
+          <div className="max-w-[1400px] mx-auto">
+            <ProjectBlocks blocks={project.blocks} />
+          </div>
+        </section>
+      )}
 
       {/* 4. NEXT PROJECT CTA (StudioSection style but custom text) */}
       <div className="bg-cream">

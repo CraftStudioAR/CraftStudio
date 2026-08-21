@@ -32,12 +32,24 @@ export async function getProjects(): Promise<WorkCase[]> {
       if (error) {
         console.error('[Supabase Error] getProjects:', error.message, error.details);
       } else if (data && data.length > 0) {
-        return data.map((item) => ({
-          ...item,
-          scope: typeof item.scope === 'string' ? JSON.parse(item.scope) : item.scope,
-          cover: typeof item.cover === 'string' ? JSON.parse(item.cover) : item.cover,
-          blocks: typeof item.blocks === 'string' ? JSON.parse(item.blocks) : item.blocks,
-        }));
+        return data.map((item) => {
+          let titleStyle = undefined;
+          try {
+            if (item.description && item.description.trim().startsWith('{')) {
+              const parsed = JSON.parse(item.description);
+              titleStyle = parsed.titleStyle;
+            }
+          } catch (e) {
+            // Ignore
+          }
+          return {
+            ...item,
+            scope: typeof item.scope === 'string' ? JSON.parse(item.scope) : item.scope,
+            cover: typeof item.cover === 'string' ? JSON.parse(item.cover) : item.cover,
+            blocks: typeof item.blocks === 'string' ? JSON.parse(item.blocks) : item.blocks,
+            titleStyle,
+          };
+        });
       }
     } catch (e) {
       console.error('[Supabase Exception] getProjects:', e);
@@ -61,11 +73,21 @@ export async function getProjectBySlug(slug: string): Promise<WorkCase | undefin
       if (error) {
         console.error(`[Supabase Error] getProjectBySlug (${slug}):`, error.message, error.details);
       } else if (data) {
+        let titleStyle = undefined;
+        try {
+          if (data.description && data.description.trim().startsWith('{')) {
+            const parsed = JSON.parse(data.description);
+            titleStyle = parsed.titleStyle;
+          }
+        } catch (e) {
+          // Ignore
+        }
         return {
           ...data,
           scope: typeof data.scope === 'string' ? JSON.parse(data.scope) : data.scope,
           cover: typeof data.cover === 'string' ? JSON.parse(data.cover) : data.cover,
           blocks: typeof data.blocks === 'string' ? JSON.parse(data.blocks) : data.blocks,
+          titleStyle,
         };
       }
     } catch (e) {
