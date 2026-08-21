@@ -142,7 +142,7 @@ export default function FoundersSection() {
   }, []);
 
   return (
-    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 py-28 sm:py-32 min-h-[125vh] md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center">
+    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 py-24 sm:py-28 md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center">
       <GlyphMark
         variant={1}
         className="pointer-events-none absolute -left-20 top-10 z-0 h-[40vw] w-[40vw] max-w-[400px] text-ink/[0.03] md:-left-10 rotate-12"
@@ -195,7 +195,7 @@ export default function FoundersSection() {
       {/* 2. MOBILE FLOATING PARALLAX IMAGES (Layered collage framing with lively travel) */}
       <div className="block md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Top Left */}
-        <div data-speed="1.2" className="parallax-img absolute top-[12%] left-1.5 z-10">
+        <div data-speed="1.2" className="parallax-img absolute top-[18%] left-1.5 z-10">
           <MagneticImage
             src="/images/about3.jpg"
             initialRotate={-6}
@@ -203,7 +203,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Top Right */}
-        <div data-speed="1.4" className="parallax-img absolute top-[7%] right-1.5 z-20">
+        <div data-speed="1.4" className="parallax-img absolute top-[14%] right-1.5 z-20">
           <MagneticImage
             src="/images/about2.jpg"
             initialRotate={6}
@@ -211,7 +211,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Left */}
-        <div data-speed="1.1" className="parallax-img absolute bottom-[38%] left-1.5 z-10">
+        <div data-speed="1.1" className="parallax-img absolute bottom-[26%] left-1.5 z-10">
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={3}
@@ -219,7 +219,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Right */}
-        <div data-speed="1.3" className="parallax-img absolute bottom-[24%] right-1.5 z-20">
+        <div data-speed="1.3" className="parallax-img absolute bottom-[20%] right-1.5 z-20">
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-6}
@@ -227,7 +227,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Left */}
-        <div data-speed="0.9" className="parallax-img absolute bottom-[2%] left-1.5 z-20">
+        <div data-speed="0.9" className="parallax-img absolute bottom-[3%] left-1.5 z-20">
           <MagneticImage
             src="/images/about5.jpg"
             initialRotate={-2}
