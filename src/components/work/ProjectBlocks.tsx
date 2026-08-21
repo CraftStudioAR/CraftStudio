@@ -407,12 +407,12 @@ function Block({
       return <Testimonial quote={block.quote} author={block.author} role={block.role} />;
 
     case "text": {
-      const containerWidth = 
-        block.widthMode === "full" 
-          ? "w-full" 
-          : block.widthMode === "auto" 
-            ? "w-fit max-w-full" 
-            : "max-w-3xl";
+      const isFullWidth = block.hasContainer || block.widthMode === "full";
+      const containerWidth = isFullWidth 
+        ? "w-full" 
+        : block.widthMode === "auto" 
+          ? "w-fit max-w-full" 
+          : "max-w-3xl";
 
       const containerClass = `mx-auto w-full my-4 ${containerWidth} ${
         block.hasContainer 
@@ -420,7 +420,7 @@ function Block({
           : "px-6 md:px-0"
       }`;
 
-      const innerClass = (block.hasContainer && block.widthMode === "full")
+      const innerClass = isFullWidth
         ? "max-w-3xl mx-auto w-full flex flex-col gap-4"
         : "w-full flex flex-col gap-4";
 
