@@ -414,9 +414,13 @@ function Block({
 
       const containerClass = `mx-auto w-full my-4 ${containerWidth} ${
         block.hasContainer 
-          ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 flex flex-col gap-4 shadow-sm" 
+          ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 shadow-sm" 
           : "px-6 md:px-0"
       }`;
+
+      const innerClass = (block.hasContainer && block.widthMode === "full")
+        ? "max-w-3xl mx-auto w-full flex flex-col gap-4"
+        : "w-full flex flex-col gap-4";
 
       const boldClass = block.bold ? "font-bold" : "font-normal";
       const italicClass = block.italic ? "italic" : "not-italic";
@@ -432,24 +436,26 @@ function Block({
 
       return (
         <div className={containerClass}>
-          {block.text.split("\n\n").map((paragraph, idx) => {
-            const pId = `${elementId}-${idx}`;
-            const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
-              pId,
-              sizeMobile,
-              sizeTablet,
-              sizeDesktop
-            );
-            const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
-            return (
-              <Fragment key={idx}>
-                {styleElement}
-                <p id={pId} className={textClass} style={sizeStyle}>
-                  {paragraph}
-                </p>
-              </Fragment>
-            );
-          })}
+          <div className={innerClass}>
+            {block.text.split("\n\n").map((paragraph, idx) => {
+              const pId = `${elementId}-${idx}`;
+              const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
+                pId,
+                sizeMobile,
+                sizeTablet,
+                sizeDesktop
+              );
+              const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
+              return (
+                <Fragment key={idx}>
+                  {styleElement}
+                  <p id={pId} className={textClass} style={sizeStyle}>
+                    {paragraph}
+                  </p>
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
       );
     }
