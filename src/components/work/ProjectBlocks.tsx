@@ -96,14 +96,59 @@ function Img({
   );
 }
 
-function TextBox({ text, className = "" }: { text: string; className?: string }) {
+function TextBox({
+  text,
+  className = "",
+  fontFamily = 'serif',
+  bold = false,
+  italic = false,
+  sizeMobile = 'text-sm',
+  sizeTablet = 'text-base',
+  sizeDesktop = 'text-base',
+  tracking = 'tracking-normal',
+  leading = 'leading-relaxed',
+  textAlign = 'left',
+}: {
+  text: string;
+  className?: string;
+  fontFamily?: 'serif' | 'sans';
+  bold?: boolean;
+  italic?: boolean;
+  sizeMobile?: string;
+  sizeTablet?: string;
+  sizeDesktop?: string;
+  tracking?: string;
+  leading?: string;
+  textAlign?: 'left' | 'center' | 'right';
+}) {
+  const boldClass = bold ? "font-bold" : "font-normal";
+  const italicClass = italic ? "italic" : "not-italic";
+  const trackingClass = tracking || "tracking-normal";
+  const leadingClass = leading || "leading-relaxed";
+  const fontFamilyClass = fontFamily === "sans" ? "font-sans" : "font-serif";
+
+  const elementId = `text-box-site-${Math.random().toString(36).substr(2, 9)}`;
+
   return (
     <div className={`flex flex-col justify-center gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 ${className}`}>
-      {text.split("\n\n").map((paragraph, i) => (
-        <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
-          {paragraph}
-        </p>
-      ))}
+      {text.split("\n\n").map((paragraph, idx) => {
+        const pId = `${elementId}-${idx}`;
+        const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
+          pId,
+          sizeMobile,
+          sizeTablet,
+          sizeDesktop
+        );
+        const textClass = `text-ink/80 text-${textAlign} ${fontFamilyClass} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
+        return (
+          <Fragment key={idx}>
+            {styleElement}
+            <p id={pId} className={textClass} style={sizeStyle}>
+              {paragraph}
+            </p>
+          </Fragment>
+        );
+      })}
     </div>
   );
 }

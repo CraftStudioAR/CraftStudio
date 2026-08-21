@@ -110,6 +110,8 @@ export type ProjectBlock =
       text: string;
       imagePosition?: "left" | "right";
       mobileOrder?: "imageFirst" | "textFirst";
+      layout?: "50/50" | "60/40" | "40/60" | "70/30" | "30/70" | "66/34" | "34/66";
+      textAlign?: "left" | "center" | "right";
       fontFamily?: "serif" | "sans";
       bold?: boolean;
       italic?: boolean;
