@@ -20,22 +20,22 @@ export default function LabSection() {
         <Reveal className="w-full">
           <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
             <div className="glass-sheen" />
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 relative z-10 w-full lg:translate-x-4">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-center gap-10 lg:gap-20 relative z-10 w-full lg:translate-x-4">
               
               {/* Title */}
               <div className="flex-shrink-0">
-                <h2 className="font-serif italic text-7xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight text-cream drop-shadow-sm">
+                <h2 className="font-serif italic text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight text-cream drop-shadow-sm text-left">
                   Craft<br/>Lab<span className="text-red">.</span>
                 </h2>
               </div>
               
               {/* Text Block */}
-              <div className="max-w-[450px]">
-                <p className="text-xs md:text-sm tracking-widest uppercase mb-6 flex items-center gap-6 text-cream font-bold drop-shadow-sm">
+              <div className="max-w-[450px] text-left">
+                <p className="text-xs md:text-sm tracking-widest uppercase mb-6 flex items-center gap-6 text-cream font-bold drop-shadow-sm justify-start">
                   <span className="w-12 h-[1.5px] bg-cream" /> Manifiesto Editorial
                 </p>
                 
-                <p className="font-sans text-2xl md:text-3xl lg:text-4xl leading-[1.3] text-balance font-medium tracking-tight drop-shadow-sm">
+                <p className="font-sans text-base md:text-3xl lg:text-4xl leading-[1.3] text-balance font-medium tracking-tight drop-shadow-sm text-left">
                   Un espacio de ideas, ensayos y curadurías donde desglosamos la <span className="italic">mirada Craft.</span>
                 </p>
                 
