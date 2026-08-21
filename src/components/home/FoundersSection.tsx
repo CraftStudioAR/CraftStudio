@@ -120,9 +120,9 @@ export default function FoundersSection() {
         const isMobile = window.innerWidth < 768;
         images.forEach((img, i) => {
           const speed = parseFloat(img.getAttribute("data-speed") || "1");
-          const yFactor = isMobile ? -110 : -70;
-          const xFactor = isMobile ? 20 : 12;
-          const rotFactor = isMobile ? 6 : 3.5;
+          const yFactor = isMobile ? -45 : -70;
+          const xFactor = isMobile ? 8 : 12;
+          const rotFactor = isMobile ? 3 : 3.5;
           gsap.to(img, {
             yPercent: yFactor * speed,
             xPercent: (i % 2 === 0 ? 1 : -1) * xFactor * speed,
@@ -195,7 +195,7 @@ export default function FoundersSection() {
       {/* 2. MOBILE FLOATING PARALLAX IMAGES (Layered collage framing with lively travel) */}
       <div className="block md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Top Left */}
-        <div data-speed="1.2" className="parallax-img absolute top-10 left-2 z-10">
+        <div data-speed="1.2" className="parallax-img absolute top-[24%] left-2 z-10">
           <MagneticImage
             src="/images/about3.jpg"
             initialRotate={-6}
@@ -203,7 +203,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Top Right */}
-        <div data-speed="1.4" className="parallax-img absolute top-8 right-2 z-20">
+        <div data-speed="1.4" className="parallax-img absolute top-[18%] right-2 z-20">
           <MagneticImage
             src="/images/about2.jpg"
             initialRotate={6}
@@ -211,7 +211,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Left */}
-        <div data-speed="1.1" className="parallax-img absolute bottom-12 left-2 z-10">
+        <div data-speed="1.1" className="parallax-img absolute bottom-[26%] left-2 z-10">
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={3}
@@ -219,7 +219,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Right */}
-        <div data-speed="1.3" className="parallax-img absolute bottom-14 right-2 z-20">
+        <div data-speed="1.3" className="parallax-img absolute bottom-[18%] right-2 z-20">
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-6}
@@ -227,7 +227,7 @@ export default function FoundersSection() {
           />
         </div>
         {/* Bottom Left */}
-        <div data-speed="0.9" className="parallax-img absolute bottom-2 left-2 z-20">
+        <div data-speed="0.9" className="parallax-img absolute bottom-[3%] left-2 z-20">
           <MagneticImage
             src="/images/about5.jpg"
             initialRotate={-2}
