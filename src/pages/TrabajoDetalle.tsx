@@ -6,6 +6,42 @@ import ProjectBlocks from "../components/work/ProjectBlocks";
 import { getProjectBySlug } from "../lib/supabaseClient";
 import type { WorkCase } from "../content/brand";
 
+function getResponsiveTextStyle(
+  elementId: string,
+  sizeMobile: string,
+  sizeTablet: string,
+  sizeDesktop: string
+) {
+  let className = "";
+  let style: React.CSSProperties = {};
+  let styleElement: React.ReactNode = null;
+
+  const classes = [];
+  if (sizeMobile.startsWith("text-")) classes.push(sizeMobile);
+  if (sizeTablet.startsWith("text-")) classes.push(`md:${sizeTablet}`);
+  if (sizeDesktop.startsWith("text-")) classes.push(`lg:${sizeDesktop}`);
+  className = classes.join(" ");
+
+  const hasCustom = !sizeMobile.startsWith("text-") || !sizeTablet.startsWith("text-") || !sizeDesktop.startsWith("text-");
+  if (hasCustom) {
+    const cssRules = [];
+    if (!sizeMobile.startsWith("text-")) {
+      cssRules.push(`#${elementId} { font-size: ${sizeMobile}; }`);
+    }
+    if (!sizeTablet.startsWith("text-")) {
+      cssRules.push(`@media (min-width: 768px) { #${elementId} { font-size: ${sizeTablet}; } }`);
+    }
+    if (!sizeDesktop.startsWith("text-")) {
+      cssRules.push(`@media (min-width: 1024px) { #${elementId} { font-size: ${sizeDesktop}; } }`);
+    }
+    styleElement = (
+      <style dangerouslySetInnerHTML={{ __html: cssRules.join("\n") }} />
+    );
+  }
+
+  return { className, style, styleElement };
+}
+
 export default function TrabajoDetalle() {
   const { slug } = useParams();
   const [project, setProject] = useState<WorkCase | undefined | null>(null);
@@ -76,26 +112,36 @@ export default function TrabajoDetalle() {
             className="lg:col-span-7 flex flex-col gap-4 md:gap-5"
           >
             {/* Título principal: tipo de trabajo */}
-            <motion.h1
-              variants={itemVariants}
-              className={`font-serif text-[#0a0424] text-balance ${
-                project.titleStyle?.bold ? 'font-bold' : 'font-normal'
-              } ${
-                project.titleStyle?.italic !== false ? 'italic' : 'not-italic'
-              } ${
-                project.titleStyle?.tracking || 'tracking-tight'
-              } ${
-                project.titleStyle?.leading || 'leading-[0.95]'
-              } ${
-                project.titleStyle?.sizeMobile || 'text-4xl'
-              } md:${
-                project.titleStyle?.sizeTablet || 'text-6xl'
-              } lg:${
+            {(() => {
+              const titleId = `title-detail-${Math.random().toString(36).substr(2, 9)}`;
+              const { className: titleSizeClass, style: titleSizeStyle, styleElement: titleStyleElement } = getResponsiveTextStyle(
+                titleId,
+                project.titleStyle?.sizeMobile || 'text-4xl',
+                project.titleStyle?.sizeTablet || 'text-6xl',
                 project.titleStyle?.sizeDesktop || 'text-[9rem]'
-              }`}
-            >
-              {project.title ?? project.client}
-            </motion.h1>
+              );
+              return (
+                <>
+                  {titleStyleElement}
+                  <motion.h1
+                    id={titleId}
+                    variants={itemVariants}
+                    className={`font-serif text-[#0a0424] text-balance ${
+                      project.titleStyle?.bold ? 'font-bold' : 'font-normal'
+                    } ${
+                      project.titleStyle?.italic !== false ? 'italic' : 'not-italic'
+                    } ${
+                      project.titleStyle?.tracking || 'tracking-tight'
+                    } ${
+                      project.titleStyle?.leading || 'leading-[0.95]'
+                    } ${titleSizeClass}`}
+                    style={titleSizeStyle}
+                  >
+                    {project.title ?? project.client}
+                  </motion.h1>
+                </>
+              );
+            })()}
 
             {/* Nombre de la marca debajo, más chico */}
             {project.title && (

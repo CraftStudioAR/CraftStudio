@@ -1,10 +1,47 @@
-import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { animate, useInView, useReducedMotion } from "motion/react";
 import Reveal from "../Reveal";
 import GlyphMark from "../GlyphMark";
 import Lightbox from "./Lightbox";
 import { cld } from "../../lib/cloudinary";
 import type { ProjectBlock, ProjectImage, Stat } from "../../content/brand";
+
+function getResponsiveTextStyle(
+  elementId: string,
+  sizeMobile: string,
+  sizeTablet: string,
+  sizeDesktop: string
+) {
+  let className = "";
+  let style: React.CSSProperties = {};
+  let styleElement: React.ReactNode = null;
+
+  const classes = [];
+  if (sizeMobile.startsWith("text-")) classes.push(sizeMobile);
+  if (sizeTablet.startsWith("text-")) classes.push(`md:${sizeTablet}`);
+  if (sizeDesktop.startsWith("text-")) classes.push(`lg:${sizeDesktop}`);
+  className = classes.join(" ");
+
+  const hasCustom = !sizeMobile.startsWith("text-") || !sizeTablet.startsWith("text-") || !sizeDesktop.startsWith("text-");
+  if (hasCustom) {
+    const cssRules = [];
+    if (!sizeMobile.startsWith("text-")) {
+      cssRules.push(`#${elementId} { font-size: ${sizeMobile}; }`);
+    }
+    if (!sizeTablet.startsWith("text-")) {
+      cssRules.push(`@media (min-width: 768px) { #${elementId} { font-size: ${sizeTablet}; } }`);
+    }
+    if (!sizeDesktop.startsWith("text-")) {
+      cssRules.push(`@media (min-width: 1024px) { #${elementId} { font-size: ${sizeDesktop}; } }`);
+    }
+    styleElement = (
+      <style dangerouslySetInnerHTML={{ __html: cssRules.join("\n") }} />
+    );
+  }
+
+  return { className, style, styleElement };
+}
+
 
 /** Imágenes de un bloque, en el orden en que se ven en pantalla. */
 function blockImages(block: ProjectBlock): ProjectImage[] {
@@ -391,15 +428,28 @@ function Block({
       const sizeTablet = block.sizeTablet || "text-xl";
       const sizeDesktop = block.sizeDesktop || "text-2xl";
 
-      const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${sizeMobile} md:${sizeTablet} lg:${sizeDesktop}`;
+      const elementId = `text-block-${Math.random().toString(36).substr(2, 9)}`;
 
       return (
         <div className={containerClass}>
-          {block.text.split("\n\n").map((paragraph, idx) => (
-            <p key={idx} className={textClass}>
-              {paragraph}
-            </p>
-          ))}
+          {block.text.split("\n\n").map((paragraph, idx) => {
+            const pId = `${elementId}-${idx}`;
+            const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
+              pId,
+              sizeMobile,
+              sizeTablet,
+              sizeDesktop
+            );
+            const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
+            return (
+              <Fragment key={idx}>
+                {styleElement}
+                <p id={pId} className={textClass} style={sizeStyle}>
+                  {paragraph}
+                </p>
+              </Fragment>
+            );
+          })}
         </div>
       );
     }
