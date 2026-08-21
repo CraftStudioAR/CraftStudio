@@ -24,7 +24,7 @@ export default function StudioSection() {
         <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-24 md:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">
           
           <Reveal>
-            <h2 className="font-sans font-medium tracking-tight text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-10 whitespace-nowrap sm:whitespace-normal text-balance">
+            <h2 className="font-sans font-medium tracking-tight text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-4 md:mb-8 whitespace-nowrap sm:whitespace-normal text-balance">
               ¿Listo para construir?
             </h2>
 
