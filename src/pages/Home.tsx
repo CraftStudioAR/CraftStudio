@@ -34,7 +34,7 @@ export default function Home() {
       <ServicesSection />
 
       {/* 5. Brands Marquee (Clean, faded edges) */}
-      <div className="relative z-20 w-full bg-cream pt-16 pb-12 md:pt-24 md:pb-20 border-b border-ink/5">
+      <div className="relative z-20 w-full bg-cream pt-2 pb-12 md:pt-4 md:pb-20 border-b border-ink/5">
         <div className="mx-auto w-full max-w-7xl px-6 md:px-10 mb-8 md:mb-12 text-center">
           <p className="text-xs md:text-sm tracking-widest text-red uppercase font-semibold flex items-center justify-center gap-3">
             <span className="w-6 h-[1px] bg-red/40" /> Algunas marcas que confiaron en nosotros <span className="w-6 h-[1px] bg-red/40" />
