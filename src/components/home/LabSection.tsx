@@ -24,8 +24,8 @@ export default function LabSection() {
               
               {/* Title */}
               <div className="flex-shrink-0">
-                <h2 className="font-serif italic text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight text-cream drop-shadow-sm text-left">
-                  Craft<br/>Lab<span className="text-red">.</span>
+                <h2 className="font-serif italic text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight text-cream drop-shadow-sm text-left whitespace-nowrap">
+                  Craft <br className="hidden sm:inline" />Lab<span className="text-red">.</span>
                 </h2>
               </div>
               
