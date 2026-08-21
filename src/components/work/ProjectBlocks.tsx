@@ -96,9 +96,9 @@ function Img({
   );
 }
 
-function TextBox({ text }: { text: string }) {
+function TextBox({ text, className = "" }: { text: string; className?: string }) {
   return (
-    <div className="flex flex-col justify-center gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10">
+    <div className={`flex flex-col justify-center gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 ${className}`}>
       {text.split("\n\n").map((paragraph, i) => (
         <p key={i} className="text-lg leading-relaxed text-ink/80 md:text-xl">
           {paragraph}
@@ -349,12 +349,44 @@ function Block({
       // hasta igualarla (el grid ya estira por defecto). "text" (default): al reves,
       // la imagen no aporta alto propio y se estira hasta el alto del texto.
       const heightFromImage = block.heightFrom === "image";
+      
+      const isMobileOrderTextFirst = block.mobileOrder === "textFirst";
+      const isDesktopOrderRight = block.imagePosition === "right";
+      
+      const imageOrderClass = `${isMobileOrderTextFirst ? "order-2" : "order-1"} ${isDesktopOrderRight ? "md:order-2" : "md:order-1"}`;
+      const textOrderClass = `${isMobileOrderTextFirst ? "order-1" : "order-2"} ${isDesktopOrderRight ? "md:order-1" : "md:order-2"}`;
+
+      // Resolve proportions layout
+      const layoutOption = block.layout || '50/50';
+      let resolvedLayout = layoutOption;
+      if (isDesktopOrderRight) {
+        if (layoutOption === '30/70') resolvedLayout = '70/30';
+        else if (layoutOption === '40/60') resolvedLayout = '60/40';
+        else if (layoutOption === '60/40') resolvedLayout = '40/60';
+        else if (layoutOption === '70/30') resolvedLayout = '30/70';
+        else if (layoutOption === '66/34') resolvedLayout = '34/66';
+        else if (layoutOption === '34/66') resolvedLayout = '66/34';
+      }
+
+      const layoutClasses: Record<string, string> = {
+        '30/70': 'md:grid-cols-[3fr_7fr]',
+        '40/60': 'md:grid-cols-[4fr_6fr]',
+        '50/50': 'md:grid-cols-2',
+        '60/40': 'md:grid-cols-[6fr_4fr]',
+        '70/30': 'md:grid-cols-[7fr_3fr]',
+        '66/34': 'md:grid-cols-[66fr_34fr]',
+        '34/66': 'md:grid-cols-[34fr_66fr]',
+      };
+      
+      const desktopGridCols = layoutClasses[resolvedLayout] || 'md:grid-cols-2';
+
       return (
-        <div className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-2 md:gap-6">
+        <div className={`grid grid-cols-1 items-stretch gap-3 ${desktopGridCols} md:gap-6`}>
           {heightFromImage ? (
             <Img
               image={block.image}
               transforms="f_auto,q_auto,w_1200"
+              className={imageOrderClass}
               onOpen={() => onOpen(startIndex)}
             />
           ) : (
@@ -362,7 +394,7 @@ function Block({
               type="button"
               onClick={() => onOpen(startIndex)}
               aria-label={`Ampliar imagen: ${block.image.alt}`}
-              className="group/img relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-auto"
+              className={`group/img relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-auto ${imageOrderClass}`}
             >
               <img
                 src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
@@ -372,7 +404,19 @@ function Block({
               />
             </button>
           )}
-          <TextBox text={block.text} />
+          <TextBox
+            text={block.text}
+            className={textOrderClass}
+            fontFamily={block.fontFamily}
+            bold={block.bold}
+            italic={block.italic}
+            sizeMobile={block.sizeMobile}
+            sizeTablet={block.sizeTablet}
+            sizeDesktop={block.sizeDesktop}
+            tracking={block.tracking}
+            leading={block.leading}
+            textAlign={block.textAlign}
+          />
         </div>
       );
     }

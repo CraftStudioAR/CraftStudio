@@ -108,6 +108,16 @@ export type ProjectBlock =
       type: "imageText";
       image: ProjectImage;
       text: string;
+      imagePosition?: "left" | "right";
+      mobileOrder?: "imageFirst" | "textFirst";
+      fontFamily?: "serif" | "sans";
+      bold?: boolean;
+      italic?: boolean;
+      sizeMobile?: string;
+      sizeTablet?: string;
+      sizeDesktop?: string;
+      tracking?: string;
+      leading?: string;
       /** Quien define el alto de la fila en desktop. "text" (default): la imagen se
        *  estira hasta el alto del texto. "image": la imagen queda en su alto natural
        *  y la caja de texto crece hasta igualarla. */
