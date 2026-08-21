@@ -227,7 +227,7 @@ export async function getBrandLogos(): Promise<Array<{ publicId: string; alt: st
 
       if (!error && data && data.description) {
         const parsed = JSON.parse(data.description);
-        if (Array.isArray(parsed.brandLogos)) {
+        if (Array.isArray(parsed.brandLogos) && parsed.brandLogos.length > 0) {
           return parsed.brandLogos;
         }
       }
