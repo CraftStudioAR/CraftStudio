@@ -24,11 +24,11 @@ export default function StudioSection() {
         <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-24 md:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">
           
           <Reveal>
-            <h2 className="font-sans font-medium tracking-tight text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-10 text-balance">
+            <h2 className="font-sans font-medium tracking-tight text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-10 whitespace-nowrap sm:whitespace-normal text-balance">
               ¿Listo para construir?
             </h2>
 
-            <div className="flex flex-col gap-6 text-lg md:text-xl lg:text-2xl opacity-80 leading-relaxed mb-16 max-w-3xl lg:max-w-4xl mx-auto text-balance">
+            <div className="flex flex-col gap-6 text-xs sm:text-lg md:text-xl lg:text-2xl opacity-70 sm:opacity-80 leading-relaxed mb-16 max-w-3xl lg:max-w-4xl mx-auto text-balance">
               <p>
                 Si llegaste hasta acá, probablemente tenés algo que comunicar que todavía no encontró la forma correcta de decirse. Eso es exactamente lo que Craft hace.
               </p>
