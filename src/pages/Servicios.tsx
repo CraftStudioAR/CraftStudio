@@ -235,51 +235,51 @@ export default function Servicios() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-10% 0px" }}
-              className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-10 w-full"
+              className="bg-red text-cream rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl flex flex-col gap-8 md:gap-10 w-full"
             >
-              
-              {/* Detail & Scope Columns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-                <motion.p 
-                  variants={cardItemVariants}
-                  className="text-xl md:text-2xl font-medium leading-relaxed opacity-95"
-                >
-                  {brandPartnershipsInfo.detail}
-                </motion.p>
-                <motion.p 
-                  variants={cardItemVariants}
-                  className="text-xl md:text-2xl font-medium leading-relaxed opacity-95"
-                >
-                  {brandPartnershipsInfo.scope}
-                </motion.p>
-              </div>
-              
-              {/* Divider Line with Text */}
-              <motion.div 
-                variants={cardItemVariants}
-                className="relative flex items-center justify-center my-4"
-              >
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-cream/20"></div>
+              {/* Header */}
+              <motion.div variants={cardItemVariants} className="flex flex-col gap-6 md:gap-8 flex-shrink-0">
+                <div className="flex items-baseline gap-4 md:gap-6">
+                  <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
+                    00
+                  </span>
+                  <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none">
+                    Brand Partnerships
+                  </h2>
                 </div>
-                <div className="relative bg-[#a52f18] px-6 text-xs md:text-sm font-bold tracking-widest uppercase text-cream/70">
-                  Fit Ideal
-                </div>
+                <div className="w-16 h-[1px] bg-current opacity-30"></div>
               </motion.div>
 
-              {/* Fit Ideal Pills */}
-              <motion.div 
+              {/* Intro Texts (Single Column) */}
+              <motion.p 
                 variants={cardItemVariants}
-                className="flex flex-wrap justify-center gap-3"
+                className="text-xl md:text-2xl font-medium leading-[1.3] text-balance"
               >
-                {brandPartnershipsInfo.ideal.map((item) => (
-                  <span 
-                    key={item} 
-                    className="px-4.5 py-2.5 rounded-full text-xs md:text-sm tracking-wide font-medium border bg-white/10 border-white/20 text-cream leading-tight text-center"
-                  >
-                    {item}
-                  </span>
-                ))}
+                {brandPartnershipsInfo.detail}
+              </motion.p>
+              
+              <motion.p 
+                variants={cardItemVariants}
+                className="text-base md:text-lg opacity-80 leading-relaxed font-medium font-sans"
+              >
+                {brandPartnershipsInfo.scope}
+              </motion.p>
+
+              {/* Fit Ideal */}
+              <motion.div variants={cardItemVariants} className="flex flex-col gap-4">
+                <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-current opacity-60">
+                  <span className="w-6 h-[1px] bg-current"></span> Fit Ideal
+                </h4>
+                <div className="flex flex-wrap gap-2 justify-start">
+                  {brandPartnershipsInfo.ideal.map((item, j) => (
+                    <span 
+                      key={j} 
+                      className="px-3 py-1.5 rounded-full text-[11px] md:text-xs tracking-wide font-medium border bg-white/10 border-white/20"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
               
             </motion.div>
