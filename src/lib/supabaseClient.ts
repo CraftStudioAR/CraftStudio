@@ -32,7 +32,22 @@ export async function getProjects(): Promise<WorkCase[]> {
       if (error) {
         console.error('[Supabase Error] getProjects:', error.message, error.details);
       } else if (data && data.length > 0) {
-        return data.map((item) => {
+        const settingsRow = data.find((item) => item.slug === '__settings__');
+        let customOrder: string[] = [];
+        try {
+          if (settingsRow && settingsRow.description) {
+            const parsed = JSON.parse(settingsRow.description);
+            if (Array.isArray(parsed.customOrder)) {
+              customOrder = parsed.customOrder;
+            }
+          }
+        } catch (e) {
+          // Ignore
+        }
+
+        const projectsOnly = data.filter((item) => item.slug !== '__settings__');
+
+        const mappedProjects = projectsOnly.map((item) => {
           let titleStyle = undefined;
           try {
             if (item.description && item.description.trim().startsWith('{')) {
@@ -50,6 +65,18 @@ export async function getProjects(): Promise<WorkCase[]> {
             titleStyle,
           };
         });
+
+        if (customOrder.length > 0) {
+          mappedProjects.sort((a, b) => {
+            const idxA = customOrder.indexOf(a.slug);
+            const idxB = customOrder.indexOf(b.slug);
+            const posA = idxA === -1 ? 99999 : idxA;
+            const posB = idxB === -1 ? 99999 : idxB;
+            return posA - posB;
+          });
+        }
+
+        return mappedProjects;
       }
     } catch (e) {
       console.error('[Supabase Exception] getProjects:', e);
@@ -112,7 +139,47 @@ export async function getCraftLabArticles() {
       if (error) {
         console.error('[Supabase Error] getCraftLabArticles:', error.message, error.details);
       } else if (data && data.length > 0) {
-        return data;
+        const settingsRow = data.find((item) => item.slug === '__settings__');
+        let customOrder: string[] = [];
+        let sortMode: 'date' | 'custom' = 'date';
+        try {
+          if (settingsRow && settingsRow.desc) {
+            const parsed = JSON.parse(settingsRow.desc);
+            if (Array.isArray(parsed.customOrder)) {
+              customOrder = parsed.customOrder;
+            }
+            if (parsed.sortMode) {
+              sortMode = parsed.sortMode;
+            }
+          }
+        } catch (e) {
+          // Ignore
+        }
+
+        const articlesOnly = data.filter((item) => item.slug !== '__settings__');
+
+        const mappedArticles = articlesOnly.map((item) => ({
+          ...item,
+          blocks: typeof item.blocks === 'string' ? JSON.parse(item.blocks) : item.blocks || [],
+        }));
+
+        if (sortMode === 'custom' && customOrder.length > 0) {
+          mappedArticles.sort((a, b) => {
+            const idxA = customOrder.indexOf(a.slug);
+            const idxB = customOrder.indexOf(b.slug);
+            const posA = idxA === -1 ? 99999 : idxA;
+            const posB = idxB === -1 ? 99999 : idxB;
+            return posA - posB;
+          });
+        } else {
+          mappedArticles.sort((a, b) => {
+            const dateA = new Date(a.created_at || a.date || 0).getTime();
+            const dateB = new Date(b.created_at || b.date || 0).getTime();
+            return dateB - dateA;
+          });
+        }
+
+        return mappedArticles;
       }
     } catch (e) {
       console.error('[Supabase Exception] getCraftLabArticles:', e);
