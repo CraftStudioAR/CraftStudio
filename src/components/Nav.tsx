@@ -189,7 +189,7 @@ export default function Nav() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-center bg-navy px-8 pt-20 pb-10 md:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 flex flex-col justify-center bg-ink px-8 pt-20 pb-10 md:hidden overflow-y-auto"
           >
             <div className="flex flex-col gap-6">
               {displayNav.map((item, i) => (
@@ -204,7 +204,7 @@ export default function Nav() {
                       to={item.to}
                       onClick={() => setOpen(false)}
                       className={({ isActive }) => 
-                        `font-serif text-5xl block transition-colors ${isActive ? "text-cream italic" : "text-cream/60"}`
+                        `font-sans text-3xl tracking-widest uppercase font-bold block transition-all duration-300 ${isActive ? "text-cream opacity-100" : "text-cream/50"}`
                       }
                     >
                       {item.label}
