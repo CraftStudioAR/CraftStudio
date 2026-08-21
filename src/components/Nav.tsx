@@ -231,8 +231,22 @@ export default function Nav() {
                     hola@craftstudio.com.ar
                   </a>
                 </div>
-                <a href="#" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors">
-                  Instagram {"\u2197\uFE0E"}
+                <a href="#" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors inline-flex items-center gap-1">
+                  Instagram
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-2.5 h-2.5 shrink-0"
+                  >
+                    <line x1="2" y1="10" x2="10" y2="2" />
+                    <polyline points="4 2 10 2 10 8" />
+                  </svg>
                 </a>
               </div>
             </motion.div>

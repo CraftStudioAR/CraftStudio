@@ -46,7 +46,22 @@ export default function LabSection() {
                       className="group relative flex justify-center items-center gap-4 rounded-xl px-8 py-3.5 bg-white text-red hover:bg-white/90 transition-all hover:scale-105 shadow-xl w-fit"
                     >
                       <span className="font-bold uppercase tracking-widest text-xs md:text-sm">Explorar el Lab</span>
-                      <span className="text-xl leading-none transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">{"\u2197\uFE0E"}</span>
+                      <span className="transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="w-3 h-3 shrink-0"
+                        >
+                          <line x1="2" y1="10" x2="10" y2="2" />
+                          <polyline points="4 2 10 2 10 8" />
+                        </svg>
+                      </span>
                     </Link>
                   </Magnetic>
                 </div>

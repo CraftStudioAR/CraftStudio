@@ -92,7 +92,20 @@ export default function WorkSection() {
           className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white text-ink font-semibold text-xs shadow-xl active:scale-95 transition-transform"
         >
           <span>Ver todos los proyectos</span>
-          <span className="text-sm font-bold">↗</span>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-2.5 h-2.5 shrink-0"
+          >
+            <line x1="2" y1="10" x2="10" y2="2" />
+            <polyline points="4 2 10 2 10 8" />
+          </svg>
         </Link>
       </div>
 
@@ -104,7 +117,22 @@ export default function WorkSection() {
             className="group flex justify-center items-center gap-3 rounded-xl px-8 py-3.5 bg-white text-ink hover:scale-105 transition-transform duration-300 shadow-xl"
           >
             <span className="font-bold tracking-tight text-base">Ver todos los proyectos</span>
-            <span className="text-2xl leading-none transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">{"\u2197\uFE0E"}</span>
+            <span className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-3.5 h-3.5 shrink-0"
+              >
+                <line x1="2" y1="10" x2="10" y2="2" />
+                <polyline points="4 2 10 2 10 8" />
+              </svg>
+            </span>
           </Link>
         </Magnetic>
       </div>
