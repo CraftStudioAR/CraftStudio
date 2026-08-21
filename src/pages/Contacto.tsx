@@ -138,7 +138,7 @@ export default function Contacto() {
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
               </h1>
-              <p className="mt-6 mx-auto max-w-4xl text-base sm:text-lg opacity-75 font-normal leading-relaxed text-balance">
+              <p className="mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
                 Nos gustaría saber un poco más sobre vos, tu marca y lo que estás buscando. Completá este breve formulario y nos pondremos en contacto con vos lo antes posible!
               </p>
             </Reveal>
