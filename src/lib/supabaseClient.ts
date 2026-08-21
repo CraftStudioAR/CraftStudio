@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import type { WorkCase } from '../content/brand';
-import { work as localWork } from '../content/brand';
+import { work as localWork, brandLogos as localBrandLogos } from '../content/brand';
 import { articles as localArticles } from '../content/lab';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -211,4 +211,29 @@ export async function getCraftLabArticleBySlug(slug: string) {
   }
   const articles = await getCraftLabArticles();
   return articles.find((a: { slug: string }) => a.slug === slug);
+}
+
+/**
+ * Obtener logos del carrusel de marcas
+ */
+export async function getBrandLogos(): Promise<Array<{ publicId: string; alt: string }>> {
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('description')
+        .eq('slug', '__settings__')
+        .maybeSingle();
+
+      if (!error && data && data.description) {
+        const parsed = JSON.parse(data.description);
+        if (Array.isArray(parsed.brandLogos)) {
+          return parsed.brandLogos;
+        }
+      }
+    } catch (e) {
+      console.error('[Supabase Error] getBrandLogos:', e);
+    }
+  }
+  return localBrandLogos;
 }
