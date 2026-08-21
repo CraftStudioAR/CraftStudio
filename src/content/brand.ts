@@ -176,6 +176,16 @@ export type WorkCase = {
     tracking?: string;
     leading?: string;
   };
+  clientStyle?: {
+    sizeMobile?: string;
+    sizeTablet?: string;
+    sizeDesktop?: string;
+  };
+  summaryStyle?: {
+    sizeMobile?: string;
+    sizeTablet?: string;
+    sizeDesktop?: string;
+  };
 };
 
 export const work: WorkCase[] = [

@@ -144,20 +144,53 @@ export default function TrabajoDetalle() {
             })()}
 
             {/* Nombre de la marca debajo, más chico */}
-            {project.title && (
-              <motion.p
-                variants={itemVariants}
-                className="font-sans font-bold uppercase tracking-widest text-xl md:text-2xl text-ink/70"
-              >
-                {project.client}
-              </motion.p>
-            )}
+            {project.title && (() => {
+              const clientId = `client-site-${Math.random().toString(36).substr(2, 9)}`;
+              const { className: clientSizeClass, style: clientSizeStyle, styleElement: clientStyleElement } = getResponsiveTextStyle(
+                clientId,
+                project.clientStyle?.sizeMobile || 'text-sm',
+                project.clientStyle?.sizeTablet || 'text-sm',
+                project.clientStyle?.sizeDesktop || 'text-base'
+              );
+              return (
+                <>
+                  {clientStyleElement}
+                  <motion.p
+                    id={clientId}
+                    variants={itemVariants}
+                    className={`font-sans font-bold uppercase tracking-widest text-ink/70 ${clientSizeClass}`}
+                    style={{ letterSpacing: '0.15em', ...clientSizeStyle }}
+                  >
+                    {project.client}
+                  </motion.p>
+                </>
+              );
+            })()}
             
             <motion.div variants={itemVariants} className="w-16 h-[1px] bg-red mt-1"></motion.div>
             
-            <motion.p variants={itemVariants} className="text-base md:text-lg font-medium leading-[1.5] text-balance max-w-2xl text-ink/80">
-              {project.summary}
-            </motion.p>
+            {(() => {
+              const summaryId = `summary-site-${Math.random().toString(36).substr(2, 9)}`;
+              const { className: summarySizeClass, style: summarySizeStyle, styleElement: summaryStyleElement } = getResponsiveTextStyle(
+                summaryId,
+                project.summaryStyle?.sizeMobile || 'text-base',
+                project.summaryStyle?.sizeTablet || 'text-base',
+                project.summaryStyle?.sizeDesktop || 'text-lg'
+              );
+              return (
+                <>
+                  {summaryStyleElement}
+                  <motion.p
+                    id={summaryId}
+                    variants={itemVariants}
+                    className={`font-medium leading-[1.5] text-balance max-w-2xl text-ink/80 ${summarySizeClass}`}
+                    style={summarySizeStyle}
+                  >
+                    {project.summary}
+                  </motion.p>
+                </>
+              );
+            })()}
           </motion.div>
 
           <motion.div 
