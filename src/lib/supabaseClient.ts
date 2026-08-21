@@ -49,10 +49,12 @@ export async function getProjects(): Promise<WorkCase[]> {
 
         const mappedProjects = projectsOnly.map((item) => {
           let titleStyle = undefined;
+          let featured = false;
           try {
             if (item.description && item.description.trim().startsWith('{')) {
               const parsed = JSON.parse(item.description);
               titleStyle = parsed.titleStyle;
+              featured = parsed.featured || false;
             }
           } catch (e) {
             // Ignore
@@ -63,6 +65,7 @@ export async function getProjects(): Promise<WorkCase[]> {
             cover: typeof item.cover === 'string' ? JSON.parse(item.cover) : item.cover,
             blocks: typeof item.blocks === 'string' ? JSON.parse(item.blocks) : item.blocks,
             titleStyle,
+            featured,
           };
         });
 
@@ -101,10 +104,12 @@ export async function getProjectBySlug(slug: string): Promise<WorkCase | undefin
         console.error(`[Supabase Error] getProjectBySlug (${slug}):`, error.message, error.details);
       } else if (data) {
         let titleStyle = undefined;
+        let featured = false;
         try {
           if (data.description && data.description.trim().startsWith('{')) {
             const parsed = JSON.parse(data.description);
             titleStyle = parsed.titleStyle;
+            featured = parsed.featured || false;
           }
         } catch (e) {
           // Ignore
@@ -115,6 +120,7 @@ export async function getProjectBySlug(slug: string): Promise<WorkCase | undefin
           cover: typeof data.cover === 'string' ? JSON.parse(data.cover) : data.cover,
           blocks: typeof data.blocks === 'string' ? JSON.parse(data.blocks) : data.blocks,
           titleStyle,
+          featured,
         };
       }
     } catch (e) {

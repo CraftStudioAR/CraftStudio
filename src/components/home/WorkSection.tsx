@@ -15,12 +15,16 @@ export default function WorkSection() {
   const workContainerRef = useRef<HTMLDivElement>(null);
   const workScrollRef = useRef<HTMLDivElement>(null);
 
+  const displayList = projectsList.filter((p) => p.featured).length > 0
+    ? projectsList.filter((p) => p.featured)
+    : projectsList;
+
   useEffect(() => {
     getProjects().then(setProjectsList);
   }, []);
 
   useEffect(() => {
-    if (projectsList.length === 0) return;
+    if (displayList.length === 0) return;
 
     const ctx = gsap.context(() => {
       // Horizontal Scroll for Work Section
@@ -53,7 +57,7 @@ export default function WorkSection() {
     }, workContainerRef);
     
     return () => ctx.revert();
-  }, [projectsList]);
+  }, [displayList]);
 
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-start relative">
@@ -77,9 +81,9 @@ export default function WorkSection() {
       {/* Horizontal scroll track */}
       <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-36">
         <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-20 pr-16 md:pr-32 items-start">
-          {projectsList.map((w, i) => (
+          {displayList.map((w, i) => (
             <div key={w.slug} className="w-[84vw] sm:w-[85vw] md:w-[85vw] max-w-md shrink-0">
-              <WorkCard work={w} index={i} total={projectsList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
+              <WorkCard work={w} index={i} total={displayList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>
           ))}
         </div>

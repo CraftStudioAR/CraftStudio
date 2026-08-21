@@ -164,6 +164,7 @@ export type WorkCase = {
   scope?: string[];
   description?: string;
   blocks?: ProjectBlock[];
+  featured?: boolean;
   titleStyle?: {
     bold?: boolean;
     italic?: boolean;
