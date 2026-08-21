@@ -375,10 +375,10 @@ function Block({
             ? "w-fit max-w-full" 
             : "max-w-3xl";
 
-      const containerClass = `mx-auto w-full px-6 md:px-0 my-4 ${containerWidth} ${
+      const containerClass = `mx-auto w-full my-4 ${containerWidth} ${
         block.hasContainer 
           ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 flex flex-col gap-4 shadow-sm" 
-          : ""
+          : "px-6 md:px-0"
       }`;
 
       const boldClass = block.bold ? "font-bold" : "font-normal";
