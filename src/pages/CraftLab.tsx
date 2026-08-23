@@ -16,6 +16,9 @@ interface Article {
   content: string;
 }
 
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function CraftLab() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
 
@@ -24,6 +27,15 @@ export default function CraftLab() {
   }, []);
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
+      <SEO
+        title="Craft Lab — Ensayos y Cultura de Marca"
+        description="Craft Lab es nuestro espacio de pensamiento, investigación y ensayística sobre branding, diseño, tipografía, micro-interacciones y cultura digital."
+        keywords="craft lab, ensayos branding, cultura de marca, tipografia como identidad, construccion de valor, pensamiento de diseño"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Craft Lab", url: "/craft-lab" }
+        ])}
+      />
       
       {/* HERO SECTION */}
       <section className="relative px-6 pt-40 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">

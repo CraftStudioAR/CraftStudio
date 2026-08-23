@@ -8,6 +8,9 @@ import LabSection from "../components/home/LabSection";
 import StudioSection from "../components/home/StudioSection";
 import { getBrandLogos } from "../lib/supabaseClient";
 
+import SEO from "../components/SEO";
+import { organizationSchema, websiteSchema } from "../utils/seoSchemas";
+
 export default function Home() {
   const [logos, setLogos] = useState<any[]>([]);
 
@@ -21,6 +24,11 @@ export default function Home() {
 
   return (
     <div data-theme="light" className="bg-cream">
+      <SEO
+        title="Estudio de Identidad y Comunicación Estratégica"
+        description="Craft Studio es un estudio de identidad visual, branding y comunicación estratégica en Buenos Aires. Pensamos el problema, diseñamos la solución."
+        jsonLd={[organizationSchema, websiteSchema]}
+      />
       {/* 1. Hero Section (Pinned, shrinks as rectangle) */}
       <HeroSection />
 

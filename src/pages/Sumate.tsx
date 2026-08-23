@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
 import { contactInfo } from "../content/brand";
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
 
 const areas = [
   "Diseño gráfico",
@@ -134,6 +136,15 @@ export default function Sumate() {
 
   return (
     <div className="min-h-screen bg-cream text-ink relative overflow-hidden">
+      <SEO
+        title="Sumate al Equipo — Talent & Careers"
+        description="Buscamos personas creativas que disfruten del branding, la estrategia, el diseño y la comunicación. Sumate a Craft Studio."
+        keywords="sumate craft studio, carreras branding, empleo diseño grafico buenos aires, trabajar en craft studio"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Sumate", url: "/sumate" }
+        ])}
+      />
 
 
       <div className="px-6 pt-32 pb-20 md:pt-40 md:pb-32 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">

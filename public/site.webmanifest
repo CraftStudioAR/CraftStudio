@@ -1,0 +1,15 @@
+{
+  "name": "Craft Studio",
+  "short_name": "Craft Studio",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0a0424",
+  "background_color": "#fcfbf9"
+}

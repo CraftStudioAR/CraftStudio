@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import Reveal from "../components/Reveal";
 
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function Nosotras() {
   return (
     <div data-theme="light" className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
+      <SEO
+        title="Sobre Nosotras"
+        description="Conocé a Martina y Tiziana, las fundadoras de Craft Studio. Un equipo creativo que combina estrategia, dirección de arte y pensamiento de marca."
+        keywords="nosotras craft studio, fundadoras craft studio, Martina, Tiziana, estudio de marca buenos aires, equipo creativo"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Nosotras", url: "/nosotras" }
+        ])}
+      />
       
       {/* 1. HERO / INTRO SECTION */}
       <section className="pt-32 pb-16 md:pt-44 md:pb-20 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">

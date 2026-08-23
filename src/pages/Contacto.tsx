@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import Reveal from "../components/Reveal";
 import Magnetic from "../components/Magnetic";
 import { contactInfo, contactForm } from "../content/brand";
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
 
 // Tabs data
 const TABS = [
@@ -126,6 +128,15 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-cream text-ink relative overflow-hidden">
+      <SEO
+        title="Contacto — Hablemos de tu Proyecto"
+        description="Ponete en contacto con Craft Studio para empezar tu proyecto de branding, rebranding, dirección de arte o estrategia de comunicación."
+        keywords="contacto craft studio, contratar agencia branding, cotizacion branding buenos aires, formulario de contacto"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Contacto", url: "/contacto" }
+        ])}
+      />
       <div className="px-6 pt-32 pb-0 md:pt-40 md:pb-0 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
         
         {/* ENCABEZADO CENTRADO */}

@@ -18,6 +18,9 @@ interface Article {
   blocks?: any[];
 }
 
+import SEO from "../components/SEO";
+import { buildArticleSchema, buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function LabDetalle() {
   const { slug } = useParams();
   const [article, setArticle] = useState<Article | undefined | null>(null);
@@ -55,6 +58,20 @@ export default function LabDetalle() {
 
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
+      <SEO
+        title={`${article.title} — Craft Lab`}
+        description={article.desc}
+        ogType="article"
+        keywords={`${article.title}, ${article.category}, craft lab, ensayo de diseño, branding`}
+        jsonLd={[
+          buildArticleSchema(article),
+          buildBreadcrumbSchema([
+            { name: "Inicio", url: "/" },
+            { name: "Craft Lab", url: "/craft-lab" },
+            { name: article.title, url: `/craft-lab/${article.slug}` }
+          ])
+        ]}
+      />
       
       {/* HEADER EDITORIAL */}
       <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10 max-w-4xl mx-auto">

@@ -3,6 +3,9 @@ import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
 import { programas, programasInfo, brandPartnershipsInfo, modalidadesInfo } from "../content/brand";
 
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function Servicios() {
   const [activeProgramas, setActiveProgramas] = useState(0);
   const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(null);
@@ -29,9 +32,15 @@ export default function Servicios() {
       document.body.style.width = "";
       document.documentElement.style.overflow = "";
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
       }
     }
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [mobileActiveIndex]);
 
   const cardColors = [
@@ -78,6 +87,15 @@ export default function Servicios() {
 
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
+      <SEO
+        title="Servicios y Modalidades de Trabajo"
+        description="Conocé nuestros programas (Build, Shift, Refresh) y Brand Partnerships para potenciar el posicionamiento, branding y comunicación de tu marca."
+        keywords="servicios branding, programas de marca, Build Program, Shift Program, Refresh Program, Brand Partnerships, estrategia de marca"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Servicios", url: "/servicios" }
+        ])}
+      />
       
       {/* 1. HERO SECTION */}
       <section className="relative px-6 pt-40 pb-24 md:pt-56 md:pb-32 md:px-10 overflow-hidden z-10">

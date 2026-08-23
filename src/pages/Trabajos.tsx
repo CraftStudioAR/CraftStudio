@@ -5,6 +5,9 @@ import { getProjects } from "../lib/supabaseClient";
 import type { WorkCase } from "../content/brand";
 import { motion } from "motion/react";
 
+import SEO from "../components/SEO";
+import { buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function Trabajos() {
   const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
 
@@ -30,6 +33,15 @@ export default function Trabajos() {
 
   return (
     <div className="bg-cream min-h-screen text-ink">
+      <SEO
+        title="Proyectos y Portafolio"
+        description="Explorá nuestros casos de éxito en branding, estrategia de comunicación, growth marketing y dirección de arte (Yokoo Studio, Nómade Café, USA Magazine, Sunkiss y más)."
+        keywords="portafolio branding, casos de éxito, Yokoo Studio, Nómade Café, Sunkiss, dirección de arte, branding argentina"
+        jsonLd={buildBreadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Proyectos", url: "/trabajos" }
+        ])}
+      />
       
       {/* 1. HERO REDISEÑADO */}
       <section className="relative px-6 pt-32 pb-20 md:pt-48 md:pb-32 md:px-10 overflow-hidden">

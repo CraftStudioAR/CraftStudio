@@ -42,6 +42,9 @@ function getResponsiveTextStyle(
   return { className, style, styleElement };
 }
 
+import SEO from "../components/SEO";
+import { buildProjectSchema, buildBreadcrumbSchema } from "../utils/seoSchemas";
+
 export default function TrabajoDetalle() {
   const { slug } = useParams();
   const [project, setProject] = useState<WorkCase | undefined | null>(null);
@@ -83,10 +86,21 @@ export default function TrabajoDetalle() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
-
-
   return (
     <div className="bg-cream min-h-screen text-ink selection:bg-red selection:text-cream">
+      <SEO
+        title={`${project.client} — ${project.title ?? project.category}`}
+        description={project.summary}
+        keywords={`${project.client}, ${project.category}, ${project.scope?.join(", ") ?? ""}, caso de estudio, branding`}
+        jsonLd={[
+          buildProjectSchema(project),
+          buildBreadcrumbSchema([
+            { name: "Inicio", url: "/" },
+            { name: "Proyectos", url: "/trabajos" },
+            { name: project.client, url: `/trabajos/${project.slug}` }
+          ])
+        ]}
+      />
       
       {/* 1. HERO DEL PROYECTO */}
       <section className="px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-32 overflow-hidden">
