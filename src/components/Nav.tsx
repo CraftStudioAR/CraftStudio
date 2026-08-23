@@ -170,8 +170,9 @@ export default function Nav() {
                   {item.label}
                   {isActive && (
                     <motion.span
-                      layoutId="nav-dot"
-                      className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red"
+                      layoutId="active-nav-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-red"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </>

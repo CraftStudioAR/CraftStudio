@@ -103,7 +103,7 @@ export default function TrabajoDetalle() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-20">
           
           <motion.div 
             variants={containerVariants}
@@ -197,26 +197,26 @@ export default function TrabajoDetalle() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-5 flex flex-col gap-10 lg:pt-6"
+            className="lg:col-span-5 flex flex-col gap-4 md:gap-10 lg:pt-6"
           >
-            <motion.div variants={itemVariants} className="flex flex-col gap-3">
-              <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Modalidad</h4>
-              <p className="text-xl md:text-2xl font-medium">{project.category}</p>
+            <motion.div variants={itemVariants} className="flex flex-col gap-1 md:gap-3">
+              <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Modalidad</h4>
+              <p className="text-base md:text-2xl font-medium">{project.category}</p>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-col gap-3">
-              <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Año</h4>
-              <p className="text-xl md:text-2xl font-medium">{project.year}</p>
+            <motion.div variants={itemVariants} className="flex flex-col gap-1 md:gap-3">
+              <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Año</h4>
+              <p className="text-base md:text-2xl font-medium">{project.year}</p>
             </motion.div>
 
             {project.scope && project.scope.length > 0 && (
-              <motion.div variants={itemVariants} className="flex flex-col gap-4">
-                <h4 className="text-xs font-bold tracking-widest uppercase text-ink/40">Alcance del proyecto</h4>
-                <div className="flex flex-wrap gap-2">
+              <motion.div variants={itemVariants} className="flex flex-col gap-2 md:gap-4">
+                <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Alcance del proyecto</h4>
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {project.scope.map((item) => (
                     <span
                       key={item}
-                      className="px-3 py-1.5 rounded-lg text-xs tracking-wide font-medium bg-ink/5 border border-ink/10"
+                      className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-md md:rounded-lg text-[11px] md:text-xs tracking-wide font-medium bg-ink/5 border border-ink/10"
                     >
                       {item}
                     </span>
