@@ -123,23 +123,19 @@ export default function LabDetalle() {
         </Reveal>
       </section>
 
-      {/* CONTENIDO (READING COLUMN & BLOCKS) */}
+      {/* CONTENIDO (BLOCKS O PÁRRAFOS DE FALLBACK) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
-        <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
-          {paragraphs.length > 0 && (
-            <div className="max-w-3xl mx-auto space-y-8 md:space-y-12">
-              {paragraphs.map((paragraph, index) => (
-                <Reveal key={index} delay={0.1}>
-                  <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif">
-                    {paragraph}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-          )}
-
-          {article.blocks && article.blocks.length > 0 && (
+        <div className={`${article.blocks && article.blocks.length > 0 ? 'max-w-6xl' : 'max-w-3xl'} mx-auto space-y-8 md:space-y-12`}>
+          {article.blocks && article.blocks.length > 0 ? (
             <ProjectBlocks blocks={article.blocks} />
+          ) : (
+            paragraphs.map((paragraph, index) => (
+              <Reveal key={index} delay={0.1}>
+                <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif">
+                  {paragraph}
+                </p>
+              </Reveal>
+            ))
           )}
           
           <Reveal>
