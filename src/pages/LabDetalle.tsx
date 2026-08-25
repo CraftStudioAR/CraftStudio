@@ -128,7 +128,7 @@ export default function LabDetalle() {
       />
       
       {/* HEADER EDITORIAL */}
-      <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">
+      <section className="relative px-6 pt-32 pb-10 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">
         <div className="max-w-6xl mx-auto w-full flex flex-col items-start text-left">
           <Reveal>
             <Link 
@@ -165,7 +165,7 @@ export default function LabDetalle() {
       </section>
 
       {/* PORTADA */}
-      <section className="px-6 md:px-10 mb-20 md:mb-32">
+      <section className="px-6 md:px-10 mb-8 md:mb-24">
         <Reveal delay={0.4}>
           <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-[2rem] overflow-hidden relative bg-ink/5">
             <img 
