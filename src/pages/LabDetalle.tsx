@@ -91,6 +91,24 @@ export default function LabDetalle() {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareTitle} — ${shareUrl}`)}`, '_blank', 'noopener,noreferrer');
   };
 
+  const handleMobileShare = async () => {
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: `Lee "${shareTitle}" en Craft Lab`,
+          url: shareUrl,
+        });
+      } catch (err: any) {
+        if (err.name !== 'AbortError') {
+          setShowMobileShareMenu((prev) => !prev);
+        }
+      }
+    } else {
+      setShowMobileShareMenu((prev) => !prev);
+    }
+  };
+
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       <SEO
@@ -178,7 +196,72 @@ export default function LabDetalle() {
               <p className="text-sm tracking-widest uppercase font-bold opacity-60">
                 Compartir este artículo
               </p>
-              <div className="flex flex-wrap gap-3">
+
+              {/* Botón e interfaz nativa/desplegable para Mobile */}
+              <div className="md:hidden w-full space-y-3">
+                <button
+                  type="button"
+                  onClick={handleMobileShare}
+                  className="w-full px-6 py-3.5 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold bg-white text-ink hover:bg-ink hover:text-cream transition-all duration-300 active:scale-95 flex items-center justify-center gap-3 cursor-pointer shadow-sm"
+                >
+                  <svg 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="w-4 h-4 text-red shrink-0"
+                  >
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                  </svg>
+                  <span>Compartir artículo</span>
+                </button>
+
+                {showMobileShareMenu && (
+                  <div className="grid grid-cols-2 gap-2 pt-2 animate-fadeIn">
+                    <button 
+                      type="button"
+                      onClick={shareLinkedIn}
+                      className="px-4 py-3 rounded-2xl border border-ink/15 text-[11px] tracking-wider uppercase font-bold bg-white text-ink hover:bg-ink hover:text-cream text-center transition-all cursor-pointer"
+                    >
+                      LinkedIn
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={shareTwitter}
+                      className="px-4 py-3 rounded-2xl border border-ink/15 text-[11px] tracking-wider uppercase font-bold bg-white text-ink hover:bg-ink hover:text-cream text-center transition-all cursor-pointer"
+                    >
+                      X (Twitter)
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={shareWhatsApp}
+                      className="px-4 py-3 rounded-2xl border border-ink/15 text-[11px] tracking-wider uppercase font-bold bg-white text-ink hover:bg-ink hover:text-cream text-center transition-all cursor-pointer"
+                    >
+                      WhatsApp
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={handleCopyLink}
+                      className={`px-4 py-3 rounded-2xl border text-[11px] tracking-wider uppercase font-bold text-center transition-all cursor-pointer ${
+                        copied ? 'bg-red text-cream border-red' : 'border-ink/15 bg-white text-ink hover:bg-ink hover:text-cream'
+                      }`}
+                    >
+                      {copied ? '¡Copiado!' : 'Copiar Link'}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Botones inline para Desktop */}
+              <div className="hidden md:flex flex-wrap gap-3">
                 <button 
                   type="button"
                   onClick={shareLinkedIn}
