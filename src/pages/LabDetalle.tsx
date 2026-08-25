@@ -26,6 +26,7 @@ export default function LabDetalle() {
   const [article, setArticle] = useState<Article | undefined | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [showMobileShareMenu, setShowMobileShareMenu] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
