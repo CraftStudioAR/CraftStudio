@@ -25,11 +25,11 @@ export default function ServicesSection() {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {/* Card 1: Programas */}
+          {/* Card 1: Programs */}
           <Reveal>
             <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full flex flex-col items-start">
               <h3 className="font-sans font-bold text-4xl md:text-5xl tracking-tight mb-4 text-ink">
-                Programas
+                Programs
               </h3>
               <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
                 Construimos la dirección de tu marca.
@@ -43,7 +43,7 @@ export default function ServicesSection() {
                   to="/servicios"
                   className="group flex justify-center items-center gap-2 rounded-xl px-6 py-2.5 bg-red text-cream hover:bg-red/90 hover:scale-105 transition-all duration-300"
                 >
-                  <span className="font-bold tracking-tight text-sm">Ver programas</span>
+                  <span className="font-bold tracking-tight text-sm">Ver programs</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
                     <svg
                       width="12"
