@@ -85,38 +85,40 @@ export default function LabDetalle() {
       />
       
       {/* HEADER EDITORIAL */}
-      <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10 max-w-6xl mx-auto text-left">
-        <Reveal>
-          <Link 
-            to="/craft-lab" 
-            className="inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-red mb-12 hover:opacity-70 transition-opacity"
-          >
-            ← Volver a Craft Lab
-          </Link>
-        </Reveal>
+      <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">
+        <div className="max-w-6xl mx-auto w-full flex flex-col items-start text-left">
+          <Reveal>
+            <Link 
+              to="/craft-lab" 
+              className="inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-red mb-12 hover:opacity-70 transition-opacity"
+            >
+              ← Volver a Craft Lab
+            </Link>
+          </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-[10px] md:text-xs tracking-widest text-red uppercase font-bold bg-red/10 px-4 py-1.5 rounded-lg">
-              {article.category}
-            </span>
-            <span className="text-[10px] md:text-xs tracking-widest text-ink/50 uppercase font-bold py-1">
-              {article.date}
-            </span>
-          </div>
-        </Reveal>
+          <Reveal delay={0.1}>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[10px] md:text-xs tracking-widest text-red uppercase font-bold bg-red/10 px-4 py-1.5 rounded-lg">
+                {article.category}
+              </span>
+              <span className="text-[10px] md:text-xs tracking-widest text-ink/50 uppercase font-bold py-1">
+                {article.date}
+              </span>
+            </div>
+          </Reveal>
 
-        <Reveal delay={0.2}>
-          <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-8 text-balance text-left">
-            {article.title}
-          </h1>
-        </Reveal>
+          <Reveal delay={0.2}>
+            <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-8 text-balance text-left">
+              {article.title}
+            </h1>
+          </Reveal>
 
-        <Reveal delay={0.3}>
-          <p className="text-xl md:text-3xl text-ink/70 font-medium leading-relaxed text-balance text-left">
-            {article.desc}
-          </p>
-        </Reveal>
+          <Reveal delay={0.3}>
+            <p className="text-xl md:text-3xl text-ink/70 font-medium leading-relaxed text-balance text-left">
+              {article.desc}
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       {/* PORTADA */}
