@@ -221,7 +221,10 @@ export async function getCraftLabArticleBySlug(slug: string) {
       if (error) {
         console.error(`[Supabase Error] getCraftLabArticleBySlug (${slug}):`, error.message, error.details);
       } else if (data) {
-        return data;
+        return {
+          ...data,
+          blocks: typeof data.blocks === 'string' ? JSON.parse(data.blocks) : data.blocks || [],
+        };
       }
     } catch (e) {
       console.error(`[Supabase Exception] getCraftLabArticleBySlug (${slug}):`, e);

@@ -58,6 +58,15 @@ export default function LabDetalle() {
     ? article.content.split('\n\n').filter((p) => p.trim().length > 0)
     : [];
 
+  const rawBlocks = article.blocks;
+  const parsedBlocks: any[] = Array.isArray(rawBlocks)
+    ? rawBlocks
+    : typeof rawBlocks === 'string'
+    ? (() => { try { return JSON.parse(rawBlocks); } catch { return []; } })()
+    : [];
+
+  const hasBlocks = parsedBlocks.length > 0;
+
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       <SEO
@@ -125,9 +134,9 @@ export default function LabDetalle() {
 
       {/* CONTENIDO (BLOCKS O PÁRRAFOS DE FALLBACK) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
-        <div className={`${article.blocks && article.blocks.length > 0 ? 'max-w-6xl' : 'max-w-3xl'} mx-auto space-y-8 md:space-y-12`}>
-          {article.blocks && article.blocks.length > 0 ? (
-            <ProjectBlocks blocks={article.blocks} />
+        <div className={`${hasBlocks ? 'max-w-6xl' : 'max-w-3xl'} mx-auto space-y-8 md:space-y-12`}>
+          {hasBlocks ? (
+            <ProjectBlocks blocks={parsedBlocks} />
           ) : (
             paragraphs.map((paragraph, index) => (
               <Reveal key={index} delay={0.1}>
