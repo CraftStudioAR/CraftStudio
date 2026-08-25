@@ -67,6 +67,31 @@ export default function LabDetalle() {
 
   const hasBlocks = parsedBlocks.length > 0;
 
+  const [copied, setCopied] = useState(false);
+
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const shareTitle = article ? article.title : '';
+
+  const handleCopyLink = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const shareLinkedIn = () => {
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const shareTwitter = () => {
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const shareWhatsApp = () => {
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareTitle} — ${shareUrl}`)}`, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="bg-cream min-h-screen font-sans text-ink selection:bg-red selection:text-cream">
       <SEO
@@ -154,12 +179,38 @@ export default function LabDetalle() {
               <p className="text-sm tracking-widest uppercase font-bold opacity-60">
                 Compartir este artículo
               </p>
-              <div className="flex gap-4">
-                <button className="px-6 py-2 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold hover:bg-ink hover:text-cream transition-colors">
+              <div className="flex flex-wrap gap-3">
+                <button 
+                  type="button"
+                  onClick={shareLinkedIn}
+                  className="px-5 py-2.5 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold hover:bg-ink hover:text-cream transition-all duration-300 active:scale-95 flex items-center gap-2 cursor-pointer"
+                >
                   LinkedIn
                 </button>
-                <button className="px-6 py-2 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold hover:bg-ink hover:text-cream transition-colors">
-                  Twitter
+                <button 
+                  type="button"
+                  onClick={shareTwitter}
+                  className="px-5 py-2.5 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold hover:bg-ink hover:text-cream transition-all duration-300 active:scale-95 flex items-center gap-2 cursor-pointer"
+                >
+                  X (Twitter)
+                </button>
+                <button 
+                  type="button"
+                  onClick={shareWhatsApp}
+                  className="px-5 py-2.5 rounded-full border border-ink/20 text-xs tracking-widest uppercase font-bold hover:bg-ink hover:text-cream transition-all duration-300 active:scale-95 flex items-center gap-2 cursor-pointer"
+                >
+                  WhatsApp
+                </button>
+                <button 
+                  type="button"
+                  onClick={handleCopyLink}
+                  className={`px-5 py-2.5 rounded-full border text-xs tracking-widest uppercase font-bold transition-all duration-300 active:scale-95 flex items-center gap-2 cursor-pointer ${
+                    copied 
+                      ? 'bg-red text-cream border-red' 
+                      : 'border-ink/20 hover:bg-ink hover:text-cream'
+                  }`}
+                >
+                  {copied ? '¡Link Copiado!' : 'Copiar Link'}
                 </button>
               </div>
             </div>
