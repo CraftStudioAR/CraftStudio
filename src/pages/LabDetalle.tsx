@@ -25,6 +25,7 @@ export default function LabDetalle() {
   const { slug } = useParams();
   const [article, setArticle] = useState<Article | undefined | null>(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,8 +67,6 @@ export default function LabDetalle() {
     : [];
 
   const hasBlocks = parsedBlocks.length > 0;
-
-  const [copied, setCopied] = useState(false);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareTitle = article ? article.title : '';
