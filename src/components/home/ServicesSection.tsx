@@ -28,7 +28,7 @@ export default function ServicesSection() {
           {/* Card 1: Programs */}
           <Reveal>
             <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full flex flex-col items-start">
-              <h3 className="font-sans font-bold text-4xl md:text-5xl tracking-tight mb-4 text-ink">
+              <h3 className="font-sans font-normal text-4xl md:text-5xl tracking-tight mb-4 text-ink">
                 Programs
               </h3>
               <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
@@ -68,7 +68,7 @@ export default function ServicesSection() {
           {/* Card 2: Brand Partnerships */}
           <Reveal delay={0.2}>
             <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full flex flex-col items-start">
-              <h3 className="font-sans font-bold text-4xl md:text-5xl tracking-tight mb-4 text-ink">
+              <h3 className="font-sans font-normal text-4xl md:text-5xl tracking-tight mb-4 text-ink">
                 Brand Partnerships
               </h3>
               <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
