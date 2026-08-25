@@ -496,22 +496,13 @@ function Block({
       return <Testimonial quote={block.quote} author={block.author} role={block.role} />;
 
     case "text": {
-      const isFullWidth = block.hasContainer || block.widthMode === "full";
-      const containerWidth = isFullWidth 
-        ? "w-full" 
-        : block.widthMode === "auto" 
-          ? "w-fit max-w-full" 
-          : "max-w-3xl";
-
-      const containerClass = `mx-auto w-full my-4 ${containerWidth} ${
+      const containerClass = `w-full my-4 ${
         block.hasContainer 
           ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 shadow-sm" 
-          : "px-6 md:px-0"
+          : "px-0"
       }`;
 
-      const innerClass = isFullWidth
-        ? "max-w-3xl mx-auto w-full flex flex-col gap-4"
-        : "w-full flex flex-col gap-4";
+      const innerClass = "w-full flex flex-col gap-4 text-left";
 
       const boldClass = block.bold ? "font-bold" : "font-normal";
       const italicClass = block.italic ? "italic" : "not-italic";

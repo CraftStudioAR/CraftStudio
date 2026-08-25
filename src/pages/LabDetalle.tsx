@@ -85,7 +85,7 @@ export default function LabDetalle() {
       />
       
       {/* HEADER EDITORIAL */}
-      <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10 max-w-4xl mx-auto">
+      <section className="relative px-6 pt-32 pb-16 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10 max-w-6xl mx-auto text-left">
         <Reveal>
           <Link 
             to="/craft-lab" 
@@ -107,13 +107,13 @@ export default function LabDetalle() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-8 text-balance">
+          <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-8 text-balance text-left">
             {article.title}
           </h1>
         </Reveal>
 
         <Reveal delay={0.3}>
-          <p className="text-xl md:text-3xl text-ink/70 font-medium leading-relaxed text-balance">
+          <p className="text-xl md:text-3xl text-ink/70 font-medium leading-relaxed text-balance text-left">
             {article.desc}
           </p>
         </Reveal>
@@ -134,13 +134,13 @@ export default function LabDetalle() {
 
       {/* CONTENIDO (BLOCKS O PÁRRAFOS DE FALLBACK) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
-        <div className={`${hasBlocks ? 'max-w-6xl' : 'max-w-3xl'} mx-auto space-y-8 md:space-y-12`}>
+        <div className="max-w-6xl mx-auto w-full space-y-8 md:space-y-12 text-left">
           {hasBlocks ? (
             <ProjectBlocks blocks={parsedBlocks} />
           ) : (
             paragraphs.map((paragraph, index) => (
               <Reveal key={index} delay={0.1}>
-                <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif">
+                <p className="text-lg md:text-2xl text-ink/80 leading-relaxed font-serif text-left">
                   {paragraph}
                 </p>
               </Reveal>
