@@ -91,7 +91,7 @@ export type Stat = {
 };
 
 export type ProjectBlock =
-  | { type: "image"; image: ProjectImage }
+  | { type: "image"; image: ProjectImage; aspect?: string; size?: 'full' | 'contained' }
   | { type: "imageFeature"; main: ProjectImage; stacked: [ProjectImage, ProjectImage] }
   | {
       type: "imagePair";
