@@ -317,14 +317,16 @@ function Block({
       const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
       if (isPhonesImage) {
         return (
-          <div className="w-full -mx-3 sm:-mx-6 md:-mx-16 lg:-mx-24 my-2 sm:my-4">
-            <Img
-              image={block.image}
-              transforms="f_auto,q_auto,w_2000"
-              className="w-full"
-              imgClassName="w-full h-auto object-contain rounded-2xl md:rounded-3xl"
-              onOpen={() => onOpen(startIndex)}
-            />
+          <div className="w-full flex justify-center items-center my-2 sm:my-4">
+            <div className="w-[115%] sm:w-[125%] md:w-[135%] max-w-none shrink-0 flex justify-center">
+              <Img
+                image={block.image}
+                transforms="f_auto,q_auto,w_2000"
+                className="w-full mx-auto"
+                imgClassName="w-full h-auto object-contain mx-auto rounded-2xl md:rounded-3xl"
+                onOpen={() => onOpen(startIndex)}
+              />
+            </div>
           </div>
         );
       }
