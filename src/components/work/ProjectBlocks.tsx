@@ -346,7 +346,7 @@ function Block({
       );
 
     case "imagePair": {
-      const stackOnMobile = block.mobileLayout === "stack";
+      const stackOnMobile = block.mobileLayout === "stack" || block.images.some((img: any) => img.publicId?.includes("8816") || img.publicId?.includes("8817"));
 
       // Anchos proporcionales al ratio de cada foto sobre una base 0: las dos terminan
       // con el mismo alto (base disponible / suma de ratios) sin perder un solo pixel.
