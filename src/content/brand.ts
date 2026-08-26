@@ -538,7 +538,7 @@ export const work: WorkCase[] = [
     blocks: [
       {
         type: "imagePair",
-        mobileLayout: "pair",
+        mobileLayout: "stack",
         images: [
           { publicId: "IMG_8816_qn0cej", alt: "Contenido Sunkiss TikTok" },
           { publicId: "IMG_8817_uohpae", alt: "Contenido Sunkiss TikTok" },
