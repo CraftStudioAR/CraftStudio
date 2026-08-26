@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 /**
@@ -9,13 +9,19 @@ import { motion, useMotionValue, useSpring } from "motion/react";
  */
 export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string | null>(null);
   const [pressed, setPressed] = useState(false);
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const ringX = useSpring(x, { stiffness: 500, damping: 40, mass: 0.5 });
-  const ringY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.5 });
+
+  // Fast, responsive spring without heavy lag or freezing
+  const ringX = useSpring(x, { stiffness: 900, damping: 50, mass: 0.2 });
+  const ringY = useSpring(y, { stiffness: 900, damping: 50, mass: 0.2 });
+
+  const labelRef = useRef<string | null>(null);
+  const hasMovedRef = useRef(false);
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -23,23 +29,51 @@ export default function CustomCursor() {
     if (!fine) return;
 
     const move = (e: MouseEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
+      // First move: jump motion values directly to avoid flying from (-100, -100)
+      if (!hasMovedRef.current) {
+        hasMovedRef.current = true;
+        x.jump(e.clientX);
+        y.jump(e.clientY);
+        setVisible(true);
+      } else {
+        x.set(e.clientX);
+        y.set(e.clientY);
+        if (!visible) setVisible(true);
+      }
+
       const target = (e.target as HTMLElement)?.closest<HTMLElement>("[data-cursor]");
-      setLabel(target?.dataset.cursor ?? null);
+      const newLabel = target?.dataset.cursor ?? null;
+
+      // Avoid re-rendering React on every mousemove pixel if label hasn't changed
+      if (labelRef.current !== newLabel) {
+        labelRef.current = newLabel;
+        setLabel(newLabel);
+      }
     };
+
     const down = () => setPressed(true);
     const up = () => setPressed(false);
+    const leave = () => setVisible(false);
+    const enter = (e: MouseEvent) => {
+      x.jump(e.clientX);
+      y.jump(e.clientY);
+      setVisible(true);
+    };
 
-    window.addEventListener("mousemove", move);
+    window.addEventListener("mousemove", move, { passive: true });
     window.addEventListener("mousedown", down);
     window.addEventListener("mouseup", up);
+    document.addEventListener("mouseleave", leave);
+    document.addEventListener("mouseenter", enter);
+
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mousedown", down);
       window.removeEventListener("mouseup", up);
+      document.removeEventListener("mouseleave", leave);
+      document.removeEventListener("mouseenter", enter);
     };
-  }, [x, y]);
+  }, [x, y, visible]);
 
   if (!enabled) return null;
 
@@ -48,14 +82,21 @@ export default function CustomCursor() {
   return (
     <motion.div
       className="pointer-events-none fixed top-0 left-0 z-[9999] mix-blend-difference hidden md:block"
-      style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
+      style={{
+        x: ringX,
+        y: ringY,
+        translateX: "-50%",
+        translateY: "-50%",
+        opacity: visible ? 1 : 0,
+      }}
+      transition={{ opacity: { duration: 0.15 } }}
     >
       <motion.div
         animate={{
           scale: pressed ? 0.85 : active ? 1.3 : 1,
           rotate: active ? 45 : 0,
         }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
         className="relative flex items-center justify-center"
         style={{ width: 34, height: 34 }}
       >
