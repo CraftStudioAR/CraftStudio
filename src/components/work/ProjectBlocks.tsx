@@ -570,7 +570,7 @@ function Block({
       const italicClass = block.italic ? "italic" : "not-italic";
       const trackingClass = block.tracking || "tracking-normal";
       const leadingClass = block.leading || "leading-relaxed";
-      const fontFamily = block.fontFamily === "serif" ? "font-serif" : "font-sans";
+      const fontFamily = block.fontFamily === "sans" ? "font-sans" : "font-serif";
       
       const sizeMobile = block.sizeMobile || "text-sm";
       const sizeTablet = block.sizeTablet || "text-base";
