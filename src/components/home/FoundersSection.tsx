@@ -6,18 +6,18 @@ import GlyphMark from "../GlyphMark";
 gsap.registerPlugin(ScrollTrigger);
 
 const manifesto = [
-  { t: "Construimos", s: "" },
-  { t: "la", s: "" },
-  { t: "forma", s: "" },
-  { t: "en", s: "" },
-  { t: "la", s: "" },
-  { t: "que", s: "" },
-  { t: "tu", s: "font-serif italic font-medium text-red" },
+  { t: "Tu", s: "font-serif italic font-medium text-red" },
   { t: "marca", s: "font-serif italic font-medium text-red" },
-  { t: "se", s: "" },
-  { t: "presenta", s: "" },
-  { t: "al", s: "" },
-  { t: "mundo.", s: "" },
+  { t: "tiene", s: "" },
+  { t: "mucho", s: "" },
+  { t: "para", s: "" },
+  { t: "decir.", s: "" },
+  { t: "Nosotras", s: "" },
+  { t: "te", s: "" },
+  { t: "ayudamos", s: "" },
+  { t: "a", s: "" },
+  { t: "construir", s: "" },
+  { t: "cómo.", s: "" },
 ];
 
 function MagneticImage({
@@ -250,9 +250,9 @@ export default function FoundersSection() {
               </span>
             ))}
           </p>
-          <div className="max-w-xl mx-auto mt-1 md:mt-2 text-center text-balance">
+          <div className="max-w-2xl mx-auto mt-1 md:mt-2 text-center text-balance">
             <p className="text-base sm:text-lg md:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
-              Desarrollamos sistemas que escalan y representan aquello que hace único a cada proyecto.
+              Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.
             </p>
           </div>
         </div>

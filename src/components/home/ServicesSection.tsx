@@ -9,16 +9,15 @@ export default function ServicesSection() {
         
         {/* Header General */}
         <Reveal>
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <p className="text-sm tracking-widest text-red uppercase mb-4 flex items-center gap-4">
               <span className="w-8 h-[1px] bg-red" /> SERVICIOS
             </p>
-            <h2 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] mb-6 tracking-tight leading-tight">
-              Como trabaja <span className="font-serif italic font-medium text-red">Craft</span>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 tracking-tight leading-tight">
+              Dos formas de trabajar. <span className="font-serif italic font-medium text-red">Una solución única</span> para cada marca.
             </h2>
-            <p className="text-base md:text-lg text-ink/80 max-w-2xl text-balance font-sans leading-relaxed">
-              <span className="font-semibold text-ink">Cada marca atraviesa momentos diferentes.</span>{" "}
-              Por eso desarrollamos dos modalidades de trabajo, pensadas para responder a las necesidades de cada etapa.
+            <p className="text-base md:text-lg text-ink/80 max-w-3xl text-balance font-sans leading-relaxed">
+              Partimos de dos modalidades y construimos dentro de cada una la solución que mejor responde a las necesidades, objetivos y momento de cada proyecto.
             </p>
           </div>
         </Reveal>
