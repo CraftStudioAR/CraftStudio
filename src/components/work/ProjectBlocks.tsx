@@ -321,7 +321,7 @@ function Block({
             <Img
               image={block.image}
               transforms="f_auto,q_auto,w_1600"
-              className="w-full scale-x-[1.6] origin-center"
+              className="w-[155%] max-w-none shrink-0"
               imgClassName="w-full h-auto object-contain"
               onOpen={() => onOpen(startIndex)}
             />
