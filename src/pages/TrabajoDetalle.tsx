@@ -103,7 +103,7 @@ export default function TrabajoDetalle() {
       />
       
       {/* 1. HERO DEL PROYECTO */}
-      <section className="px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-32 overflow-hidden">
+      <section className="px-6 pt-32 pb-6 md:px-10 md:pt-40 md:pb-10 overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
 
           {/* Volver */}
