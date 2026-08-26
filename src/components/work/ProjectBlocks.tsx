@@ -331,7 +331,7 @@ export default function ProjectBlocks({
 
   return (
     <>
-      <div className="flex flex-col gap-6 md:gap-10">
+      <div className="flex flex-col gap-5 md:gap-6">
         {blocks.map((block, i) => (
           <Reveal key={i} delay={Math.min(i * 0.05, 0.3)}>
             <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />

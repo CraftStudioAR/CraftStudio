@@ -128,19 +128,19 @@ export default function LabDetalle() {
       />
       
       {/* HEADER EDITORIAL */}
-      <section className="relative px-6 pt-32 pb-10 md:pt-48 md:pb-24 md:px-10 overflow-hidden z-10">
+      <section className="relative px-6 pt-32 pb-6 md:pt-36 md:pb-8 md:px-10 overflow-hidden z-10">
         <div className="max-w-6xl mx-auto w-full flex flex-col items-start text-left">
           <Reveal>
             <Link 
               to="/craft-lab" 
-              className="inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-red mb-12 hover:opacity-70 transition-opacity"
+              className="inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-red mb-8 hover:opacity-70 transition-opacity"
             >
               ← Volver a Craft Lab
             </Link>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4">
               <span className="text-[10px] md:text-xs tracking-widest text-red uppercase font-bold bg-red/10 px-4 py-1.5 rounded-lg">
                 {article.category}
               </span>
@@ -151,13 +151,13 @@ export default function LabDetalle() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-8 text-balance text-left">
+            <h1 className="font-serif italic text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight text-navy mb-6 text-balance text-left">
               {article.title}
             </h1>
           </Reveal>
 
           <Reveal delay={0.3}>
-            <p className="text-xl md:text-3xl text-ink/70 font-medium leading-relaxed text-balance text-left">
+            <p className="text-xl md:text-2xl text-ink/70 font-medium leading-relaxed text-balance text-left">
               {article.desc}
             </p>
           </Reveal>
@@ -165,7 +165,7 @@ export default function LabDetalle() {
       </section>
 
       {/* PORTADA */}
-      <section className="px-6 md:px-10 mb-8 md:mb-24">
+      <section className="px-6 md:px-10 mb-6 md:mb-8">
         <Reveal delay={0.4}>
           <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-[2rem] overflow-hidden relative bg-ink/5">
             <img 
@@ -179,7 +179,7 @@ export default function LabDetalle() {
 
       {/* CONTENIDO (BLOCKS O PÁRRAFOS DE FALLBACK) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
-        <div className="max-w-6xl mx-auto w-full space-y-8 md:space-y-12 text-left">
+        <div className="max-w-6xl mx-auto w-full space-y-6 md:space-y-7 text-left">
           {hasBlocks ? (
             <ProjectBlocks blocks={parsedBlocks} />
           ) : (
