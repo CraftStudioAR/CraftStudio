@@ -135,7 +135,21 @@ export type ProjectBlock =
       /** Métrica destacada, en una fila propia al pie del panel. */
       highlight?: Stat;
     }
-  | { type: "testimonial"; quote: string; author: string; role: string }
+  | {
+      type: "testimonial";
+      quote: string;
+      author: string;
+      role: string;
+      fontFamily?: 'serif' | 'sans';
+      bold?: boolean;
+      italic?: boolean;
+      sizeMobile?: string;
+      sizeTablet?: string;
+      sizeDesktop?: string;
+      tracking?: string;
+      leading?: string;
+      textAlign?: 'left' | 'center' | 'right';
+    }
   | {
       type: "text";
       text: string;
