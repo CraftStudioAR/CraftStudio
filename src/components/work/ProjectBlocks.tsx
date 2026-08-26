@@ -570,11 +570,11 @@ function Block({
       const italicClass = block.italic ? "italic" : "not-italic";
       const trackingClass = block.tracking || "tracking-normal";
       const leadingClass = block.leading || "leading-relaxed";
-      const fontFamily = block.fontFamily === "sans" ? "font-sans" : "font-serif";
+      const fontFamily = block.fontFamily === "serif" ? "font-serif" : "font-sans";
       
-      const sizeMobile = block.sizeMobile || "text-lg";
-      const sizeTablet = block.sizeTablet || "text-xl";
-      const sizeDesktop = block.sizeDesktop || "text-2xl";
+      const sizeMobile = block.sizeMobile || "text-sm";
+      const sizeTablet = block.sizeTablet || "text-base";
+      const sizeDesktop = block.sizeDesktop || "text-base";
 
       const elementId = `text-block-${Math.random().toString(36).substr(2, 9)}`;
 
