@@ -561,6 +561,7 @@ export const work: WorkCase[] = [
       },
       {
         type: "image",
+        aspect: "auto",
         image: { publicId: "ANTES_Y_DESPUES_rnwysy", alt: "Gráfico de crecimiento Sunkiss" },
       },
     ],
