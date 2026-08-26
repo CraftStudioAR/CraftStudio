@@ -247,7 +247,7 @@ export default function TrabajoDetalle() {
 
       {/* 3. GALERÍA DEL PROYECTO */}
       {project.blocks && project.blocks.length > 0 && (
-        <section className="px-2 md:px-10 pb-32">
+        <section className="px-6 pb-32 md:px-10">
           <div className="max-w-[1400px] mx-auto">
             <ProjectBlocks blocks={project.blocks} />
           </div>

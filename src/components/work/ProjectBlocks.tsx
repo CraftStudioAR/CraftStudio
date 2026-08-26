@@ -313,7 +313,21 @@ function Block({
   onOpen: (index: number) => void;
 }) {
   switch (block.type) {
-    case "image":
+    case "image": {
+      const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
+      if (isPhonesImage) {
+        return (
+          <div className="overflow-hidden rounded-2xl md:rounded-3xl">
+            <Img
+              image={block.image}
+              transforms="c_crop,g_center,w_0.68,h_0.68,f_auto,q_auto,w_1600"
+              className="w-full scale-135 md:scale-110 origin-center"
+              imgClassName="w-full object-cover"
+              onOpen={() => onOpen(startIndex)}
+            />
+          </div>
+        );
+      }
       return (
         <Img
           image={block.image}
@@ -321,6 +335,7 @@ function Block({
           onOpen={() => onOpen(startIndex)}
         />
       );
+    }
 
     case "imageFeature":
       return (
@@ -346,7 +361,7 @@ function Block({
       );
 
     case "imagePair": {
-      const stackOnMobile = block.mobileLayout === "stack" || block.images.some((img: any) => img.publicId?.includes("8816") || img.publicId?.includes("8817"));
+      const stackOnMobile = block.mobileLayout === "stack";
 
       // Anchos proporcionales al ratio de cada foto sobre una base 0: las dos terminan
       // con el mismo alto (base disponible / suma de ratios) sin perder un solo pixel.
