@@ -1,15 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
-/**
- * Cursor placeholder: un visor tipo "handle de selección" (referencia directa
- * al motivo de UI de diseño superpuesto a fotografía del brief de dirección
- * creativa). Reemplazar el marcador central por el ícono del cliente cuando
- * lo pase — el resto del sistema (spring, label, estados) queda intacto.
- */
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [enabled, setEnabled] = useState(true);
+  const [visible, setVisible] = useState(true);
   const [label, setLabel] = useState<string | null>(null);
   const [pressed, setPressed] = useState(false);
 
@@ -17,34 +11,54 @@ export default function CustomCursor() {
   const y = useMotionValue(-100);
 
   // Fast, responsive spring without heavy lag or freezing
-  const ringX = useSpring(x, { stiffness: 900, damping: 50, mass: 0.2 });
-  const ringY = useSpring(y, { stiffness: 900, damping: 50, mass: 0.2 });
+  const ringX = useSpring(x, { stiffness: 1000, damping: 50, mass: 0.1 });
+  const ringY = useSpring(y, { stiffness: 1000, damping: 50, mass: 0.1 });
 
   const labelRef = useRef<string | null>(null);
   const hasMovedRef = useRef(false);
+  const visibleRef = useRef(true);
 
   useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    setEnabled(fine);
-    if (!fine) return;
+    const checkEnabled = () => {
+      const isDesktopWidth = window.innerWidth >= 768;
+      const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+      const isDesktop = isDesktopWidth && isFinePointer;
+      setEnabled(isDesktop);
+      return isDesktop;
+    };
 
-    const move = (e: MouseEvent) => {
-      // First move: jump motion values directly to avoid flying from (-100, -100)
+    checkEnabled();
+
+    const handleResize = () => {
+      const active = checkEnabled();
+      if (active) {
+        visibleRef.current = true;
+        setVisible(true);
+      }
+    };
+
+    const updatePosition = (clientX: number, clientY: number) => {
       if (!hasMovedRef.current) {
         hasMovedRef.current = true;
-        x.jump(e.clientX);
-        y.jump(e.clientY);
-        setVisible(true);
+        x.jump(clientX);
+        y.jump(clientY);
       } else {
-        x.set(e.clientX);
-        y.set(e.clientY);
-        if (!visible) setVisible(true);
+        x.set(clientX);
+        y.set(clientY);
       }
+
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        setVisible(true);
+      }
+    };
+
+    const move = (e: MouseEvent) => {
+      updatePosition(e.clientX, e.clientY);
 
       const target = (e.target as HTMLElement)?.closest<HTMLElement>("[data-cursor]");
       const newLabel = target?.dataset.cursor ?? null;
 
-      // Avoid re-rendering React on every mousemove pixel if label hasn't changed
       if (labelRef.current !== newLabel) {
         labelRef.current = newLabel;
         setLabel(newLabel);
@@ -53,27 +67,52 @@ export default function CustomCursor() {
 
     const down = () => setPressed(true);
     const up = () => setPressed(false);
-    const leave = () => setVisible(false);
+    
+    const leave = () => {
+      visibleRef.current = false;
+      setVisible(false);
+    };
+
     const enter = (e: MouseEvent) => {
-      x.jump(e.clientX);
-      y.jump(e.clientY);
+      updatePosition(e.clientX, e.clientY);
+    };
+
+    const focus = () => {
+      visibleRef.current = true;
       setVisible(true);
     };
 
     window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("pointermove", move as any, { passive: true });
     window.addEventListener("mousedown", down);
     window.addEventListener("mouseup", up);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("focus", focus);
     document.addEventListener("mouseleave", leave);
     document.addEventListener("mouseenter", enter);
 
     return () => {
       window.removeEventListener("mousemove", move);
+      window.removeEventListener("pointermove", move as any);
       window.removeEventListener("mousedown", down);
       window.removeEventListener("mouseup", up);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("focus", focus);
       document.removeEventListener("mouseleave", leave);
       document.removeEventListener("mouseenter", enter);
     };
-  }, [x, y, visible]);
+  }, [x, y]);
+
+  // If disabled on mobile/small screens, ensure html/body gets cursor: auto back
+  useEffect(() => {
+    if (!enabled) {
+      document.documentElement.style.cursor = "auto";
+      document.body.style.cursor = "auto";
+    } else {
+      document.documentElement.style.cursor = "none";
+      document.body.style.cursor = "none";
+    }
+  }, [enabled]);
 
   if (!enabled) return null;
 
@@ -89,7 +128,7 @@ export default function CustomCursor() {
         translateY: "-50%",
         opacity: visible ? 1 : 0,
       }}
-      transition={{ opacity: { duration: 0.15 } }}
+      transition={{ opacity: { duration: 0.1 } }}
     >
       <motion.div
         animate={{
@@ -113,7 +152,7 @@ export default function CustomCursor() {
         initial={false}
         animate={{ opacity: active ? 1 : 0, y: active ? 0 : 6 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="bg-cream text-ink absolute top-full left-1/2 mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-[11px] tracking-wide uppercase"
+        className="bg-cream text-ink absolute top-full left-1/2 mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-[11px] tracking-wide uppercase font-medium"
       >
         {label}
       </motion.div>
