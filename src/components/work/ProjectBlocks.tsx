@@ -317,14 +317,20 @@ function Block({
       const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
       if (isPhonesImage) {
         return (
-          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl flex items-center justify-center">
-            <Img
-              image={block.image}
-              transforms="f_auto,q_auto,w_1600"
-              className="w-[155%] max-w-none shrink-0"
-              imgClassName="w-full h-auto object-contain"
-              onOpen={() => onOpen(startIndex)}
-            />
+          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl">
+            <button
+              type="button"
+              onClick={() => onOpen(startIndex)}
+              aria-label={`Ampliar imagen: ${block.image.alt}`}
+              className="group/img block w-full overflow-hidden"
+            >
+              <img
+                src={cld(block.image.publicId, "f_auto,q_auto,w_1600")}
+                alt={block.image.alt}
+                loading="lazy"
+                className="w-full h-auto object-cover scale-[1.32] md:scale-[1.18] transition-transform duration-700 ease-out group-hover/img:scale-[1.37] origin-center"
+              />
+            </button>
           </div>
         );
       }
