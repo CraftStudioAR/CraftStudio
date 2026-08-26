@@ -313,35 +313,15 @@ function Block({
   onOpen: (index: number) => void;
 }) {
   switch (block.type) {
-    case "image": {
-      const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
-      if (isPhonesImage) {
-        return (
-          <div className="w-full overflow-hidden rounded-2xl md:rounded-3xl">
-            <button
-              type="button"
-              onClick={() => onOpen(startIndex)}
-              aria-label={`Ampliar imagen: ${block.image.alt}`}
-              className="group/img block w-full overflow-hidden"
-            >
-              <img
-                src={cld(block.image.publicId, "f_auto,q_auto,w_1600")}
-                alt={block.image.alt}
-                loading="lazy"
-                className="w-full h-auto object-cover scale-[1.32] md:scale-[1.18] transition-transform duration-700 ease-out group-hover/img:scale-[1.37] origin-center"
-              />
-            </button>
-          </div>
-        );
-      }
+    case "image":
       return (
         <Img
           image={block.image}
           transforms="f_auto,q_auto,w_1600"
+          aspect={block.aspect}
           onOpen={() => onOpen(startIndex)}
         />
       );
-    }
 
     case "imageFeature":
       return (
