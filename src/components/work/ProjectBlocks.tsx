@@ -317,15 +317,13 @@ function Block({
       const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
       if (isPhonesImage) {
         return (
-          <div className="overflow-hidden rounded-2xl md:rounded-3xl">
-            <Img
-              image={block.image}
-              transforms="c_crop,g_center,w_0.68,h_0.68,f_auto,q_auto,w_1600"
-              className="w-full scale-135 md:scale-110 origin-center"
-              imgClassName="w-full object-cover"
-              onOpen={() => onOpen(startIndex)}
-            />
-          </div>
+          <Img
+            image={block.image}
+            transforms="c_crop,g_center,w_0.62,h_1.0,f_auto,q_auto,w_1600"
+            className="w-full"
+            imgClassName="w-full h-auto object-contain"
+            onOpen={() => onOpen(startIndex)}
+          />
         );
       }
       return (
