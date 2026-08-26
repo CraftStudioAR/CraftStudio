@@ -288,11 +288,11 @@ function Testimonial({
   const alignJustifyClass = textAlign === 'center' ? 'justify-center text-center' : textAlign === 'right' ? 'justify-end text-right' : 'justify-start text-left';
 
   return (
-    <figure className="relative overflow-hidden rounded-2xl border border-ink/10 bg-ink/[0.02] px-8 py-12 md:px-16 md:py-20">
+    <figure className="relative overflow-hidden rounded-2xl border border-ink/10 bg-ink/[0.02] px-12 py-12 sm:px-16 md:px-24 md:py-20 lg:px-32">
       {styleElement}
       <GlyphMark
         variant={12}
-        className="pointer-events-none absolute -top-4 left-4 w-24 text-red/10 md:left-8 md:w-36"
+        className="pointer-events-none absolute -top-4 left-6 w-24 text-red/10 sm:left-10 md:left-16 md:w-36"
       />
       <blockquote
         id={elementId}
