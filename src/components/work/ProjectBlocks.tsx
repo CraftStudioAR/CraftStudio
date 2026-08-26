@@ -313,7 +313,21 @@ function Block({
   onOpen: (index: number) => void;
 }) {
   switch (block.type) {
-    case "image":
+    case "image": {
+      const isPhonesImage = block.image.publicId?.includes("ANTES_Y_DESPUES");
+      if (isPhonesImage) {
+        return (
+          <div className="w-full -mx-3 sm:-mx-6 md:-mx-16 lg:-mx-24 my-2 sm:my-4">
+            <Img
+              image={block.image}
+              transforms="f_auto,q_auto,w_2000"
+              className="w-full"
+              imgClassName="w-full h-auto object-contain rounded-2xl md:rounded-3xl"
+              onOpen={() => onOpen(startIndex)}
+            />
+          </div>
+        );
+      }
       return (
         <Img
           image={block.image}
@@ -322,6 +336,7 @@ function Block({
           onOpen={() => onOpen(startIndex)}
         />
       );
+    }
 
     case "imageFeature":
       return (
