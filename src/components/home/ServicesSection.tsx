@@ -14,7 +14,8 @@ export default function ServicesSection() {
               <span className="w-8 h-[1px] bg-red" /> SERVICIOS
             </p>
             <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 tracking-tight leading-tight">
-              Dos formas de trabajar. <span className="font-serif italic font-medium text-red">Una solución única</span> para cada marca.
+              Dos formas de trabajar.<br />
+              <span className="font-serif italic font-medium text-red">Una solución única</span> para cada marca.
             </h2>
             <p className="text-base md:text-lg text-ink/80 max-w-3xl text-balance font-sans leading-relaxed">
               Partimos de dos modalidades y construimos dentro de cada una la solución que mejor responde a las necesidades, objetivos y momento de cada proyecto.
