@@ -6,18 +6,18 @@ import GlyphMark from "../GlyphMark";
 gsap.registerPlugin(ScrollTrigger);
 
 const manifesto = [
-  { t: "Tu", s: "font-serif italic font-medium text-red" },
-  { t: "marca", s: "font-serif italic font-medium text-red" },
+  { t: "Tu", s: "" },
+  { t: "marca", s: "" },
   { t: "tiene", s: "" },
   { t: "mucho", s: "" },
   { t: "para", s: "" },
   { t: "decir.", s: "" },
   { t: "Nosotras", s: "" },
   { t: "te", s: "" },
-  { t: "ayudamos", s: "" },
-  { t: "a", s: "" },
-  { t: "construir", s: "" },
-  { t: "cómo.", s: "" },
+  { t: "ayudamos", s: "font-serif italic font-medium text-red" },
+  { t: "a", s: "font-serif italic font-medium text-red" },
+  { t: "construir", s: "font-serif italic font-medium text-red" },
+  { t: "cómo.", s: "font-serif italic font-medium text-red" },
 ];
 
 function MagneticImage({
@@ -251,7 +251,7 @@ export default function FoundersSection() {
             ))}
           </p>
           <div className="max-w-2xl mx-auto mt-1 md:mt-2 text-center text-balance">
-            <p className="text-base sm:text-lg md:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
+            <p className="text-xs sm:text-lg md:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
               Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.
             </p>
           </div>
