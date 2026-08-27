@@ -5,19 +5,25 @@ import GlyphMark from "../GlyphMark";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const manifesto = [
-  { t: "Tu", s: "" },
-  { t: "marca", s: "" },
-  { t: "tiene", s: "" },
-  { t: "mucho", s: "", br: true },
-  { t: "para", s: "" },
-  { t: "decir.", s: "" },
-  { t: "Nosotras", s: "" },
-  { t: "te", s: "", br: true },
-  { t: "ayudamos", s: "font-serif italic font-medium text-red" },
-  { t: "a", s: "font-serif italic font-medium text-red" },
-  { t: "construir", s: "font-serif italic font-medium text-red" },
-  { t: "cómo.", s: "font-serif italic font-medium text-red" },
+const manifestoLines = [
+  [
+    { t: "Tu", s: "" },
+    { t: "marca", s: "" },
+    { t: "tiene", s: "" },
+    { t: "mucho", s: "" },
+  ],
+  [
+    { t: "para", s: "" },
+    { t: "decir.", s: "" },
+    { t: "Nosotras", s: "" },
+    { t: "te", s: "" },
+  ],
+  [
+    { t: "ayudamos", s: "font-serif italic font-medium text-red" },
+    { t: "a", s: "font-serif italic font-medium text-red" },
+    { t: "construir", s: "font-serif italic font-medium text-red" },
+    { t: "cómo.", s: "font-serif italic font-medium text-red" },
+  ],
 ];
 
 function MagneticImage({
@@ -239,17 +245,18 @@ export default function FoundersSection() {
       <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
         
         {/* Declaración Principal */}
-        <div className="text-center max-w-3xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-6 sm:px-4">
+        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
           <p
             ref={textRef}
-            className="font-serif text-[30px] sm:text-[38px] md:text-6xl lg:text-7xl leading-[1.18] md:leading-[1.1] text-ink/90 text-balance mb-2 md:mb-3"
+            className="font-serif text-[24px] xs:text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] md:leading-[1.12] text-ink/90 mb-2 md:mb-3"
           >
-            {manifesto.map((w, i) => (
-              <span key={i}>
-                <span className={`inline-block mr-[0.25em] gsap-word ${w.s}`}>
-                  {w.t}
-                </span>
-                {w.br && <br />}
+            {manifestoLines.map((line, lIdx) => (
+              <span key={lIdx} className="block">
+                {line.map((w, wIdx) => (
+                  <span key={wIdx} className={`inline-block mr-[0.22em] gsap-word ${w.s}`}>
+                    {w.t}
+                  </span>
+                ))}
               </span>
             ))}
           </p>
