@@ -9,11 +9,11 @@ const manifesto = [
   { t: "Tu", s: "" },
   { t: "marca", s: "" },
   { t: "tiene", s: "" },
-  { t: "mucho", s: "" },
+  { t: "mucho", s: "", br: true },
   { t: "para", s: "" },
   { t: "decir.", s: "" },
   { t: "Nosotras", s: "" },
-  { t: "te", s: "" },
+  { t: "te", s: "", br: true },
   { t: "ayudamos", s: "font-serif italic font-medium text-red" },
   { t: "a", s: "font-serif italic font-medium text-red" },
   { t: "construir", s: "font-serif italic font-medium text-red" },
@@ -245,8 +245,11 @@ export default function FoundersSection() {
             className="font-serif text-[30px] sm:text-[38px] md:text-6xl lg:text-7xl leading-[1.18] md:leading-[1.1] text-ink/90 text-balance mb-2 md:mb-3"
           >
             {manifesto.map((w, i) => (
-              <span key={i} className={`inline-block mr-[0.25em] gsap-word ${w.s}`}>
-                {w.t}
+              <span key={i}>
+                <span className={`inline-block mr-[0.25em] gsap-word ${w.s}`}>
+                  {w.t}
+                </span>
+                {w.br && <br />}
               </span>
             ))}
           </p>
