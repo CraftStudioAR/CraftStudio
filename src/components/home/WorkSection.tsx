@@ -60,9 +60,9 @@ export default function WorkSection() {
   }, [displayList]);
 
   return (
-    <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-center md:justify-between py-6 md:py-0 relative">
+    <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-between relative">
       {/* Header */}
-      <div className="px-6 md:px-10 pt-4 sm:pt-14 md:pt-14 pb-1 md:pb-8 flex-shrink-0">
+      <div className="px-6 md:px-10 pt-16 sm:pt-20 md:pt-14 pb-0 md:pb-8 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
             <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-1.5 md:mb-4 flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function WorkSection() {
       </div>
       
       {/* Horizontal scroll track */}
-      <div className="my-auto md:flex-1 flex items-center pl-6 md:pl-10 py-3 md:py-0 md:pb-36">
+      <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-36">
         <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-20 pr-16 md:pr-32 items-start">
           {displayList.map((w, i) => (
             <div key={w.slug} className="w-[84vw] sm:w-[85vw] md:w-[85vw] max-w-md shrink-0">
@@ -90,7 +90,7 @@ export default function WorkSection() {
       </div>
 
       {/* Mobile Bottom Navigation Bar (No "Desliza" text) */}
-      <div className="px-6 pb-4 sm:pb-12 pt-1 flex justify-end md:hidden z-40 flex-shrink-0">
+      <div className="px-6 pb-14 sm:pb-16 pt-0 flex justify-end md:hidden z-40 flex-shrink-0">
         <Link
           to="/trabajos"
           className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white text-ink font-semibold text-xs shadow-xl active:scale-95 transition-transform"
