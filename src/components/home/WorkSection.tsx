@@ -62,16 +62,16 @@ export default function WorkSection() {
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-between relative">
       {/* Header */}
-      <div className="px-6 md:px-10 pt-10 sm:pt-14 md:pt-14 pb-2 md:pb-8 flex-shrink-0">
+      <div className="px-6 md:px-10 pt-10 sm:pt-14 md:pt-14 pb-1 md:pb-8 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
-            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-3 md:mb-4 flex items-center gap-3">
+            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-2 md:mb-4 flex items-center gap-3">
               <span className="w-8 h-[1.5px] bg-red" /> Portafolio
             </p>
             <h2 className="font-sans font-medium tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream leading-[1.05]">
               Proyectos
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-cream/80 max-w-xl leading-relaxed mt-2 md:mt-3">
+            <p className="text-base sm:text-lg md:text-xl text-cream/80 max-w-xl leading-relaxed mt-1.5 md:mt-3">
               Algunas marcas que ya confiaron en nuestra mirada
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function WorkSection() {
       </div>
 
       {/* Mobile Bottom Navigation Bar (No "Desliza" text) */}
-      <div className="px-6 pb-10 sm:pb-12 pt-2 flex justify-end md:hidden z-40 flex-shrink-0">
+      <div className="px-6 pb-8 sm:pb-12 pt-1 flex justify-end md:hidden z-40 flex-shrink-0">
         <Link
           to="/trabajos"
           className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white text-ink font-semibold text-xs shadow-xl active:scale-95 transition-transform"

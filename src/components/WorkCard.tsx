@@ -52,7 +52,7 @@ export default function WorkCard({
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
           style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-          className={`relative flex w-full min-w-0 aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3] max-h-[44vh] md:max-h-none items-center justify-center overflow-hidden ${
+          className={`relative flex w-full min-w-0 aspect-[3/4] sm:aspect-[4/3] md:aspect-[4/3] max-h-[50vh] sm:max-h-[48vh] md:max-h-none items-center justify-center overflow-hidden ${
             work.cover ? "bg-ink" : `bg-gradient-to-br ${bgs[index % bgs.length]}`
           }`}
         >
