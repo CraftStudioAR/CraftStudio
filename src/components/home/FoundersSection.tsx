@@ -162,43 +162,43 @@ export default function FoundersSection() {
       {/* 1. DESKTOP FLOATING PARALLAX IMAGES (Subtly overlapping editorial collage) */}
       <div className="hidden md:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Top Left (Cosmetics) */}
-        <div data-speed="1.1" className="parallax-img absolute top-20 md:top-24 left-1 lg:left-[1%] xl:left-[3%] z-10">
+        <div data-speed="1.1" className="parallax-img absolute top-24 md:top-28 left-[3%] lg:left-[5%] z-10">
           <MagneticImage
             src="/images/about3.jpg"
             initialRotate={-2}
-            className="w-28 md:w-36 lg:w-44 xl:w-52 aspect-square object-cover opacity-90 rounded-sm shadow-md"
+            className="w-48 md:w-56 lg:w-60 aspect-square object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
         {/* Center Left (Guy B&W photo) */}
-        <div data-speed="0.8" className="parallax-img absolute top-[46%] left-1 lg:left-[2%] xl:left-[4%] z-20">
+        <div data-speed="0.8" className="parallax-img absolute top-[40%] left-[5%] lg:left-[8%] z-20">
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={2}
-            className="w-32 md:w-38 lg:w-46 xl:w-54 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
+            className="w-52 md:w-60 lg:w-64 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
           />
         </div>
         {/* Top Right (Model) */}
-        <div data-speed="1.3" className="parallax-img absolute top-28 md:top-32 right-1 lg:right-[2%] xl:right-[6%] z-10">
+        <div data-speed="1.3" className="parallax-img absolute top-36 md:top-40 right-[8%] lg:right-[12%] z-10">
           <MagneticImage
             src="/images/about2.jpg"
             initialRotate={3}
-            className="w-24 md:w-28 lg:w-34 xl:w-40 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
+            className="w-36 md:w-40 lg:w-44 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
-        {/* Bottom Right (Wine photo) */}
-        <div data-speed="0.6" className="parallax-img absolute top-[56%] right-0 md:right-1 lg:right-[1%] xl:right-[3%] z-20">
+        {/* Bottom Right (Wine photo - únicamente esta ajustada en tamaño y posición) */}
+        <div data-speed="0.6" className="parallax-img absolute top-[56%] right-0 md:right-1 lg:right-[2%] xl:right-[4%] z-20">
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-2}
-            className="w-36 md:w-40 lg:w-52 xl:w-64 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-40 md:w-48 lg:w-56 xl:w-64 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
         {/* Bottom Left (Pipa & Nala tag) */}
-        <div data-speed="0.7" className="parallax-img absolute top-[74%] left-1 lg:left-[5%] xl:left-[8%] z-10">
+        <div data-speed="0.7" className="parallax-img absolute top-[70%] left-[10%] lg:left-[14%] z-10">
           <MagneticImage
             src="/images/about5.jpg"
             initialRotate={-3}
-            className="w-32 md:w-38 lg:w-48 xl:w-56 aspect-[4/3] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-52 md:w-64 lg:w-72 aspect-[4/3] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
       </div>
@@ -250,7 +250,7 @@ export default function FoundersSection() {
       <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
         
         {/* Declaración Principal */}
-        <div className="text-center max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
+        <div className="text-center max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
           <p
             ref={textRef}
             className="font-serif text-[24px] xs:text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] md:leading-[1.12] text-ink/90 mb-2 md:mb-3"
