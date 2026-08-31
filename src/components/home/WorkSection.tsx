@@ -62,16 +62,16 @@ export default function WorkSection() {
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-between relative">
       {/* Header */}
-      <div className="px-6 md:px-10 pt-16 sm:pt-20 md:pt-14 pb-0 md:pb-8 flex-shrink-0">
+      <div className="px-6 md:px-10 pt-14 sm:pt-16 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
-            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-1.5 md:mb-4 flex items-center gap-3">
+            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-1.5 md:mb-3 flex items-center gap-3">
               <span className="w-8 h-[1.5px] bg-red" /> Portafolio
             </p>
-            <h2 className="font-sans font-medium tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream leading-[1.05]">
+            <h2 className="font-sans font-medium tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-cream leading-[1.05]">
               Proyectos
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-cream/80 max-w-xl leading-relaxed mt-1 md:mt-3">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-cream/80 max-w-xl leading-relaxed mt-1 md:mt-2">
               Algunas marcas que ya confiaron en nuestra mirada
             </p>
           </div>
@@ -79,10 +79,10 @@ export default function WorkSection() {
       </div>
       
       {/* Horizontal scroll track */}
-      <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-36">
-        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-20 pr-16 md:pr-32 items-start">
+      <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-20 lg:pb-24">
+        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-16 md:pr-32 items-start">
           {displayList.map((w, i) => (
-            <div key={w.slug} className="w-[84vw] sm:w-[85vw] md:w-[85vw] max-w-md shrink-0">
+            <div key={w.slug} className="w-[82vw] sm:w-[65vw] md:w-[32vw] lg:w-[28vw] xl:w-[26vw] max-w-md shrink-0">
               <WorkCard work={w} index={i} total={displayList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>
           ))}
@@ -114,13 +114,13 @@ export default function WorkSection() {
       </div>
 
       {/* Desktop Bottom Right Button (100% original) */}
-      <div className="hidden md:block absolute bottom-10 right-10 z-50">
+      <div className="hidden md:block absolute bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10 z-50">
         <Magnetic>
           <Link
             to="/trabajos"
-            className="group flex justify-center items-center gap-3 rounded-xl px-8 py-3.5 bg-white text-ink hover:scale-105 transition-transform duration-300 shadow-xl"
+            className="group flex justify-center items-center gap-3 rounded-xl px-6 py-3 lg:px-8 lg:py-3.5 bg-white text-ink hover:scale-105 transition-transform duration-300 shadow-xl"
           >
-            <span className="font-bold tracking-tight text-base">Ver todos los proyectos</span>
+            <span className="font-bold tracking-tight text-sm lg:text-base">Ver todos los proyectos</span>
             <span className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
               <svg
                 width="14"

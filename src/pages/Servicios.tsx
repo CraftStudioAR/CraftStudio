@@ -342,7 +342,7 @@ export default function Servicios() {
               directo la problemática y el paso siguiente, sin reciclar ese contenido. */}
           <div className="lg:w-7/12 flex flex-col gap-6 md:gap-8 relative z-10 justify-center text-center lg:text-left">
             <Reveal delay={0.2}>
-              <p className="text-2xl md:text-3xl font-medium leading-[1.3] text-balance">
+              <p className="text-lg sm:text-xl md:text-3xl font-medium leading-[1.3] text-balance">
                 El primer paso es entender en qué momento está tu marca.
               </p>
             </Reveal>
