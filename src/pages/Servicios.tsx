@@ -309,7 +309,7 @@ export default function Servicios() {
       <div ref={ctaRef} className="px-4 md:px-10 pb-10 md:pb-20 pt-10 md:pt-16 perspective-1000 bg-cream">
         <motion.section 
           style={{ scale }}
-          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-20 border border-white/10 backdrop-blur-xl"
+          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-8 lg:gap-20 border border-white/10 backdrop-blur-xl"
         >
           {/* Textura y efectos de luz glassmorphism */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
@@ -317,16 +317,16 @@ export default function Servicios() {
           <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
           <div className="glass-sheen" />
           
-          <div className="lg:w-5/12 flex flex-col relative z-10 text-center lg:text-left h-full">
+          <div className="lg:w-5/12 flex flex-col justify-between relative z-10 text-center lg:text-left h-full">
             <Reveal>
-              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-6 flex items-center justify-center lg:justify-start gap-4">
+              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-4 sm:mb-6 flex items-center justify-center lg:justify-start gap-4">
                 <span className="w-8 h-[1px] bg-cream/50" /> Siguiente paso
               </p>
-              <h2 className="font-serif italic text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.9] tracking-tight mb-8 text-cream">
+              <h2 className="font-serif italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-4 lg:mb-8 text-cream">
                 ¿Por dónde <br className="hidden lg:block"/>empezar?
               </h2>
 
-              <div className="mt-8 lg:mt-12 flex flex-col items-center lg:items-start gap-8">
+              <div className="mt-8 lg:mt-12 hidden lg:flex flex-col items-start gap-8">
                 <a
                   href="/contacto" 
                   className="group/btn relative inline-flex items-center gap-6 bg-cream text-red px-10 py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all hover:scale-[1.02] overflow-hidden shadow-lg"
@@ -340,17 +340,30 @@ export default function Servicios() {
           
           {/* El Home y las secciones de arriba ya explicaron las modalidades: acá va
               directo la problemática y el paso siguiente, sin reciclar ese contenido. */}
-          <div className="lg:w-7/12 flex flex-col gap-6 md:gap-8 relative z-10 justify-center text-center lg:text-left">
+          <div className="lg:w-7/12 flex flex-col gap-4 sm:gap-6 md:gap-8 relative z-10 justify-center text-center lg:text-left">
             <Reveal delay={0.2}>
-              <p className="text-lg sm:text-xl md:text-3xl font-medium leading-[1.3] text-balance">
+              <p className="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium leading-[1.3] text-balance">
                 El primer paso es entender en qué momento está tu marca.
               </p>
             </Reveal>
 
             <Reveal delay={0.4}>
-              <p className="text-base md:text-lg text-cream/70 leading-relaxed text-balance max-w-2xl">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-cream/75 leading-relaxed text-balance max-w-2xl">
                 En una primera reunión analizamos tu contexto, identificamos los principales desafíos y definimos juntas el mejor punto de partida para acompañarte.
               </p>
+            </Reveal>
+
+            {/* Mobile CTA Button (Al final de todos los textos) */}
+            <Reveal delay={0.5} className="block lg:hidden mt-2 pt-2">
+              <div className="flex justify-center">
+                <a
+                  href="/contacto" 
+                  className="group/btn relative inline-flex items-center justify-center gap-4 bg-cream text-red px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all active:scale-95 shadow-lg w-full sm:w-auto"
+                >
+                  <span className="relative z-10 text-xs">Agendar Diagnóstico</span>
+                  <span className="relative z-10 text-lg group-hover/btn:translate-x-1 transition-transform duration-500">{"\u2192\uFE0E"}</span>
+                </a>
+              </div>
             </Reveal>
           </div>
           
