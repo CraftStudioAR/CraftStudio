@@ -127,12 +127,16 @@ export default function FoundersSection() {
         const isSmallLaptop = window.innerWidth < 1440;
         images.forEach((img, i) => {
           const speed = parseFloat(img.getAttribute("data-speed") || "1");
-          const yFactor = isMobile ? -35 : (isSmallLaptop ? -35 : -60);
-          const xFactor = isMobile ? 5 : (isSmallLaptop ? 4 : 8);
-          const rotFactor = isMobile ? 2.5 : 3;
+          const yFactor = isMobile ? -35 : (isSmallLaptop ? -35 : -55);
+          // Las imágenes de la derecha (2, 3) se desplazan hacia la DERECHA (+x), 
+          // las de la izquierda (0, 1, 4) hacia la IZQUIERDA (-x), alejándose del texto siempre.
+          const isRightSide = i === 2 || i === 3;
+          const xDir = isRightSide ? 1 : -1;
+          const xFactor = isMobile ? 3 : (isSmallLaptop ? 3 : 5);
+          const rotFactor = isMobile ? 2 : 2.5;
           gsap.to(img, {
             yPercent: yFactor * speed,
-            xPercent: (i % 2 === 0 ? 1 : -1) * xFactor * speed,
+            xPercent: xDir * xFactor * speed,
             rotation: (i % 2 === 0 ? 1 : -1) * (rotFactor * speed),
             ease: "none",
             scrollTrigger: {
@@ -157,44 +161,44 @@ export default function FoundersSection() {
       
       {/* 1. DESKTOP FLOATING PARALLAX IMAGES (Subtly overlapping editorial collage) */}
       <div className="hidden md:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Top Left */}
-        <div data-speed="1.1" className="parallax-img absolute top-24 md:top-28 left-2 lg:left-[2%] xl:left-[4%] z-10">
+        {/* Top Left (Cosmetics) */}
+        <div data-speed="1.1" className="parallax-img absolute top-20 md:top-24 left-1 lg:left-[1%] xl:left-[3%] z-10">
           <MagneticImage
             src="/images/about3.jpg"
             initialRotate={-2}
-            className="w-32 md:w-40 lg:w-48 xl:w-56 aspect-square object-cover opacity-90 rounded-sm shadow-md"
+            className="w-28 md:w-36 lg:w-44 xl:w-52 aspect-square object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
-        {/* Center Left (Overlaps bottom of Top Left) */}
-        <div data-speed="0.8" className="parallax-img absolute top-[44%] left-2 lg:left-[3%] xl:left-[6%] z-20">
+        {/* Center Left (Guy B&W photo) */}
+        <div data-speed="0.8" className="parallax-img absolute top-[46%] left-1 lg:left-[2%] xl:left-[4%] z-20">
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={2}
-            className="w-36 md:w-44 lg:w-52 xl:w-60 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
+            className="w-32 md:w-38 lg:w-46 xl:w-54 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
           />
         </div>
-        {/* Top Right */}
-        <div data-speed="1.3" className="parallax-img absolute top-32 md:top-36 xl:top-40 right-2 lg:right-[3%] xl:right-[8%] z-10">
+        {/* Top Right (Model) */}
+        <div data-speed="1.3" className="parallax-img absolute top-28 md:top-32 right-1 lg:right-[2%] xl:right-[6%] z-10">
           <MagneticImage
             src="/images/about2.jpg"
             initialRotate={3}
-            className="w-28 md:w-32 lg:w-36 xl:w-44 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
+            className="w-24 md:w-28 lg:w-34 xl:w-40 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
-        {/* Bottom Right (Overlaps bottom of Top Right) */}
-        <div data-speed="0.6" className="parallax-img absolute top-[52%] right-2 lg:right-[2%] xl:right-[5%] z-20">
+        {/* Bottom Right (Wine photo) */}
+        <div data-speed="0.6" className="parallax-img absolute top-[56%] right-0 md:right-1 lg:right-[1%] xl:right-[3%] z-20">
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-2}
-            className="w-44 md:w-52 lg:w-64 xl:w-76 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-36 md:w-40 lg:w-52 xl:w-64 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
-        {/* Bottom Left */}
-        <div data-speed="0.7" className="parallax-img absolute top-[72%] left-2 lg:left-[8%] xl:left-[12%] z-10">
+        {/* Bottom Left (Pipa & Nala tag) */}
+        <div data-speed="0.7" className="parallax-img absolute top-[74%] left-1 lg:left-[5%] xl:left-[8%] z-10">
           <MagneticImage
             src="/images/about5.jpg"
             initialRotate={-3}
-            className="w-36 md:w-44 lg:w-56 xl:w-64 aspect-[4/3] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-32 md:w-38 lg:w-48 xl:w-56 aspect-[4/3] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
       </div>
@@ -246,7 +250,7 @@ export default function FoundersSection() {
       <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
         
         {/* Declaración Principal */}
-        <div className="text-center max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
+        <div className="text-center max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
           <p
             ref={textRef}
             className="font-serif text-[24px] xs:text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] md:leading-[1.12] text-ink/90 mb-2 md:mb-3"
