@@ -170,11 +170,11 @@ export default function FoundersSection() {
           />
         </div>
         {/* Center Left (Guy B&W photo) */}
-        <div data-speed="0.8" className="parallax-img absolute top-[40%] left-[5%] lg:left-[8%] z-20">
+        <div data-speed="0.8" className="parallax-img absolute top-[42%] left-[2%] lg:left-[4%] xl:left-[6%] z-20">
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={2}
-            className="w-52 md:w-60 lg:w-64 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
+            className="w-40 md:w-48 lg:w-54 xl:w-58 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
           />
         </div>
         {/* Top Right (Model) */}
