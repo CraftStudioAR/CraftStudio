@@ -309,7 +309,7 @@ export default function Servicios() {
       <div ref={ctaRef} className="px-4 md:px-10 pb-10 md:pb-20 pt-10 md:pt-16 perspective-1000 bg-cream">
         <motion.section 
           style={{ scale }}
-          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-3 sm:gap-6 lg:gap-20 border border-white/10 backdrop-blur-xl"
+          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl px-8 py-10 sm:px-10 sm:py-12 md:p-14 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-4 sm:gap-6 lg:gap-20 border border-white/10 backdrop-blur-xl"
         >
           {/* Textura y efectos de luz glassmorphism */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
