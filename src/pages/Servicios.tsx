@@ -354,14 +354,14 @@ export default function Servicios() {
             </Reveal>
 
             {/* Mobile CTA Button (Al final de todos los textos) */}
-            <Reveal delay={0.5} className="block lg:hidden mt-2 pt-2">
+            <Reveal delay={0.5} className="block lg:hidden mt-1 pt-1">
               <div className="flex justify-center">
                 <a
                   href="/contacto" 
-                  className="group/btn relative inline-flex items-center justify-center gap-4 bg-cream text-red px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all active:scale-95 shadow-lg w-full sm:w-auto"
+                  className="group/btn relative inline-flex items-center justify-center gap-3 bg-cream text-red px-5 py-2.5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all active:scale-95 shadow-md w-auto"
                 >
                   <span className="relative z-10 text-xs">Agendar Diagnóstico</span>
-                  <span className="relative z-10 text-lg group-hover/btn:translate-x-1 transition-transform duration-500">{"\u2192\uFE0E"}</span>
+                  <span className="relative z-10 text-base group-hover/btn:translate-x-1 transition-transform duration-500">{"\u2192\uFE0E"}</span>
                 </a>
               </div>
             </Reveal>
