@@ -123,7 +123,7 @@ export default function Servicios() {
             </motion.h1>
             
             <Reveal delay={0.6}>
-              <p className="text-2xl md:text-4xl max-w-4xl font-medium md:text-balance opacity-90 leading-snug">
+              <p className="text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl font-medium text-ink/80 leading-relaxed">
                 {modalidadesInfo.description}
               </p>
             </Reveal>
