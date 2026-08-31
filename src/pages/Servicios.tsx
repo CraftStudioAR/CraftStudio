@@ -309,7 +309,7 @@ export default function Servicios() {
       <div ref={ctaRef} className="px-4 md:px-10 pb-10 md:pb-20 pt-10 md:pt-16 perspective-1000 bg-cream">
         <motion.section 
           style={{ scale }}
-          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-8 lg:gap-20 border border-white/10 backdrop-blur-xl"
+          className="bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] relative overflow-hidden text-cream rounded-2xl md:rounded-2xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-3 sm:gap-6 lg:gap-20 border border-white/10 backdrop-blur-xl"
         >
           {/* Textura y efectos de luz glassmorphism */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" />
@@ -319,10 +319,10 @@ export default function Servicios() {
           
           <div className="lg:w-5/12 flex flex-col justify-between relative z-10 text-left h-full">
             <Reveal>
-              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-4 sm:mb-6 flex items-center justify-start gap-4">
+              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-2 sm:mb-4 flex items-center justify-start gap-4">
                 <span className="w-8 h-[1px] bg-cream/50" /> Siguiente paso
               </p>
-              <h2 className="font-serif italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-4 lg:mb-8 text-cream">
+              <h2 className="font-serif italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-1 sm:mb-2 lg:mb-8 text-cream">
                 ¿Por dónde <br className="hidden lg:block"/>empezar?
               </h2>
 
@@ -340,7 +340,7 @@ export default function Servicios() {
           
           {/* El Home y las secciones de arriba ya explicaron las modalidades: acá va
               directo la problemática y el paso siguiente, sin reciclar ese contenido. */}
-          <div className="lg:w-7/12 flex flex-col gap-4 sm:gap-6 md:gap-8 relative z-10 justify-center text-left">
+          <div className="lg:w-7/12 flex flex-col gap-2.5 sm:gap-4 md:gap-8 relative z-10 justify-center text-left">
             <Reveal delay={0.2}>
               <p className="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium leading-[1.3] text-balance">
                 El primer paso es entender en qué momento está tu marca.
@@ -354,7 +354,7 @@ export default function Servicios() {
             </Reveal>
 
             {/* Mobile CTA Button (Al final de todos los textos) */}
-            <Reveal delay={0.5} className="block lg:hidden mt-1 pt-1">
+            <Reveal delay={0.5} className="block lg:hidden mt-3 pt-1">
               <div className="flex justify-start">
                 <a
                   href="/contacto" 
