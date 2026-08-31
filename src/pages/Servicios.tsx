@@ -317,9 +317,9 @@ export default function Servicios() {
           <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-black/30 rounded-full blur-3xl pointer-events-none" />
           <div className="glass-sheen" />
           
-          <div className="lg:w-5/12 flex flex-col justify-between relative z-10 text-center lg:text-left h-full">
+          <div className="lg:w-5/12 flex flex-col justify-between relative z-10 text-left h-full">
             <Reveal>
-              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-4 sm:mb-6 flex items-center justify-center lg:justify-start gap-4">
+              <p className="text-xs tracking-widest text-cream/80 uppercase font-bold mb-4 sm:mb-6 flex items-center justify-start gap-4">
                 <span className="w-8 h-[1px] bg-cream/50" /> Siguiente paso
               </p>
               <h2 className="font-serif italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-4 lg:mb-8 text-cream">
@@ -340,7 +340,7 @@ export default function Servicios() {
           
           {/* El Home y las secciones de arriba ya explicaron las modalidades: acá va
               directo la problemática y el paso siguiente, sin reciclar ese contenido. */}
-          <div className="lg:w-7/12 flex flex-col gap-4 sm:gap-6 md:gap-8 relative z-10 justify-center text-center lg:text-left">
+          <div className="lg:w-7/12 flex flex-col gap-4 sm:gap-6 md:gap-8 relative z-10 justify-center text-left">
             <Reveal delay={0.2}>
               <p className="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium leading-[1.3] text-balance">
                 El primer paso es entender en qué momento está tu marca.
@@ -355,7 +355,7 @@ export default function Servicios() {
 
             {/* Mobile CTA Button (Al final de todos los textos) */}
             <Reveal delay={0.5} className="block lg:hidden mt-1 pt-1">
-              <div className="flex justify-center">
+              <div className="flex justify-start">
                 <a
                   href="/contacto" 
                   className="group/btn relative inline-flex items-center justify-center gap-3 bg-cream text-red px-5 py-2.5 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all active:scale-95 shadow-md w-auto"
