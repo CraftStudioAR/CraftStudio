@@ -98,14 +98,14 @@ export default function Servicios() {
       />
       
       {/* 1. HERO SECTION */}
-      <section className="relative px-6 pt-40 pb-24 md:pt-56 md:pb-32 md:px-10 overflow-hidden z-10">
+      <section className="relative px-6 pt-32 sm:pt-40 md:pt-40 lg:pt-48 pb-16 md:pb-20 md:px-10 overflow-hidden z-10">
         <div className="mx-auto max-w-[1400px] relative z-10">
           
           {/* Header: Título y descripción */}
           <div className="flex flex-col justify-start">
             <Reveal>
-              <p className="text-sm tracking-widest uppercase mb-6 flex items-center gap-4 text-red font-bold">
-                <span className="w-12 h-[1px] bg-red" /> Especialidad
+              <p className="text-xs sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-4 text-red font-bold">
+                <span className="w-8 sm:w-12 h-[1px] bg-red" /> Especialidad
               </p>
             </Reveal>
             
@@ -113,7 +113,7 @@ export default function Servicios() {
               variants={titleVariants}
               initial="hidden"
               animate="visible"
-              className="font-serif italic text-6xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight mb-8 text-navy"
+              className="font-serif italic text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[8.5rem] 2xl:text-[10rem] leading-[0.88] tracking-tight mb-6 md:mb-8 text-navy"
             >
               {"Modalidades.".split("").map((char, index) => (
                 <motion.span key={index} variants={charVariants} className="inline-block">
@@ -123,13 +123,13 @@ export default function Servicios() {
             </motion.h1>
             
             <Reveal delay={0.6}>
-              <p className="text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl font-medium text-ink/80 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-3xl lg:max-w-4xl font-medium text-ink/80 leading-relaxed">
                 {modalidadesInfo.description}
               </p>
             </Reveal>
 
             <Reveal delay={0.7}>
-              <div className="w-full h-[1px] bg-ink/10 mt-16 md:mt-20" />
+              <div className="w-full h-[1px] bg-ink/10 mt-10 md:mt-14 lg:mt-16" />
             </Reveal>
           </div>
 
