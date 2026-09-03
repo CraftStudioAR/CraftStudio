@@ -132,7 +132,7 @@ export default function Lightbox({
           if (info.offset.x < -80) goTo(1);
           else if (info.offset.x > 80) goTo(-1);
         }}
-        className="max-h-full max-w-full rounded-lg object-contain"
+        className="max-h-full max-w-full rounded-sm object-contain"
       />
     </motion.div>
   );

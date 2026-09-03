@@ -92,16 +92,28 @@ export type Stat = {
 
 export type ProjectBlock =
   | { type: "image"; image: ProjectImage; aspect?: string; size?: 'full' | 'contained' }
-  | { type: "imageFeature"; main: ProjectImage; stacked: [ProjectImage, ProjectImage] }
+  | {
+      type: "imageFeature";
+      main: ProjectImage;
+      stacked: [ProjectImage, ProjectImage];
+      imagePosition?: "left" | "right" | "izquierda" | "derecha";
+      mainPosition?: "left" | "right" | "izquierda" | "derecha";
+      position?: "left" | "right" | "izquierda" | "derecha";
+      mainImagePosition?: "left" | "right" | "izquierda" | "derecha";
+      align?: "left" | "right" | "izquierda" | "derecha";
+      mobileOrder?: "mainFirst" | "stackedFirst" | "imageFirst" | "textFirst";
+    }
   | {
       type: "imagePair";
       images: ProjectImage[];
       mobileLayout?: "pair" | "stack";
-      /** Aspect ratio CSS (ej. "9 / 10") que ambas imágenes comparten, para igualar su altura cuando sus proporciones naturales no coinciden. Si se omite, cada imagen usa su altura natural. */
+      /** Aspect ratio CSS (ej. "9 / 10" o "16:9") que ambas imágenes comparten. */
       aspect?: string;
-      /** Iguala el alto escalando en vez de recortar: la más alta se achica y las dos
-       *  conservan su proporción natural. Requiere `ratio` en ambas imágenes y siempre
-       *  va en fila, también en mobile (ignora mobileLayout). */
+      aspectRatio?: string;
+      layout?: "50/50" | "60/40" | "40/60" | "70/30" | "30/70" | "66/34" | "34/66" | string;
+      columnLayout?: string;
+      proporcion?: string;
+      /** Iguala el alto escalando en vez de recortar. */
       matchHeight?: boolean;
     }
   | {

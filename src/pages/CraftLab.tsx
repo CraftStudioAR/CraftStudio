@@ -68,7 +68,7 @@ export default function CraftLab() {
                 <Link to={`/craft-lab/${article.slug}`} className="break-inside-avoid mb-16 flex flex-col group cursor-pointer block">
                   
                   {/* Tarjeta Visual */}
-                  <div className={`relative w-full ${article.aspect || 'aspect-[4/5]'} overflow-hidden rounded-2xl bg-ink/5 mb-6`}>
+                  <div className={`relative w-full ${article.aspect || 'aspect-[4/5]'} overflow-hidden rounded-sm bg-ink/5 mb-6`}>
                     <img 
                       src={getImageUrl(article.image)} 
                       alt={article.title} 

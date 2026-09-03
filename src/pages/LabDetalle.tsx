@@ -167,7 +167,7 @@ export default function LabDetalle() {
       {/* PORTADA */}
       <section className="px-6 md:px-10 mb-6 md:mb-8">
         <Reveal delay={0.4}>
-          <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-[2rem] overflow-hidden relative bg-ink/5">
+          <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden relative bg-ink/5">
             <img 
               src={getImageUrl(article.image)} 
               alt={article.title} 

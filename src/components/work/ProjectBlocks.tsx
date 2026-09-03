@@ -43,6 +43,13 @@ function getResponsiveTextStyle(
 }
 
 
+function formatAspect(rawAspect?: string): string | undefined {
+  if (!rawAspect) return undefined;
+  const clean = String(rawAspect).trim();
+  if (clean.toLowerCase() === "auto") return undefined;
+  return clean.replace(":", "/");
+}
+
 /** Imágenes de un bloque, en el orden en que se ven en pantalla. */
 function blockImages(block: ProjectBlock): ProjectImage[] {
   switch (block.type) {
@@ -83,14 +90,15 @@ function Img({
       type="button"
       onClick={onOpen}
       aria-label={`Ampliar imagen: ${image.alt}`}
-      className={`group/img block w-full overflow-hidden rounded-2xl ${className}`}
+      style={aspect ? { aspectRatio: aspect } : undefined}
+      className={`group/img block w-full overflow-hidden rounded-sm ${className}`}
     >
       <img
         src={cld(image.publicId, transforms)}
         alt={image.alt}
         loading="lazy"
         style={aspect ? { aspectRatio: aspect } : undefined}
-        className={`w-full transition-transform duration-700 ease-out group-hover/img:scale-[1.03] rounded-2xl ${imgClassName}`}
+        className={`w-full transition-transform duration-700 ease-out group-hover/img:scale-[1.03] rounded-sm ${imgClassName}`}
       />
     </button>
   );
@@ -130,7 +138,7 @@ function TextBox({
   const elementId = `text-box-site-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <div className={`flex flex-col justify-center gap-4 rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 ${className}`}>
+    <div className={`flex flex-col justify-center gap-4 rounded-sm border border-ink/10 bg-ink/[0.02] p-8 md:p-10 ${className}`}>
       {text.split("\n\n").map((paragraph, idx) => {
         const pId = `${elementId}-${idx}`;
         const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
@@ -197,7 +205,7 @@ function StatsPanel({
   return (
     <div
       data-theme="dark"
-      className="relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] px-6 py-12 text-cream shadow-2xl backdrop-blur-xl md:px-12 md:py-16"
+      className="relative overflow-hidden rounded-sm border border-white/20 bg-gradient-to-br from-[#B8381D] via-[#A52F18] to-[#751C0C] px-6 py-12 text-cream shadow-2xl backdrop-blur-xl md:px-12 md:py-16"
     >
       {/* Mismo tratamiento glassmorphism que la tarjeta de consulta enviada en Contacto. */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10" />
@@ -288,7 +296,7 @@ function Testimonial({
   const alignJustifyClass = textAlign === 'center' ? 'justify-center text-center' : textAlign === 'right' ? 'justify-end text-right' : 'justify-start text-left';
 
   return (
-    <figure className="relative overflow-hidden rounded-2xl border border-ink/10 bg-ink/[0.02] px-12 py-12 sm:px-16 md:px-24 md:py-20 lg:px-32">
+    <figure className="relative overflow-hidden rounded-sm border border-ink/10 bg-ink/[0.02] px-12 py-12 sm:px-16 md:px-24 md:py-20 lg:px-32">
       {styleElement}
       <GlyphMark
         variant={12}
@@ -364,22 +372,33 @@ function Block({
         <Img
           image={block.image}
           transforms="f_auto,q_auto,w_2000"
-          aspect={block.aspect}
+          aspect={formatAspect(block.aspect || (block as any).aspectRatio)}
           onOpen={() => onOpen(startIndex)}
         />
       );
 
-    case "imageFeature":
+    case "imageFeature": {
+      const pos = block.imagePosition || block.mainPosition || block.position || block.mainImagePosition || block.align;
+      const isRight = pos === "right" || pos === "derecha";
+
+      const mobilePos = block.mobileOrder as string | undefined;
+      const isStackedFirst = mobilePos === "stackedFirst" || mobilePos === "textFirst";
+      const mainMobileOrder = isStackedFirst ? "order-2" : "order-1";
+      const stackedMobileOrder = isStackedFirst ? "order-1" : "order-2";
+
+      const mainOrderClass = `${mainMobileOrder} ${isRight ? "md:order-2" : "md:order-1"}`;
+      const stackedOrderClass = `${stackedMobileOrder} ${isRight ? "md:order-1" : "md:order-2"}`;
+
       return (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 items-stretch">
           <Img
             image={block.main}
             transforms="f_auto,q_auto,w_1200"
-            className="h-full"
+            className={`h-full ${mainOrderClass}`}
             imgClassName="h-full object-cover"
             onOpen={() => onOpen(startIndex)}
           />
-          <div className="grid grid-cols-2 gap-3 self-start md:grid-cols-1 md:gap-6">
+          <div className={`grid grid-cols-2 gap-3 self-start md:grid-cols-1 md:gap-6 ${stackedOrderClass}`}>
             {block.stacked.map((image, i) => (
               <Img
                 key={image.publicId}
@@ -391,12 +410,27 @@ function Block({
           </div>
         </div>
       );
+    }
 
     case "imagePair": {
-      const stackOnMobile = block.mobileLayout === "stack";
+      const mobilePos = block.mobileLayout as string | undefined;
+      const stackOnMobile = mobilePos === "stack" || mobilePos === "apiladas" || mobilePos === "apilado";
 
-      // Anchos proporcionales al ratio de cada foto sobre una base 0: las dos terminan
-      // con el mismo alto (base disponible / suma de ratios) sin perder un solo pixel.
+      const rawAspect = block.aspect || (block as any).aspectRatio || (block as any).aspecto;
+      const resolvedAspect = formatAspect(rawAspect);
+
+      const layoutOption = block.layout || (block as any).columnLayout || (block as any).proporcion || (block as any).columns;
+
+      const layoutClasses: Record<string, string> = {
+        '30/70': 'md:grid-cols-[3fr_7fr]',
+        '40/60': 'md:grid-cols-[4fr_6fr]',
+        '50/50': 'md:grid-cols-2',
+        '60/40': 'md:grid-cols-[6fr_4fr]',
+        '70/30': 'md:grid-cols-[7fr_3fr]',
+        '66/34': 'md:grid-cols-[66fr_34fr]',
+        '34/66': 'md:grid-cols-[34fr_66fr]',
+      };
+
       if (block.matchHeight && block.images.every((image) => image.ratio)) {
         return (
           <div className="flex items-start gap-3 md:gap-6">
@@ -405,6 +439,7 @@ function Block({
                 <Img
                   image={image}
                   transforms="f_auto,q_auto,w_1200"
+                  aspect={resolvedAspect}
                   onOpen={() => onOpen(startIndex + i)}
                 />
               </div>
@@ -414,7 +449,11 @@ function Block({
       }
 
       const count = block.images.length;
-      const desktopCols = count === 4 ? "md:grid-cols-4" : count === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
+      let desktopCols = count === 4 ? "md:grid-cols-4" : count === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
+      if (count === 2 && layoutOption && layoutClasses[layoutOption]) {
+        desktopCols = layoutClasses[layoutOption];
+      }
+
       const mobileCols = stackOnMobile ? "grid-cols-1" : (count === 4 ? "grid-cols-4" : count === 3 ? "grid-cols-3" : "grid-cols-2");
 
       return (
@@ -426,7 +465,7 @@ function Block({
               key={image.publicId}
               image={image}
               transforms="f_auto,q_auto,w_1200"
-              aspect={block.aspect}
+              aspect={resolvedAspect}
               className="h-full w-full"
               imgClassName="h-full object-cover"
               onOpen={() => onOpen(startIndex + i)}
@@ -486,7 +525,7 @@ function Block({
               type="button"
               onClick={() => onOpen(startIndex)}
               aria-label={`Ampliar imagen: ${block.image.alt}`}
-              className={`group/img relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:aspect-auto ${imageOrderClass}`}
+              className={`group/img relative aspect-[4/3] w-full overflow-hidden rounded-sm md:aspect-auto ${imageOrderClass}`}
             >
               <img
                 src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
@@ -560,7 +599,7 @@ function Block({
     case "text": {
       const containerClass = `w-full my-4 ${
         block.hasContainer 
-          ? "rounded-2xl border border-ink/10 bg-ink/[0.02] p-8 md:p-10 shadow-sm" 
+          ? "rounded-sm border border-ink/10 bg-ink/[0.02] p-8 md:p-10 shadow-sm" 
           : "px-0"
       }`;
 
