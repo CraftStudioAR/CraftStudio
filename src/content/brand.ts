@@ -96,6 +96,7 @@ export type ProjectBlock =
       type: "imageFeature";
       main: ProjectImage;
       stacked: [ProjectImage, ProjectImage];
+      mainSide?: "left" | "right" | "izquierda" | "derecha";
       imagePosition?: "left" | "right" | "izquierda" | "derecha";
       mainPosition?: "left" | "right" | "izquierda" | "derecha";
       position?: "left" | "right" | "izquierda" | "derecha";
@@ -110,6 +111,7 @@ export type ProjectBlock =
       /** Aspect ratio CSS (ej. "9 / 10" o "16:9") que ambas imágenes comparten. */
       aspect?: string;
       aspectRatio?: string;
+      split?: "50/50" | "60/40" | "40/60" | "70/30" | "30/70" | "66/34" | "34/66" | string;
       layout?: "50/50" | "60/40" | "40/60" | "70/30" | "30/70" | "66/34" | "34/66" | string;
       columnLayout?: string;
       proporcion?: string;

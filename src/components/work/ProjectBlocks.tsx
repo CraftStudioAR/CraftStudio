@@ -62,6 +62,7 @@ function getGridTemplateColumns(layoutStr?: string): string | undefined {
 
 function resolvePairLayout(block: any): string | undefined {
   const layoutCandidates = [
+    block.split,
     block.layout,
     block.columnLayout,
     block.proporcion,
@@ -69,6 +70,7 @@ function resolvePairLayout(block: any): string | undefined {
     block.proporcionColumnas,
     block.proporcion_columnas,
     block.column_layout,
+    block.diseno?.split,
     block.diseno?.layout,
     block.diseno?.columnLayout,
     block.diseno?.proporcion,
@@ -417,6 +419,8 @@ function Block({
 
     case "imageFeature": {
       const posCandidates = [
+        block.mainSide,
+        (block as any).diseno?.mainSide,
         block.imagePosition,
         block.mainPosition,
         block.position,
