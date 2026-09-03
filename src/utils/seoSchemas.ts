@@ -7,8 +7,8 @@ export const organizationSchema = {
   "name": "Craft Studio",
   "alternateName": "Craft Studio Argentina",
   "url": BASE_URL,
-  "logo": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.webp",
-  "image": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.webp",
+  "logo": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg",
+  "image": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg",
   "description": "Estudio de identidad visual, branding y comunicación estratégica en Buenos Aires, Argentina.",
   "email": "hola@craftstudio.com.ar",
   "address": {

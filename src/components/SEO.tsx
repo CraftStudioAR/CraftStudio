@@ -17,7 +17,7 @@ const DEFAULT_DESCRIPTION =
   "Craft Studio es un estudio de identidad visual, branding y comunicación estratégica en Buenos Aires. Pensamos el problema y diseñamos la solución para marcas en crecimiento.";
 const DEFAULT_KEYWORDS =
   "Craft Studio, branding, identidad visual, comunicación estratégica, estrategia de marca, dirección de arte, growth marketing, estudio de diseño Buenos Aires, rebranding";
-const DEFAULT_OG_IMAGE = "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.webp";
+const DEFAULT_OG_IMAGE = "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg";
 
 export default function SEO({
   title,
@@ -72,7 +72,7 @@ export default function SEO({
     setMetaTag('meta[property="og:url"]', 'property', 'og:url', 'content', currentUrl);
     setMetaTag('meta[property="og:image"]', 'property', 'og:image', 'content', ogImage);
     setMetaTag('meta[property="og:image:secure_url"]', 'property', 'og:image:secure_url', 'content', ogImage);
-    setMetaTag('meta[property="og:image:type"]', 'property', 'og:image:type', 'content', 'image/webp');
+    setMetaTag('meta[property="og:image:type"]', 'property', 'og:image:type', 'content', 'image/jpeg');
     setMetaTag('meta[property="og:image:width"]', 'property', 'og:image:width', 'content', '1200');
     setMetaTag('meta[property="og:image:height"]', 'property', 'og:image:height', 'content', '630');
     setMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'content', 'es_AR');
