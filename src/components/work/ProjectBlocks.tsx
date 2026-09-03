@@ -50,6 +50,44 @@ function formatAspect(rawAspect?: string): string | undefined {
   return clean.replace(":", "/");
 }
 
+function getGridTemplateColumns(layoutStr?: string): string | undefined {
+  if (!layoutStr) return undefined;
+  const clean = String(layoutStr).replace(/\s+/g, "").replace(/[:-]/g, "/");
+  const parts = clean.split("/");
+  if (parts.length === 2 && !isNaN(Number(parts[0])) && !isNaN(Number(parts[1]))) {
+    return `${parts[0]}fr ${parts[1]}fr`;
+  }
+  return undefined;
+}
+
+function resolvePairLayout(block: any): string | undefined {
+  const layoutCandidates = [
+    block.layout,
+    block.columnLayout,
+    block.proporcion,
+    block.columns,
+    block.proporcionColumnas,
+    block.proporcion_columnas,
+    block.column_layout,
+    block.diseno?.layout,
+    block.diseno?.columnLayout,
+    block.diseno?.proporcion,
+    block.diseno?.columns,
+    block.diseno?.proporcionColumnas,
+    block.design?.layout,
+    block.design?.columnLayout,
+    block.design?.proporcion,
+    block.design?.columns,
+    block.design?.proporcionColumnas,
+    block.settings?.layout,
+    block.settings?.columnLayout,
+    block.settings?.proporcion,
+  ];
+
+  const rawLayout = layoutCandidates.find((val) => val !== undefined && val !== null && val !== "")?.toString().trim();
+  return getGridTemplateColumns(rawLayout);
+}
+
 /** Imágenes de un bloque, en el orden en que se ven en pantalla. */
 function blockImages(block: ProjectBlock): ProjectImage[] {
   switch (block.type) {
@@ -378,28 +416,72 @@ function Block({
       );
 
     case "imageFeature": {
-      const pos = block.imagePosition || block.mainPosition || block.position || block.mainImagePosition || block.align;
-      const isRight = pos === "right" || pos === "derecha";
+      const posCandidates = [
+        block.imagePosition,
+        block.mainPosition,
+        block.position,
+        block.mainImagePosition,
+        block.align,
+        (block as any).posicion,
+        (block as any).posicionImagenPrincipal,
+        (block as any).posicion_imagen_principal,
+        (block as any).main_position,
+        (block as any).image_position,
+        (block as any).layout,
+        (block as any).order,
+        (block as any).diseno?.position,
+        (block as any).diseno?.posicion,
+        (block as any).diseno?.mainPosition,
+        (block as any).diseno?.imagePosition,
+        (block as any).diseno?.posicionImagenPrincipal,
+        (block as any).design?.position,
+        (block as any).design?.posicion,
+        (block as any).design?.mainPosition,
+        (block as any).design?.imagePosition,
+        (block as any).design?.posicionImagenPrincipal,
+        (block as any).settings?.position,
+        (block as any).settings?.mainPosition,
+        (block as any).settings?.imagePosition,
+        (block as any).style?.position,
+        (block as any).style?.mainPosition,
+        (block as any).style?.imagePosition,
+      ];
 
-      const mobilePos = block.mobileOrder as string | undefined;
-      const isStackedFirst = mobilePos === "stackedFirst" || mobilePos === "textFirst";
+      const rawPos = posCandidates.find((val) => val !== undefined && val !== null && val !== "")?.toString().toLowerCase().trim();
+
+      const isRight = Boolean(
+        rawPos && (
+          rawPos.includes("right") ||
+          rawPos.includes("derecha") ||
+          rawPos === "d" ||
+          rawPos === "r"
+        )
+      );
+
+      const mobilePos = (block.mobileOrder || (block as any).mobileLayout || (block as any).diseno?.mobileOrder || (block as any).design?.mobileOrder) as string | undefined;
+      const isStackedFirst = mobilePos === "stackedFirst" || mobilePos === "textFirst" || mobilePos === "stacked" || mobilePos === "apiladas";
       const mainMobileOrder = isStackedFirst ? "order-2" : "order-1";
       const stackedMobileOrder = isStackedFirst ? "order-1" : "order-2";
 
       const mainOrderClass = `${mainMobileOrder} ${isRight ? "md:order-2" : "md:order-1"}`;
       const stackedOrderClass = `${stackedMobileOrder} ${isRight ? "md:order-1" : "md:order-2"}`;
 
+      const mainImg = block.main || (block as any).mainImage || (block as any).image;
+      const stackedImgs: ProjectImage[] = block.stacked || (block as any).secondaryImages || (block as any).stackedImages || (block as any).images || [];
+
       return (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 items-stretch">
-          <Img
-            image={block.main}
-            transforms="f_auto,q_auto,w_1200"
-            className={`h-full ${mainOrderClass}`}
-            imgClassName="h-full object-cover"
-            onOpen={() => onOpen(startIndex)}
-          />
+          {mainImg && (
+            <Img
+              image={mainImg}
+              transforms="f_auto,q_auto,w_1200"
+              className={`h-full ${mainOrderClass}`}
+              imgClassName="h-full object-cover"
+              onOpen={() => onOpen(startIndex)}
+            />
+          )}
           <div className={`grid grid-cols-2 gap-3 self-start md:grid-cols-1 md:gap-6 ${stackedOrderClass}`}>
-            {block.stacked.map((image, i) => (
+            {stackedImgs.map((image, i) => (
               <Img
                 key={image.publicId}
                 image={image}
@@ -413,56 +495,38 @@ function Block({
     }
 
     case "imagePair": {
-      const mobilePos = block.mobileLayout as string | undefined;
+      const mobilePos = (block.mobileLayout || (block as any).mobile || (block as any).diseno?.mobileLayout || (block as any).diseno?.mobile) as string | undefined;
       const stackOnMobile = mobilePos === "stack" || mobilePos === "apiladas" || mobilePos === "apilado";
 
-      const rawAspect = block.aspect || (block as any).aspectRatio || (block as any).aspecto;
+      const rawAspect = block.aspect || (block as any).aspectRatio || (block as any).aspecto || (block as any).diseno?.aspect || (block as any).diseno?.aspectRatio;
       const resolvedAspect = formatAspect(rawAspect);
 
-      const layoutOption = block.layout || (block as any).columnLayout || (block as any).proporcion || (block as any).columns;
+      const images: ProjectImage[] = block.images || (block as any).items || [];
+      const count = images.length;
 
-      const layoutClasses: Record<string, string> = {
-        '30/70': 'md:grid-cols-[3fr_7fr]',
-        '40/60': 'md:grid-cols-[4fr_6fr]',
-        '50/50': 'md:grid-cols-2',
-        '60/40': 'md:grid-cols-[6fr_4fr]',
-        '70/30': 'md:grid-cols-[7fr_3fr]',
-        '66/34': 'md:grid-cols-[66fr_34fr]',
-        '34/66': 'md:grid-cols-[34fr_66fr]',
-      };
+      const customGridCols = count === 2 ? resolvePairLayout(block) : undefined;
 
-      if (block.matchHeight && block.images.every((image) => image.ratio)) {
-        return (
-          <div className="flex items-start gap-3 md:gap-6">
-            {block.images.map((image, i) => (
-              <div key={image.publicId} className="min-w-0" style={{ flex: `${image.ratio} 1 0%` }}>
-                <Img
-                  image={image}
-                  transforms="f_auto,q_auto,w_1200"
-                  aspect={resolvedAspect}
-                  onOpen={() => onOpen(startIndex + i)}
-                />
-              </div>
-            ))}
-          </div>
-        );
-      }
-
-      const count = block.images.length;
-      let desktopCols = count === 4 ? "md:grid-cols-4" : count === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
-      if (count === 2 && layoutOption && layoutClasses[layoutOption]) {
-        desktopCols = layoutClasses[layoutOption];
-      }
+      const elementId = `image-pair-${Math.random().toString(36).substring(2, 9)}`;
+      const styleElement = customGridCols ? (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `@media (min-width: 768px) { #${elementId} { grid-template-columns: ${customGridCols} !important; } }`,
+          }}
+        />
+      ) : null;
 
       const mobileCols = stackOnMobile ? "grid-cols-1" : (count === 4 ? "grid-cols-4" : count === 3 ? "grid-cols-3" : "grid-cols-2");
+      const desktopCols = customGridCols ? "md:grid-cols-2" : (count === 4 ? "md:grid-cols-4" : count === 3 ? "md:grid-cols-3" : "md:grid-cols-2");
 
       return (
         <div
+          id={elementId}
           className={`grid items-stretch gap-3 md:gap-6 ${desktopCols} ${mobileCols}`}
         >
-          {block.images.map((image, i) => (
+          {styleElement}
+          {images.map((image, i) => (
             <Img
-              key={image.publicId}
+              key={image.publicId || i}
               image={image}
               transforms="f_auto,q_auto,w_1200"
               aspect={resolvedAspect}
