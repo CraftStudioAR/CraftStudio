@@ -134,6 +134,12 @@ export type ProjectBlock =
       sizeDesktop?: string;
       tracking?: string;
       leading?: string;
+      hasContainer?: boolean;
+      hasBox?: boolean;
+      container?: boolean;
+      box?: boolean;
+      showContainer?: boolean;
+      showBox?: boolean;
       /** Quien define el alto de la fila en desktop. "text" (default): la imagen se
        *  estira hasta el alto del texto. "image": la imagen queda en su alto natural
        *  y la caja de texto crece hasta igualarla. */

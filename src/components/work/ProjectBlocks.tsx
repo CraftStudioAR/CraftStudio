@@ -156,6 +156,7 @@ function TextBox({
   tracking = 'tracking-normal',
   leading = 'leading-relaxed',
   textAlign = 'left',
+  hasContainer = true,
 }: {
   text: string;
   className?: string;
@@ -168,6 +169,7 @@ function TextBox({
   tracking?: string;
   leading?: string;
   textAlign?: 'left' | 'center' | 'right';
+  hasContainer?: boolean;
 }) {
   const boldClass = bold ? "font-bold" : "font-normal";
   const italicClass = italic ? "italic" : "not-italic";
@@ -177,8 +179,10 @@ function TextBox({
 
   const elementId = `text-box-site-${Math.random().toString(36).substr(2, 9)}`;
 
+  const boxStyleClass = hasContainer ? "border border-ink/10 bg-ink/[0.02]" : "border-transparent bg-transparent";
+
   return (
-    <div className={`flex flex-col justify-center gap-4 rounded-sm border border-ink/10 bg-ink/[0.02] p-8 md:p-10 ${className}`}>
+    <div className={`flex flex-col justify-center gap-4 rounded-sm ${boxStyleClass} p-8 md:p-10 ${className}`}>
       {text.split("\n\n").map((paragraph, idx) => {
         const pId = `${elementId}-${idx}`;
         const { className: resolvedSizeClass, style: sizeStyle, styleElement } = getResponsiveTextStyle(
@@ -579,6 +583,28 @@ function Block({
       
       const desktopGridCols = layoutClasses[resolvedLayout] || 'md:grid-cols-2';
 
+      const containerCandidates = [
+        block.hasContainer,
+        block.hasBox,
+        block.container,
+        block.box,
+        block.showContainer,
+        block.showBox,
+        (block as any).diseno?.hasContainer,
+        (block as any).diseno?.hasBox,
+        (block as any).diseno?.container,
+        (block as any).diseno?.box,
+        (block as any).design?.hasContainer,
+        (block as any).design?.hasBox,
+        (block as any).design?.container,
+        (block as any).design?.box,
+      ];
+
+      const rawNoBox = (block as any).noContainer === true || (block as any).transparent === true || (block as any).sinCaja === true || (block as any).diseno?.noContainer === true;
+
+      const foundContainerVal = containerCandidates.find((val) => val !== undefined && val !== null);
+      const hasContainer = rawNoBox ? false : (foundContainerVal !== undefined ? Boolean(foundContainerVal) : true);
+
       return (
         <div className={`grid grid-cols-1 items-stretch gap-3 ${desktopGridCols} md:gap-6`}>
           {heightFromImage ? (
@@ -615,6 +641,7 @@ function Block({
             tracking={block.tracking}
             leading={block.leading}
             textAlign={block.textAlign}
+            hasContainer={hasContainer}
           />
         </div>
       );
