@@ -73,6 +73,8 @@ export default function SEO({
     setMetaTag('meta[property="og:image"]', 'property', 'og:image', 'content', ogImage);
     setMetaTag('meta[property="og:image:secure_url"]', 'property', 'og:image:secure_url', 'content', ogImage);
     setMetaTag('meta[property="og:image:type"]', 'property', 'og:image:type', 'content', 'image/webp');
+    setMetaTag('meta[property="og:image:width"]', 'property', 'og:image:width', 'content', '1200');
+    setMetaTag('meta[property="og:image:height"]', 'property', 'og:image:height', 'content', '630');
     setMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'content', 'es_AR');
 
     // Twitter Card Tags
