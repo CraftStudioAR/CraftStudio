@@ -15,13 +15,13 @@ export default function StudioSection() {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
 
   return (
-    <div ref={containerRef} className="px-4 md:px-10 pb-10 md:pb-20 perspective-1000">
+    <div ref={containerRef} className="px-4 md:px-10 py-6 md:py-20 perspective-1000">
       <motion.section 
         style={{ scale }}
         className="bg-cream relative overflow-hidden text-ink rounded-2xl flex flex-col items-center justify-center"
       >
 
-        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-12 sm:py-16 md:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">
+        <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-20 md:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">
           
           <Reveal>
             <h2 className="font-sans font-medium tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-4 md:mb-8 text-balance">
