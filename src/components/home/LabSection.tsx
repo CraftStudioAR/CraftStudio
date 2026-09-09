@@ -7,7 +7,7 @@ export default function LabSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} data-theme="dark" className="bg-ink text-cream py-32 md:py-48 relative overflow-hidden flex flex-col justify-center min-h-[90vh]">
+    <section ref={containerRef} data-theme="dark" className="bg-ink text-cream py-16 md:py-48 relative overflow-hidden flex flex-col justify-center min-h-0 md:min-h-[90vh]">
       
       {/* Background Image */}
       <img 
@@ -18,9 +18,9 @@ export default function LabSection() {
 
       <div className="w-full relative z-10 px-6 md:px-10 max-w-7xl mx-auto">
         <Reveal className="w-full">
-          <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
+          <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
             <div className="glass-sheen" />
-            <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-center gap-10 lg:gap-20 relative z-10 w-full lg:translate-x-4">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-center gap-4 sm:gap-6 lg:gap-20 relative z-10 w-full lg:translate-x-4">
               
               {/* Title */}
               <div className="flex-shrink-0">
@@ -31,7 +31,7 @@ export default function LabSection() {
               
               {/* Text Block */}
               <div className="max-w-[450px] text-left">
-                <p className="text-xs md:text-sm tracking-widest uppercase mb-6 flex items-center gap-6 text-cream font-bold drop-shadow-sm justify-start">
+                <p className="text-xs md:text-sm tracking-widest uppercase mb-4 md:mb-6 flex items-center gap-6 text-cream font-bold drop-shadow-sm justify-start">
                   <span className="w-12 h-[1.5px] bg-cream" /> Manifiesto Editorial
                 </p>
                 
@@ -39,7 +39,7 @@ export default function LabSection() {
                   Un espacio de ideas, ensayos y curadurías donde desglosamos la <span className="italic">mirada Craft.</span>
                 </p>
                 
-                <div className="mt-8 md:mt-12">
+                <div className="mt-6 md:mt-12">
                   <Magnetic>
                     <Link
                       to="/craft-lab"
