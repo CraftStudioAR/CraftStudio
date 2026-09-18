@@ -82,7 +82,13 @@ export default function WorkSection() {
       <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-20 lg:pb-24">
         <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-16 md:pr-32 items-start">
           {displayList.map((w, i) => (
-            <div key={w.slug} className="w-[82vw] sm:w-[65vw] md:w-[32vw] lg:w-[28vw] xl:w-[26vw] max-w-md shrink-0">
+            // El tope para que la card entre en la sección de 100vh va en el ANCHO
+            // (alto máximo × proporción de la card), no en el alto: así la card se
+            // achica entera y nunca cambia de proporción ni recorta distinto la portada.
+            <div
+              key={w.slug}
+              className="w-[82vw] sm:w-[65vw] md:w-[32vw] lg:w-[28vw] xl:w-[26vw] max-w-[min(28rem,31.5vh)] sm:max-w-[min(28rem,58.6vh)] md:max-w-[min(28rem,45.3vh)] lg:max-w-[min(28rem,50.6vh)] xl:max-w-[min(28rem,56vh)] shrink-0"
+            >
               <WorkCard work={w} index={i} total={displayList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>
           ))}
