@@ -17,7 +17,7 @@ export const modalidadesInfo = {
 };
 
 export const programasInfo = {
-  title: "PROGRAMS",
+  title: "Programs",
   description: "Construimos la dirección de una marca a través de procesos estratégicos que responden a distintos momentos: crear, reposicionar o actualizar."
 };
 
@@ -58,7 +58,7 @@ export const programas = [
  *  activación es uno de los proyectos que puede darse dentro de ella, no un
  *  nivel más abajo. */
 export const brandPartnershipsInfo = {
-  title: "BRAND PARTNERSHIPS",
+  title: "Brand Partnerships",
   description: "Diseñamos y dirigimos acciones de comunicación para marcas que ya cuentan con una dirección definida.",
   detail: "Nos sumamos a proyectos que necesitan una mirada estratégica, creativa y de ejecución. Cada Brand Partnership se construye según los objetivos de la marca y el alcance de la iniciativa.",
   scope: "Desarrollamos campañas, lanzamientos de producto, producciones, activaciones de marca, dirección creativa, experiencias digitales, desarrollo visual, entre otros.",

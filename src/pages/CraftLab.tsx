@@ -50,7 +50,7 @@ export default function CraftLab() {
           <div className="md:pb-4">
             <Reveal delay={0.2}>
               <p className="text-xl md:text-2xl text-ink/80 font-medium leading-relaxed text-balance max-w-xl">
-                Un espacio editorial de ideas, ensayos y curadurías donde desglosamos la <span className="font-serif italic text-red">mirada Craft</span>: observar el contexto para entender cómo las marcas se construyen, se comunican y responden al paradigma actual.
+                Un espacio editorial de ideas, ensayos y curadurías donde desglosamos la <span className="font-sans italic text-red">mirada Craft</span>: observar el contexto para entender cómo las marcas se construyen, se comunican y responden al paradigma actual.
               </p>
             </Reveal>
           </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import Reveal from "../components/Reveal";
 import { programas, programasInfo, brandPartnershipsInfo, modalidadesInfo } from "../content/brand";
@@ -8,7 +8,7 @@ import { buildBreadcrumbSchema } from "../utils/seoSchemas";
 
 export default function Servicios() {
   const [activeProgramas, setActiveProgramas] = useState(0);
-  const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(null);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(0);
 
   const ctaRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: ctaScroll } = useScroll({
@@ -17,31 +17,6 @@ export default function Servicios() {
   });
   const scale = useTransform(ctaScroll, [0, 1], [0.8, 1]);
 
-  // Lock body scroll when mobile modal is open (Bulletproof iOS fix with position restoration)
-  useEffect(() => {
-    if (mobileActiveIndex !== null) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.documentElement.style.overflow = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
-      }
-    }
-    return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.documentElement.style.overflow = "";
-    };
-  }, [mobileActiveIndex]);
 
   const cardColors = [
     "bg-white text-ink border border-ink/5 shadow-xl", 
@@ -141,7 +116,7 @@ export default function Servicios() {
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="mb-10 max-w-3xl">
-              <h2 className="font-sans font-bold uppercase tracking-tight text-4xl md:text-6xl text-navy mb-4">{programasInfo.title}</h2>
+              <h2 className="font-sans font-normal tracking-tight text-4xl md:text-6xl text-navy mb-4">{programasInfo.title}</h2>
               <p className="text-lg md:text-2xl font-medium">{programasInfo.description}</p>
             </div>
           </Reveal>
@@ -161,79 +136,92 @@ export default function Servicios() {
                   className={`relative overflow-hidden rounded-2xl cursor-pointer flex-shrink-0 ${cardColors[i]}`}
                   style={{ minWidth: "0px" }}
                 >
-                  <CardContent s={s} i={i} isActive={isActive} isMobile={false} />
+                  <CardContent s={s} i={i} isActive={isActive} />
                 </motion.div>
               );
             })}
           </div>
 
-          {/* MOBILE LAYOUT */}
+          {/* MOBILE LAYOUT: acordeón que se despliega en el lugar, con la misma curva que desktop */}
           <div className="flex lg:hidden flex-col gap-4 w-full">
-            {programas.map((s, i) => (
-              <div 
-                key={`mobile-btn-prog-${s.n}`}
-                onClick={() => setMobileActiveIndex(i)}
-                className={`relative overflow-hidden rounded-2xl flex-shrink-0 cursor-pointer h-[120px] px-6 md:px-8 flex items-center justify-between shadow-sm hover:opacity-90 transition-opacity ${cardColors[i]}`}
-              >
-                <div className="flex items-center gap-6">
-                  <span className="font-serif text-3xl opacity-60">{s.n}</span>
-                  <h3 className="font-serif text-xl md:text-2xl opacity-90 text-balance max-w-[200px]">{s.title}</h3>
-                </div>
-                <div className="w-10 h-10 shrink-0 rounded-full bg-black/10 flex items-center justify-center">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M7 1V13M1 7H13"/>
-                  </svg>
-                </div>
-              </div>
-            ))}
-          </div>
+            {programas.map((s, i) => {
+              const isOpen = mobileActiveIndex === i;
 
-          {/* MOBILE MODAL */}
-          <AnimatePresence>
-            {mobileActiveIndex !== null && (
-              <div className="fixed inset-0 z-[100] lg:hidden flex items-center justify-center p-4 sm:p-6">
-                {/* Backdrop (Fijo, no scrollea) */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={() => setMobileActiveIndex(null)}
-                  className="absolute inset-0 bg-black/60 backdrop-blur-md"
-                />
-
-                {/* Contenedor Modal (Se adapta al contenido) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className={`relative w-full rounded-2xl shadow-2xl overflow-hidden pointer-events-auto ${cardColors[mobileActiveIndex % cardColors.length]}`}
+              return (
+                <div
+                  key={`mobile-prog-${s.n}`}
+                  className={`relative overflow-hidden rounded-2xl flex-shrink-0 ${cardColors[i]}`}
                 >
-                  {/* Botón de cerrar fijo arriba a la derecha (no scrollea porque es absolute al contenedor padre) */}
-                  <div className="absolute top-0 right-0 w-full flex justify-end p-4 z-20 pointer-events-none">
-                    <button
-                      onClick={() => setMobileActiveIndex(null)}
-                      className="w-12 h-12 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center hover:bg-black/20 transition-colors pointer-events-auto"
+                  <button
+                    type="button"
+                    onClick={() => setMobileActiveIndex(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="w-full min-h-[120px] px-6 md:px-8 flex items-center justify-between text-left cursor-pointer"
+                  >
+                    <div className="flex items-center gap-6">
+                      <span className="font-serif text-3xl opacity-60">{s.n}</span>
+                      <h3 className="font-serif text-xl md:text-2xl opacity-90 text-balance max-w-[200px]">{s.title}</h3>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                      className="w-10 h-10 shrink-0 rounded-full bg-black/10 flex items-center justify-center"
                     >
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                        <path d="M1 1L13 13M1 13L13 1"/>
+                        <path d="M7 1V13M1 7H13"/>
                       </svg>
-                    </button>
-                  </div>
+                    </motion.div>
+                  </button>
 
-                  {/* Área scrolleable independiente (Controla la altura máxima) */}
-                  <div className="w-full max-h-[85vh] overflow-y-auto overscroll-contain no-scrollbar relative z-10">
-                    <CardContent
-                      s={programas[mobileActiveIndex]}
-                      i={mobileActiveIndex}
-                      isActive={true}
-                      isMobile={true}
-                    />
-                  </div>
-                </motion.div>
-              </div>
-            )}
-          </AnimatePresence>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key={`mobile-prog-body-${s.n}`}
+                        initial={{ height: 0 }}
+                        animate={{ height: "auto" }}
+                        exit={{ height: 0 }}
+                        transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.4, delay: 0.2 }}
+                          className="px-6 pb-8 flex flex-col gap-8"
+                        >
+                          <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
+
+                          <div className="flex flex-col gap-6">
+                            <p className="text-xl font-medium leading-[1.4]">{s.summary}</p>
+                            <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
+                          </div>
+
+                          <div className="flex flex-col gap-4">
+                            <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                              <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {s.fit.map((f: string, j: number) => (
+                                <span
+                                  key={j}
+                                  className={`px-3 py-1.5 rounded-lg text-[11px] tracking-wide font-medium border ${
+                                    i === 0 ? 'bg-ink/5 border-ink/10' : 'bg-white/10 border-white/20'
+                                  }`}
+                                >
+                                  {f}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -242,7 +230,7 @@ export default function Servicios() {
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="mb-10 max-w-3xl">
-              <h2 className="font-sans font-bold uppercase tracking-tight text-4xl md:text-6xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
+              <h2 className="font-sans font-normal tracking-tight text-4xl md:text-6xl text-navy mb-4">{brandPartnershipsInfo.title}</h2>
               <p className="text-lg md:text-2xl font-medium">{brandPartnershipsInfo.description}</p>
             </div>
           </Reveal>
@@ -374,8 +362,8 @@ export default function Servicios() {
   );
 }
 
-// Extracted Card Content component to avoid duplication between Desktop and Mobile layouts
-function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive: boolean, isMobile: boolean }) {
+// Contenido de las cards de Programs en desktop (mobile usa el acordeón)
+function CardContent({ s, i, isActive }: { s: any, i: number, isActive: boolean }) {
   return (
     <AnimatePresence mode="popLayout">
       {!isActive ? (
@@ -403,57 +391,9 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className={isMobile ? "w-full" : "p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"}
+          className="p-6 md:p-10 lg:p-12 flex flex-col w-full h-full"
         >
-          {isMobile ? (
-            /* MOBILE CUSTOM ACTIVE VIEW */
-            <div className="cursor-default w-full">
-              <div className="p-6 pt-20 flex flex-col gap-10">
-                
-                {/* Header */}
-                <div className="flex flex-col gap-6">
-                  <div className="flex items-start gap-4">
-                    <span className="font-serif text-3xl opacity-40 italic mt-1">{s.n}</span>
-                    <h2 className="font-serif italic text-4xl leading-[1.1] pr-4 text-balance break-words">{s.title}</h2>
-                  </div>
-                  <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
-                </div>
-
-                {/* Intro Text */}
-                <div className="flex flex-col gap-6">
-                  <p className="text-xl font-medium leading-[1.4]">{s.summary}</p>
-                  <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
-                </div>
-
-                {/* Attributes Container (Specs Box) */}
-                <div className={`p-6 rounded-[1.5rem] flex flex-col gap-10 ${i === 0 ? 'bg-ink/5' : 'bg-white/5'}`}>
-                  
-                  {/* Fit Ideal */}
-                  <div className="flex flex-col gap-5">
-                    <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
-                      <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
-                    </h4>
-                    <div className="flex flex-col gap-3">
-                      {s.fit.map((f: string, j: number) => (
-                        <span 
-                          key={j} 
-                          className={`px-4 py-3 rounded-xl text-xs tracking-wide font-medium border leading-tight ${
-                            i === 0 ? 'bg-white border-ink/10 shadow-sm' : 'bg-black/20 border-white/10'
-                          }`}
-                        >
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Pequeño spacer físico para evitar el colapso del padding en iOS, sin sumar gap */}
-              <div className="h-6 w-full shrink-0" aria-hidden="true"></div>
-            </div>
-          ) : (
-            /* DESKTOP ACTIVE VIEW (Untouched) */
+          {/* DESKTOP ACTIVE VIEW */}
             <div className="flex flex-col gap-8 md:gap-10 w-full h-full max-w-4xl">
               
               <div className="flex flex-col gap-6 md:gap-8 flex-shrink-0">
@@ -501,7 +441,6 @@ function CardContent({ s, i, isActive, isMobile }: { s: any, i: number, isActive
               </div>
 
             </div>
-          )}
         </motion.div>
       )}
     </AnimatePresence>

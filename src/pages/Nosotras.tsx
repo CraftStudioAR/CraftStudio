@@ -163,9 +163,9 @@ export default function Nosotras() {
           {/* Left Column: Text on the side */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             <Reveal>
-              <div className="text-[11px] md:text-xs tracking-[0.25em] uppercase font-bold text-cream/70 mb-8">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-cream mb-8">
                 Nuestra forma de trabajo
-              </div>
+              </h2>
               
               <div className="space-y-6 text-cream/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
                 <p>

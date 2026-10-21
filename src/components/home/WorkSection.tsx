@@ -65,8 +65,8 @@ export default function WorkSection() {
       <div className="px-6 md:px-10 pt-14 sm:pt-16 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
-            <p className="text-xs md:text-sm tracking-widest text-red uppercase mb-1.5 md:mb-3 flex items-center gap-3">
-              <span className="w-8 h-[1.5px] bg-red" /> Portafolio
+            <p className="text-xs md:text-sm tracking-widest text-cream uppercase mb-1.5 md:mb-3 flex items-center gap-3">
+              <span className="w-8 h-[1.5px] bg-cream" /> Portfolio
             </p>
             <h2 className="font-sans font-medium tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-cream leading-[1.05]">
               Proyectos
