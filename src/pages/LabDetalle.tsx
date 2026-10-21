@@ -14,6 +14,8 @@ interface Article {
   image: string;
   desc: string;
   aspect?: string;
+  /** false oculta la portada dentro de la nota (se elige desde el CRM). */
+  show_cover?: boolean;
   content: string;
   blocks?: any[];
 }
@@ -165,17 +167,19 @@ export default function LabDetalle() {
       </section>
 
       {/* PORTADA */}
-      <section className="px-6 md:px-10 mb-6 md:mb-8">
-        <Reveal delay={0.4}>
-          <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden relative bg-ink/5">
-            <img 
-              src={getImageUrl(article.image)} 
-              alt={article.title} 
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-        </Reveal>
-      </section>
+      {article.show_cover !== false && (
+        <section className="px-6 md:px-10 mb-6 md:mb-8">
+          <Reveal delay={0.4}>
+            <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden relative bg-ink/5">
+              <img 
+                src={getImageUrl(article.image)} 
+                alt={article.title} 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* CONTENIDO (BLOCKS O PÁRRAFOS DE FALLBACK) */}
       <section className="px-6 md:px-10 pb-32 md:pb-40">
