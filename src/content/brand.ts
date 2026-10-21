@@ -625,12 +625,6 @@ export const contactForm = {
     "Me interesa lanzar una campaña específica para mi proyecto.",
     "No estoy seguro, me gustaría recibir orientación.",
   ],
-  budgets: [
-    "Entre $500.000 y $1.000.000",
-    "Entre $1.000.000 y $2.000.000",
-    "Entre $2.000.000 y $5.000.000",
-    "Más de $5.000.000",
-  ],
   howFound: ["Instagram", "TikTok", "Google", "Recomendación", "Otro"],
   timelines: [
     "Lo antes posible.",

@@ -22,7 +22,9 @@ export default function Contacto() {
   const [direction, setDirection] = useState(1);
 
   const [need, setNeed] = useState<string | null>(null);
-  const [budget, setBudget] = useState<string | null>(null);
+  // Presupuesto: monto libre en pesos o "todavía no lo tenemos definido"
+  const [budgetAmount, setBudgetAmount] = useState("");
+  const [noBudget, setNoBudget] = useState(false);
   const [howFound, setHowFound] = useState<string | null>(null);
   const [timeline, setTimeline] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -33,6 +35,13 @@ export default function Contacto() {
     redes: "",
     proyectoInfo: "",
   });
+
+  // Deja sólo dígitos y los agrupa con punto de miles (8000000 -> 8.000.000)
+  function handleBudgetChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const digits = e.target.value.replace(/\D/g, "").replace(/^0+/, "");
+    setBudgetAmount(digits.replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+    if (digits) setNoBudget(false);
+  }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -65,7 +74,7 @@ export default function Contacto() {
           marca: formData.marca,
           redes: formData.redes,
           necesidad: need,
-          presupuesto: budget,
+          presupuesto: noBudget ? "Todavía no tenemos un presupuesto definido" : `$${budgetAmount} ARS`,
           timeline: timeline,
           como_nos_conociste: howFound,
           info_proyecto: formData.proyectoInfo,
@@ -286,23 +295,51 @@ export default function Contacto() {
                             />
                           </div>
                           <div>
-                            <h2 className="font-serif italic text-2xl md:text-3xl mb-6 text-navy">Presupuesto estimado</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              {contactForm.budgets.map((opt) => (
-                                <button
-                                  key={opt}
-                                  type="button"
-                                  onClick={() => setBudget(opt)}
-                                  className={`px-4 py-3 md:px-6 md:py-4 rounded-xl border text-left transition-all duration-300 ${
-                                    budget === opt
-                                      ? "bg-ink text-cream border-ink shadow-lg scale-[1.02]"
-                                      : "bg-[#faf8f6] border-ink/10 hover:border-ink/30 text-ink"
-                                  }`}
-                                >
-                                  <span className="font-sans font-medium text-sm">{opt}</span>
-                                </button>
-                              ))}
+                            <h2 className="font-serif italic text-2xl md:text-3xl mb-4 text-navy">Presupuesto estimado</h2>
+                            <label htmlFor="budgetAmount" className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                              ¿Qué inversión estiman destinar al proyecto? Ingresá un monto aproximado en pesos argentinos (ARS).
+                            </label>
+                            <div className={`flex items-center border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-3 focus-within:border-red focus-within:bg-white transition-colors ${noBudget ? "opacity-40" : ""}`}>
+                              <span className="font-sans text-base opacity-50 mr-1">$</span>
+                              <input
+                                id="budgetAmount"
+                                type="text"
+                                inputMode="numeric"
+                                autoComplete="off"
+                                value={budgetAmount}
+                                onChange={handleBudgetChange}
+                                className="w-full bg-transparent font-sans text-base outline-none placeholder:opacity-30"
+                                placeholder="Ej. 8.000.000"
+                              />
                             </div>
+
+                            <button
+                              type="button"
+                              role="checkbox"
+                              aria-checked={noBudget}
+                              onClick={() => {
+                                setNoBudget((v) => !v);
+                                setBudgetAmount("");
+                              }}
+                              className="group mt-5 flex items-center gap-3 text-left cursor-pointer"
+                            >
+                              <span
+                                className={`w-5 h-5 shrink-0 rounded-full border flex items-center justify-center transition-colors ${
+                                  noBudget ? "bg-ink border-ink" : "border-ink/30 group-hover:border-ink/60"
+                                }`}
+                              >
+                                {noBudget && (
+                                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M2 6.5 5 9.5 10 3" />
+                                  </svg>
+                                )}
+                              </span>
+                              <span className="font-sans font-medium text-sm">Todavía no tenemos un presupuesto definido.</span>
+                            </button>
+
+                            <p className="mt-5 text-xs md:text-sm opacity-60 leading-relaxed">
+                              El presupuesto nos permite desarrollar una propuesta acorde a sus recursos y objetivos.
+                            </p>
                           </div>
                         </div>
                         <div className="flex justify-between items-center mt-auto pt-8">
@@ -310,7 +347,7 @@ export default function Contacto() {
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
                           </button>
-                          <NextButton onClick={nextStep} disabled={!formData.proyectoInfo || !budget} />
+                          <NextButton onClick={nextStep} disabled={!formData.proyectoInfo || (!budgetAmount && !noBudget)} />
                         </div>
                       </motion.div>
                     )}
