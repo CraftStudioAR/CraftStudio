@@ -76,7 +76,17 @@ export type ProjectImage = {
   alt: string;
   /** Proporción natural ancho/alto (ej. 2160/3261). Solo hace falta en pares con matchHeight. */
   ratio?: number;
+  /** Pie de foto opcional, con su tamaño y la distancia a la imagen. */
+  caption?: string;
+  captionSize?: CaptionSize;
+  captionGap?: CaptionGap;
 };
+
+export type CaptionSize = "sm" | "md" | "lg";
+export type CaptionGap = "tight" | "normal" | "loose";
+
+/** Espacio sobre un bloque. Sin valor (o "normal") queda el espacio de siempre. */
+export type BlockSpacing = "tight" | "sm" | "normal" | "lg" | "xl";
 
 /** Métrica de resultado. El número va aparte del formato para poder animar el conteo. */
 export type Stat = {
@@ -90,7 +100,7 @@ export type Stat = {
   label: string;
 };
 
-export type ProjectBlock =
+export type ProjectBlock = (
   | { type: "image"; image: ProjectImage; aspect?: string; size?: 'full' | 'contained' }
   | {
       type: "imageFeature";
@@ -184,7 +194,10 @@ export type ProjectBlock =
       sizeDesktop?: string;
       tracking?: string;
       leading?: string;
-    };
+    }
+) & {
+  spacingTop?: BlockSpacing;
+};
 
 export type WorkCase = {
   slug: string;

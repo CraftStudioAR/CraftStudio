@@ -4,7 +4,8 @@ import Reveal from "../Reveal";
 import GlyphMark from "../GlyphMark";
 import Lightbox from "./Lightbox";
 import { cld } from "../../lib/cloudinary";
-import type { ProjectBlock, ProjectImage, Stat } from "../../content/brand";
+import { renderRichText } from "../../lib/richText";
+import type { BlockSpacing, ProjectBlock, ProjectImage, Stat } from "../../content/brand";
 
 function getResponsiveTextStyle(
   elementId: string,
@@ -109,6 +110,20 @@ function blockImages(block: ProjectBlock): ProjectImage[] {
   }
 }
 
+const CAPTION_SIZE = { sm: "text-[11px]", md: "text-xs md:text-sm", lg: "text-sm md:text-base" } as const;
+const CAPTION_GAP = { tight: "mt-1.5", normal: "mt-3", loose: "mt-6" } as const;
+
+function Caption({ image }: { image: ProjectImage }) {
+  if (!image.caption) return null;
+  return (
+    <figcaption
+      className={`font-sans text-left text-ink/60 leading-snug ${CAPTION_SIZE[image.captionSize || "sm"]} ${CAPTION_GAP[image.captionGap || "normal"]}`}
+    >
+      {image.caption}
+    </figcaption>
+  );
+}
+
 function Img({
   image,
   transforms,
@@ -125,13 +140,13 @@ function Img({
   aspect?: string;
   onOpen: () => void;
 }) {
-  return (
+  const button = (
     <button
       type="button"
       onClick={onOpen}
       aria-label={`Ampliar imagen: ${image.alt}`}
       style={aspect ? { aspectRatio: aspect } : undefined}
-      className={`group/img block w-full overflow-hidden rounded-sm ${className}`}
+      className={`group/img block w-full overflow-hidden rounded-sm ${image.caption ? "flex-1 min-h-0" : className}`}
     >
       <img
         src={cld(image.publicId, transforms)}
@@ -141,6 +156,16 @@ function Img({
         className={`w-full transition-transform duration-700 ease-out group-hover/img:scale-[1.03] rounded-sm ${imgClassName}`}
       />
     </button>
+  );
+
+  if (!image.caption) return button;
+
+  // Con pie de foto, las clases de layout (alto, orden) pasan a la figura.
+  return (
+    <figure className={`flex flex-col w-full ${className}`}>
+      {button}
+      <Caption image={image} />
+    </figure>
   );
 }
 
@@ -196,7 +221,7 @@ function TextBox({
           <Fragment key={idx}>
             {styleElement}
             <p id={pId} className={textClass} style={sizeStyle}>
-              {paragraph}
+              {renderRichText(paragraph)}
             </p>
           </Fragment>
         );
@@ -383,11 +408,13 @@ export default function ProjectBlocks({
 
   return (
     <>
-      <div className="flex flex-col gap-5 md:gap-6">
+      <div className="flex flex-col gap-5 md:gap-6 [--block-gap:1.25rem] md:[--block-gap:1.5rem]">
         {blocks.map((block, i) => (
-          <Reveal key={i} delay={Math.min(i * 0.05, 0.3)}>
-            <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
-          </Reveal>
+          <div key={i} style={spacingStyle(block, blocks[i - 1])}>
+            <Reveal delay={Math.min(i * 0.05, 0.3)}>
+              <Block block={block} startIndex={startIndexes[i]} onOpen={setOpenIndex} />
+            </Reveal>
+          </div>
         ))}
       </div>
 
@@ -399,6 +426,16 @@ export default function ProjectBlocks({
       />
     </>
   );
+}
+
+const SPACING_PX: Record<Exclude<BlockSpacing, "normal">, number> = { tight: 4, sm: 12, lg: 64, xl: 120 };
+
+/** Margen para que el espacio elegido sobre un bloque sea la distancia real con el
+ *  anterior: descuenta el gap de la lista y el my-4 propio de los bloques de texto. */
+function spacingStyle(block: ProjectBlock, prev?: ProjectBlock): React.CSSProperties | undefined {
+  if (!prev || !block.spacingTop || block.spacingTop === "normal") return undefined;
+  const own = (prev.type === "text" ? 16 : 0) + (block.type === "text" ? 16 : 0);
+  return { marginTop: `calc(${SPACING_PX[block.spacingTop] - own}px - var(--block-gap))` };
 }
 
 function Block({
@@ -615,19 +652,22 @@ function Block({
               onOpen={() => onOpen(startIndex)}
             />
           ) : (
-            <button
-              type="button"
-              onClick={() => onOpen(startIndex)}
-              aria-label={`Ampliar imagen: ${block.image.alt}`}
-              className={`group/img relative aspect-[4/3] w-full overflow-hidden rounded-sm md:aspect-auto ${imageOrderClass}`}
-            >
-              <img
-                src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
-                alt={block.image.alt}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
-              />
-            </button>
+            <figure className={`flex flex-col ${imageOrderClass}`}>
+              <button
+                type="button"
+                onClick={() => onOpen(startIndex)}
+                aria-label={`Ampliar imagen: ${block.image.alt}`}
+                className="group/img relative aspect-[4/3] w-full flex-1 overflow-hidden rounded-sm md:aspect-auto"
+              >
+                <img
+                  src={cld(block.image.publicId, "f_auto,q_auto,w_1200")}
+                  alt={block.image.alt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
+                />
+              </button>
+              <Caption image={block.image} />
+            </figure>
           )}
           <TextBox
             text={block.text}
@@ -728,7 +768,7 @@ function Block({
                 <Fragment key={idx}>
                   {styleElement}
                   <p id={pId} className={textClass} style={sizeStyle}>
-                    {paragraph}
+                    {renderRichText(paragraph)}
                   </p>
                 </Fragment>
               );
