@@ -78,7 +78,7 @@ export default function Footer() {
           </div>
 
           <div className="w-full md:w-1/3 flex justify-center md:justify-end text-[10px] tracking-widest uppercase text-cream/50 font-medium">
-            <a href="#" className="hover:text-cream transition-colors">
+            <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">
               Instagram
             </a>
           </div>

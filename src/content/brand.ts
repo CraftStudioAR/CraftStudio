@@ -619,6 +619,7 @@ export const work: WorkCase[] = [
 
 export const contactInfo = {
   email: "hola@craftstudio.com.ar",
+  instagram: "https://www.instagram.com/craftstudio_ar/",
   city: "Buenos Aires, Argentina",
   tagline: "We craft communication",
 };

@@ -27,7 +27,7 @@ export const organizationSchema = {
     "Desarrollo Web"
   ],
   "sameAs": [
-    "https://instagram.com/craftstudio.ar"
+    "https://www.instagram.com/craftstudio_ar/"
   ]
 };
 

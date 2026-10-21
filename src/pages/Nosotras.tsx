@@ -172,7 +172,7 @@ export default function Nosotras() {
                   No buscamos resolver una necesidad aislada, sino construir un programa estratégico que permita a las marcas comunicar mejor, conectar con las personas correctas y expandir su alcance.
                 </p>
                 <p>
-                  Ese compromiso con la comunicación no termina en los proyectos: Para nosotras, construir una marca también es entender y estudiar el contexto en el que existe: las personas, la cultura, el consumo y los cambios que transforman la forma en que las marcas se comunican.
+                  Ese compromiso con la comunicación no termina en los proyectos. Para nosotras, construir una marca también es entender y estudiar el contexto en el que existe: las personas, la cultura, el consumo y los cambios que transforman la forma en que las marcas se comunican.
                 </p>
               </div>
 

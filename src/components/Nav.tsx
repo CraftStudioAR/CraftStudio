@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import Magnetic from "./Magnetic";
 import { LogoMark } from "./Logo";
-import { nav } from "../content/brand";
+import { nav, contactInfo } from "../content/brand";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -232,7 +232,7 @@ export default function Nav() {
                     hola@craftstudio.com.ar
                   </a>
                 </div>
-                <a href="#" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors inline-flex items-center gap-1">
+                <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="text-cream/70 text-sm font-medium hover:text-cream transition-colors inline-flex items-center gap-1">
                   Instagram
                   <svg
                     width="10"
