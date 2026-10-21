@@ -24,9 +24,8 @@ export default function Home() {
 
   return (
     <div data-theme="light" className="bg-cream">
+      {/* Sin title ni description: el home usa los de por defecto ("Craft Studio") */}
       <SEO
-        title="Estudio de Identidad y Comunicación Estratégica"
-        description="Craft Studio es un estudio de identidad visual, branding y comunicación estratégica en Buenos Aires. Pensamos el problema, diseñamos la solución."
         jsonLd={[organizationSchema, websiteSchema]}
       />
       {/* 1. Hero Section (Pinned, shrinks as rectangle) */}
