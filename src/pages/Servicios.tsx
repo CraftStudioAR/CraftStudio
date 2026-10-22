@@ -159,9 +159,9 @@ export default function Servicios() {
                     aria-expanded={isOpen}
                     className="w-full min-h-[120px] px-6 md:px-8 flex items-center justify-between text-left cursor-pointer"
                   >
-                    <div className="flex items-center gap-6">
-                      <span className="font-serif text-3xl opacity-60">{s.n}</span>
-                      <h3 className="font-serif text-xl md:text-2xl opacity-90 text-balance max-w-[200px]">{s.title}</h3>
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[10px] tracking-widest uppercase opacity-60">{s.n} / {s.title}</span>
+                      <h3 className="font-serif text-2xl opacity-90 text-balance">{s.name}</h3>
                     </div>
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -194,10 +194,7 @@ export default function Servicios() {
                           <div className={`w-full h-[1px] ${i === 0 ? 'bg-ink/10' : 'bg-current opacity-20'}`}></div>
 
                           <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-1.5">
-                              <h4 className="text-xl font-medium leading-[1.3]">{s.name}</h4>
-                              <p className="font-serif italic text-lg leading-snug opacity-90">{s.summary}</p>
-                            </div>
+                            <p className="font-serif italic text-xl leading-snug opacity-90">{s.summary}</p>
                             <p className="text-base opacity-80 leading-relaxed">{s.detail}</p>
                           </div>
 
@@ -401,29 +398,20 @@ function CardContent({ s, i, isActive }: { s: any, i: number, isActive: boolean 
             <div className="flex flex-col gap-8 md:gap-10 w-full h-full max-w-4xl">
               
               <div className="flex flex-col gap-6 md:gap-8 flex-shrink-0">
-                <div className="flex items-baseline gap-4 md:gap-6">
-                  <span className="font-serif text-3xl md:text-5xl opacity-40 italic">
-                    {s.n}
+                <div className="flex flex-col gap-3 md:gap-4">
+                  <span className="text-[10px] md:text-xs tracking-widest uppercase opacity-60">
+                    {s.n} / {s.title}
                   </span>
-                  <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none flex flex-wrap gap-x-[0.2em]">
-                    {s.title.split(" ").map((word: string, wIdx: number) => (
-                      <span key={wIdx} className="inline-block whitespace-nowrap">
-                        {word}
-                      </span>
-                    ))}
+                  <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none text-balance">
+                    {s.name}
                   </h2>
                 </div>
-                
+
                 <div className={`w-16 h-[1px] ${i === 0 ? 'bg-ink/20' : 'bg-current opacity-30'}`}></div>
-                
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-xl md:text-2xl font-medium leading-[1.3] text-balance">
-                    {s.name}
-                  </h3>
-                  <p className="font-serif italic text-lg md:text-xl leading-snug opacity-90">
-                    {s.summary}
-                  </p>
-                </div>
+
+                <p className="font-serif italic text-xl md:text-2xl leading-snug opacity-90">
+                  {s.summary}
+                </p>
                 
                 <p className="text-base md:text-lg opacity-80 leading-relaxed font-medium">
                   {s.detail}
