@@ -18,38 +18,45 @@ export const modalidadesInfo = {
 
 export const programasInfo = {
   title: "Programs",
-  description: "Construimos la dirección de una marca a través de procesos estratégicos que responden a distintos momentos: crear, reposicionar o actualizar."
+  description: "Acompañamos la dirección de cada marca.",
+  intro: "Tres programas estratégicos para crear, reposicionar o actualizar marcas según su etapa."
 };
 
 export const programas = [
   {
     n: "01",
     title: "Build Program",
-    summary: "Para marcas nuevas que necesitan nacer con una base clara.",
-    detail: "Construimos el branding, el posicionamiento y los criterios de comunicación para salir al mercado con dirección.",
+    name: "Construcción de marca",
+    summary: "Todo empieza con una idea.",
+    detail: "Damos forma a nuevas marcas desde sus bases estratégicas hasta su identidad y comunicación, construyendo los cimientos para salir al mercado con una dirección clara.",
     fit: [
-      "Nueva Marca o Proyecto"
+      "Nuevas marcas",
+      "Proyectos desde cero",
+      "Lanzamientos de marca"
     ]
   },
   {
     n: "02",
     title: "Shift Program",
-    summary: "Para marcas que crecieron, cambiaron o ya no comunican lo que realmente son.",
-    detail: "Revisamos el posicionamiento, la propuesta de valor y la comunicación para que la marca conecte mejor con su negocio, su público y sus objetivos.",
+    name: "Estrategia y posicionamiento",
+    summary: "Nuevas perspectivas para seguir creciendo.",
+    detail: "Para marcas que ya están en marcha y necesitan cambiar el rumbo de su comunicación, encontrar nuevas oportunidades o desarrollar estrategias para evolucionar y conectar mejor con su público.",
     fit: [
-      "Negocio en evolución",
-      "Nuevo público",
-      "Mayor diferenciación"
+      "Marcas en crecimiento",
+      "Nueva dirección estratégica",
+      "Evolución de la comunicación"
     ]
   },
   {
     n: "03",
     title: "Refresh Program",
-    summary: "Para marcas que necesitan actualizar su identidad para representar una nueva etapa.",
-    detail: "Actualizamos la identidad visual y el sistema de comunicación para que la marca refleje con mayor coherencia quién es hoy y hacia dónde quiere crecer.",
+    name: "Actualización de marca",
+    summary: "Una nueva identidad para una nueva etapa.",
+    detail: "Acompañamos a marcas existentes en procesos de rebranding que pueden incluir un cambio de nombre, una nueva identidad visual o una transformación más profunda de su identidad.",
     fit: [
-      "Relanzamiento",
-      "Cambio de Imagen"
+      "Marcas establecidas",
+      "Renovación de identidad",
+      "Rebranding"
     ]
   }
 ];
@@ -59,15 +66,14 @@ export const programas = [
  *  nivel más abajo. */
 export const brandPartnershipsInfo = {
   title: "Brand Partnerships",
-  description: "Diseñamos y dirigimos acciones de comunicación para marcas que ya cuentan con una dirección definida.",
-  detail: "Nos sumamos a proyectos que necesitan una mirada estratégica, creativa y de ejecución. Cada Brand Partnership se construye según los objetivos de la marca y el alcance de la iniciativa.",
-  scope: "Desarrollamos campañas, lanzamientos de producto, producciones, activaciones de marca, dirección creativa, experiencias digitales, desarrollo visual, entre otros.",
+  description: "Pensamos conceptos. Creamos experiencias.",
+  detail: "Nos aliamos con marcas para idear y llevar adelante acciones de comunicación puntuales, combinando estrategia, creatividad y ejecución.",
+  scope: "Desarrollamos campañas, lanzamientos de producto, producciones de contenido, activaciones de marca, dirección creativa y experiencias digitales, entre otros.",
   ideal: [
-    "Lanzar un producto.",
-    "Comunicar una fecha clave.",
-    "Potenciar una acción comercial.",
-    "Desarrollar un proyecto especial.",
-    "Coordinación de activaciones online y offline."
+    "Lanzar un producto",
+    "Comunicar una fecha clave",
+    "Desarrollar una campaña específica",
+    "Llevar adelante una activación de marca"
   ]
 };
 
