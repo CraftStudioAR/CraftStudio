@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GlyphMark from "../GlyphMark";
+import PhotoStrip from "./PhotoStrip";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -153,7 +154,7 @@ export default function FoundersSection() {
   }, []);
 
   return (
-    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 py-24 sm:py-28 md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center">
+    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 py-24 sm:py-28 md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center overflow-x-clip">
       <GlyphMark
         variant={1}
         className="pointer-events-none absolute -left-20 top-10 z-0 h-[40vw] w-[40vw] max-w-[400px] text-ink/[0.03] md:-left-10 rotate-12"
@@ -203,49 +204,8 @@ export default function FoundersSection() {
         </div>
       </div>
 
-      {/* 2. MOBILE FLOATING PARALLAX IMAGES (Layered collage framing with lively travel) */}
-      <div className="block md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Top Left */}
-        <div data-speed="1.2" className="parallax-img absolute top-[18%] left-1.5 z-10">
-          <MagneticImage
-            src="/images/about3.jpg"
-            initialRotate={-6}
-            className="w-24 aspect-square object-cover opacity-85 shadow-sm rounded-sm"
-          />
-        </div>
-        {/* Top Right */}
-        <div data-speed="1.4" className="parallax-img absolute top-[14%] right-1.5 z-20">
-          <MagneticImage
-            src="/images/about2.jpg"
-            initialRotate={6}
-            className="w-22 aspect-[4/5] object-cover opacity-90 shadow-md rounded-sm"
-          />
-        </div>
-        {/* Bottom Left */}
-        <div data-speed="1.1" className="parallax-img absolute bottom-[26%] left-1.5 z-10">
-          <MagneticImage
-            src="/images/about1.jpg"
-            initialRotate={3}
-            className="w-22 aspect-[3/4] object-cover opacity-80 shadow-sm rounded-sm"
-          />
-        </div>
-        {/* Bottom Right */}
-        <div data-speed="1.3" className="parallax-img absolute bottom-[20%] right-1.5 z-20">
-          <MagneticImage
-            src="/images/about4.jpg"
-            initialRotate={-6}
-            className="w-22 aspect-[4/5] object-cover opacity-85 shadow-md rounded-sm"
-          />
-        </div>
-        {/* Bottom Left */}
-        <div data-speed="0.9" className="parallax-img absolute bottom-[3%] left-1.5 z-20">
-          <MagneticImage
-            src="/images/about5.jpg"
-            initialRotate={-2}
-            className="w-28 aspect-[4/3] object-cover opacity-90 shadow-md rounded-sm"
-          />
-        </div>
-      </div>
+      {/* 2. MOBILE: tiras de fotos arriba y abajo del texto que se deslizan con el scroll */}
+      <PhotoStrip position="top" />
 
       <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
         
@@ -272,8 +232,9 @@ export default function FoundersSection() {
           </div>
         </div>
 
-        
       </div>
+
+      <PhotoStrip position="bottom" />
     </section>
   );
 }
