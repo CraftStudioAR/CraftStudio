@@ -32,7 +32,7 @@ export default function ServicesSection() {
                 Programs
               </h3>
               <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
-                Construimos la dirección de tu marca.
+                Acompañamos la dirección de cada marca.
               </p>
               <p className="font-sans italic text-sm md:text-base text-ink/60 mb-12 flex-grow text-balance">
                 Ideal para: crear una marca desde cero, reposicionarla o actualizar su identidad y comunicación.
@@ -72,7 +72,7 @@ export default function ServicesSection() {
                 Brand Partnerships
               </h3>
               <p className="font-sans text-base md:text-lg text-ink/80 mb-4 text-balance">
-                Diseñamos y dirigimos acciones de comunicación para marcas que ya cuentan con una dirección definida.
+                Pensamos conceptos. Creamos experiencias.
               </p>
               <p className="font-sans italic text-sm md:text-base text-ink/60 mb-12 flex-grow text-balance">
                 Ideal para: campañas, lanzamientos, producciones y activaciones.
