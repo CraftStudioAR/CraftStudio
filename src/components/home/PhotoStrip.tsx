@@ -20,6 +20,7 @@ export default function PhotoStrip({ position }: { position: "top" | "bottom" })
   useEffect(() => {
     const ctx = gsap.context(() => {
       const track = ref.current?.querySelector(".strip-track");
+      if (!track) return;
       const toLeft = position === "top";
       gsap.fromTo(
         track,
