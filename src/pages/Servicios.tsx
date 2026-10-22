@@ -380,8 +380,8 @@ function CardContent({ s, i, isActive }: { s: any, i: number, isActive: boolean 
           <span className="font-serif text-2xl opacity-60 lg:absolute lg:top-10">
             {s.n}
           </span>
-          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl whitespace-nowrap lg:-rotate-90 opacity-80 lg:overflow-visible tracking-wide origin-center truncate">
-            {s.title}
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-2xl 2xl:text-3xl whitespace-nowrap lg:-rotate-90 lg:translate-y-6 opacity-80 lg:overflow-visible tracking-wide origin-center truncate">
+            {s.name}
           </h3>
         </motion.div>
       ) : (
