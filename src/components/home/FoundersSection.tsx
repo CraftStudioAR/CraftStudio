@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GlyphMark from "../GlyphMark";
-import PhotoTunnel from "./PhotoTunnel";
+import MobileFolderSequence from "./MobileFolderSequence";
 import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -233,16 +233,16 @@ export default function FoundersSection() {
         </div>
       </div>
 
-      {/* MOBILE: texto arriba y la galería debajo, fijos juntos en una pantalla mientras pasan las fotos */}
-      <PhotoTunnel
+      {/* MOBILE: Secuencia interactiva de carpeta de vidrio y dispersión de collage editorial */}
+      <MobileFolderSequence
         intro={
-          <div className="px-6">
-            <div className="mb-6 flex items-center gap-3 text-red">
-              <span className="h-px w-[42%] bg-red/50" />
+          <div className="px-1">
+            <div className="mb-4 flex items-center gap-3 text-red">
+              <span className="h-px w-10 bg-red/50" />
               <span className="font-serif text-lg leading-none">01</span>
             </div>
-            <Manifesto lines={mobileLines} className="text-[clamp(22px,7.1vw,28px)] leading-[1.18]" />
-            <p className="mt-4 max-w-[34ch] text-[13px] leading-relaxed text-ink/80 font-sans tracking-wide">{intro}</p>
+            <Manifesto lines={mobileLines} className="text-[clamp(21px,6.5vw,27px)] leading-[1.18]" />
+            <p className="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide">{intro}</p>
           </div>
         }
       />
