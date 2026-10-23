@@ -189,10 +189,10 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
   return (
     <div
       ref={sectionRef}
-      className="md:hidden relative w-full h-screen bg-cream text-ink flex flex-col justify-between pt-16 pb-4 px-5 overflow-hidden"
+      className="md:hidden relative w-full h-screen bg-cream text-ink flex flex-col justify-between pt-24 pb-4 px-5 overflow-hidden"
     >
       {/* 1. Encabezado editorial: Texto superior SIEMPRE despejado y visible */}
-      <div className="relative z-30 flex-shrink-0 pt-2 pb-2">
+      <div className="relative z-30 flex-shrink-0 pt-1 pb-2">
         {intro}
       </div>
 
@@ -241,7 +241,8 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
                   transform: `translate(${photo.stacked.x}px, ${photo.stacked.y}px) rotate(${photo.stacked.r}deg)`,
                 }}
               >
-                <div className="bg-white p-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.14)] border border-black/5">
+                {/* Fotografía sin bordes blancos, con sombra editorial */}
+                <div className="overflow-hidden shadow-[0_12px_28px_rgba(0,0,0,0.22)]">
                   <img
                     src={photo.src}
                     alt={photo.alt}
