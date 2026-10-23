@@ -158,11 +158,20 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
     const tapFocus = field.map(() => ({ f: 0 }));
     let tapped = -1;
 
+    // Cached layout values – updated on resize / ScrollTrigger refresh, NOT every scroll event.
+    let elTop = 0;
+    let elHeight = 0;
+    const measureLayout = () => {
+      const r = el.getBoundingClientRect();
+      elTop = r.top + window.scrollY;
+      elHeight = r.height;
+    };
+    measureLayout();
+
     // 0 cuando el bloque toca arriba, 1 cuando se termina de despegar.
     const readScroll = () => {
-      const r = el.getBoundingClientRect();
-      const span = r.height - window.innerHeight;
-      target = span > 0 ? clamp01(-r.top / span) : 0;
+      const span = elHeight - window.innerHeight;
+      target = span > 0 ? clamp01((window.scrollY - elTop) / span) : 0;
     };
     readScroll();
     progress = target;
@@ -194,6 +203,20 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
         const depth = -(zc - R * CAM_BACK);
         const vis = clamp01((depth - 120) / 220);
 
+        const f = tapFocus[i].f;
+        // La pila son solo las cinco fotos reales: el campo aparece a medida que se abre
+        // y se desvanece al guardarse.
+        const op = vis * s * s * (1 - f) + f;
+
+        // Skip fully hidden nodes entirely — saves ~80% of transform writes on mobile.
+        if (op < 0.005 && f < 0.005) {
+          if (node.style.opacity !== "0") {
+            node.style.opacity = "0";
+            node.style.transform = "translate(-50%,-50%) translate3d(0,0,-9999px) scale(0)";
+          }
+          return;
+        }
+
         // Mezcla entre la pila del centro y su lugar en la esfera. La pila está a la misma
         // profundidad que el frente de la esfera (así no se agrandan al pasar) y la escala
         // iguala los anchos; el índice las ordena de abajo hacia arriba.
@@ -204,18 +227,13 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
         const ey = c.sy * k0 + y * s;
         const ez = (PERSPECTIVE - stackDepth + i * 0.4) * k0 + (PERSPECTIVE - depth) * s;
 
-        const f = tapFocus[i].f;
         const k = 1 - f;
         const pz = ez * k + frontZ(c.w, W, 0) * f;
         node.style.transform =
           `translate(-50%, -50%) translate3d(${ex * k}px, ${ey * k}px, ${pz}px) ` +
           `rotateY(${-face * s * k}deg) rotateX(${c.lat * s * k}deg) rotateZ(${c.sr * k0 * k}deg) ` +
           `scale(${sc * k + f})`;
-        // La pila son solo las cinco fotos reales: el campo aparece a medida que se abre
-        // y se desvanece al guardarse.
-        const op = vis * s * s * k + f;
         node.style.opacity = String(op);
-        node.style.visibility = op < 0.01 ? "hidden" : "visible";
       });
 
       heroNodes.forEach((node, i) => {
@@ -243,7 +261,6 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
         const turnOp = clamp01(Math.min((u - IN_START + 0.35) / 0.15, (OUT_END + 0.35 - u) / 0.15));
         const op = k0 + turnOp * s;
         node.style.opacity = String(op);
-        node.style.visibility = op < 0.01 ? "hidden" : "visible";
       });
     };
 
@@ -252,15 +269,24 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
         dragTurn += velocity;
         velocity *= 0.93;
         dirty = true;
+      } else {
+        velocity = 0;
       }
       const diff = target - progress;
-      if (Math.abs(diff) > 0.0001) {
-        progress += reduced ? diff : diff * 0.12;
+      if (Math.abs(diff) > 0.0002) {
+        progress += reduced ? diff : diff * 0.18;
+        dirty = true;
+      } else if (diff !== 0) {
+        progress = target; // snap to stop micro-repaints
         dirty = true;
       }
       const nextTurn = progress * FIELD_TURN + dragTurn;
-      if (Math.abs(nextTurn - turn) > 0.01) {
-        turn += reduced ? nextTurn - turn : (nextTurn - turn) * 0.12;
+      const turnDiff = nextTurn - turn;
+      if (Math.abs(turnDiff) > 0.02) {
+        turn += reduced ? turnDiff : turnDiff * 0.18;
+        dirty = true;
+      } else if (turnDiff !== 0) {
+        turn = nextTurn;
         dirty = true;
       }
       if (dirty) {
@@ -287,7 +313,10 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
       dirty = true;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    const onResize = () => void (dirty = true);
+    const onResize = () => {
+      measureLayout();
+      dirty = true;
+    };
     window.addEventListener("resize", onResize);
 
     const setTapped = (i: number) => {
@@ -372,10 +401,11 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
         <div className="tunnel-frame relative mt-5 min-h-0 flex-1">
           <div ref={stageRef} aria-hidden="true" className="photo-tunnel absolute inset-0 overflow-hidden select-none">
             {field.map((c, i) => (
-              <div key={`f${i}`} data-field={i} className="tunnel-card absolute left-1/2 top-1/2" style={{ width: c.w }}>
+              <div key={`f${i}`} data-field={i} className="tunnel-card absolute left-1/2 top-1/2" style={{ width: c.w, opacity: 0 }}>
                 <img
                   src={c.photo.src}
                   alt=""
+                  loading="lazy"
                   draggable={false}
                   decoding="async"
                   className="block w-full object-cover rounded-[6px]"

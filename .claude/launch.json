@@ -7,6 +7,12 @@
       "runtimeArgs": ["run", "dev"],
       "port": 5173,
       "autoPort": true
+    },
+    {
+      "name": "craft-studio-crm-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "../CraftStudio-CRM", "run", "dev"],
+      "port": 5174
     }
   ]
 }
