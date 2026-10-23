@@ -2,30 +2,57 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GlyphMark from "../GlyphMark";
-import PhotoStrip from "./PhotoStrip";
+import PhotoTunnel from "./PhotoTunnel";
+import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const manifestoLines = [
-  [
-    { t: "Tu", s: "" },
-    { t: "marca", s: "" },
-    { t: "tiene", s: "" },
-    { t: "mucho", s: "" },
-  ],
-  [
-    { t: "para", s: "" },
-    { t: "decir.", s: "" },
-    { t: "Nosotras", s: "" },
-    { t: "te", s: "" },
-  ],
-  [
-    { t: "ayudamos", s: "font-serif italic font-medium text-red" },
-    { t: "a", s: "font-serif italic font-medium text-red" },
-    { t: "construir", s: "font-serif italic font-medium text-red" },
-    { t: "cómo.", s: "font-serif italic font-medium text-red" },
-  ],
+// Cortes de línea pedidos por Craft (capturas del 23/10): cada línea con su estilo.
+type Line = { text: string; className?: string };
+const accent = "italic font-medium text-red";
+
+const desktopLines: Line[] = [
+  { text: "Tu marca tiene mucho para decir." },
+  { text: "Nosotras te ayudamos a construir cómo.", className: accent },
 ];
+
+const mobileLines: Line[] = [
+  { text: "Tu marca tiene mucho para" },
+  { text: "decir. Nosotras te ayudamos a" },
+  { text: "construir cómo.", className: `${accent} text-[1.36em] leading-[1.05] mt-1` },
+];
+
+const fullText = desktopLines.map((l) => l.text).join(" ");
+const intro =
+  "Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.";
+
+/** Manifiesto con la aparición del título de Proyectos: letra por letra al entrar en pantalla. */
+function Manifesto({ lines, className }: { lines: Line[]; className: string }) {
+  return (
+    <motion.p
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-15% 0px" }}
+      variants={titleVariants}
+      aria-label={fullText}
+      className={`font-serif text-ink/90 ${className}`}
+    >
+      {lines.map((line, lIdx) => (
+        <span key={lIdx} aria-hidden="true" className={`block whitespace-nowrap ${line.className ?? ""}`}>
+          {line.text.split(" ").map((word, wIdx) => (
+            <span key={wIdx} className="inline-block mr-[0.22em] last:mr-0">
+              {word.split("").map((char, cIdx) => (
+                <motion.span key={cIdx} variants={charVariants} className="inline-block">
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+          ))}
+        </span>
+      ))}
+    </motion.p>
+  );
+}
 
 function MagneticImage({
   src,
@@ -94,33 +121,22 @@ function MagneticImage({
   );
 }
 
+// Mismos valores que el título de Proyectos (pages/Trabajos.tsx)
+const titleVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
+};
+
+const charVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 export default function FoundersSection() {
   const containerRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Manifesto Text Scramble / Fade
-      const words = textRef.current?.querySelectorAll("span.gsap-word");
-      if (words?.length) {
-        gsap.fromTo(
-          words,
-          { opacity: 0.1, y: 10 },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.05,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 70%",
-              end: "center center",
-              scrub: 1,
-            },
-          }
-        );
-      }
-
       // 1. Scroll-triggered Parallax (Pronounced, lively movement on scroll, completely still when not scrolling)
       const images = containerRef.current?.querySelectorAll(".parallax-img");
       if (images?.length) {
@@ -154,7 +170,7 @@ export default function FoundersSection() {
   }, []);
 
   return (
-    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink px-6 py-24 sm:py-28 md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center overflow-x-clip">
+    <section ref={containerRef} data-theme="light" className="relative z-10 bg-cream text-ink md:pt-32 md:pb-28 md:px-10 md:min-h-screen flex flex-col items-center justify-center overflow-x-clip">
       <GlyphMark
         variant={1}
         className="pointer-events-none absolute -left-20 top-10 z-0 h-[40vw] w-[40vw] max-w-[400px] text-ink/[0.03] md:-left-10 rotate-12"
@@ -204,37 +220,32 @@ export default function FoundersSection() {
         </div>
       </div>
 
-      {/* 2. MOBILE: tiras de fotos arriba y abajo del texto que se deslizan con el scroll */}
-      <PhotoStrip position="top" />
-
-      <div className="relative z-20 mx-auto max-w-7xl flex flex-col items-center pointer-events-none">
-        
-        {/* Declaración Principal */}
-        <div className="text-center max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto my-14 md:my-0 mb-10 md:mb-12 px-4 sm:px-6">
-          <p
-            ref={textRef}
-            className="font-serif text-[24px] xs:text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] md:leading-[1.12] text-ink/90 mb-2 md:mb-3"
-          >
-            {manifestoLines.map((line, lIdx) => (
-              <span key={lIdx} className="block">
-                {line.map((w, wIdx) => (
-                  <span key={wIdx} className={`inline-block mr-[0.22em] gsap-word ${w.s}`}>
-                    {w.t}
-                  </span>
-                ))}
-              </span>
-            ))}
+      {/* DESKTOP: declaración en dos líneas, centrada entre las fotos */}
+      <div className="hidden md:flex relative z-20 mx-auto w-full max-w-7xl flex-col items-center pointer-events-none">
+        <div className="text-center max-w-5xl mx-auto mb-12 px-6">
+          <Manifesto
+            lines={desktopLines}
+            className="text-[1.6rem] lg:text-[1.9rem] xl:text-[2.6rem] min-[1400px]:text-5xl leading-[1.15] mb-3"
+          />
+          <p className="max-w-sm xl:max-w-xl min-[1400px]:max-w-2xl mx-auto mt-2 text-balance text-base xl:text-lg min-[1400px]:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
+            {intro}
           </p>
-          <div className="max-w-2xl mx-auto mt-1 md:mt-2 text-center text-balance">
-            <p className="text-xs sm:text-lg md:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
-              Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.
-            </p>
-          </div>
         </div>
-
       </div>
 
-      <PhotoStrip position="bottom" />
+      {/* MOBILE: texto arriba y la galería debajo, fijos juntos en una pantalla mientras pasan las fotos */}
+      <PhotoTunnel
+        intro={
+          <div className="px-6">
+            <div className="mb-6 flex items-center gap-3 text-red">
+              <span className="h-px w-[42%] bg-red/50" />
+              <span className="font-serif text-lg leading-none">01</span>
+            </div>
+            <Manifesto lines={mobileLines} className="text-[clamp(22px,7.1vw,28px)] leading-[1.18]" />
+            <p className="mt-4 max-w-[34ch] text-[13px] leading-relaxed text-ink/80 font-sans tracking-wide">{intro}</p>
+          </div>
+        }
+      />
     </section>
   );
 }

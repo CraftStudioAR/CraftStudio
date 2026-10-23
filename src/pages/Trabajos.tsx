@@ -89,7 +89,7 @@ export default function Trabajos() {
               <div className="flex flex-col gap-6 lg:max-w-xs lg:pb-4">
                 <div className="w-16 h-[1px] bg-current opacity-20 hidden lg:block"></div>
                 <p className="text-xs font-bold tracking-widest uppercase opacity-40">
-                  Casos completos a pedido.
+                  Casos de éxito.
                 </p>
               </div>
             </Reveal>

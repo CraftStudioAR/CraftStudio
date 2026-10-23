@@ -177,3 +177,20 @@
     }
   }
 }
+
+/* Esfera de fotos del home en mobile (PhotoTunnel): la gira JS con el scroll y el arrastre. */
+.photo-tunnel {
+  perspective: 700px;
+  transform-style: preserve-3d;
+  touch-action: pan-y;
+}
+
+.tunnel-card {
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* La galería se funde con el texto de arriba y con el borde de abajo. */
+.tunnel-frame {
+  mask-image: linear-gradient(to bottom, transparent, black 4%, black 96%, transparent);
+}

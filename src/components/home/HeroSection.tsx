@@ -101,7 +101,17 @@ export default function HeroSection() {
           <div className="h-10 sm:h-14 md:h-20 flex items-center justify-center">
             <h2 className="flex items-center text-[18px] xs:text-[21px] sm:text-[30px] md:text-[40px] text-cream tracking-wide text-center m-0 whitespace-nowrap">
               <span className="font-sans">we</span>
-              <span className="relative inline-flex items-center justify-center min-w-[75px] xs:min-w-[90px] sm:min-w-[150px] md:min-w-[210px] h-[1.8em] mx-1 sm:mx-2 md:mx-4 [perspective:600px]">
+              <span className="relative inline-grid place-items-center h-[1.8em] mx-1.5 sm:mx-2 md:mx-4 [perspective:600px]">
+                {/* Reserva el ancho de la palabra más larga: ninguna se pega a "we" ni a "communication" */}
+                {WORDS.map((w) => (
+                  <span
+                    key={w}
+                    aria-hidden="true"
+                    className="invisible col-start-1 row-start-1 font-script text-[26px] xs:text-[30px] sm:text-5xl md:text-6xl px-1 whitespace-nowrap"
+                  >
+                    {w}
+                  </span>
+                ))}
                 <AnimatePresence mode="popLayout">
                   <motion.span
                     key={currentWordIndex}
