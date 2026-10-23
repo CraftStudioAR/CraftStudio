@@ -4,13 +4,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Las 5 fotos reales de Craft, coordinadas para el collage inferior sin tocar el texto superior
+// Las 5 fotos reales de Craft con Z-INDEX FIJO E INMUTABLE
+// Esto asegura que NUNCA cambien de orden de superposición entre sí durante el scroll
 const CRAFT_PHOTOS = [
   {
     src: "/images/about3.jpg",
     alt: "Craft still life",
     aspect: "aspect-square",
-    // Posición apilada dentro de la carpeta
+    // Capa base en el fondo
+    fixedZ: 10,
     stacked: { x: -6, y: 15, r: -2.5 },
     // Mesa 03 & 04: Izquierda arriba (debajo del texto, con margen seguro)
     target: { x: "-24vw", y: "-8vh", r: -4, w: "38vw" },
@@ -19,6 +21,7 @@ const CRAFT_PHOTOS = [
     src: "/images/about4.jpg",
     alt: "Craft wine bottle",
     aspect: "aspect-[4/5]",
+    fixedZ: 12,
     stacked: { x: 5, y: 12, r: 2 },
     // Mesa 03 & 04: Centro derecha arriba
     target: { x: "18vw", y: "-5vh", r: 3, w: "36vw" },
@@ -27,6 +30,7 @@ const CRAFT_PHOTOS = [
     src: "/images/about2.jpg",
     alt: "Craft portrait",
     aspect: "aspect-[3/4]",
+    fixedZ: 14,
     stacked: { x: -3, y: 8, r: -1 },
     // Mesa 03 & 04: Derecha centro
     target: { x: "24vw", y: "8vh", r: -2.5, w: "34vw" },
@@ -35,6 +39,7 @@ const CRAFT_PHOTOS = [
     src: "/images/about1.jpg",
     alt: "Craft black and white",
     aspect: "aspect-[3/4]",
+    fixedZ: 16,
     stacked: { x: 6, y: 4, r: 3 },
     // Mesa 03 & 04: Izquierda abajo
     target: { x: "-22vw", y: "15vh", r: 4, w: "37vw" },
@@ -43,13 +48,14 @@ const CRAFT_PHOTOS = [
     src: "/images/about5.jpg",
     alt: "Craft object",
     aspect: "aspect-[4/3]",
+    fixedZ: 18,
     stacked: { x: 0, y: 0, r: -1.5 },
-    // Mesa 03 & 04: Derecha abajo
+    // Mesa 03 & 04: Derecha abajo en primer plano
     target: { x: "15vw", y: "24vh", r: -2, w: "43vw" },
   },
 ];
 
-// Medidas exactas de la carpeta (esquinas rectas arquitectónicas Craft)
+// Medidas exactas de la carpeta con esquinas rectas arquitectónicas Craft
 const W = 310;
 const H = 230;
 const FRONT_H = 160;
@@ -61,7 +67,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const folderBackRef = useRef<HTMLDivElement>(null);
   const folderFrontRef = useRef<HTMLDivElement>(null);
-  const folderKeyRef = useRef<HTMLDivElement>(null);
   const pocketClipRef = useRef<HTMLDivElement>(null);
   const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -70,22 +75,21 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
     const stage = stageRef.current;
     const folderBack = folderBackRef.current;
     const folderFront = folderFrontRef.current;
-    const folderKey = folderKeyRef.current;
     const pocketClip = pocketClipRef.current;
     if (!section || !stage || !folderBack || !folderFront || !pocketClip) return;
 
     const photoNodes = photoRefs.current.filter(Boolean) as HTMLDivElement[];
 
     const ctx = gsap.context(() => {
-      // Usar GSAP ScrollTrigger con pin nativo: sin temblor, sincronizado con Lenis
+      // Timeline ultra fluida con scrub 1 para máxima suavidad al tacto
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=260%",
+          end: "+=280%",
           pin: true,
           pinSpacing: true,
-          scrub: 0.8,
+          scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -93,16 +97,14 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
       // =========================================================================
       // FASE 1 (0% -> 25%):
-      // Apertura elegante de la carpeta (Mesa 01 -> Mesa 02)
-      // La solapa frontal se inclina hacia adelante suavemente.
-      // Las fotos se asoman hacia arriba dentro de la carpeta.
+      // Apertura suave de la solapa de vidrio (Mesa 01 -> Mesa 02)
       // =========================================================================
       tl.to(
         folderFront,
         {
-          rotateX: -15,
+          rotateX: -14,
           transformOrigin: "50% 100%",
-          ease: "sine.inOut",
+          ease: "power1.inOut",
           duration: 0.25,
         },
         0.02
@@ -112,8 +114,8 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
         tl.to(
           node,
           {
-            y: "-=24",
-            ease: "sine.out",
+            y: "-=22",
+            ease: "power1.out",
             duration: 0.22,
           },
           0.04 + i * 0.02
@@ -122,38 +124,32 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
       // =========================================================================
       // FASE 2 (25% -> 75%):
-      // Transición progresiva y fluida:
-      // - La carpeta se desliza hacia abajo saliendo de la pantalla (Mesa 03)
-      // - El clip inferior se libera para que las fotos salgan libres
-      // - Las 5 fotos se elevan suavemente hacia el espacio visual INFERIOR al texto
-      //   (NUNCA suben a tapar el texto, quedan perfectamente entre Y:-8vh y Y:24vh)
+      // - El clip inferior se desvanece suavemente conforme la carpeta baja
+      // - La carpeta se desliza hacia abajo y desaparece
+      // - Las fotos planean a sus destinos sin cambiar su zIndex relativo
       // =========================================================================
-      
-      // Liberar el clip inferior suavemente conforme la carpeta desciende
       tl.to(
         pocketClip,
         {
           clipPath: "inset(-500px -300px -400px -300px)",
           ease: "power1.inOut",
-          duration: 0.2,
+          duration: 0.25,
         },
         0.24
       );
 
-      // Descenso de la carpeta hacia abajo
       tl.to(
-        [folderBack, folderFront, folderKey],
+        [folderBack, folderFront],
         {
           y: "+=220",
           scale: 0.92,
           opacity: 0,
           ease: "power1.inOut",
-          duration: 0.42,
+          duration: 0.44,
         },
         0.25
       );
 
-      // Dispersión suave y ordenada de las fotos hacia el collage
       photoNodes.forEach((node, i) => {
         const item = CRAFT_PHOTOS[i];
         tl.to(
@@ -164,18 +160,17 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
             width: item.target.w,
             rotation: item.target.r,
             scale: 1,
-            zIndex: 20 + i,
-            ease: "sine.out",
-            duration: 0.46,
+            // NUNCA alteramos el zIndex aquí para que la superposición sea 100% estable
+            ease: "power2.out",
+            duration: 0.48,
           },
-          0.26 + i * 0.05
+          0.26 + i * 0.045
         );
       });
 
       // =========================================================================
       // FASE 3 (75% -> 100%):
-      // El collage y la escena acompañan el scroll hacia arriba para conectar
-      // con la sección Proyectos (Mesa 05) de forma natural y sin saltos
+      // Desplazamiento sutil hacia arriba para conectar fluidamente con Proyectos
       // =========================================================================
       tl.to(
         stage,
@@ -196,20 +191,20 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       ref={sectionRef}
       className="md:hidden relative w-full h-screen bg-cream text-ink flex flex-col justify-between pt-16 pb-4 px-5 overflow-hidden"
     >
-      {/* 1. Encabezado editorial: El texto se mantiene SIEMPRE visible y despejado arriba */}
+      {/* 1. Encabezado editorial: Texto superior SIEMPRE despejado y visible */}
       <div className="relative z-30 flex-shrink-0 pt-2 pb-2">
         {intro}
       </div>
 
-      {/* 2. Área visual para la carpeta y el collage (Estrictamente debajo del texto) */}
+      {/* 2. Área visual: Carpeta y fotos strictly debajo del texto */}
       <div
         ref={stageRef}
         className="relative flex-1 w-full flex items-center justify-center min-h-0 select-none overflow-visible"
         style={{ perspective: "1000px" }}
       >
-        {/* Contenedor de la carpeta centrada */}
+        {/* Carpeta */}
         <div className="relative w-[310px] h-[230px] flex items-center justify-center transform-gpu">
-          {/* PANEL TRASERO (Back) */}
+          {/* PANEL TRASERO */}
           <div
             ref={folderBackRef}
             className="absolute inset-0 z-0 pointer-events-none transform-gpu will-change-transform"
@@ -224,10 +219,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
             </svg>
           </div>
 
-          {/* CONTENEDOR DEL BOLSILLO CON CLIP INFERIOR ESTRICTO:
-              inset(-300px -100px 0px -100px)
-              El 0px en el fondo garantiza matemáticamente que NINGUNA imagen
-              sobresalga por debajo de la base de la carpeta. */}
+          {/* BOLSILLO CON RECORTE INFERIOR ESTRICTO (0px abajo impide cualquier desborde) */}
           <div
             ref={pocketClipRef}
             className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
@@ -244,10 +236,11 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
                 className="absolute transform-gpu will-change-transform pointer-events-auto"
                 style={{
                   width: "195px",
+                  // zIndex fijo y constante: nunca cambia ni se intercambia
+                  zIndex: photo.fixedZ,
                   transform: `translate(${photo.stacked.x}px, ${photo.stacked.y}px) rotate(${photo.stacked.r}deg)`,
                 }}
               >
-                {/* Marco de fotografía editorial Craft */}
                 <div className="bg-white p-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.14)] border border-black/5">
                   <img
                     src={photo.src}
@@ -260,7 +253,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
             ))}
           </div>
 
-          {/* PANEL FRONTAL DE VIDRIO ESMERILADO (Front Glass) */}
+          {/* PANEL FRONTAL DE VIDRIO ESMERILADO (Sin el botón de tres puntos) */}
           <div
             ref={folderFrontRef}
             className="absolute left-0 bottom-0 w-[310px] h-[160px] z-20 transform-gpu will-change-transform pointer-events-none"
@@ -286,18 +279,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
               <span className="font-mono text-[9.5px] tracking-wider text-ink/50 uppercase">
                 5 items
               </span>
-            </div>
-          </div>
-
-          {/* BOTÓN MÁS (···) */}
-          <div
-            ref={folderKeyRef}
-            className="absolute right-3.5 bottom-3.5 z-30 w-10 h-10 bg-white/90 backdrop-blur-md border border-black/10 shadow-sm flex items-center justify-center transform-gpu will-change-transform pointer-events-auto"
-          >
-            <div className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-ink/70" />
-              <span className="w-1.5 h-1.5 rounded-full bg-ink/70" />
-              <span className="w-1.5 h-1.5 rounded-full bg-ink/70" />
             </div>
           </div>
         </div>
