@@ -272,20 +272,14 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
       } else {
         velocity = 0;
       }
-      const diff = target - progress;
-      if (Math.abs(diff) > 0.0002) {
-        progress += reduced ? diff : diff * 0.18;
-        dirty = true;
-      } else if (diff !== 0) {
-        progress = target; // snap to stop micro-repaints
+      // Lenis already smooths the scroll — no second lerp needed.
+      // Direct tracking eliminates the springy double-smoothing that caused jitter.
+      if (progress !== target) {
+        progress = target;
         dirty = true;
       }
       const nextTurn = progress * FIELD_TURN + dragTurn;
-      const turnDiff = nextTurn - turn;
-      if (Math.abs(turnDiff) > 0.02) {
-        turn += reduced ? turnDiff : turnDiff * 0.18;
-        dirty = true;
-      } else if (turnDiff !== 0) {
+      if (turn !== nextTurn) {
         turn = nextTurn;
         dirty = true;
       }

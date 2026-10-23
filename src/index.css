@@ -188,9 +188,6 @@
 .tunnel-card {
   transform-style: preserve-3d;
   cursor: pointer;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   contain: layout style;
 }
 
