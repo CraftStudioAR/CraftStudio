@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // sale del fondo, viene a primer plano casi centrada, se queda un momento creciendo apenas
 // y vuelve al campo mientras la siguiente ya viene. Solo las fotos de Craft.
 
+gsap.registerPlugin(ScrollTrigger);
+
 // ratio = ancho / alto real de cada foto
 const photos = [
   { src: "/images/about1.jpg", ratio: 821 / 1024 },
@@ -53,7 +55,8 @@ const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 const rad = (d: number) => (d * Math.PI) / 180;
 
 // --- Campo: esfera de fotos chicas ---
-const COUNT = 110;
+// 36 fotos en mobile dan un campo esférico completo y denso manteniendo 60fps sólidos.
+const COUNT = 36;
 const MAX_LAT = 72; // grados: la esfera se recorta arriba y abajo
 const rand = seeded(11);
 const golden = Math.PI * (3 - Math.sqrt(5));
@@ -65,7 +68,7 @@ const field = Array.from({ length: COUNT }, (_, i) => {
     lon: (i * golden * 180) / Math.PI,
     lat: Math.asin(v) * (180 / Math.PI) * (MAX_LAT / 90),
     r: 0.88 + rand() * 0.24, // capas apenas distintas: más profundidad
-    w: 30 + rand() * 42,
+    w: 38 + rand() * 32,
     // Cómo queda en la pila del centro (antes de abrirse y después de guardarse).
     sx: (rand() * 2 - 1) * 6,
     sy: (rand() * 2 - 1) * 6,
@@ -74,11 +77,12 @@ const field = Array.from({ length: COUNT }, (_, i) => {
 });
 
 // --- Las que pasan a primer plano: una por foto ---
-// ox/oy: de qué parte del fondo sale (fracción de la pantalla desde el centro).
-// fx/fy: dónde se queda en primer plano (en el video no siempre es el centro exacto).
+// Ancho nativo real para renderizar con definición fotográfica nítida en pantallas Retina.
+const HERO_WIDTH = 220;
+
 const heroes = photos.map((photo, i) => ({
   photo,
-  w: 90,
+  w: HERO_WIDTH,
   ox: [-0.3, 0.32, -0.12, 0.26, -0.28][i],
   oy: [-0.22, 0.18, 0.28, -0.3, 0.12][i],
   fx: [-0.04, 0.05, 0, -0.05, 0.03][i],
@@ -158,23 +162,18 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
     const tapFocus = field.map(() => ({ f: 0 }));
     let tapped = -1;
 
-    // Cached layout values – updated on resize / ScrollTrigger refresh, NOT every scroll event.
-    let elTop = 0;
-    let elHeight = 0;
-    const measureLayout = () => {
-      const r = el.getBoundingClientRect();
-      elTop = r.top + window.scrollY;
-      elHeight = r.height;
-    };
-    measureLayout();
+    // Sincronización precisa con ScrollTrigger y Lenis para mobile (inmune a variaciones de barra de navegación)
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        target = self.progress;
+        dirty = true;
+      },
+    });
 
-    // 0 cuando el bloque toca arriba, 1 cuando se termina de despegar.
-    const readScroll = () => {
-      const span = elHeight - window.innerHeight;
-      target = span > 0 ? clamp01((window.scrollY - elTop) / span) : 0;
-    };
-    readScroll();
-    progress = target;
+    target = progress = st.progress;
     turn = progress * FIELD_TURN;
 
     // Pose de primer plano: de frente, a FOCUS_WIDTH de la pantalla (y un poco más con grow).
@@ -302,15 +301,7 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
     });
     io.observe(el);
 
-    const onScroll = () => {
-      readScroll();
-      dirty = true;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const onResize = () => {
-      measureLayout();
-      dirty = true;
-    };
+    const onResize = () => void (dirty = true);
     window.addEventListener("resize", onResize);
 
     const setTapped = (i: number) => {
@@ -325,58 +316,88 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
       }
     };
 
-    // Arrastre de costado (el scroll vertical sigue siendo del navegador: touch-action pan-y).
+    // Arrastre horizontal discriminado: el scroll vertical nunca se interrumpe ni genera giro accidental
     let startX = 0;
     let startY = 0;
     let lastX = 0;
     let lastT = 0;
     let dragging = false;
     let moved = false;
+    let isHorizontalGesture = false;
+
     const onDown = (e: PointerEvent) => {
-      dragging = true;
-      moved = false;
+      if (e.pointerType === "touch" && !e.isPrimary) return;
       startX = lastX = e.clientX;
       startY = e.clientY;
       lastT = performance.now();
+      dragging = false;
+      moved = false;
+      isHorizontalGesture = false;
       velocity = 0;
     };
+
     const onMove = (e: PointerEvent) => {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      // Si aún no definimos el gesto:
+      if (!dragging && !isHorizontalGesture) {
+        // Si el usuario desliza verticalmente para scrollear, ignoramos el drag
+        if (Math.abs(dy) > 7 && Math.abs(dy) >= Math.abs(dx)) {
+          return;
+        }
+        // Solo si desliza de forma predominantemente horizontal (> 12px y 1.5x mayor que dy)
+        if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          dragging = true;
+          isHorizontalGesture = true;
+        }
+      }
+
       if (!dragging) return;
-      if (Math.abs(e.clientX - startX) > 8 || Math.abs(e.clientY - startY) > 8) moved = true;
+      moved = true;
       const now = performance.now();
       const step = ((e.clientX - lastX) / stage.clientWidth) * DRAG_TURN;
       dragTurn += step;
-      velocity = (step / Math.max(1, now - lastT)) * 16; // por cuadro de ~16 ms
+      velocity = (step / Math.max(1, now - lastT)) * 16;
       lastX = e.clientX;
       lastT = now;
       dirty = true;
     };
+
     const onUp = (e: PointerEvent) => {
-      if (!dragging) return;
+      const wasDragging = dragging;
       dragging = false;
+      isHorizontalGesture = false;
       if (reduced) velocity = 0;
-      if (moved) return;
-      // Fue un toque: traer adelante la foto tocada del fondo, o devolver la que estaba.
-      velocity = 0;
-      const card = (e.target as HTMLElement).closest<HTMLElement>("[data-field]");
-      if (card) setTapped(Number(card.dataset.field));
-      else if (tapped >= 0) setTapped(tapped);
+
+      // Solo si fue un toque sin arrastre
+      if (!moved && !wasDragging && Math.hypot(e.clientX - startX, e.clientY - startY) < 10) {
+        velocity = 0;
+        const card = (e.target as HTMLElement).closest<HTMLElement>("[data-field]");
+        if (card) setTapped(Number(card.dataset.field));
+        else if (tapped >= 0) setTapped(tapped);
+      }
     };
-    const onCancel = () => void (dragging = false);
+
+    const onCancel = () => {
+      dragging = false;
+      isHorizontalGesture = false;
+      velocity = 0;
+    };
+
     stage.addEventListener("pointerdown", onDown);
     stage.addEventListener("pointermove", onMove);
     stage.addEventListener("pointerup", onUp);
     stage.addEventListener("pointercancel", onCancel);
 
     render();
-    // Este bloque suma varios altos de pantalla: que el pin de Proyectos (más abajo) se recalcule.
     const refresh = requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       io.disconnect();
       cancelAnimationFrame(refresh);
       if (running) gsap.ticker.remove(tick);
-      window.removeEventListener("scroll", onScroll);
+      st.kill();
       window.removeEventListener("resize", onResize);
       stage.removeEventListener("pointerdown", onDown);
       stage.removeEventListener("pointermove", onMove);
@@ -387,10 +408,9 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
   }, []);
 
   return (
-    // El alto extra es el recorrido del sticky: se abre la pila, pasan las cinco fotos y se guardan.
-    // Texto y galería quedan fijos juntos en una pantalla; la galería ocupa lo que sobra.
-    <div ref={ref} className="md:hidden relative w-[100vw] h-[560svh]">
-      <div className="sticky top-0 flex h-[100svh] w-full flex-col pt-24">
+    // Recorrido suave del sticky en mobile con sincronización ScrollTrigger
+    <div ref={ref} className="md:hidden relative w-full h-[520vh]">
+      <div className="sticky top-0 flex h-[100dvh] w-full flex-col pt-24 overflow-hidden">
         {intro}
         <div className="tunnel-frame relative mt-5 min-h-0 flex-1">
           <div ref={stageRef} aria-hidden="true" className="photo-tunnel absolute inset-0 overflow-hidden select-none">
@@ -408,7 +428,7 @@ export default function PhotoTunnel({ intro }: { intro: ReactNode }) {
               </div>
             ))}
             {heroes.map((h, i) => (
-              <div key={`h${i}`} data-hero={i} className="tunnel-card absolute left-1/2 top-1/2" style={{ width: h.w }}>
+              <div key={`h${i}`} data-hero={i} className="tunnel-card absolute left-1/2 top-1/2 drop-shadow-xl" style={{ width: h.w }}>
                 <img
                   src={h.photo.src}
                   alt=""
