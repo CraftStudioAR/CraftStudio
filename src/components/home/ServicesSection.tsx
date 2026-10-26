@@ -35,7 +35,7 @@ export default function ServicesSection() {
                 Acompañamos la dirección de cada marca.
               </p>
               <p className="font-sans italic text-sm md:text-base text-ink/60 mb-6 md:mb-8 flex-grow text-balance leading-relaxed">
-                Ideal para: crear una marca desde cero, reposicionarla o actualizar su identidad y comunicación.
+                Tres programas estratégicos para crear, reposicionar o actualizar marcas según su etapa.
               </p>
 
               <Magnetic>
@@ -74,8 +74,11 @@ export default function ServicesSection() {
               <p className="font-sans text-base md:text-lg text-ink/80 mb-2 text-balance leading-snug">
                 Pensamos conceptos. Creamos experiencias.
               </p>
+              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-2 text-balance leading-relaxed">
+                Nos aliamos con marcas para idear y llevar adelante acciones de comunicación puntuales, combinando estrategia, creatividad y ejecución.
+              </p>
               <p className="font-sans italic text-sm md:text-base text-ink/60 mb-6 md:mb-8 flex-grow text-balance leading-relaxed">
-                Ideal para: campañas, lanzamientos, producciones y activaciones.
+                Desarrollamos campañas, lanzamientos de producto, producciones de contenido, activaciones de marca, dirección creativa y experiencias digitales, entre otros.
               </p>
 
               <Magnetic>
