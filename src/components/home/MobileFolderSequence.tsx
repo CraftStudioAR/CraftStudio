@@ -204,19 +204,27 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       >
         {/* Carpeta */}
         <div className="relative w-[310px] h-[230px] flex items-center justify-center transform-gpu">
-          {/* PANEL TRASERO */}
+          {/* PANEL TRASERO. La sombra va en un contenedor aparte porque el clip-path
+              recorta cualquier sombra propia; el panel trasero tiene la silueta completa
+              de la carpeta, así que su sombra la despega del fondo. (El frontal no puede
+              llevar filter: rompería el desenfoque de vidrio). */}
           <div
             ref={folderBackRef}
             className="absolute inset-0 z-0 pointer-events-none transform-gpu will-change-transform"
-            style={{
-              clipPath: `path('${BACK_PATH_SHARP}')`,
-              background: "linear-gradient(180deg, #ede8e4 0%, #ded9d4 100%)",
-            }}
+            style={{ filter: "drop-shadow(0 18px 26px rgba(0,0,0,0.16)) drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }}
           >
-            <div className="absolute inset-0 bg-white/20" />
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox={`0 0 ${W} ${H}`}>
-              <path d={BACK_PATH_SHARP} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
-            </svg>
+            <div
+              className="absolute inset-0"
+              style={{
+                clipPath: `path('${BACK_PATH_SHARP}')`,
+                background: "linear-gradient(180deg, #ede8e4 0%, #ded9d4 100%)",
+              }}
+            >
+              <div className="absolute inset-0 bg-white/20" />
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox={`0 0 ${W} ${H}`}>
+                <path d={BACK_PATH_SHARP} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+              </svg>
+            </div>
           </div>
 
           {/* BOLSILLO CON RECORTE INFERIOR ESTRICTO (0px abajo impide cualquier desborde) */}

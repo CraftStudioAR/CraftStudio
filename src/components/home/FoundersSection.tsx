@@ -19,20 +19,20 @@ const desktopLines: Line[] = [
 const mobileLines: Line[] = [
   { text: "Tu marca tiene mucho para" },
   { text: "decir. Nosotras te ayudamos a" },
-  { text: "construir cómo.", className: `${accent} text-[1.36em] leading-[1.05] mt-1` },
+  { text: "construir cómo.", className: accent },
 ];
 
 const fullText = desktopLines.map((l) => l.text).join(" ");
 const intro =
   "Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.";
 
-/** Manifiesto con la aparición del título de Proyectos: letra por letra al entrar en pantalla. */
+/** Manifiesto con la aparición del título de Proyectos: letra por letra cada vez que entra en pantalla (también al volver a subir). */
 function Manifesto({ lines, className }: { lines: Line[]; className: string }) {
   return (
     <motion.p
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-15% 0px" }}
+      viewport={{ once: false, margin: "-15% 0px" }}
       variants={titleVariants}
       aria-label={fullText}
       className={`font-serif text-ink/90 ${className}`}
@@ -241,7 +241,7 @@ export default function FoundersSection() {
               <span className="h-px w-10 bg-red/50" />
               <span className="font-serif text-lg leading-none">01</span>
             </div>
-            <Manifesto lines={mobileLines} className="text-[clamp(21px,6.5vw,27px)] leading-[1.18]" />
+            <Manifesto lines={mobileLines} className="text-[clamp(26px,8.4vw,34px)] leading-[1.14]" />
             <p className="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide">{intro}</p>
           </div>
         }
