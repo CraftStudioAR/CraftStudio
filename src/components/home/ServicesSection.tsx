@@ -74,11 +74,8 @@ export default function ServicesSection() {
               <p className="font-sans text-base md:text-lg text-ink/80 mb-2 text-balance leading-snug">
                 Pensamos conceptos. Creamos experiencias.
               </p>
-              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-2 text-balance leading-relaxed">
-                Nos aliamos con marcas para idear y llevar adelante acciones de comunicación puntuales, combinando estrategia, creatividad y ejecución.
-              </p>
               <p className="font-sans italic text-sm md:text-base text-ink/60 mb-6 md:mb-8 flex-grow text-balance leading-relaxed">
-                Desarrollamos campañas, lanzamientos de producto, producciones de contenido, activaciones de marca, dirección creativa y experiencias digitales, entre otros.
+                Nos aliamos con marcas para idear y llevar adelante acciones de comunicación puntuales, combinando estrategia, creatividad y ejecución.
               </p>
 
               <Magnetic>

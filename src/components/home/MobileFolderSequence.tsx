@@ -227,12 +227,14 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
             </div>
           </div>
 
-          {/* BOLSILLO CON RECORTE INFERIOR ESTRICTO (0px abajo impide cualquier desborde) */}
+          {/* BOLSILLO CON RECORTE INFERIOR ESTRICTO (4px arriba del borde: ninguna foto asoma por debajo) */}
           <div
             ref={pocketClipRef}
             className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
             style={{
-              clipPath: "inset(-300px -100px 0px -100px)",
+              // 4px arriba del borde: si el recorte coincide justo con el borde del frente,
+              // en celus de alta densidad asoma un hilo de las fotos por debajo.
+              clipPath: "inset(-300px -100px 4px -100px)",
             }}
           >
             {CRAFT_PHOTOS.map((photo, i) => (
