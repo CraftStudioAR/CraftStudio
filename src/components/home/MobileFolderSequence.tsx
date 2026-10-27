@@ -55,6 +55,14 @@ const CRAFT_PHOTOS = [
   },
 ];
 
+// Glifos del fondo: posición, tamaño y color (muy tenues, solo para dar textura)
+const BG_GLYPHS = [
+  // a la derecha, casi detrás del título
+  { src: "/brand/glyphs/hash.svg", className: "-right-8 top-[19%] h-[150px] w-[130px] bg-red/[0.07] rotate-12" },
+  // a la izquierda, a media altura, detrás de la carpeta
+  { src: "/brand/glyphs/quote-open.svg", className: "-left-6 top-[52%] h-[80px] w-[106px] bg-navy/[0.06] -rotate-6" },
+];
+
 // Medidas exactas de la carpeta con esquinas rectas arquitectónicas Craft
 const W = 310;
 const H = 230;
@@ -75,7 +83,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const folderBackRef = useRef<HTMLDivElement>(null);
   const folderFrontRef = useRef<HTMLDivElement>(null);
-  const glyphsRef = useRef<HTMLDivElement>(null);
   const pocketClipRef = useRef<HTMLDivElement>(null);
   const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -85,8 +92,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
     const folderBack = folderBackRef.current;
     const folderFront = folderFrontRef.current;
     const pocketClip = pocketClipRef.current;
-    const glyphs = glyphsRef.current;
-    if (!section || !stage || !folderBack || !folderFront || !pocketClip || !glyphs) return;
+    if (!section || !stage || !folderBack || !folderFront || !pocketClip) return;
 
     const photoNodes = photoRefs.current.filter(Boolean) as HTMLDivElement[];
 
@@ -154,7 +160,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       );
 
       tl.to(
-        [folderBack, folderFront, glyphs],
+        [folderBack, folderFront],
         {
           y: "+=220",
           scale: 0.92,
@@ -198,6 +204,25 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       ref={sectionRef}
       className="md:hidden relative w-full h-[100svh] bg-cream text-ink flex flex-col justify-between pt-24 pb-4 px-5 overflow-hidden"
     >
+      {/* GLIFOS DE MARCA: tenues, repartidos en el fondo de toda la sección (detrás del
+          texto y de la carpeta). Se quedan quietos mientras pasa el resto. */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
+        {BG_GLYPHS.map((g) => (
+          <span
+            key={g.className}
+            className={`absolute ${g.className}`}
+            style={{
+              maskImage: `url(${g.src})`,
+              WebkitMaskImage: `url(${g.src})`,
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          />
+        ))}
+      </div>
+
       {/* 1. Encabezado editorial: Texto superior SIEMPRE despejado y visible */}
       <div className="relative z-30 flex-shrink-0 pt-1 pb-2">
         {intro}
@@ -211,35 +236,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       >
         {/* Carpeta */}
         <div className="relative w-[310px] h-[230px] flex items-center justify-center transform-gpu">
-          {/* GLIFOS DE MARCA (# y “): asoman por los costados y quedan detrás del frente
-              de vidrio, así se ve el desenfoque. Salen con la carpeta. */}
-          <div ref={glyphsRef} className="absolute inset-0 z-[5] pointer-events-none transform-gpu">
-            <span
-              aria-hidden="true"
-              className="absolute -left-6 bottom-6 h-[96px] w-[84px] bg-red"
-              style={{
-                maskImage: "url(/brand/glyphs/hash.svg)",
-                WebkitMaskImage: "url(/brand/glyphs/hash.svg)",
-                maskSize: "contain",
-                WebkitMaskSize: "contain",
-                maskRepeat: "no-repeat",
-                WebkitMaskRepeat: "no-repeat",
-              }}
-            />
-            <span
-              aria-hidden="true"
-              className="absolute -right-5 bottom-16 h-[56px] w-[74px] bg-navy"
-              style={{
-                maskImage: "url(/brand/glyphs/quote-open.svg)",
-                WebkitMaskImage: "url(/brand/glyphs/quote-open.svg)",
-                maskSize: "contain",
-                WebkitMaskSize: "contain",
-                maskRepeat: "no-repeat",
-                WebkitMaskRepeat: "no-repeat",
-              }}
-            />
-          </div>
-
           {/* PANEL TRASERO. La sombra va en un contenedor aparte porque el clip-path
               recorta cualquier sombra propia; el panel trasero tiene la silueta completa
               de la carpeta, así que su sombra la despega del fondo. (El frontal no puede
