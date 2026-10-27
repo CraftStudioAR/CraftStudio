@@ -18,6 +18,17 @@ export default function Contacto() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // En compus sin programa de correo el mailto no hace nada: además copiamos la dirección.
+  const [mailCopied, setMailCopied] = useState(false);
+  const copyMail = () => {
+    navigator.clipboard?.writeText(contactInfo.email).then(
+      () => {
+        setMailCopied(true);
+        window.setTimeout(() => setMailCopied(false), 2200);
+      },
+      () => {}
+    );
+  };
   const [activeStep, setActiveStep] = useState(1);
   const [direction, setDirection] = useState(1);
 
@@ -153,7 +164,7 @@ export default function Contacto() {
           <div>
             <Reveal>
               <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
-                <span className="w-8 md:w-12 h-[1px] bg-red" /> SECCIÓN / CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
+                <span className="w-8 md:w-12 h-[1px] bg-red" /> CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
               </p>
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
@@ -478,16 +489,24 @@ export default function Contacto() {
           )}
         </div>
 
-        {/* Mail alineado a la derecha con presencia y estilo */}
-        <div className="w-full flex justify-end mt-4 mb-6 md:mb-8">
+        {/* Mail alineado a la derecha: link de texto (no botón). Abre el correo y además
+            copia la dirección, para las compus que no tienen programa de correo. */}
+        <div className="w-full flex flex-wrap justify-end items-center gap-x-3 gap-y-1 mt-4 mb-6 md:mb-8 text-sm md:text-base">
+          <span className="text-ink/60 whitespace-nowrap">Escribinos a</span>
           <a
             href={`mailto:${contactInfo.email}`}
-            className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm md:text-base font-medium tracking-wide shadow-sm"
+            onClick={copyMail}
+            className="inline-flex items-center gap-2 font-medium text-navy underline decoration-red/40 underline-offset-4 hover:text-red hover:decoration-red transition-colors duration-200"
           >
-            <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            <span>{contactInfo.email}</span>
-            <svg className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            {contactInfo.email}
           </a>
+          <span
+            role="status"
+            className={`text-xs text-red transition-opacity duration-200 ${mailCopied ? "opacity-100" : "opacity-0"}`}
+          >
+            Mail copiado
+          </span>
         </div>
       </div>
       

@@ -34,7 +34,7 @@ export default function ServicesSection() {
               <p className="font-sans text-base md:text-lg text-ink/80 mb-2 text-balance leading-snug">
                 Acompañamos la dirección de cada marca.
               </p>
-              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-6 md:mb-8 flex-grow text-balance leading-relaxed">
+              <p className="font-sans text-[13px] md:text-sm text-ink/60 mb-6 md:mb-7 text-balance leading-snug">
                 Tres programas estratégicos para crear, reposicionar o actualizar marcas según su etapa.
               </p>
 
@@ -74,7 +74,7 @@ export default function ServicesSection() {
               <p className="font-sans text-base md:text-lg text-ink/80 mb-2 text-balance leading-snug">
                 Pensamos conceptos. Creamos experiencias.
               </p>
-              <p className="font-sans italic text-sm md:text-base text-ink/60 mb-6 md:mb-8 flex-grow text-balance leading-relaxed">
+              <p className="font-sans text-[13px] md:text-sm text-ink/60 mb-6 md:mb-7 text-balance leading-snug">
                 Nos aliamos con marcas para idear y llevar adelante acciones de comunicación puntuales, combinando estrategia, creatividad y ejecución.
               </p>
 

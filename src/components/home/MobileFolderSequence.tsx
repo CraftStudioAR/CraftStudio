@@ -15,7 +15,7 @@ const CRAFT_PHOTOS = [
     fixedZ: 10,
     stacked: { x: -6, y: 15, r: -2.5 },
     // Mesa 03 & 04: Izquierda arriba (debajo del texto, con margen seguro)
-    target: { x: "-24vw", y: "-8vh", r: -4, w: "38vw" },
+    target: { x: -0.24, y: -0.31, r: -4, w: 0.4 },
   },
   {
     src: "/images/about4.jpg",
@@ -24,7 +24,7 @@ const CRAFT_PHOTOS = [
     fixedZ: 12,
     stacked: { x: 5, y: 12, r: 2 },
     // Mesa 03 & 04: Centro derecha arriba
-    target: { x: "18vw", y: "-5vh", r: 3, w: "36vw" },
+    target: { x: 0.23, y: -0.27, r: 3, w: 0.38 },
   },
   {
     src: "/images/about2.jpg",
@@ -33,7 +33,7 @@ const CRAFT_PHOTOS = [
     fixedZ: 14,
     stacked: { x: -3, y: 8, r: -1 },
     // Mesa 03 & 04: Derecha centro
-    target: { x: "24vw", y: "8vh", r: -2.5, w: "34vw" },
+    target: { x: 0.25, y: 0.08, r: -2.5, w: 0.36 },
   },
   {
     src: "/images/about1.jpg",
@@ -42,7 +42,7 @@ const CRAFT_PHOTOS = [
     fixedZ: 16,
     stacked: { x: 6, y: 4, r: 3 },
     // Mesa 03 & 04: Izquierda abajo
-    target: { x: "-22vw", y: "15vh", r: 4, w: "37vw" },
+    target: { x: -0.23, y: 0.05, r: 4, w: 0.38 },
   },
   {
     src: "/images/about5.jpg",
@@ -51,7 +51,7 @@ const CRAFT_PHOTOS = [
     fixedZ: 18,
     stacked: { x: 0, y: 0, r: -1.5 },
     // Mesa 03 & 04: Derecha abajo en primer plano
-    target: { x: "15vw", y: "24vh", r: -2, w: "43vw" },
+    target: { x: 0.08, y: 0.32, r: -2, w: 0.46 },
   },
 ];
 
@@ -62,11 +62,20 @@ const FRONT_H = 160;
 const BACK_PATH_SHARP = "M0 28 L130 28 L152 0 L310 0 L310 230 L0 230 Z";
 const FRONT_PATH_SHARP = "M0 0 L108 0 L130 26 L310 26 L310 " + FRONT_H + " L0 " + FRONT_H + " Z";
 
+// Ancho de cada foto dentro de la carpeta; al salir crecen o achican con scale (no con
+// width, que obliga a recalcular el layout en cada cuadro y hace temblar el scroll).
+const PHOTO_W = 195;
+
+// Medida base del collage: el ancho del escenario, salvo en celus bajos, donde manda el
+// alto para que las fotos no se salgan por abajo.
+const unitOf = (stage: HTMLElement) => Math.min(stage.clientWidth, stage.clientHeight * 0.74);
+
 export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const folderBackRef = useRef<HTMLDivElement>(null);
   const folderFrontRef = useRef<HTMLDivElement>(null);
+  const glyphsRef = useRef<HTMLDivElement>(null);
   const pocketClipRef = useRef<HTMLDivElement>(null);
   const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -76,9 +85,15 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
     const folderBack = folderBackRef.current;
     const folderFront = folderFrontRef.current;
     const pocketClip = pocketClipRef.current;
-    if (!section || !stage || !folderBack || !folderFront || !pocketClip) return;
+    const glyphs = glyphsRef.current;
+    if (!section || !stage || !folderBack || !folderFront || !pocketClip || !glyphs) return;
 
     const photoNodes = photoRefs.current.filter(Boolean) as HTMLDivElement[];
+
+    // En pantallas táctiles el scroll lo maneja GSAP: así la barra del navegador no se
+    // esconde ni aparece mientras la sección está fijada (eso cambiaba el alto de la
+    // pantalla y hacía temblar el pin).
+    const normalizer = ScrollTrigger.isTouch === 1 ? ScrollTrigger.normalizeScroll(true) : null;
 
     const ctx = gsap.context(() => {
       // Timeline ultra fluida con scrub 1 para máxima suavidad al tacto
@@ -139,7 +154,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       );
 
       tl.to(
-        [folderBack, folderFront],
+        [folderBack, folderFront, glyphs],
         {
           y: "+=220",
           scale: 0.92,
@@ -155,11 +170,11 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
         tl.to(
           node,
           {
-            x: item.target.x,
-            y: item.target.y,
-            width: item.target.w,
+            // Medidas del escenario real (se recalculan al cambiar el tamaño de pantalla)
+            x: () => item.target.x * stage.clientWidth,
+            y: () => item.target.y * stage.clientHeight,
+            scale: () => (item.target.w * unitOf(stage)) / PHOTO_W,
             rotation: item.target.r,
-            scale: 1,
             // NUNCA alteramos el zIndex aquí para que la superposición sea 100% estable
             ease: "power2.out",
             duration: 0.48,
@@ -168,28 +183,20 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
         );
       });
 
-      // =========================================================================
-      // FASE 3 (75% -> 100%):
-      // Desplazamiento sutil hacia arriba para conectar fluidamente con Proyectos
-      // =========================================================================
-      tl.to(
-        stage,
-        {
-          y: "-10vh",
-          ease: "none",
-          duration: 0.25,
-        },
-        0.75
-      );
+      // FASE 3: el collage queda quieto y centrado un tramo antes de que se suelte el pin.
+      tl.to({}, { duration: 0.2 });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      normalizer?.kill();
+    };
   }, []);
 
   return (
     <div
       ref={sectionRef}
-      className="md:hidden relative w-full h-screen bg-cream text-ink flex flex-col justify-between pt-24 pb-4 px-5 overflow-hidden"
+      className="md:hidden relative w-full h-[100svh] bg-cream text-ink flex flex-col justify-between pt-24 pb-4 px-5 overflow-hidden"
     >
       {/* 1. Encabezado editorial: Texto superior SIEMPRE despejado y visible */}
       <div className="relative z-30 flex-shrink-0 pt-1 pb-2">
@@ -204,6 +211,35 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
       >
         {/* Carpeta */}
         <div className="relative w-[310px] h-[230px] flex items-center justify-center transform-gpu">
+          {/* GLIFOS DE MARCA (# y “): asoman por los costados y quedan detrás del frente
+              de vidrio, así se ve el desenfoque. Salen con la carpeta. */}
+          <div ref={glyphsRef} className="absolute inset-0 z-[5] pointer-events-none transform-gpu">
+            <span
+              aria-hidden="true"
+              className="absolute -left-6 bottom-6 h-[96px] w-[84px] bg-red"
+              style={{
+                maskImage: "url(/brand/glyphs/hash.svg)",
+                WebkitMaskImage: "url(/brand/glyphs/hash.svg)",
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+              }}
+            />
+            <span
+              aria-hidden="true"
+              className="absolute -right-5 bottom-16 h-[56px] w-[74px] bg-navy"
+              style={{
+                maskImage: "url(/brand/glyphs/quote-open.svg)",
+                WebkitMaskImage: "url(/brand/glyphs/quote-open.svg)",
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+              }}
+            />
+          </div>
+
           {/* PANEL TRASERO. La sombra va en un contenedor aparte porque el clip-path
               recorta cualquier sombra propia; el panel trasero tiene la silueta completa
               de la carpeta, así que su sombra la despega del fondo. (El frontal no puede
@@ -245,7 +281,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
                 }}
                 className="absolute transform-gpu will-change-transform pointer-events-auto"
                 style={{
-                  width: "195px",
+                  width: `${PHOTO_W}px`,
                   // zIndex fijo y constante: nunca cambia ni se intercambia
                   zIndex: photo.fixedZ,
                   transform: `translate(${photo.stacked.x}px, ${photo.stacked.y}px) rotate(${photo.stacked.r}deg)`,
@@ -282,13 +318,13 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
               <path d={FRONT_PATH_SHARP} fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
             </svg>
 
-            {/* Etiqueta: "Archives 5 items" */}
+            {/* Etiqueta de la carpeta */}
             <div className="absolute left-5 bottom-4 z-20 flex flex-col gap-0.5 text-ink">
               <span className="font-sans font-semibold text-[14px] tracking-tight text-ink">
-                Archives
+                Craft Studio
               </span>
               <span className="font-mono text-[9.5px] tracking-wider text-ink/50 uppercase">
-                5 items
+                ###
               </span>
             </div>
           </div>

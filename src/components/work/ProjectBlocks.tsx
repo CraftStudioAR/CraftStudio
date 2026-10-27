@@ -7,38 +7,49 @@ import { cld } from "../../lib/cloudinary";
 import { renderRichText } from "../../lib/richText";
 import type { BlockSpacing, ProjectBlock, ProjectImage, Stat } from "../../content/brand";
 
+// Tamaños del CRM ("text-5xl", etc.) en su medida real de Tailwind. No se pueden armar
+// clases como `lg:${size}`: Tailwind solo genera las que aparecen escritas enteras en el
+// código, y varias (lg:text-5xl, lg:text-sm…) no existían, así que el 5XL de desktop se
+// veía con el tamaño de tablet. El interlineado respeta un leading-* propio del bloque.
+const TEXT_SIZES: Record<string, [string, string]> = {
+  "text-xs": ["0.75rem", "1.333"],
+  "text-sm": ["0.875rem", "1.429"],
+  "text-base": ["1rem", "1.5"],
+  "text-lg": ["1.125rem", "1.556"],
+  "text-xl": ["1.25rem", "1.4"],
+  "text-2xl": ["1.5rem", "1.333"],
+  "text-3xl": ["1.875rem", "1.2"],
+  "text-4xl": ["2.25rem", "1.111"],
+  "text-5xl": ["3rem", "1"],
+  "text-6xl": ["3.75rem", "1"],
+  "text-7xl": ["4.5rem", "1"],
+  "text-8xl": ["6rem", "1"],
+  "text-9xl": ["8rem", "1"],
+};
+
+// Solo medidas simples ("4rem", "68px"…): el valor se escribe a mano en el CRM y va a CSS.
+const CUSTOM_SIZE = /^\d+(\.\d+)?(rem|px|em|vw)$/;
+
+function sizeRule(size: string) {
+  const preset = TEXT_SIZES[size];
+  if (preset) return `font-size: ${preset[0]}; line-height: var(--tw-leading, ${preset[1]});`;
+  return CUSTOM_SIZE.test(size.trim()) ? `font-size: ${size.trim()};` : "";
+}
+
 function getResponsiveTextStyle(
   elementId: string,
   sizeMobile: string,
   sizeTablet: string,
   sizeDesktop: string
 ) {
-  let className = "";
-  let style: React.CSSProperties = {};
-  let styleElement: React.ReactNode = null;
-
-  const classes = [];
-  if (sizeMobile.startsWith("text-")) classes.push(sizeMobile);
-  if (sizeTablet.startsWith("text-")) classes.push(`md:${sizeTablet}`);
-  if (sizeDesktop.startsWith("text-")) classes.push(`lg:${sizeDesktop}`);
-  className = classes.join(" ");
-
-  const hasCustom = !sizeMobile.startsWith("text-") || !sizeTablet.startsWith("text-") || !sizeDesktop.startsWith("text-");
-  if (hasCustom) {
-    const cssRules = [];
-    if (!sizeMobile.startsWith("text-")) {
-      cssRules.push(`#${elementId} { font-size: ${sizeMobile}; }`);
-    }
-    if (!sizeTablet.startsWith("text-")) {
-      cssRules.push(`@media (min-width: 768px) { #${elementId} { font-size: ${sizeTablet}; } }`);
-    }
-    if (!sizeDesktop.startsWith("text-")) {
-      cssRules.push(`@media (min-width: 1024px) { #${elementId} { font-size: ${sizeDesktop}; } }`);
-    }
-    styleElement = (
-      <style dangerouslySetInnerHTML={{ __html: cssRules.join("\n") }} />
-    );
-  }
+  const className = "";
+  const style: React.CSSProperties = {};
+  const cssRules = [
+    `#${elementId} { ${sizeRule(sizeMobile)} }`,
+    `@media (min-width: 768px) { #${elementId} { ${sizeRule(sizeTablet)} } }`,
+    `@media (min-width: 1024px) { #${elementId} { ${sizeRule(sizeDesktop)} } }`,
+  ];
+  const styleElement = <style dangerouslySetInnerHTML={{ __html: cssRules.join("\n") }} />;
 
   return { className, style, styleElement };
 }
@@ -216,7 +227,7 @@ function TextBox({
           sizeTablet,
           sizeDesktop
         );
-        const textClass = `text-ink/80 text-${textAlign} ${fontFamilyClass} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
+        const textClass = `whitespace-pre-line text-ink/80 text-${textAlign} ${fontFamilyClass} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
         return (
           <Fragment key={idx}>
             {styleElement}
@@ -373,7 +384,7 @@ function Testimonial({
       />
       <blockquote
         id={elementId}
-        className={`relative ${fontFamilyClass} ${boldClass} ${italicClass} text-${textAlign} text-balance text-navy ${trackingClass} ${leadingClass} ${resolvedSizeClass}`}
+        className={`relative whitespace-pre-line ${fontFamilyClass} ${boldClass} ${italicClass} text-${textAlign} text-balance text-navy ${trackingClass} ${leadingClass} ${resolvedSizeClass}`}
         style={sizeStyle}
       >
         {quote}
@@ -763,7 +774,7 @@ function Block({
                 sizeTablet,
                 sizeDesktop
               );
-              const textClass = `text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
+              const textClass = `whitespace-pre-line text-ink/80 text-${block.align || "left"} ${fontFamily} ${boldClass} ${italicClass} ${trackingClass} ${leadingClass} ${resolvedSizeClass}`;
               return (
                 <Fragment key={idx}>
                   {styleElement}

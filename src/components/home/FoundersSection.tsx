@@ -16,41 +16,80 @@ const desktopLines: Line[] = [
   { text: "Nosotras te ayudamos a construir cómo.", className: accent },
 ];
 
+// Mobile (25/10): la "a" baja a la línea roja, que queda "a construir cómo.".
 const mobileLines: Line[] = [
   { text: "Tu marca tiene mucho para" },
-  { text: "decir. Nosotras te ayudamos a" },
-  { text: "construir cómo.", className: accent },
+  { text: "decir. Nosotras te ayudamos" },
+  { text: "a construir cómo.", className: accent },
 ];
 
 const fullText = desktopLines.map((l) => l.text).join(" ");
 const intro =
   "Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.";
 
-/** Manifiesto con la aparición del título de Proyectos: letra por letra cada vez que entra en pantalla (también al volver a subir). */
-function Manifesto({ lines, className }: { lines: Line[]; className: string }) {
+// Tiempos de la aparición: el título letra por letra y el texto de lectura con un fundido
+// que arranca después pero termina junto con el título (pedido de Craft, 25/10).
+const CHAR_STAGGER = 0.018;
+const CHAR_DURATION = 0.45;
+const TITLE_DELAY = 0.1;
+const BODY_DURATION = 0.7;
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+const titleChars = desktopLines.reduce((n, l) => n + l.text.replace(/ /g, "").length, 0);
+const titleTotal = TITLE_DELAY + CHAR_STAGGER * (titleChars - 1) + CHAR_DURATION;
+
+const titleVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: CHAR_STAGGER, delayChildren: TITLE_DELAY } },
+};
+
+const charVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: CHAR_DURATION, ease: EASE_OUT } },
+};
+
+const bodyVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: titleTotal - BODY_DURATION, duration: BODY_DURATION, ease: EASE_OUT },
+  },
+};
+
+/**
+ * Manifiesto con la aparición del título de Proyectos: letra por letra cada vez que entra
+ * en pantalla (también al volver a subir), con el texto de lectura entrando en fundido.
+ */
+function Manifesto({
+  lines,
+  className,
+  bodyClassName,
+}: {
+  lines: Line[];
+  className: string;
+  bodyClassName: string;
+}) {
   return (
-    <motion.p
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: "-15% 0px" }}
-      variants={titleVariants}
-      aria-label={fullText}
-      className={`font-serif text-ink/90 ${className}`}
-    >
-      {lines.map((line, lIdx) => (
-        <span key={lIdx} aria-hidden="true" className={`block whitespace-nowrap ${line.className ?? ""}`}>
-          {line.text.split(" ").map((word, wIdx) => (
-            <span key={wIdx} className="inline-block mr-[0.22em] last:mr-0">
-              {word.split("").map((char, cIdx) => (
-                <motion.span key={cIdx} variants={charVariants} className="inline-block">
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-          ))}
-        </span>
-      ))}
-    </motion.p>
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, margin: "-15% 0px" }}>
+      <motion.p variants={titleVariants} aria-label={fullText} className={`font-serif text-ink/90 ${className}`}>
+        {lines.map((line, lIdx) => (
+          <span key={lIdx} aria-hidden="true" className={`block whitespace-nowrap ${line.className ?? ""}`}>
+            {line.text.split(" ").map((word, wIdx) => (
+              <span key={wIdx} className="inline-block mr-[0.22em] last:mr-0">
+                {word.split("").map((char, cIdx) => (
+                  <motion.span key={cIdx} variants={charVariants} className="inline-block">
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
+          </span>
+        ))}
+      </motion.p>
+      <motion.p variants={bodyVariants} className={bodyClassName}>
+        {intro}
+      </motion.p>
+    </motion.div>
   );
 }
 
@@ -120,17 +159,6 @@ function MagneticImage({
     </div>
   );
 }
-
-// Mismos valores que el título de Proyectos (pages/Trabajos.tsx)
-const titleVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
-};
-
-const charVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
 
 export default function FoundersSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -223,13 +251,13 @@ export default function FoundersSection() {
       {/* DESKTOP: declaración en dos líneas, centrada entre las fotos */}
       <div className="hidden md:flex relative z-20 mx-auto w-full max-w-7xl flex-col items-center pointer-events-none">
         <div className="text-center max-w-5xl mx-auto mb-12 px-6">
+          {/* 25/10: todo más grande en la misma proporción, hasta donde entra sin pisar las fotos
+              de los costados (el renglón rojo es el más ancho). */}
           <Manifesto
             lines={desktopLines}
-            className="text-[1.6rem] lg:text-[1.9rem] xl:text-[2.6rem] min-[1400px]:text-5xl leading-[1.15] mb-3"
+            className="text-[1.6rem] lg:text-[1.75rem] xl:text-[2.7rem] min-[87.5rem]:text-[3.3rem] leading-[1.12] mb-3"
+            bodyClassName="max-w-sm lg:max-w-md xl:max-w-xl min-[87.5rem]:max-w-2xl mx-auto mt-3 text-balance text-base lg:text-lg xl:text-xl min-[87.5rem]:text-[1.4rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
           />
-          <p className="max-w-sm xl:max-w-xl min-[1400px]:max-w-2xl mx-auto mt-2 text-balance text-base xl:text-lg min-[1400px]:text-xl text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]">
-            {intro}
-          </p>
         </div>
       </div>
 
@@ -239,10 +267,13 @@ export default function FoundersSection() {
           <div className="px-1">
             <div className="mb-4 flex items-center gap-3 text-red">
               <span className="h-px w-10 bg-red/50" />
-              <span className="font-serif text-lg leading-none">01</span>
+              <span className="font-serif text-lg leading-none">About us</span>
             </div>
-            <Manifesto lines={mobileLines} className="text-[clamp(26px,8.4vw,34px)] leading-[1.14]" />
-            <p className="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide">{intro}</p>
+            <Manifesto
+              lines={mobileLines}
+              className="text-[clamp(28px,8.8vw,37px)] leading-[1.12]"
+              bodyClassName="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide"
+            />
           </div>
         }
       />
