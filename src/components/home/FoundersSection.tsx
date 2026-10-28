@@ -16,11 +16,10 @@ const desktopLines: Line[] = [
   { text: "Nosotras te ayudamos a construir cómo.", className: accent },
 ];
 
-// Mobile (25/10): la "a" baja a la línea roja, que queda "a construir cómo.".
+// Mobile: dos líneas — la primera normal, la segunda en rojo (sin el enter extra del medio).
 const mobileLines: Line[] = [
-  { text: "Tu marca tiene mucho para" },
-  { text: "decir. Nosotras te ayudamos" },
-  { text: "a construir cómo.", className: accent },
+  { text: "Tu marca tiene mucho para decir." },
+  { text: "Nosotras te ayudamos a construir cómo.", className: accent },
 ];
 
 const fullText = desktopLines.map((l) => l.text).join(" ");
@@ -266,12 +265,12 @@ export default function FoundersSection() {
         intro={
           <div className="px-1">
             <div className="mb-4 flex items-center gap-3 text-red">
-              <span className="h-px w-10 bg-red/50" />
-              <span className="font-serif text-lg leading-none">About us</span>
+              <span className="w-8 h-[1px] bg-red" />
+              <span className="text-xs tracking-widest uppercase">About us</span>
             </div>
             <Manifesto
               lines={mobileLines}
-              className="text-[clamp(28px,8.8vw,37px)] leading-[1.12]"
+              className="text-[clamp(22px,7vw,32px)] leading-[1.12]"
               bodyClassName="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide"
             />
           </div>

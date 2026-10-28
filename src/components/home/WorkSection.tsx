@@ -33,7 +33,7 @@ export default function WorkSection() {
           if (!workScrollRef.current) return 0;
           const isMobile = window.innerWidth < 768;
           // In mobile, provide extra margin so the last card passes fully into view before unpinning
-          const extraMobile = isMobile ? 100 : 0;
+          const extraMobile = isMobile ? 116 : 0;
           return workScrollRef.current.scrollWidth - window.innerWidth + extraMobile;
         };
 
@@ -62,7 +62,7 @@ export default function WorkSection() {
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-between relative">
       {/* Header */}
-      <div className="px-6 md:px-10 pt-14 sm:pt-16 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
+      <div className="px-8 md:px-10 pt-14 sm:pt-16 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
             <p className="text-xs md:text-sm tracking-widest text-cream uppercase mb-1.5 md:mb-3 flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function WorkSection() {
       </div>
       
       {/* Horizontal scroll track */}
-      <div className="flex-1 flex items-center pl-6 md:pl-10 md:pb-20 lg:pb-24">
+      <div className="flex-1 flex items-center pl-8 md:pl-10 md:pb-20 lg:pb-24">
         <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-16 md:pr-32 items-start">
           {displayList.map((w, i) => (
             // El tope para que la card entre en la sección de 100vh va en el ANCHO

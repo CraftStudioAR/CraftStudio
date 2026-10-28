@@ -160,11 +160,11 @@ export default function Contacto() {
       <div className="px-6 pt-32 pb-0 md:pt-40 md:pb-0 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
         
         {/* ENCABEZADO CENTRADO */}
-        <div className="w-full text-center flex flex-col items-center mb-16 relative z-10">
+        <div className="w-full text-center flex flex-col items-center mb-8 md:mb-16 relative z-10">
           <div>
             <Reveal>
               <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
-                <span className="w-8 md:w-12 h-[1px] bg-red" /> CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
+                <span className="w-8 md:w-12 h-[1px] bg-red" /> CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red" />
               </p>
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
@@ -491,7 +491,7 @@ export default function Contacto() {
 
         {/* Mail alineado a la derecha: link de texto (no botón). Abre el correo y además
             copia la dirección, para las compus que no tienen programa de correo. */}
-        <div className="w-full flex flex-wrap justify-end items-center gap-x-3 gap-y-1 mt-4 mb-6 md:mb-8 text-sm md:text-base">
+        <div className="w-full flex flex-wrap justify-center md:justify-end items-center gap-x-3 gap-y-1 mt-4 mb-6 md:mb-8 text-sm md:text-base">
           <span className="text-ink/60 whitespace-nowrap">Escribinos a</span>
           <a
             href={`mailto:${contactInfo.email}`}
@@ -517,7 +517,7 @@ export default function Contacto() {
           <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
             Sumate a nuestro equipo.
           </h2>
-          <p className="text-sm md:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
+          <p className="text-xs md:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
             Si compartís la manera en que Craft entiende el trabajo: con criterio, con proceso y con compromiso real, nos gustaría conocerte.
           </p>
           <a 
