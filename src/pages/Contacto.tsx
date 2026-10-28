@@ -491,7 +491,7 @@ export default function Contacto() {
 
         {/* Mail alineado a la derecha: link de texto (no botón). Abre el correo y además
             copia la dirección, para las compus que no tienen programa de correo. */}
-        <div className="w-full flex flex-wrap justify-center md:justify-end items-center gap-x-3 gap-y-1 mt-4 mb-6 md:mb-8 text-sm md:text-base relative">
+        <div className="w-full flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mt-4 mb-6 md:mb-8 text-sm md:text-base relative">
           <span className="text-ink/60 whitespace-nowrap">Escribinos a</span>
           <a
             href={`mailto:${contactInfo.email}`}
