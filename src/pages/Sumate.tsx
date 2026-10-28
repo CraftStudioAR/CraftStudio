@@ -159,7 +159,7 @@ export default function Sumate() {
                 <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                   Contanos quién sos
                 </h1>
-                <p className="mt-4 mx-auto max-w-3xl text-lg md:text-xl opacity-70 font-medium text-balance">
+                <p className="mt-3 md:mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
                   Buscamos personas que disfruten proponer, preguntar, construir en equipo y meterse de lleno en cada proyecto. Si te sentís identificado/a, nos encantaría conocerte!
                 </p>
               </Reveal>
