@@ -26,7 +26,7 @@ const mobileLines: Line[] = [
 
 const fullText = desktopLines.map((l) => l.text).join(" ");
 const intro =
-  "Somos un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo.";
+  "Somos un partner de comunicación para empresas que buscan\ntransformar o potenciar la forma en la que se presentan al mundo.";
 
 // Tiempos de la aparición: el título letra por letra y el texto de lectura con un fundido
 // que arranca después pero termina junto con el título (pedido de Craft, 25/10).
@@ -257,7 +257,7 @@ export default function FoundersSection() {
           <Manifesto
             lines={desktopLines}
             className="text-[1.6rem] lg:text-[1.75rem] xl:text-[2.7rem] min-[87.5rem]:text-[3.3rem] leading-[1.12] mb-3"
-            bodyClassName="max-w-sm lg:max-w-md xl:max-w-3xl min-[87.5rem]:max-w-4xl mx-auto mt-3 text-base lg:text-lg xl:text-xl min-[87.5rem]:text-[1.4rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
+            bodyClassName="max-w-sm lg:max-w-md xl:max-w-3xl min-[87.5rem]:max-w-4xl mx-auto mt-3 whitespace-pre-line text-base lg:text-lg xl:text-xl min-[87.5rem]:text-[1.4rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
           />
         </div>
       </div>
