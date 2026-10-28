@@ -157,13 +157,13 @@ export default function Contacto() {
           { name: "Contacto", url: "/contacto" }
         ])}
       />
-      <div className="px-6 pt-32 pb-0 md:pt-40 md:pb-0 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
+      <div className="px-6 pt-24 pb-0 md:pt-40 md:pb-0 md:px-10 mx-auto max-w-5xl flex flex-col items-center relative z-10">
         
         {/* ENCABEZADO CENTRADO */}
         <div className="w-full text-center flex flex-col items-center mb-8 md:mb-16 relative z-10">
           <div>
             <Reveal>
-              <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
+              <p className="mb-3 md:mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
                 <span className="w-8 md:w-12 h-[1px] bg-red" /> CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red" />
               </p>
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
