@@ -16,10 +16,12 @@ const desktopLines: Line[] = [
   { text: "Nosotras te ayudamos a construir cómo.", className: accent },
 ];
 
-// Mobile: dos líneas — la primera normal, la segunda en rojo (sin el enter extra del medio).
+// Mobile: cortes originales — líneas cortas para que entren en pantalla.
+// La "a" baja a la línea roja para que quede "a construir cómo." en rojo.
 const mobileLines: Line[] = [
-  { text: "Tu marca tiene mucho para decir." },
-  { text: "Nosotras te ayudamos a construir cómo.", className: accent },
+  { text: "Tu marca tiene mucho para" },
+  { text: "decir. Nosotras te ayudamos" },
+  { text: "a construir cómo.", className: accent },
 ];
 
 const fullText = desktopLines.map((l) => l.text).join(" ");
@@ -254,7 +256,7 @@ export default function FoundersSection() {
               de los costados (el renglón rojo es el más ancho). */}
           <Manifesto
             lines={desktopLines}
-            className="text-[1.6rem] lg:text-[1.75rem] xl:text-[2.7rem] min-[87.5rem]:text-[3.3rem] leading-[1.12] mb-3"
+            className="text-[1.6rem] lg:text-[1.75rem] xl:text-[2.4rem] min-[87.5rem]:text-[2.8rem] leading-[1.12] mb-3"
             bodyClassName="max-w-sm lg:max-w-md xl:max-w-xl min-[87.5rem]:max-w-2xl mx-auto mt-3 text-balance text-base lg:text-lg xl:text-xl min-[87.5rem]:text-[1.4rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
           />
         </div>
@@ -270,7 +272,7 @@ export default function FoundersSection() {
             </div>
             <Manifesto
               lines={mobileLines}
-              className="text-[clamp(22px,7vw,32px)] leading-[1.12]"
+              className="text-[clamp(28px,8.8vw,37px)] leading-[1.12]"
               bodyClassName="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide"
             />
           </div>
