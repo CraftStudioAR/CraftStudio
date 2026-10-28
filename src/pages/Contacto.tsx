@@ -514,7 +514,9 @@ export default function Contacto() {
       {/* SUMATE AL EQUIPO BANNER */}
       <div className="px-6 pt-12 md:pt-16 pb-28 md:pb-36 mx-auto max-w-[900px] flex flex-col items-center text-center">
         <Reveal>
-          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">SUMATE AL EQUIPO</span>
+          <p className="text-[10px] tracking-widest text-red uppercase font-bold flex items-center justify-center gap-4 mb-4">
+            <span className="w-8 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 h-[1px] bg-red" />
+          </p>
           <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
             Sumate a nuestro equipo.
           </h2>
