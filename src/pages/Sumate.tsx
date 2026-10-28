@@ -154,7 +154,7 @@ export default function Sumate() {
             <div>
               <Reveal>
                 <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
-                  <span className="w-8 md:w-12 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 md:w-12 h-[1px] bg-red hidden md:block" />
+                  <span className="w-8 md:w-12 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 md:w-12 h-[1px] bg-red" />
                 </p>
                 <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                   Contanos quién sos
@@ -393,7 +393,7 @@ export default function Sumate() {
           </div>
 
           {/* Mail alineado a la derecha con presencia y estilo */}
-          <div className="w-full flex justify-end mt-6 mb-12">
+          <div className="w-full flex justify-center md:justify-end mt-6 mb-12">
             <a
               href={`mailto:${contactInfo.email}`}
               className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm md:text-base font-medium tracking-wide shadow-sm"
