@@ -169,7 +169,7 @@ export default function Contacto() {
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
               </h1>
-              <p className="mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
+              <p className="mt-3 md:mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
                 Nos gustaría saber un poco más sobre vos, tu marca y lo que estás buscando. Completá este breve formulario y nos pondremos en contacto con vos lo antes posible!
               </p>
             </Reveal>
@@ -517,7 +517,7 @@ export default function Contacto() {
           <p className="text-[10px] tracking-widest text-red uppercase font-bold flex items-center justify-center gap-4 mb-4">
             <span className="w-8 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 h-[1px] bg-red" />
           </p>
-          <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-5">
+          <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-2 md:mb-5">
             Sumate a nuestro equipo.
           </h2>
           <p className="text-xs md:text-lg opacity-70 mb-8 max-w-xl mx-auto text-balance leading-relaxed">
