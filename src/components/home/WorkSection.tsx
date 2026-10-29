@@ -62,7 +62,7 @@ export default function WorkSection() {
   return (
     <section ref={workContainerRef} data-theme="dark" className="bg-ink text-cream h-[100dvh] md:h-screen overflow-hidden flex flex-col justify-between relative">
       {/* Header */}
-      <div className="px-8 md:px-10 pt-7 sm:pt-10 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
+      <div className="px-8 md:px-10 pt-10 md:pt-10 lg:pt-14 pb-0 md:pb-4 flex-shrink-0">
         <Reveal>
           <div className="flex flex-col items-start max-w-7xl">
             <p className="text-xs md:text-sm tracking-widest text-cream uppercase mb-1.5 md:mb-3 flex items-center gap-3">
