@@ -96,7 +96,7 @@ export default function WorkSection() {
       </div>
 
       {/* Mobile Bottom Navigation Bar (No "Desliza" text) */}
-      <div className="px-6 pb-14 sm:pb-16 pt-0 flex justify-end md:hidden z-40 flex-shrink-0">
+      <div className="px-6 pb-20 sm:pb-24 pt-0 flex justify-end md:hidden z-40 flex-shrink-0">
         <Link
           to="/trabajos"
           className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-white text-ink font-semibold text-xs shadow-xl active:scale-95 transition-transform"
