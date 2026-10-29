@@ -98,7 +98,7 @@ export default function WorkCard({
       {/* En la grilla lo importante es entender rápido qué se desarrolló; el detalle
           del proceso vive dentro del caso. Los colores heredan del contexto porque
           la tarjeta se usa sobre fondo oscuro (home) y sobre crema (/trabajos). */}
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="mt-3 sm:mt-4 flex flex-col gap-2 sm:gap-3">
         <div className="flex items-baseline justify-between gap-4">
           <h3 className="text-current text-sm sm:text-base font-medium leading-snug opacity-90">
             {work.title ?? work.client}
