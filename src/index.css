@@ -56,6 +56,10 @@
 }
 
 @layer utilities {
+  /* Safe-area padding para iPhone con barra de Safari/home indicator */
+  .pb-safe {
+    padding-bottom: max(5rem, calc(2.5rem + env(safe-area-inset-bottom)));
+  }
   .font-serif-italic {
     font-family: var(--font-serif);
     font-style: italic;
