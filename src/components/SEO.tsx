@@ -14,7 +14,7 @@ export interface SEOProps {
 const DEFAULT_DOMAIN = "https://craftstudio.com.ar";
 const DEFAULT_TITLE = "Craft Studio";
 const DEFAULT_DESCRIPTION =
-  "Craft Studio es un partner de comunicación para empresas que buscan transformar o potenciar la forma en la que se presentan al mundo. Branding, identidad visual y estrategia en Buenos Aires.";
+  "Construimos la comunicación con la que las empresas se presentan al mundo. Estudio de identidad visual, branding y comunicación estratégica en Buenos Aires.";
 const DEFAULT_KEYWORDS =
   "Craft Studio, branding, identidad visual, comunicación estratégica, estrategia de marca, dirección de arte, growth marketing, estudio de diseño Buenos Aires, rebranding";
 const DEFAULT_OG_IMAGE = "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg";

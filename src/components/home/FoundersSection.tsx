@@ -256,8 +256,8 @@ export default function FoundersSection() {
               de los costados (el renglón rojo es el más ancho). */}
           <Manifesto
             lines={desktopLines}
-            className="text-[1.6rem] lg:text-[1.75rem] xl:text-[2.7rem] min-[87.5rem]:text-[3.3rem] leading-[1.12] mb-3"
-            bodyClassName="max-w-xl lg:max-w-2xl xl:max-w-3xl min-[87.5rem]:max-w-4xl mx-auto mt-3 whitespace-pre-line text-base lg:text-lg xl:text-xl min-[87.5rem]:text-[1.4rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
+            className="text-[2rem] lg:text-[2.5rem] xl:text-[2.85rem] min-[87.5rem]:text-[3.3rem] leading-[1.12] mb-3"
+            bodyClassName="max-w-xl lg:max-w-2xl xl:max-w-3xl min-[87.5rem]:max-w-4xl mx-auto mt-4 whitespace-pre-line text-sm md:text-base lg:text-base xl:text-lg min-[87.5rem]:text-[1.15rem] leading-snug text-ink/80 font-sans tracking-wide [text-shadow:_0_0_10px_#FEFAF9,_0_0_20px_#FEFAF9]"
           />
         </div>
       </div>
@@ -272,8 +272,8 @@ export default function FoundersSection() {
             </div>
             <Manifesto
               lines={mobileLines}
-              className="text-[clamp(28px,8.8vw,37px)] leading-[1.12]"
-              bodyClassName="mt-3 max-w-[34ch] text-[12.5px] leading-relaxed text-ink/80 font-sans tracking-wide"
+              className="text-[29px] leading-[1.15]"
+              bodyClassName="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-ink/80 font-sans tracking-wide"
             />
           </div>
         }

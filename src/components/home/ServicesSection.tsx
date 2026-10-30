@@ -17,7 +17,7 @@ export default function ServicesSection() {
               Dos formas de trabajar.<br />
               <span className="font-serif italic font-medium text-red">Una solución única</span> para cada marca.
             </h2>
-            <p className="text-base md:text-lg text-ink/80 max-w-3xl text-balance font-sans leading-snug md:leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-ink/80 max-w-3xl text-balance font-sans leading-snug md:leading-relaxed">
               Partimos de dos modalidades y construimos dentro de cada una la solución que mejor responde a las necesidades, objetivos y momento de cada proyecto.
             </p>
           </div>

@@ -9,7 +9,7 @@ export const organizationSchema = {
   "url": BASE_URL,
   "logo": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg",
   "image": "https://res.cloudinary.com/kre7pjni/image/upload/v1788450125/nosotras_j5jzzu.jpg",
-  "description": "Estudio de identidad visual, branding y comunicación estratégica en Buenos Aires, Argentina.",
+  "description": "Construimos la comunicación con la que las empresas se presentan al mundo. Estudio de identidad visual, branding y comunicación estratégica en Buenos Aires, Argentina.",
   "email": "hola@craftstudio.com.ar",
   "address": {
     "@type": "PostalAddress",
@@ -37,7 +37,7 @@ export const websiteSchema = {
   "@id": `${BASE_URL}/#website`,
   "url": BASE_URL,
   "name": "Craft Studio",
-  "description": "Estudio de identidad visual y comunicación estratégica.",
+  "description": "Construimos la comunicación con la que las empresas se presentan al mundo.",
   "publisher": {
     "@id": `${BASE_URL}/#organization`
   },

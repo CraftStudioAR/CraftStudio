@@ -99,7 +99,7 @@ export default function HeroSection() {
         
         <div data-hero-tagline className="-mt-6 sm:-mt-8 md:-mt-14 opacity-0 z-20 flex flex-col items-center w-full px-4 sm:px-6 relative">
           <div className="h-10 sm:h-14 md:h-20 flex items-center justify-center">
-            <h2 className="flex items-center text-[18px] xs:text-[21px] sm:text-[30px] md:text-[40px] text-cream tracking-wide text-center m-0 whitespace-nowrap">
+            <h2 className="flex items-center text-[20px] sm:text-[30px] md:text-[40px] text-cream tracking-wide text-center m-0 whitespace-nowrap">
               <span className="font-sans">we</span>
               <span className="relative inline-grid place-items-center h-[1.8em] mx-1.5 sm:mx-2 md:mx-4 [perspective:600px]">
                 {/* Reserva el ancho de la palabra más larga: ninguna se pega a "we" ni a "communication" */}
@@ -107,7 +107,7 @@ export default function HeroSection() {
                   <span
                     key={w}
                     aria-hidden="true"
-                    className="invisible col-start-1 row-start-1 font-script text-[26px] xs:text-[30px] sm:text-5xl md:text-6xl px-1 whitespace-nowrap"
+                    className="invisible col-start-1 row-start-1 font-script text-[28px] sm:text-5xl md:text-6xl px-1 whitespace-nowrap"
                   >
                     {w}
                   </span>
@@ -138,7 +138,7 @@ export default function HeroSection() {
                       transformStyle: "preserve-3d",
                       backfaceVisibility: "hidden",
                     }}
-                    className="absolute font-script text-[26px] xs:text-[30px] sm:text-5xl md:text-6xl text-cream pt-0.5 sm:pt-1 md:pt-2 whitespace-nowrap drop-shadow-md"
+                    className="absolute font-script text-[28px] sm:text-5xl md:text-6xl text-cream pt-0.5 sm:pt-1 md:pt-2 whitespace-nowrap drop-shadow-md"
                   >
                     {WORDS[currentWordIndex]}
                   </motion.span>
