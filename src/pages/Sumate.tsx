@@ -47,6 +47,17 @@ export default function Sumate() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [mailCopied, setMailCopied] = useState(false);
+
+  const copyMail = () => {
+    navigator.clipboard?.writeText(contactInfo.email).then(
+      () => {
+        setMailCopied(true);
+        window.setTimeout(() => setMailCopied(false), 2200);
+      },
+      () => {}
+    );
+  };
   
   const [area, setArea] = useState<string | null>(null);
   const [otherArea, setOtherArea] = useState("");
@@ -392,27 +403,46 @@ export default function Sumate() {
             )}
           </div>
 
-          {/* Mail: botón en mobile, texto plano centrado en desktop */}
-          <div className="w-full flex justify-center mt-6 mb-12">
+          {/* Mail: botón en mobile, texto plano centrado en desktop con aviso al lado */}
+          <div className="w-full flex flex-col items-center justify-center mt-6 mb-12">
             {/* Mobile: botón pill */}
-            <a
-              href={`mailto:${contactInfo.email}`}
-              className="md:hidden group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm font-medium tracking-wide shadow-sm"
-            >
-              <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              <span>{contactInfo.email}</span>
-            </a>
-            {/* Desktop: texto plano estilo Contacto */}
-            <span className="hidden md:flex items-center gap-x-3 text-base text-ink/60">
-              Escribinos a
+            <div className="md:hidden flex flex-col items-center">
               <a
                 href={`mailto:${contactInfo.email}`}
+                onClick={copyMail}
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white border border-ink/15 text-navy hover:text-red hover:border-red/40 hover:shadow-md transition-all duration-300 text-sm font-medium tracking-wide shadow-sm"
+              >
+                <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span>{contactInfo.email}</span>
+              </a>
+              <span
+                role="status"
+                aria-live="polite"
+                className={`text-xs text-red font-medium mt-2 transition-opacity duration-200 ${mailCopied ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+              >
+                Mail copiado
+              </span>
+            </div>
+
+            {/* Desktop: texto plano estilo Contacto con aviso JUSTO AL LADO */}
+            <div className="hidden md:flex items-center justify-center gap-x-3 text-base text-ink/60">
+              <span>Escribinos a</span>
+              <a
+                href={`mailto:${contactInfo.email}`}
+                onClick={copyMail}
                 className="inline-flex items-center gap-2 font-medium text-navy underline decoration-red/40 underline-offset-4 hover:text-red hover:decoration-red transition-colors duration-200"
               >
                 <svg className="w-4 h-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                {contactInfo.email}
+                <span>{contactInfo.email}</span>
               </a>
-            </span>
+              <span
+                role="status"
+                aria-live="polite"
+                className={`inline-flex items-center text-xs font-semibold text-red bg-red/10 px-2.5 py-0.5 rounded-full transition-all duration-200 ${mailCopied ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+              >
+                Mail copiado
+              </span>
+            </div>
           </div>
       </div>
     </div>
