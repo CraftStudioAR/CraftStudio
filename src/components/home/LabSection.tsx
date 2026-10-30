@@ -17,20 +17,22 @@ export default function LabSection() {
       />
 
       <div className="w-full relative z-10 px-6 md:px-10 max-w-7xl mx-auto">
-        <Reveal className="w-full">
-          <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
-            <div className="glass-sheen" />
-            <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-center gap-4 sm:gap-6 lg:gap-20 relative z-10 w-full lg:translate-x-4">
-              
-              {/* Title */}
-              <div className="flex-shrink-0">
+        <div className="glass-panel glass-panel-dark relative overflow-hidden rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-16 lg:p-20 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.25)] backdrop-blur-2xl">
+          <div className="glass-sheen" />
+          <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-center gap-4 sm:gap-6 lg:gap-20 relative z-10 w-full lg:translate-x-4">
+            
+            {/* Title */}
+            <div className="flex-shrink-0">
+              <Reveal>
                 <h2 className="font-serif italic text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight text-cream drop-shadow-sm text-left whitespace-nowrap">
                   Craft <br className="hidden sm:inline" />Lab<span className="text-red">.</span>
                 </h2>
-              </div>
-              
-              {/* Text Block */}
-              <div className="max-w-[450px] text-left">
+              </Reveal>
+            </div>
+            
+            {/* Text Block */}
+            <div className="max-w-[450px] text-left">
+              <Reveal delay={0.1}>
                 <p className="text-xs md:text-sm tracking-widest uppercase mb-4 md:mb-6 flex items-center gap-6 text-cream font-bold drop-shadow-sm justify-start">
                   <span className="w-12 h-[1.5px] bg-cream" /> Manifiesto Editorial
                 </p>
@@ -65,11 +67,11 @@ export default function LabSection() {
                     </Link>
                   </Magnetic>
                 </div>
-              </div>
-              
+              </Reveal>
             </div>
+            
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
