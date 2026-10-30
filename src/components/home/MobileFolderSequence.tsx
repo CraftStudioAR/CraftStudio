@@ -96,11 +96,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
     const photoNodes = photoRefs.current.filter(Boolean) as HTMLDivElement[];
 
-    // En pantallas táctiles el scroll lo maneja GSAP: así la barra del navegador no se
-    // esconde ni aparece mientras la sección está fijada (eso cambiaba el alto de la
-    // pantalla y hacía temblar el pin).
-    const normalizer = ScrollTrigger.isTouch === 1 ? ScrollTrigger.normalizeScroll(true) : null;
-
     const ctx = gsap.context(() => {
       // Timeline ultra fluida con scrub 1 para máxima suavidad al tacto
       const tl = gsap.timeline({
@@ -195,7 +190,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
     return () => {
       ctx.revert();
-      normalizer?.kill();
     };
   }, []);
 

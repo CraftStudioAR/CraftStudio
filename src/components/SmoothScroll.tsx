@@ -13,9 +13,17 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.08,
+      // Desktop: suave, desaceleración lenta y flotante
+      duration: 1.35,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 0.85,
+
+      // Mobile / Touch: activar amortiguación en celular para que sea suave y controlado
+      syncTouch: true,
+      syncTouchLerp: 0.055,
+      touchMultiplier: 0.88,
+      touchInertiaExponent: 1.6,
     });
     lenisRef.current = lenis;
 
