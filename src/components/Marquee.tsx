@@ -31,7 +31,7 @@ export default function Marquee({
                     src={cld(item.publicId, "f_auto,q_auto,h_120")}
                     alt={item.alt}
                     loading="lazy"
-                    className="mx-10 md:mx-16 h-8 md:h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
+                    className="mx-8 md:mx-16 h-10 md:h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
                   />
                 )}
               </span>
