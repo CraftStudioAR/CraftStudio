@@ -30,7 +30,9 @@ export default function WorkSection() {
     if (!workContainerRef.current) return;
     const trigger = ScrollTrigger.create({
       trigger: workContainerRef.current,
-      start: "top 80%",
+      // Activa en cuanto el borde superior de Proyectos toca el fondo de la pantalla,
+      // así el modo soft ya está listo ANTES de que sea visible (sin salto brusco al bajar desde About)
+      start: "top bottom",
       end: "bottom top",
       onEnter: () => setScrollSoftness("soft"),
       onLeaveBack: () => setScrollSoftness("agile"),
