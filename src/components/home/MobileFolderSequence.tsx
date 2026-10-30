@@ -109,6 +109,15 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          // Al soltar el pin, resetear la velocidad acumulada de Lenis para que
+          // Proyectos arranque desde cero (sin el burst de inercia del About)
+          onLeave: () => {
+            const lenis = (window as any).__craftLenis;
+            if (lenis) {
+              lenis.stop();
+              requestAnimationFrame(() => lenis.start());
+            }
+          },
         },
       });
 
