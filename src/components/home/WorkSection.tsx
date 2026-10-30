@@ -45,7 +45,7 @@ export default function WorkSection() {
             start: "top top",
             end: () => `+=${getScrollDistance()}`,
             pin: true,
-            scrub: 1,
+            scrub: 0.6,
             invalidateOnRefresh: true,
             onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
             onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
