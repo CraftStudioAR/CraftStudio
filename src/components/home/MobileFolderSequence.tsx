@@ -1,7 +1,6 @@
 import { useRef, useEffect, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { setScrollSoftness } from "../SmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,15 +108,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          // Al soltar el pin, resetear la velocidad acumulada de Lenis para que
-          // Proyectos arranque desde cero (sin el burst de inercia del About)
-          onLeave: () => {
-            const lenis = (window as any).__craftLenis;
-            if (lenis) {
-              lenis.stop();
-              requestAnimationFrame(() => lenis.start());
-            }
-          },
         },
       });
 
@@ -196,22 +186,6 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
       // FASE 3: el collage queda quieto y centrado un tramo antes de que se suelte el pin.
       tl.to({}, { duration: 0.2 });
-
-      // =========================================================================
-      // PRE-ACTIVACIÓN DEL MODO SOFT:
-      // Al llegar al 75% del recorrido del pin, activamos el freno (soft scroll)
-      // ANTES de que el pin se libere. Así, cuando el viewport empieza a moverse hacia
-      // Proyectos, Lenis ya está frenado y no hay salto brusco de velocidad.
-      // El pin dura +=280% del viewport. 75% de 280% = 210% del viewport.
-      // =========================================================================
-      ScrollTrigger.create({
-        trigger: section,
-        start: () => `top+=${window.innerHeight * 2.1} top`,
-        end: () => `top+=${window.innerHeight * 2.8} top`,
-        onEnter: () => setScrollSoftness("soft"),
-        onLeaveBack: () => setScrollSoftness("agile"),
-        invalidateOnRefresh: true,
-      });
     }, sectionRef);
 
     return () => {

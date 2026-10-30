@@ -7,7 +7,6 @@ import Magnetic from "../Magnetic";
 import WorkCard from "../WorkCard";
 import { getProjects } from "../../lib/supabaseClient";
 import type { WorkCase } from "../../content/brand";
-import { setScrollSoftness } from "../SmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,27 +21,6 @@ export default function WorkSection() {
 
   useEffect(() => {
     getProjects().then(setProjectsList);
-  }, []);
-
-  // Activa scroll suave/amortiguado a partir de Proyectos hacia abajo,
-  // y restaura el modo ágil ("como antes") al volver a About o Hero
-  useEffect(() => {
-    if (!workContainerRef.current) return;
-    const trigger = ScrollTrigger.create({
-      trigger: workContainerRef.current,
-      // Activa en cuanto el borde superior de Proyectos toca el fondo de la pantalla,
-      // así el modo soft ya está listo ANTES de que sea visible (sin salto brusco al bajar desde About)
-      start: "top bottom",
-      end: "bottom top",
-      onEnter: () => setScrollSoftness("soft"),
-      onLeaveBack: () => setScrollSoftness("agile"),
-      onEnterBack: () => setScrollSoftness("soft"),
-    });
-
-    return () => {
-      trigger.kill();
-      setScrollSoftness("agile");
-    };
   }, []);
 
   useEffect(() => {
