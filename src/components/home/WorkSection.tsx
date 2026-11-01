@@ -11,7 +11,7 @@ import type { WorkCase } from "../../content/brand";
 gsap.registerPlugin(ScrollTrigger);
 
 // Px de scroll por cada px que avanzan las cards: sin esto la sección dura menos de la mitad que el About.
-const SCROLL_PACE = 2.2;
+const SCROLL_PACE = 3;
 
 export default function WorkSection() {
   const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
