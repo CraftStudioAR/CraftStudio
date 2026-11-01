@@ -37,7 +37,7 @@ export default function WorkSection() {
           const isMobile = window.innerWidth < 768;
           // In mobile, provide extra margin so the last card passes fully into view before unpinning
           const extraMobile = isMobile ? 116 : 0;
-          return workScrollRef.current.scrollWidth - window.innerWidth + extraMobile;
+          return Math.max(0, workScrollRef.current.scrollWidth - window.innerWidth + extraMobile);
         };
 
         gsap.to(workScrollRef.current, {
@@ -50,11 +50,20 @@ export default function WorkSection() {
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
-            onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
-            onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
-            onEnterBack: () => window.dispatchEvent(new Event("nav-force-hide")),
-            onLeaveBack: () => window.dispatchEvent(new Event("nav-force-show")),
           }
+        });
+
+        // La barra se oculta mientras dura la sección. En pantallas donde entran todas
+        // las cards no hay pin, así que se usa el alto de la pantalla.
+        ScrollTrigger.create({
+          trigger: workContainerRef.current,
+          start: "top top",
+          end: () => `+=${getScrollDistance() * SCROLL_PACE || window.innerHeight}`,
+          invalidateOnRefresh: true,
+          onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
+          onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
+          onEnterBack: () => window.dispatchEvent(new Event("nav-force-hide")),
+          onLeaveBack: () => window.dispatchEvent(new Event("nav-force-show")),
         });
       }
     }, workContainerRef);

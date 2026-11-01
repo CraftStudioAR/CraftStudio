@@ -313,7 +313,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
               <span className="font-sans font-semibold text-[14px] tracking-tight text-ink">
                 Craft Studio
               </span>
-              <span className="font-mono text-[9.5px] tracking-wider text-ink/50 uppercase">
+              <span className="font-mono text-[11px] tracking-wider text-ink/50 uppercase">
                 ###
               </span>
             </div>
@@ -323,7 +323,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
 
       {/* 3. Indicador de scroll */}
       <div className="relative z-30 text-center flex-shrink-0 pt-1">
-        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-ink/35">
+        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-ink/60">
           Deslizá para explorar
         </p>
       </div>

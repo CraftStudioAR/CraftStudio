@@ -164,10 +164,10 @@ export default function Sumate() {
           <div className="w-full text-center flex flex-col items-center mb-10 relative z-10">
             <div>
               <Reveal>
-                <p className="mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
+                <p className="mb-6 text-[11px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
                   <span className="w-8 md:w-12 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 md:w-12 h-[1px] bg-red" />
                 </p>
-                <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
+                <h1 className="font-serif text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                   Contanos quién sos
                 </h1>
                 <p className="mt-3 md:mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
@@ -212,7 +212,7 @@ export default function Sumate() {
                           key={tab.id}
                           onClick={() => navigateToStep(tab.id)}
                           disabled={!isPast && !isActive}
-                          className={`relative flex-1 flex justify-center items-center px-1 md:px-2 lg:px-4 py-3 md:py-5 rounded-t-xl md:rounded-t-xl font-bold text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
+                          className={`relative flex-1 flex justify-center items-center px-1 md:px-2 lg:px-4 py-3 md:py-5 rounded-t-xl md:rounded-t-xl font-bold text-[11px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
                           ${isActive 
                             ? "bg-white border-ink/10 text-navy z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
                             : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
@@ -244,7 +244,7 @@ export default function Sumate() {
                           transition={{ duration: 0.5 }}
                           className="w-full flex flex-col p-6 md:p-12 bg-white flex-1"
                         >
-                          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">01 / El Rol</span>
+                          <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">01 / El Rol</span>
                           <h2 className="font-serif italic text-2xl md:text-4xl mb-6 md:mb-8 text-navy">¿En qué área te desarrollás?</h2>
                           
                           <div className="flex flex-wrap gap-2 md:gap-3">
@@ -253,7 +253,7 @@ export default function Sumate() {
                                 key={opt}
                                 type="button"
                                 onClick={() => setArea(opt)}
-                                className={`rounded-lg border px-4 py-2 md:px-6 md:py-3 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                className={`rounded-lg border px-4 py-3 md:px-6 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                   area === opt
                                     ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                     : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
@@ -271,7 +271,7 @@ export default function Sumate() {
                           )}
 
                           <div className="mt-8 pt-8 border-t border-ink/5">
-                            <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                            <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
                               ¿Por qué te interesa sumarte a Craft? *
                             </label>
                             <textarea
@@ -302,11 +302,11 @@ export default function Sumate() {
                           transition={{ duration: 0.5 }}
                           className="w-full flex flex-col p-6 md:p-12 bg-white flex-1"
                         >
-                          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">02 / Experiencia</span>
+                          <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">02 / Experiencia</span>
                           <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tu Experiencia</h2>
                           
                           <div className="mb-8">
-                            <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                            <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
                               Contanos un poco de vos. ¿Qué tareas llevás a cabo en tu trabajo del día a día? *
                             </label>
                             <textarea
@@ -320,7 +320,7 @@ export default function Sumate() {
                           </div>
 
                           <div className="pt-8 border-t border-ink/5">
-                            <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                            <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
                               ¿Dónde podemos ver tu trabajo? Dejanos el link de tu CV y portfolio. *
                             </label>
                             <textarea
@@ -334,7 +334,7 @@ export default function Sumate() {
                           </div>
 
                           <div className="flex justify-between items-center mt-auto pt-6">
-                            <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                            <button type="button" onClick={prevStep} className="group flex items-center text-[11px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                               <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                               Atrás
                             </button>
@@ -355,7 +355,7 @@ export default function Sumate() {
                           transition={{ duration: 0.5 }}
                           className="w-full flex flex-col p-6 md:p-12 bg-white flex-1"
                         >
-                          <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">03 / Tus Datos</span>
+                          <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">03 / Tus Datos</span>
                           <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos Personales</h2>
                           
                           <div className="flex flex-col gap-6 flex-1">
@@ -370,21 +370,21 @@ export default function Sumate() {
                           </div>
 
                           <div className="flex justify-between items-center mt-auto pt-6">
-                             <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                             <button type="button" onClick={prevStep} className="group flex items-center text-[11px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                                <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                                Atrás
                              </button>
                              
                              <div className="flex flex-col items-end gap-2">
                                {submitError && (
-                                 <p className="text-red text-[10px] font-bold uppercase tracking-widest mb-1 animate-fadeIn">
+                                 <p className="text-red text-[11px] font-bold uppercase tracking-widest mb-1 animate-fadeIn">
                                    {submitError}
                                  </p>
                                )}
                                <Magnetic strength={0.2}>
                                  <button
                                    type="submit"
-                                   className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613] cursor-pointer"
+                                   className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[11px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613] cursor-pointer"
                                    disabled={!formData.nombre || !formData.ciudad || !formData.telefono || !formData.email || submitting}
                                  >
                                    {submitting ? 'Enviando...' : 'Enviar Perfil'}
@@ -457,7 +457,7 @@ function NextButton({ onClick, disabled }: { onClick: () => void; disabled: bool
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="group flex items-center gap-3 text-[10px] md:text-xs font-bold tracking-widest uppercase px-5 md:px-6 py-3 rounded-full transition-all disabled:opacity-30 hover:-translate-y-1 shadow-lg bg-ink text-cream hover:bg-navy"
+      className="group flex items-center gap-3 text-[11px] md:text-xs font-bold tracking-widest uppercase px-5 md:px-6 py-3 rounded-full transition-all disabled:opacity-30 hover:-translate-y-1 shadow-lg bg-ink text-cream hover:bg-navy"
     >
       Siguiente
       <svg className="w-4 h-4 inline-block transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -468,7 +468,7 @@ function NextButton({ onClick, disabled }: { onClick: () => void; disabled: bool
 function Field({ label, name, type = "text", value, onChange }: { label: string; name: string; type?: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   return (
     <div className="flex flex-col relative group">
-      <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-2 group-focus-within:text-red group-focus-within:opacity-100 transition-all">
+      <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-2 group-focus-within:text-red group-focus-within:opacity-100 transition-all">
         {label}
       </label>
       <input

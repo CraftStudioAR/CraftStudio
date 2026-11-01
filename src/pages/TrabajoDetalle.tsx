@@ -110,7 +110,7 @@ export default function TrabajoDetalle() {
           <div className="mb-10">
             <Link 
               to="/trabajos"
-              className="inline-flex items-center gap-3 text-xs tracking-widest uppercase font-bold text-red hover:opacity-70 transition-opacity"
+              className="inline-flex items-center gap-3 py-3 text-xs tracking-widest uppercase font-bold text-red hover:opacity-70 transition-opacity"
             >
               <span>←</span>
               <span className="border-b border-red/30 pb-0.5">Volver a todos los trabajos</span>
@@ -140,7 +140,7 @@ export default function TrabajoDetalle() {
                   <motion.h1
                     id={titleId}
                     variants={itemVariants}
-                    className={`font-serif text-[#0a0424] text-balance ${
+                    className={`font-serif text-[#0a0424] text-balance max-[22.5rem]:!text-[2.5rem] ${
                       project.titleStyle?.bold ? 'font-bold' : 'font-normal'
                     } ${
                       project.titleStyle?.italic !== false ? 'italic' : 'not-italic'
@@ -214,18 +214,18 @@ export default function TrabajoDetalle() {
             className="lg:col-span-5 flex flex-col gap-4 md:gap-10 lg:pt-6"
           >
             <motion.div variants={itemVariants} className="flex flex-col gap-1 md:gap-3">
-              <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Modalidad</h4>
+              <h4 className="text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Modalidad</h4>
               <p className="text-base md:text-2xl font-medium">{project.category}</p>
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex flex-col gap-1 md:gap-3">
-              <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Año</h4>
+              <h4 className="text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Año</h4>
               <p className="text-base md:text-2xl font-medium">{project.year}</p>
             </motion.div>
 
             {project.scope && project.scope.length > 0 && (
               <motion.div variants={itemVariants} className="flex flex-col gap-2 md:gap-4">
-                <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Alcance del proyecto</h4>
+                <h4 className="text-[11px] md:text-xs font-bold tracking-widest uppercase text-ink/40">Alcance del proyecto</h4>
                 <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {project.scope.map((item) => (
                     <span

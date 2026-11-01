@@ -162,7 +162,7 @@ export default function Nav() {
               to={item.to}
               data-cursor="Ver"
               className={({ isActive }) =>
-                `relative py-1 transition-opacity hover:opacity-60 z-10 ${isActive ? "opacity-100" : "opacity-70"}`
+                `relative py-1 before:absolute before:inset-x-0 before:-inset-y-2 before:content-[''] transition-opacity hover:opacity-60 z-10 ${isActive ? "opacity-100" : "opacity-70"}`
               }
             >
               {({ isActive }) => (
@@ -228,7 +228,7 @@ export default function Nav() {
               
               <div className="flex justify-between items-end">
                 <div className="flex flex-col gap-2">
-                  <p className="text-[10px] tracking-widest uppercase text-cream/40">Say Hello</p>
+                  <p className="text-[11px] tracking-widest uppercase text-cream/60">Say Hello</p>
                   <a href="mailto:hola@craftstudio.com.ar" className="text-cream text-sm font-medium hover:text-red transition-colors">
                     hola@craftstudio.com.ar
                   </a>

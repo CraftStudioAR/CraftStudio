@@ -74,7 +74,7 @@ export default function CraftLab() {
         <div className="mx-auto max-w-[1400px] w-full relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
           <div>
             <Reveal>
-              <h1 className="font-serif italic text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tight text-navy">
+              <h1 className="font-serif italic text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl leading-[0.85] tracking-tight text-navy">
                 Craft Lab<span className="text-red">.</span>
               </h1>
             </Reveal>
@@ -103,7 +103,7 @@ export default function CraftLab() {
                     type="button"
                     onClick={() => setActiveCategory(cat)}
                     aria-pressed={isActive}
-                    className={`text-[10px] md:text-xs tracking-widest uppercase font-bold px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+                    className={`text-[11px] md:text-xs tracking-widest uppercase font-bold px-4 py-3.5 md:py-2 rounded-lg transition-colors cursor-pointer ${
                       isActive ? "bg-red text-cream" : "bg-red/10 text-red hover:bg-red/20"
                     }`}
                   >
@@ -132,7 +132,7 @@ export default function CraftLab() {
                         
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                          <div className="bg-cream text-ink font-bold text-[10px] uppercase tracking-widest px-6 py-3 rounded-full translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
+                          <div className="bg-cream text-ink font-bold text-[11px] uppercase tracking-widest px-6 py-3 rounded-full translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
                             Leer Artículo
                           </div>
                         </div>
@@ -141,10 +141,10 @@ export default function CraftLab() {
                       {/* Metadatos y Título (Ajustados para grilla) */}
                       <div className="flex flex-col flex-1 px-1">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="text-[9px] md:text-[10px] tracking-widest text-red uppercase font-bold bg-red/10 px-3.5 py-1.5 rounded-lg">
+                          <span className="text-[11px] tracking-widest text-red uppercase font-bold bg-red/10 px-3.5 py-1.5 rounded-lg">
                             {article.category}
                           </span>
-                          <span className="text-[9px] md:text-[10px] tracking-widest text-ink/50 uppercase font-bold py-1">
+                          <span className="text-[11px] tracking-widest text-ink/50 uppercase font-bold py-1">
                             {article.date}
                           </span>
                         </div>

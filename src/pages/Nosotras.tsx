@@ -29,9 +29,9 @@ export default function Nosotras() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-7">
             <Reveal delay={0.1}>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-ink tracking-tight">
+              <h1 className="font-serif text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[5rem] leading-[1.1] text-ink tracking-tight">
                 Dos miradas.<br />
-                <span className="italic text-red font-serif">Una visión integral.</span>
+                <span className="italic text-red font-serif lg:whitespace-nowrap">Una visión integral.</span>
               </h1>
             </Reveal>
           </div>
@@ -204,7 +204,7 @@ export default function Nosotras() {
           </div>
           <Link 
             to="/contacto"
-            className="group flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider uppercase text-ink hover:text-red transition-colors"
+            className="group flex items-center gap-2 py-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-ink hover:text-red transition-colors"
           >
             <span>Trabajemos juntos</span>
             <span className="transition-transform duration-300 group-hover:translate-x-1">{"\u2192"}</span>

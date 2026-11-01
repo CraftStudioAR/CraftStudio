@@ -88,7 +88,7 @@ export default function Servicios() {
               variants={titleVariants}
               initial="hidden"
               animate="visible"
-              className="font-serif italic text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[8.5rem] 2xl:text-[10rem] leading-[0.88] tracking-tight mb-6 md:mb-8 text-navy"
+              className="font-serif italic text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl leading-[0.88] tracking-tight mb-6 md:mb-8 text-navy"
             >
               {"Modalidades.".split("").map((char, index) => (
                 <motion.span key={index} variants={charVariants} className="inline-block">
@@ -160,7 +160,7 @@ export default function Servicios() {
                     className="w-full min-h-[120px] px-6 md:px-8 flex items-center justify-between text-left cursor-pointer"
                   >
                     <div className="flex flex-col gap-1.5">
-                      <span className="text-[10px] tracking-widest uppercase opacity-60">{s.n} / {s.title}</span>
+                      <span className="text-[11px] tracking-widest uppercase opacity-60">{s.n} / {s.title}</span>
                       <h3 className="font-serif text-2xl opacity-90 text-balance">{s.name}</h3>
                     </div>
                     <motion.div
@@ -199,7 +199,7 @@ export default function Servicios() {
                           </div>
 
                           <div className="flex flex-col gap-4">
-                            <h4 className={`text-[10px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                            <h4 className={`text-[11px] font-bold tracking-widest uppercase flex items-center gap-3 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
                               <span className={`w-4 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
                             </h4>
                             <div className="flex flex-wrap gap-2">
@@ -274,7 +274,7 @@ export default function Servicios() {
 
               {/* Fit Ideal */}
               <motion.div variants={cardItemVariants} className="flex flex-col gap-4">
-                <h4 className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-current opacity-60">
+                <h4 className="text-[11px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-current opacity-60">
                   <span className="w-6 h-[1px] bg-current"></span> Fit Ideal
                 </h4>
                 <div className="flex flex-wrap gap-2 justify-start">
@@ -399,7 +399,7 @@ function CardContent({ s, i, isActive }: { s: any, i: number, isActive: boolean 
               
               <div className="flex flex-col gap-6 md:gap-8 flex-shrink-0">
                 <div className="flex flex-col gap-3 md:gap-4">
-                  <span className="text-[10px] md:text-xs tracking-widest uppercase opacity-60">
+                  <span className="text-[11px] md:text-xs tracking-widest uppercase opacity-60">
                     {s.n} / {s.title}
                   </span>
                   <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-none text-balance">
@@ -420,7 +420,7 @@ function CardContent({ s, i, isActive }: { s: any, i: number, isActive: boolean 
 
               {/* Fit Ideal */}
               <div className="flex flex-col gap-4">
-                <h4 className={`text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
+                <h4 className={`text-[11px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${i === 0 ? 'text-red' : 'text-current opacity-60'}`}>
                   <span className={`w-6 h-[1px] ${i === 0 ? 'bg-red' : 'bg-current'}`}></span> Fit Ideal
                 </h4>
                 <div className="flex flex-wrap gap-2">

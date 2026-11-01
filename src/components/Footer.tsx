@@ -29,16 +29,16 @@ export default function Footer() {
 
           {/* Navegación Column */}
           <div className="md:col-span-3 flex flex-col gap-3">
-            <h3 className="text-[10px] tracking-widest uppercase text-cream/40 mb-1 font-semibold">
+            <h3 className="text-[11px] tracking-widest uppercase text-cream/60 mb-1 font-semibold">
               Navegación
             </h3>
-            <div className="grid grid-cols-2 md:flex md:flex-col gap-x-4 gap-y-2.5">
+            <div className="grid grid-cols-2 md:flex md:flex-col gap-x-4 md:gap-y-2.5">
               {nav.map((item) => (
                 <Link 
                   key={item.to} 
                   to={item.to} 
                   data-cursor="Ver" 
-                  className="text-sm transition-all w-fit opacity-70 hover:opacity-100 hover:text-cream hover:translate-x-1 duration-200"
+                  className="py-3 md:py-0 text-sm transition-all w-fit opacity-70 hover:opacity-100 hover:text-cream hover:translate-x-1 duration-200"
                 >
                   {item.label}
                 </Link>
@@ -48,17 +48,17 @@ export default function Footer() {
 
           {/* Contacto Column */}
           <div className="md:col-span-3 flex flex-col gap-3">
-            <h3 className="text-[10px] tracking-widest uppercase text-cream/40 mb-1 font-semibold">
+            <h3 className="text-[11px] tracking-widest uppercase text-cream/60 mb-1 font-semibold">
               Contacto
             </h3>
-            <div className="grid grid-cols-2 md:flex md:flex-col gap-x-4 gap-y-2.5">
+            <div className="grid grid-cols-1 min-[23.4375rem]:grid-cols-2 md:flex md:flex-col gap-x-4 md:gap-y-2.5">
               <a 
                 href={`mailto:${contactInfo.email}`} 
-                className="text-sm transition-colors opacity-70 hover:opacity-100 hover:text-cream w-fit"
+                className="py-3 md:py-0 text-sm transition-colors opacity-70 hover:opacity-100 hover:text-cream w-fit"
               >
                 {contactInfo.email}
               </a>
-              <span className="text-sm opacity-50">
+              <span className="py-3 md:py-0 text-sm opacity-50">
                 {contactInfo.city}
               </span>
             </div>
@@ -69,7 +69,7 @@ export default function Footer() {
         {/* Bottom: Logo and Socials */}
         <div className="w-full flex flex-col-reverse md:flex-row justify-between items-center gap-6 pt-6 border-t border-cream/10">
           
-          <div className="w-full md:w-1/3 flex justify-center md:justify-start text-[10px] tracking-widest uppercase text-cream/40">
+          <div className="w-full md:w-1/3 flex justify-center md:justify-start text-[11px] tracking-widest uppercase text-cream/60">
             © {new Date().getFullYear()} Craft Studio
           </div>
 
@@ -77,8 +77,8 @@ export default function Footer() {
             <LogoWordmark className="w-28 md:w-36 h-auto text-cream opacity-80" />
           </div>
 
-          <div className="w-full md:w-1/3 flex justify-center md:justify-end text-[10px] tracking-widest uppercase text-cream/50 font-medium">
-            <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">
+          <div className="w-full md:w-1/3 flex justify-center md:justify-end text-[11px] tracking-widest uppercase text-cream/50 font-medium">
+            <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="py-3 md:py-0 hover:text-cream transition-colors">
               Instagram
             </a>
           </div>

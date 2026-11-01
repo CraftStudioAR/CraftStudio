@@ -163,10 +163,10 @@ export default function Contacto() {
         <div className="w-full text-center flex flex-col items-center mb-8 md:mb-16 relative z-10">
           <div>
             <Reveal>
-              <p className="mb-3 md:mb-6 text-[10px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
+              <p className="mb-3 md:mb-6 text-[11px] md:text-xs tracking-widest text-red uppercase flex items-center justify-center gap-4 font-bold">
                 <span className="w-8 md:w-12 h-[1px] bg-red" /> CONTACTANOS <span className="w-8 md:w-12 h-[1px] bg-red" />
               </p>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
+              <h1 className="font-serif text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl italic leading-[0.9] tracking-tight text-navy">
                 Hablemos de tu proyecto
               </h1>
               <p className="mt-3 md:mt-6 mx-auto max-w-4xl text-xs sm:text-base md:text-lg opacity-60 font-normal leading-relaxed text-balance">
@@ -212,7 +212,7 @@ export default function Contacto() {
                         key={tab.id}
                         onClick={() => navigateToStep(tab.id)}
                         disabled={!isPast && !isActive}
-                        className={`relative flex-1 flex justify-center items-center px-1 md:px-2 lg:px-4 py-3 md:py-5 rounded-t-xl md:rounded-t-xl font-bold text-[10px] sm:text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
+                        className={`relative flex-1 flex justify-center items-center px-1 md:px-2 lg:px-4 py-3 md:py-5 rounded-t-xl md:rounded-t-xl font-bold text-[11px] md:text-xs tracking-widest uppercase transition-all duration-300 border border-b-0
                           ${isActive 
                             ? "bg-white border-ink/10 text-navy z-10 shadow-[-5px_-5px_15px_rgba(0,0,0,0.02)]" 
                             : "bg-[#e5dfdb] border-transparent text-ink/30 hover:bg-[#eae4e0] mt-2 cursor-pointer"
@@ -246,7 +246,7 @@ export default function Contacto() {
                         transition={{ duration: 0.5 }}
                         className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
                       >
-                        <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">01 / El Desafío</span>
+                        <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">01 / El Desafío</span>
                         <h2 className="font-serif italic text-2xl md:text-4xl mb-6 md:mb-8 text-navy">¿Qué necesita tu marca?</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 content-start mb-8 md:mb-12">
                           {contactForm.needs.map((opt, i) => {
@@ -265,7 +265,7 @@ export default function Contacto() {
                                     : "bg-[#faf8f6] border-ink/10 text-ink hover:border-ink/30 hover:bg-white"
                                 }`}
                               >
-                                <span className={`text-[10px] font-bold tracking-widest uppercase mb-3 block transition-colors ${isActive ? 'text-red' : 'text-ink/30'}`}>Opción 0{i+1}</span>
+                                <span className={`text-[11px] font-bold tracking-widest uppercase mb-3 block transition-colors ${isActive ? 'text-red' : 'text-ink/30'}`}>Opción 0{i+1}</span>
                                 <span className="font-sans font-medium text-base sm:text-lg md:text-xl leading-tight relative z-10">{opt}</span>
                               </button>
                             )
@@ -292,8 +292,8 @@ export default function Contacto() {
                       >
                         <div className="flex flex-col gap-10 flex-1 content-start">
                           <div>
-                            <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">02 / El Proyecto</span>
-                            <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                            <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">02 / El Proyecto</span>
+                            <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
                               ¿Qué hace tu marca y qué te gustaría lograr trabajando juntos?
                             </label>
                             <textarea
@@ -307,7 +307,7 @@ export default function Contacto() {
                           </div>
                           <div>
                             <h2 className="font-serif italic text-2xl md:text-3xl mb-4 text-navy">Presupuesto estimado</h2>
-                            <label htmlFor="budgetAmount" className="text-[10px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
+                            <label htmlFor="budgetAmount" className="text-[11px] tracking-widest opacity-50 uppercase font-bold mb-3 block">
                               ¿Qué inversión estiman destinar al proyecto? Ingresá un monto aproximado en pesos argentinos (ARS).
                             </label>
                             <div className={`flex items-center border-b border-ink/20 bg-[#faf8f6] hover:bg-white rounded-t-lg px-4 py-3 focus-within:border-red focus-within:bg-white transition-colors ${noBudget ? "opacity-40" : ""}`}>
@@ -354,7 +354,7 @@ export default function Contacto() {
                           </div>
                         </div>
                         <div className="flex justify-between items-center mt-auto pt-8">
-                          <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                          <button type="button" onClick={prevStep} className="group flex items-center text-[11px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
                           </button>
@@ -378,7 +378,7 @@ export default function Contacto() {
                         <div className="flex flex-col gap-10 flex-1 content-start">
 
                           <div>
-                            <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">03 / El Contexto</span>
+                            <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">03 / El Contexto</span>
                             <h2 className="font-serif italic text-2xl md:text-3xl mb-4 text-navy">¿Cuándo te gustaría empezar?</h2>
                             <div className="flex flex-wrap gap-2 md:gap-3">
                               {contactForm.timelines.map((opt) => (
@@ -386,7 +386,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setTimeline(opt)}
-                                  className={`rounded-lg border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                  className={`rounded-lg border px-4 py-2 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                     timeline === opt
                                       ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                       : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
@@ -406,7 +406,7 @@ export default function Contacto() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setHowFound(opt)}
-                                  className={`rounded-lg border px-4 py-2 text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
+                                  className={`rounded-lg border px-4 py-2 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                                     howFound === opt
                                       ? "border-red text-cream bg-red shadow-md scale-[1.05]"
                                       : "border-ink/20 hover:border-ink/60 bg-transparent text-ink"
@@ -420,7 +420,7 @@ export default function Contacto() {
                         </div>
 
                         <div className="flex justify-between items-center mt-auto pt-6">
-                          <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                          <button type="button" onClick={prevStep} className="group flex items-center text-[11px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
                           </button>
@@ -441,7 +441,7 @@ export default function Contacto() {
                         transition={{ duration: 0.5 }}
                         className="w-full flex flex-col relative p-6 md:p-12 bg-white flex-1"
                       >
-                        <span className="text-[10px] tracking-widest text-red uppercase font-bold block mb-4">04 / Tus Datos</span>
+                        <span className="text-[11px] tracking-widest text-red uppercase font-bold block mb-4">04 / Tus Datos</span>
                         <h2 className="font-serif italic text-2xl md:text-3xl mb-8 text-navy">Tus Datos</h2>
                         <div className="flex flex-col gap-6 flex-1">
                           <div className="grid gap-4 md:gap-6 sm:grid-cols-2">
@@ -456,21 +456,21 @@ export default function Contacto() {
                         </div>
 
                         <div className="flex justify-between items-center mt-auto pt-6">
-                          <button type="button" onClick={prevStep} className="group flex items-center text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
+                          <button type="button" onClick={prevStep} className="group flex items-center text-[11px] md:text-xs font-bold tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity">
                             <svg className="w-3 h-3 mr-1.5 inline-block transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                             Atrás
                           </button>
                           
                           <div className="flex flex-col items-end gap-2">
                             {submitError && (
-                              <p className="text-red text-[10px] font-bold uppercase tracking-widest mb-1 animate-fadeIn">
+                              <p className="text-red text-[11px] font-bold uppercase tracking-widest mb-1 animate-fadeIn">
                                 {submitError}
                               </p>
                             )}
                             <Magnetic strength={0.2}>
                               <button
                                 type="submit"
-                                className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[10px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613] cursor-pointer"
+                                className="group flex items-center justify-center gap-3 bg-red text-cream px-6 md:px-8 py-3 md:py-4 rounded-xl text-[11px] md:text-xs tracking-widest uppercase font-bold transition-transform hover:scale-105 shadow-[0_8px_20px_rgba(165,47,24,0.3)] disabled:opacity-50 disabled:pointer-events-none hover:bg-[#8a2613] cursor-pointer"
                                 disabled={!formData.nombre || !formData.email || submitting}
                               >
                                 {submitting ? 'Enviando...' : 'Enviar Consulta'}
@@ -535,7 +535,7 @@ export default function Contacto() {
       {/* SUMATE AL EQUIPO BANNER */}
       <div className="px-6 pt-12 md:pt-16 pb-28 md:pb-36 mx-auto max-w-[900px] flex flex-col items-center text-center">
         <Reveal>
-          <p className="text-[10px] tracking-widest text-red uppercase font-bold flex items-center justify-center gap-4 mb-4">
+          <p className="text-[11px] tracking-widest text-red uppercase font-bold flex items-center justify-center gap-4 mb-4">
             <span className="w-8 h-[1px] bg-red" /> SUMATE AL EQUIPO <span className="w-8 h-[1px] bg-red" />
           </p>
           <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-navy mb-2 md:mb-5">
@@ -576,7 +576,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="text-[10px] tracking-widest opacity-50 uppercase font-bold block mb-2">{label}</label>
+      <label className="text-[11px] tracking-widest opacity-50 uppercase font-bold block mb-2">{label}</label>
       <input
         type={type}
         name={name}

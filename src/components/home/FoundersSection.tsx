@@ -212,7 +212,7 @@ export default function FoundersSection() {
           <MagneticImage
             src="/images/about3.jpg"
             initialRotate={-2}
-            className="w-48 md:w-56 lg:w-60 aspect-square object-cover opacity-90 rounded-sm shadow-md"
+            className="w-48 md:w-56 lg:w-44 xl:w-52 min-[85.375rem]:w-60 aspect-square object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
         {/* Center Left (Guy B&W photo) */}
@@ -220,7 +220,7 @@ export default function FoundersSection() {
           <MagneticImage
             src="/images/about1.jpg"
             initialRotate={2}
-            className="w-40 md:w-48 lg:w-54 xl:w-58 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
+            className="w-40 md:w-28 lg:w-36 xl:w-44 min-[85.375rem]:w-58 aspect-[3/4] object-cover opacity-85 rounded-sm shadow-lg"
           />
         </div>
         {/* Top Right (Model) */}
@@ -228,7 +228,7 @@ export default function FoundersSection() {
           <MagneticImage
             src="/images/about2.jpg"
             initialRotate={3}
-            className="w-36 md:w-40 lg:w-44 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
+            className="w-36 md:w-28 lg:w-36 xl:w-36 min-[85.375rem]:w-44 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-md"
           />
         </div>
         {/* Bottom Right (Wine photo - únicamente esta ajustada en tamaño y posición) */}
@@ -236,7 +236,7 @@ export default function FoundersSection() {
           <MagneticImage
             src="/images/about4.jpg"
             initialRotate={-2}
-            className="w-40 md:w-48 lg:w-56 xl:w-64 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
+            className="w-40 md:w-28 lg:w-36 xl:w-48 min-[85.375rem]:w-64 aspect-[4/5] object-cover opacity-90 rounded-sm shadow-lg"
           />
         </div>
         {/* Bottom Left (Pipa & Nala tag) */}

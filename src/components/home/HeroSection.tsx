@@ -94,7 +94,10 @@ export default function HeroSection() {
       
       <div data-hero-content style={{ willChange: "transform" }} className="relative z-10 flex flex-col items-center justify-center text-center w-full transform-gpu">
         <div data-hero-logo className="w-[85vw] max-w-5xl opacity-0 flex justify-center relative transform-gpu">
-          <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
+          <h1 className="w-full m-0">
+            <span className="sr-only">Craft Studio</span>
+            <LogoWordmark className="w-full h-auto text-cream drop-shadow-2xl" />
+          </h1>
         </div>
         
         <div data-hero-tagline className="-mt-6 sm:-mt-8 md:-mt-14 opacity-0 z-20 flex flex-col items-center w-full px-4 sm:px-6 relative">
@@ -167,7 +170,7 @@ export default function HeroSection() {
       </div>
       
       <div data-hero-scroll className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 opacity-50 flex flex-col items-center animate-bounce pointer-events-none">
-        <span className="text-[10px] uppercase tracking-widest mb-2">Scroll</span>
+        <span className="text-[11px] uppercase tracking-widest mb-2">Scroll</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-cream to-transparent" />
       </div>
     </section>
