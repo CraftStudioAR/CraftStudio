@@ -17,7 +17,11 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      syncTouch: false,
+      // Un solo ajuste de touch para toda la web: el dedo sigue 1:1 y al soltar frena suave.
+      // El exponente bajo acota el envión de un swipe fuerte para que no cruce una sección entera.
+      syncTouch: true,
+      syncTouchLerp: 0.07,
+      touchInertiaExponent: 1.45,
     });
     lenisRef.current = lenis;
     (window as any).__craftLenis = lenis;

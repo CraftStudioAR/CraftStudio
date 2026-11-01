@@ -190,6 +190,7 @@ export default function Nav() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            data-lenis-prevent
             className="fixed inset-0 z-40 flex flex-col justify-center bg-ink px-8 pt-20 pb-10 md:hidden overflow-y-auto"
           >
             <div className="flex flex-col gap-6">
