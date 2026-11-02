@@ -11,7 +11,7 @@ import type { WorkCase } from "../../content/brand";
 gsap.registerPlugin(ScrollTrigger);
 
 // Px de scroll por cada px que avanzan las cards: sin esto la sección dura menos de la mitad que el About.
-const SCROLL_PACE = 2.25;
+const getScrollPace = () => (window.innerWidth < 768 ? 2 : 2.4);
 
 export default function WorkSection() {
   const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
@@ -46,7 +46,7 @@ export default function WorkSection() {
           scrollTrigger: {
             trigger: workContainerRef.current,
             start: "top top",
-            end: () => `+=${getScrollDistance() * SCROLL_PACE}`,
+            end: () => `+=${getScrollDistance() * getScrollPace()}`,
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
@@ -58,7 +58,7 @@ export default function WorkSection() {
         ScrollTrigger.create({
           trigger: workContainerRef.current,
           start: "top top",
-          end: () => `+=${getScrollDistance() * SCROLL_PACE || window.innerHeight}`,
+          end: () => `+=${getScrollDistance() * getScrollPace() || window.innerHeight}`,
           invalidateOnRefresh: true,
           onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
           onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
