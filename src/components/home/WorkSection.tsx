@@ -11,7 +11,7 @@ import type { WorkCase } from "../../content/brand";
 gsap.registerPlugin(ScrollTrigger);
 
 // Px de scroll por cada px que avanzan las cards: sin esto la sección dura menos de la mitad que el About.
-const getScrollPace = () => (window.innerWidth < 768 ? 1.7 : 2.4);
+const getScrollPace = () => (window.innerWidth < 768 ? 1.95 : 2.7);
 
 export default function WorkSection() {
   const [projectsList, setProjectsList] = useState<WorkCase[]>([]);
@@ -34,10 +34,9 @@ export default function WorkSection() {
       if (workContainerRef.current && workScrollRef.current) {
         const getScrollDistance = () => {
           if (!workScrollRef.current) return 0;
-          const isMobile = window.innerWidth < 768;
-          // In mobile, provide extra margin so the last card passes fully into view before unpinning
-          const extraMobile = isMobile ? 116 : 0;
-          return Math.max(0, workScrollRef.current.scrollWidth - window.innerWidth + extraMobile);
+          // La última card termina a la misma distancia del borde derecho que la primera del izquierdo.
+          const { offsetLeft, scrollWidth } = workScrollRef.current;
+          return Math.max(0, offsetLeft + scrollWidth - window.innerWidth);
         };
 
         gsap.to(workScrollRef.current, {
@@ -92,7 +91,7 @@ export default function WorkSection() {
       
       {/* Horizontal scroll track */}
       <div className="flex-1 flex items-center pl-8 md:pl-10 md:pb-20 lg:pb-24">
-        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-16 md:pr-32 items-start">
+        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-8 md:pr-10 items-start">
           {displayList.map((w, i) => (
             // El tope para que la card entre en la sección de 100vh va en el ANCHO
             // (alto máximo × proporción de la card), no en el alto: así la card se
