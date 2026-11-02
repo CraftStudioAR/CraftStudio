@@ -102,7 +102,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=240%",
+          end: "+=220%",
           pin: true,
           pinSpacing: true,
           scrub: 1,
