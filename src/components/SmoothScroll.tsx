@@ -21,7 +21,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       // El exponente bajo acota el envión de un swipe fuerte para que no cruce una sección entera.
       syncTouch: true,
       syncTouchLerp: 0.07,
-      touchInertiaExponent: 1.45,
+      touchInertiaExponent: 1.6,
     });
     lenisRef.current = lenis;
     (window as any).__craftLenis = lenis;
