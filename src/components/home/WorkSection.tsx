@@ -39,13 +39,19 @@ export default function WorkSection() {
           return Math.max(0, offsetLeft + scrollWidth - window.innerWidth);
         };
 
+        // En monitores anchos las cards apenas se mueven: el piso evita que la sección pase de golpe.
+        const getPinLength = () => {
+          const distance = getScrollDistance();
+          return distance && Math.max(distance * getScrollPace(), window.innerHeight * 0.8);
+        };
+
         gsap.to(workScrollRef.current, {
           x: () => -getScrollDistance(),
           ease: "none",
           scrollTrigger: {
             trigger: workContainerRef.current,
             start: "top top",
-            end: () => `+=${getScrollDistance() * getScrollPace()}`,
+            end: () => `+=${getPinLength()}`,
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
@@ -57,7 +63,7 @@ export default function WorkSection() {
         ScrollTrigger.create({
           trigger: workContainerRef.current,
           start: "top top",
-          end: () => `+=${getScrollDistance() * getScrollPace() || window.innerHeight}`,
+          end: () => `+=${getPinLength() || window.innerHeight}`,
           invalidateOnRefresh: true,
           onEnter: () => window.dispatchEvent(new Event("nav-force-hide")),
           onLeave: () => window.dispatchEvent(new Event("nav-force-show")),
@@ -91,14 +97,14 @@ export default function WorkSection() {
       
       {/* Horizontal scroll track */}
       <div className="flex-1 flex items-center pl-8 md:pl-10 md:pb-20 lg:pb-24">
-        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-8 md:pr-10 items-start">
+        <div ref={workScrollRef} className="flex gap-5 sm:gap-8 md:gap-14 lg:gap-20 pr-8 md:pr-10 items-start mx-auto">
           {displayList.map((w, i) => (
             // El tope para que la card entre en la sección de 100vh va en el ANCHO
             // (alto máximo × proporción de la card), no en el alto: así la card se
             // achica entera y nunca cambia de proporción ni recorta distinto la portada.
             <div
               key={w.slug}
-              className="w-[82vw] sm:w-[65vw] md:w-[32vw] lg:w-[28vw] xl:w-[26vw] max-w-[min(28rem,31.5vh)] sm:max-w-[min(28rem,58.6vh)] md:max-w-[min(28rem,45.3vh)] lg:max-w-[min(28rem,50.6vh)] xl:max-w-[min(28rem,56vh)] shrink-0"
+              className="w-[82vw] sm:w-[65vw] md:w-[32vw] lg:w-[28vw] xl:w-[26vw] max-w-[min(28rem,31.5vh)] sm:max-w-[min(28rem,58.6vh)] md:max-w-[min(28rem,45.3vh)] lg:max-w-[min(28rem,50.6vh)] xl:max-w-[56vh] shrink-0"
             >
               <WorkCard work={w} index={i} total={displayList.length} to={`/trabajos/${w.slug}`} cursorLabel="Ver caso" />
             </div>

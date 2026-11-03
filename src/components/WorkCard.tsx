@@ -59,7 +59,9 @@ export default function WorkCard({
           {work.cover ? (
             <>
               <img
-                src={cld(work.cover.publicId, "f_auto,q_auto,w_800")}
+                src={cld(work.cover.publicId, "f_auto,q_auto,c_limit,w_800")}
+                srcSet={`${cld(work.cover.publicId, "f_auto,q_auto,c_limit,w_800")} 800w, ${cld(work.cover.publicId, "f_auto,q_auto,c_limit,w_1400")} 1400w`}
+                sizes="(min-width: 1280px) 56vh, 82vw"
                 alt={work.cover.alt}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

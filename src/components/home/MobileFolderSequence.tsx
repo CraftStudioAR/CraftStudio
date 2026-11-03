@@ -78,6 +78,13 @@ const PHOTO_W = 195;
 // alto para que las fotos no se salgan por abajo.
 const unitOf = (stage: HTMLElement) => Math.min(stage.clientWidth, stage.clientHeight * 0.74);
 
+const ABOUT_TOUCH_MULTIPLIER = 1.6;
+
+const setTouchMultiplier = (value: number) => {
+  const lenis = (window as any).__craftLenis;
+  if (lenis) lenis.virtualScroll.options.touchMultiplier = value;
+};
+
 export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -108,6 +115,8 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          // Acá nada sigue al dedo 1:1, así que cada deslizamiento puede rendir más que en el resto de la web.
+          onToggle: ({ isActive }) => setTouchMultiplier(isActive ? ABOUT_TOUCH_MULTIPLIER : 1),
         },
       });
 
@@ -189,6 +198,7 @@ export default function MobileFolderSequence({ intro }: { intro: ReactNode }) {
     }, sectionRef);
 
     return () => {
+      setTouchMultiplier(1);
       ctx.revert();
     };
   }, []);

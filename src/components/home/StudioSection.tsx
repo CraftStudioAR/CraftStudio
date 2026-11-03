@@ -18,7 +18,7 @@ export default function StudioSection() {
     <div ref={containerRef} className="px-4 md:px-10 py-6 md:py-20 perspective-1000">
       <motion.section 
         style={{ scale }}
-        className="bg-cream relative overflow-hidden text-ink rounded-2xl flex flex-col items-center justify-center"
+        className="mx-auto max-w-[1400px] bg-cream relative overflow-hidden text-ink rounded-2xl flex flex-col items-center justify-center"
       >
 
         <div className="w-full relative z-10 px-6 md:px-10 lg:px-20 py-14 sm:py-20 md:py-24 lg:py-28 flex flex-col items-center justify-center text-center max-w-5xl lg:max-w-6xl mx-auto">

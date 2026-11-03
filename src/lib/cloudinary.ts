@@ -8,10 +8,10 @@ export function cld(publicId: string, transforms = "f_auto,q_auto") {
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${transforms}/${publicId}`;
 }
 
-export function getImageUrl(publicIdOrUrl?: string): string {
+export function getImageUrl(publicIdOrUrl?: string, transforms?: string): string {
   if (!publicIdOrUrl) return 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80';
   if (publicIdOrUrl.startsWith('http://') || publicIdOrUrl.startsWith('https://') || publicIdOrUrl.startsWith('/')) {
     return publicIdOrUrl;
   }
-  return cld(publicIdOrUrl);
+  return cld(publicIdOrUrl, transforms);
 }

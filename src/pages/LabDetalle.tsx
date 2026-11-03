@@ -172,7 +172,7 @@ export default function LabDetalle() {
           <Reveal delay={0.4}>
             <div className="max-w-6xl mx-auto w-full aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden relative bg-ink/5">
               <img 
-                src={getImageUrl(article.image)} 
+                src={getImageUrl(article.image, "f_auto,q_auto,c_limit,w_2000")} 
                 alt={article.title} 
                 className="absolute inset-0 w-full h-full object-cover"
               />

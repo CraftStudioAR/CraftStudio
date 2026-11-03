@@ -125,13 +125,13 @@ export default function CraftLab() {
                       {/* Tarjeta Visual */}
                       <div className={`relative w-full ${article.aspect || 'aspect-[4/5]'} overflow-hidden rounded-sm bg-ink/5 mb-6`}>
                         <img 
-                          src={getImageUrl(article.image)} 
+                          src={getImageUrl(article.image, "f_auto,q_auto,c_limit,w_1000")} 
                           alt={article.title} 
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         
                         {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                        <div className="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                           <div className="bg-cream text-ink font-bold text-[11px] uppercase tracking-widest px-6 py-3 rounded-full translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
                             Leer Artículo
                           </div>
