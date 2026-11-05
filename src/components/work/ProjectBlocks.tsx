@@ -542,6 +542,8 @@ function Block({
                 key={image.publicId}
                 image={image}
                 transforms="f_auto,q_auto,w_900"
+                className="max-md:h-full"
+                imgClassName="max-md:h-full object-cover"
                 onOpen={() => onOpen(startIndex + 1 + i)}
               />
             ))}

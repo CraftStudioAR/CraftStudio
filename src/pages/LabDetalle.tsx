@@ -5,6 +5,12 @@ import { getCraftLabArticleBySlug } from "../lib/supabaseClient";
 import { getImageUrl } from "../lib/cloudinary";
 import ProjectBlocks from "../components/work/ProjectBlocks";
 
+const DESC_SIZES = {
+  sm: "text-base md:text-lg",
+  md: "text-lg md:text-xl",
+  lg: "text-xl md:text-2xl",
+};
+
 interface Article {
   id: string;
   slug: string;
@@ -13,6 +19,8 @@ interface Article {
   category: string;
   image: string;
   desc: string;
+  /** Tamaño de la bajada dentro de la nota (se elige desde el CRM). */
+  desc_size?: keyof typeof DESC_SIZES;
   aspect?: string;
   /** false oculta la portada dentro de la nota (se elige desde el CRM). */
   show_cover?: boolean;
@@ -159,7 +167,7 @@ export default function LabDetalle() {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <p className="text-xl md:text-2xl text-ink/70 font-medium leading-relaxed text-balance text-left">
+            <p className={`${DESC_SIZES[article.desc_size || "lg"]} text-ink/70 font-medium leading-relaxed text-balance text-left`}>
               {article.desc}
             </p>
           </Reveal>
