@@ -3,13 +3,8 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import Reveal from "../components/Reveal";
 import { getCraftLabArticleBySlug } from "../lib/supabaseClient";
 import { getImageUrl } from "../lib/cloudinary";
-import ProjectBlocks from "../components/work/ProjectBlocks";
-
-const DESC_SIZES = {
-  sm: "text-base md:text-lg",
-  md: "text-lg md:text-xl",
-  lg: "text-xl md:text-2xl",
-};
+import ProjectBlocks, { getResponsiveTextStyle } from "../components/work/ProjectBlocks";
+import { parseDescSize } from "../lib/descSize";
 
 interface Article {
   id: string;
@@ -19,8 +14,8 @@ interface Article {
   category: string;
   image: string;
   desc: string;
-  /** Tamaño de la bajada dentro de la nota (se elige desde el CRM). */
-  desc_size?: keyof typeof DESC_SIZES;
+  /** Tamaño de la bajada por dispositivo, como JSON (se elige desde el CRM). */
+  desc_size?: string;
   aspect?: string;
   /** false oculta la portada dentro de la nota (se elige desde el CRM). */
   show_cover?: boolean;
@@ -78,6 +73,9 @@ export default function LabDetalle() {
     : [];
 
   const hasBlocks = parsedBlocks.length > 0;
+
+  const descSizes = parseDescSize(article.desc_size);
+  const descStyle = getResponsiveTextStyle("article-desc", descSizes.mobile, descSizes.tablet, descSizes.desktop);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareTitle = article ? article.title : '';
@@ -167,7 +165,8 @@ export default function LabDetalle() {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <p className={`${DESC_SIZES[article.desc_size || "lg"]} text-ink/70 font-medium leading-relaxed text-balance text-left`}>
+            {descStyle.styleElement}
+            <p id="article-desc" className="text-ink/70 font-medium leading-relaxed text-balance text-left">
               {article.desc}
             </p>
           </Reveal>

@@ -36,7 +36,7 @@ function sizeRule(size: string) {
   return CUSTOM_SIZE.test(size.trim()) ? `font-size: ${size.trim()};` : "";
 }
 
-function getResponsiveTextStyle(
+export function getResponsiveTextStyle(
   elementId: string,
   sizeMobile: string,
   sizeTablet: string,
